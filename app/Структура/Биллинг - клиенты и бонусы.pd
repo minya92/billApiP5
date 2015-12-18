@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel datasource="null">
+  <fieldsEntity entityHeight="89" entityIconified="false" entityId="141562950618448" entityLocationX="416" entityLocationY="30" entityWidth="184" tableName="client_bonus_category"/>
+  <fieldsEntity entityHeight="242" entityIconified="false" entityId="141562950618806" entityLocationX="238" entityLocationY="29" entityWidth="150" tableName="client_personal_data"/>
+  <fieldsEntity entityHeight="148" entityIconified="false" entityId="141562950617803" entityLocationX="48" entityLocationY="46" entityWidth="150" tableName="bill_accounts"/>
+</datamodel>

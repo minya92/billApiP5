@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel>
+  <parameters>
+    <parameter description="" name="account_id" nullable="true" parameterMode="1" selectionForm="null" type="Number"/>
+    <parameter description="" name="service_id" nullable="true" parameterMode="1" selectionForm="null" type="Number"/>
+  </parameters>
+  <parametersEntity entityHeight="200" entityIconified="false" entityLocationX="8" entityLocationY="7" entityWidth="150"/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="145027436281750" entityLocationX="627" entityLocationY="10" entityWidth="150" tableAlias="t2" tableName="bill_cost" tableSchemaName=""/>
+  <entity Title="" entityHeight="161" entityIconified="false" entityId="145027436281744" entityLocationX="208" entityLocationY="52" entityWidth="150" tableAlias="t1" tableName="bill_services" tableSchemaName=""/>
+  <entity Title="" entityHeight="209" entityIconified="false" entityId="145027436281761" entityLocationX="423" entityLocationY="7" entityWidth="159" tableAlias="t" tableName="bill_services_accounts" tableSchemaName=""/>
+  <relation leftEntityId="-1" leftEntityParameterName="account_id" rightEntityFieldName="account_id" rightEntityId="145027436281761"/>
+  <relation leftEntityId="-1" leftEntityParameterName="service_id" rightEntityFieldName="bill_services_id" rightEntityId="145027436281744"/>
+  <relation leftEntityFieldName="account_service_id" leftEntityId="145027436281761" rightEntityFieldName="service_id" rightEntityId="145027436281750"/>
+  <relation leftEntityFieldName="bill_services_id" leftEntityId="145027436281744" rightEntityFieldName="account_service_id" rightEntityId="145027436281761"/>
+</datamodel>

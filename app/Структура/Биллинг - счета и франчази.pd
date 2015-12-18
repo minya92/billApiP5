@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel datasource="null">
+  <fieldsEntity entityHeight="185" entityIconified="false" entityId="141562685226066" entityLocationX="530" entityLocationY="58" entityWidth="150" tableName="bill_operations"/>
+  <fieldsEntity entityHeight="200" entityIconified="false" entityId="141562685225571" entityLocationX="142" entityLocationY="246" entityWidth="150" tableName="bill_account_types"/>
+  <fieldsEntity entityHeight="148" entityIconified="false" entityId="141562685226327" entityLocationX="534" entityLocationY="293" entityWidth="150" tableName="org_franchazi"/>
+  <fieldsEntity entityHeight="200" entityIconified="false" entityId="141562685225820" entityLocationX="343" entityLocationY="229" entityWidth="150" tableName="bill_accounts"/>
+</datamodel>
