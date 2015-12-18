@@ -15,10 +15,10 @@ define(['orm'], function (Orm, ModuleName) {
             SERVICE_ADDED   : "Услуга уже добавлена на лицевой счет",
             SERVICE_LOCKED  : "Ошибка удаления услуги с аккаунта. Услуга заблокирована для удаления!"
         };
-        
+         
         self.execute = function () {
             // TODO : place application code here
-        };
+        }; 
         
         /*
         * Создание новой услуги
@@ -29,34 +29,26 @@ define(['orm'], function (Orm, ModuleName) {
         * @param {type} aDays
         * @returns {Boolean}
         */
-        self.CreateService = function(aName, aSum, aDays, aLock, anAfterMonth, admin) {
+        self.CreateService = function(aName, aSum, aDays, aLock, anAfterMonth, aCallBack) {
             var aMonth = false;
-            if(!admin) admin = false;
             if (aDays == false || aDays == 0 || aDays == null || aDays === undefined || !aDays){
                 aMonth = true;
                 aDays = 0;
             }
-            var service = {
-                service_name: aName,
-                service_days: aDays,
-                item_cost: aSum,
-                service_month: aMonth
-            };
-            //model.qServiceList.push(obj);
-            model.qServiceList.insert();
-            model.qServiceList.cursor.service_id = model.qServiceList.cursor.bill_services_id;
-            model.qServiceList.cursor.item_cost = aSum;
-            model.qServiceList.cursor.service_days = aDays;
-            model.qServiceList.cursor.service_month = aMonth;
-            model.qServiceList.cursor.service_name = aName;
-            model.qServiceList.cursor.locked = aLock;
-            model.qServiceList.cursor.start_date = new Date();
-            model.qServiceList.cursor.after_days = anAfterMonth;
-            if(admin && getAdminAccess()) 
-                model.qServiceList.cursor.admin = true;
-            model.save();
-            eventProcessor.addEvent('serviceCreated', service);
-            return true;
+            model.qServiceList.push({
+                //service_id : model.qServiceList.cursor.bill_services_id,
+                item_cost : aSum,
+                service_days : aDays,
+                service_month : aMonth,
+                service_name : aName,
+                locked : aLock,
+                start_date : new Date(),
+                after_days : anAfterMonth
+            });
+            model.save(function(){
+                aCallBack(model.qServiceList.cursor.bill_services_id);
+            });
+            //eventProcessor.addEvent('serviceCreated', service);
         };
     };
 });

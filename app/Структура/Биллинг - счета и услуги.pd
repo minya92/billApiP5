@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><datamodel datasource="null">
-  <fieldsEntity entityHeight="71" entityIconified="false" entityId="145027135928364" entityLocationX="19" entityLocationY="343" entityWidth="173" tableName="bill_services_types"/>
-  <fieldsEntity entityHeight="132" entityIconified="false" entityId="141562894711262" entityLocationX="225" entityLocationY="71" entityWidth="150" tableName="bill_accounts"/>
+  <fieldsEntity entityHeight="90" entityIconified="false" entityId="145027135928364" entityLocationX="19" entityLocationY="343" entityWidth="173" tableName="bill_services_types"/>
+  <fieldsEntity entityHeight="132" entityIconified="false" entityId="141562894711262" entityLocationX="153" entityLocationY="66" entityWidth="150" tableName="bill_accounts"/>
   <fieldsEntity entityHeight="170" entityIconified="false" entityId="143574122601249" entityLocationX="423" entityLocationY="363" entityWidth="150" tableName="bill_cost"/>
-  <fieldsEntity entityHeight="66" entityIconified="false" entityId="141562894710842" entityLocationX="26" entityLocationY="121" entityWidth="150" tableName="bill_account_types"/>
   <fieldsEntity entityHeight="134" entityIconified="false" entityId="141562894711466" entityLocationX="896" entityLocationY="95" entityWidth="150" tableName="bill_item_cost"/>
   <fieldsEntity entityHeight="115" entityIconified="false" entityId="141562894711733" entityLocationX="663" entityLocationY="94" entityWidth="184" tableName="bill_operations_items"/>
   <fieldsEntity entityHeight="147" entityIconified="false" entityId="141562894712117" entityLocationX="423" entityLocationY="194" entityWidth="186" tableName="bill_services_accounts"/>

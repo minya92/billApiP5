@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel>
+  <entity Name="qServiseAddCost" Title="" entityHeight="200" entityIconified="false" entityId="145043108437598" entityLocationX="273" entityLocationY="23" entityWidth="150" queryId="qServiseAddCost" tableName="" tableSchemaName=""/>
+  <entity Name="qServiceList" Title="" entityHeight="309" entityIconified="false" entityId="145042832153460" entityLocationX="72" entityLocationY="24" entityWidth="150" queryId="qServiceList" tableName="" tableSchemaName=""/>
+  <referenceRelation leftEntityFieldName="service_id" leftEntityId="145042832153460" rightEntityFieldName="bill_services_id" rightEntityId="145042832153460"/>
+  <referenceRelation leftEntityFieldName="service_type_id" leftEntityId="145042832153460" rightEntityFieldName="bill_services_types_id" rightEntityId="145042832153460"/>
+  <referenceRelation leftEntityFieldName="service_id" leftEntityId="145043108437598" rightEntityFieldName="bill_services_id" rightEntityId="145042832153460"/>
+</datamodel>
