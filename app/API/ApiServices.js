@@ -3,11 +3,12 @@
  * @author Work
  * @module ApiServices
  */
-define(['orm', 'http-context', 'ApiLibs', 'BillServicesModule'], function (Orm, HttpContext, ApiLibs, BillServicesModule, ModuleName) {
+define(['orm', 'http-context', 'ApiLibs', 'BillServicesModule', 'Messages'], function (Orm, HttpContext, ApiLibs, BillServicesModule, Messages, ModuleName) {
     return function () {
         var self = this, model = Orm.loadModel(ModuleName);
         var billServicesModule  = new BillServicesModule();
         var libs = new ApiLibs();
+        var msg = new Messages();
         
         /*
          * @POST /service/create
@@ -28,7 +29,7 @@ define(['orm', 'http-context', 'ApiLibs', 'BillServicesModule'], function (Orm, 
          * @GET /service/create
          */
         self.serviceCreateGET = function(path, onSucces){
-            return {msg: libs.getMsg('usePost')};
+            return {msg: msg.get('usePost')};
         };
         
         self.execute = function () {

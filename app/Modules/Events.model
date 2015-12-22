@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel>
+  <entity Name="eventTypes" Title="" entityHeight="200" entityIconified="false" entityId="145079155807535" entityLocationX="239" entityLocationY="75" entityWidth="150" queryId="eventTypes" tableName="" tableSchemaName=""/>
+  <entity Name="eventById" Title="" entityHeight="200" entityIconified="false" entityId="145079155623026" entityLocationX="49" entityLocationY="76" entityWidth="150" queryId="eventById" tableName="" tableSchemaName=""/>
+  <referenceRelation leftEntityFieldName="type" leftEntityId="145079155623026" rightEntityFieldName="event_types_id" rightEntityId="145079155807535"/>
+</datamodel>

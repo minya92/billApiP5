@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><datamodel>
   <entity Name="qBillAccounts" Title="" entityHeight="200" entityIconified="false" entityId="145044514149877" entityLocationX="12" entityLocationY="22" entityWidth="150" queryId="qBillAccounts" tableName="" tableSchemaName=""/>
+  <entity Name="qGetAccountBalance" Title="" entityHeight="200" entityIconified="false" entityId="145077185339030" entityLocationX="213" entityLocationY="28" entityWidth="150" queryId="qGetAccountBalance" tableName="" tableSchemaName=""/>
+  <referenceRelation leftEntityFieldName="account_id" leftEntityId="145077185339030" rightEntityFieldName="bill_accounts_id" rightEntityId="145044514149877"/>
 </datamodel>

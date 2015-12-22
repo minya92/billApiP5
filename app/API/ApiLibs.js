@@ -3,14 +3,11 @@
  * @author Work
  * @module ApiLibs
  */
-define([], function (ModuleName) {
+define(['Messages'], function (Messages, ModuleName) {
     return function () {
         var self = this;
         
-        var MSG = {
-            usePost     : "You need to use POST method!",
-            reqFields   : "Not filled in all required fields!"
-        };
+        var msg = new Messages();
         
         /*
          * Проверка набора входящих параметров.
@@ -30,17 +27,11 @@ define([], function (ModuleName) {
                 }
             });
             if(err)
-                return {error: MSG.reqFields};
+                return {error: msg.get('reqFields')};
             else
                 return aParams;
         };
         
-        /*
-         * Получить сообщение по коду
-         */
-        self.getMsg = function(aCode){
-            return MSG[aCode];
-        };
         
         self.execute = function () {
             // TODO : place application code here
