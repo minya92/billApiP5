@@ -1,17 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><datamodel datamodelDbId="null">
-  <fieldsEntity entityHeight="92" entityIconified="false" entityId="140783408624612" entityLocationX="702" entityLocationY="379" entityWidth="150" tableName="bill_services"/>
-  <fieldsEntity entityHeight="200" entityIconified="false" entityId="140922596486692" entityLocationX="944" entityLocationY="23" entityWidth="150" tableName="wh_measures"/>
-  <fieldsEntity entityHeight="135" entityIconified="false" entityId="141018314336365" entityLocationX="469" entityLocationY="372" entityWidth="150" tableName="org_trade_point"/>
-  <fieldsEntity entityHeight="87" entityIconified="false" entityId="140776434172822" entityLocationX="37" entityLocationY="32" entityWidth="150" tableName="bill_operations_type"/>
+<?xml version="1.0" encoding="UTF-8"?><datamodel datasource="null">
+  <fieldsEntity entityHeight="99" entityIconified="false" entityId="140783408624612" entityLocationX="702" entityLocationY="379" entityWidth="150" tableName="bill_services"/>
+  <fieldsEntity entityHeight="87" entityIconified="false" entityId="140776434172822" entityLocationX="6" entityLocationY="32" entityWidth="181" tableName="bill_operations_type"/>
   <fieldsEntity entityHeight="200" entityIconified="false" entityId="140448308377715" entityLocationX="228" entityLocationY="35" entityWidth="178" tableName="bill_operations"/>
-  <fieldsEntity entityHeight="200" entityIconified="false" entityId="140448268097366" entityLocationX="245" entityLocationY="249" entityWidth="162" tableName="bill_accounts"/>
-  <fieldsEntity entityHeight="200" entityIconified="false" entityId="141260687393443" entityLocationX="32" entityLocationY="344" entityWidth="150" tableName="org_franchazi"/>
-  <fieldsEntity entityHeight="87" entityIconified="false" entityId="141529321579193" entityLocationX="275" entityLocationY="470" entityWidth="150" tableName="bill_product_links"/>
-  <fieldsEntity entityHeight="83" entityIconified="false" entityId="140448280227678" entityLocationX="695" entityLocationY="481" entityWidth="150" tableName="bill_account_types"/>
-  <fieldsEntity entityHeight="72" entityIconified="false" entityId="140783434683757" entityLocationX="8" entityLocationY="134" entityWidth="182" tableName="bill_operations_status"/>
+  <fieldsEntity entityHeight="106" entityIconified="false" entityId="140448268097366" entityLocationX="245" entityLocationY="249" entityWidth="162" tableName="bill_accounts"/>
+  <fieldsEntity entityHeight="93" entityIconified="false" entityId="140783434683757" entityLocationX="8" entityLocationY="134" entityWidth="182" tableName="bill_operations_status"/>
   <fieldsEntity entityHeight="202" entityIconified="false" entityId="140861056219280" entityLocationX="704" entityLocationY="158" entityWidth="148" tableName="bill_item_cost"/>
-  <fieldsEntity entityHeight="111" entityIconified="false" entityId="140793170515931" entityLocationX="705" entityLocationY="30" entityWidth="150" tableName="items_catalog"/>
   <fieldsEntity entityHeight="130" entityIconified="false" entityId="140793162241022" entityLocationX="451" entityLocationY="23" entityWidth="174" tableName="bill_operations_items"/>
-  <fieldsEntity entityHeight="200" entityIconified="false" entityId="140922602838203" entityLocationX="924" entityLocationY="256" entityWidth="150" tableName="bill_measures"/>
+  <fieldsEntity entityHeight="200" entityIconified="false" entityId="140922602838203" entityLocationX="919" entityLocationY="218" entityWidth="150" tableName="bill_measures"/>
   <fieldsEntity entityHeight="200" entityIconified="false" entityId="140784307977567" entityLocationX="447" entityLocationY="161" entityWidth="200" tableName="bill_services_accounts"/>
 </datamodel>

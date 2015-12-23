@@ -11,7 +11,7 @@ define(['orm'], function (Orm, ModuleName) {
         
         self.addEvent = function(aEventType, aEventData){
             try {
-                var evt = JSON.stringify(aEventData); //BUG Ошибка при добавлении ошибки failure ;)
+                var evt = JSON.stringify(aEventData);
                 model.eventById.push({
                     type        :   aEventType,
                     event_data  :   evt,
