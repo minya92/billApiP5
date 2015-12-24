@@ -20,6 +20,18 @@ define([], function (ModuleName) {
                 en  : "Account was not found or is not used",
                 ru  : "Аккаунт не найден или не используется"
             },
+            errFindOperation  :    {
+                en  : "Billing Operation was not found",
+                ru  : "Операция по счету не найдена"
+            },
+            errCreateOperation  :    {
+                en  : "Error creating account transactions",
+                ru  : "Ошибка создания операции по счету"
+            },
+            errNoMoney  :    {
+                en  : "No money, no honey!",
+                ru  : "Нет денег"
+            },
             successDelAccount:   {
                 en  : "Account deleted successfully",
                 ru  : "Аккаунт успешно удален"
