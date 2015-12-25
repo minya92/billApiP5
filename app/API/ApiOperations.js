@@ -11,7 +11,7 @@ define(['orm', 'http-context', 'ApiLibs', 'OperationsModule', 'Messages'], funct
         var msg = new Messages();
         
         /*
-         * @POST /operation/create
+         * @POST /operations/create
          */
         self.operationCreate = function(aPath, onSucces){
             var http = new HttpContext();
@@ -20,19 +20,28 @@ define(['orm', 'http-context', 'ApiLibs', 'OperationsModule', 'Messages'], funct
                 return http;
             } else {
                 operationsModule.createOperation(http.id, http.sum, http.withdraw, function(res){
-                    if(res.bill_operations_id){
-                        operationsModule.setOperationDone(res.bill_operations_id, function(result){
-                            onSucces(result);
-                        });
-                    } else {
-                        onSucces({error: msg.get('errCreateOperation')});
-                    }
+                    onSucces(res);
                 });
             }
         };
         
         /*
-         * @POST /operation/get
+         * @POST /operations/done
+         */
+        self.operationDone = function(aPath, onSucces){
+            var http = new HttpContext();
+            http = libs.checkRequiredParams(http.request.params, ["id"]);
+            if(http.error){
+                return http;
+            } else {
+                operationsModule.setOperationDone(http.id, function(result){
+                    onSucces(result);
+                });
+            }
+        };
+        
+        /*
+         * @POST /operations/get
          */
         self.operationGet = function(aPath, onSucces){
             var http = new HttpContext();
@@ -41,6 +50,22 @@ define(['orm', 'http-context', 'ApiLibs', 'OperationsModule', 'Messages'], funct
                 return http;
             } else {
                 operationsModule.getOperations(http.id, http.type, http.status, function(res){
+                    onSucces(res);
+                });
+            }
+        };
+
+        
+        /*
+         * @POST /operations/planned
+         */
+        self.operationPlanned = function(aPath, onSucces){
+            var http = new HttpContext();
+            http = libs.checkRequiredParams(http.request.params, ["id", "date"]);
+            if(http.error){
+                return http;
+            } else {
+                operationsModule.setOperationPlanned(http.id, http.date, function(res){
                     onSucces(res);
                 });
             }

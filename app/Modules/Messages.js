@@ -32,6 +32,10 @@ define([], function (ModuleName) {
                 en  : "No money, no honey!",
                 ru  : "Нет денег"
             },
+            errWrongDate :    {
+                en  : "Date is not set or has an unknown format",
+                ru  : "Дата не задана или имеет неизвестный формат"
+            },
             successDelAccount:   {
                 en  : "Account deleted successfully",
                 ru  : "Аккаунт успешно удален"

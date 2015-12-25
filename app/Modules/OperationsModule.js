@@ -41,10 +41,12 @@ define(['orm', 'Messages', 'Events', 'AccountsModule'], function (Orm, Messages,
                         operation_date: new Date(),
                         operation_type: anOperationType,
                         operation_status: getStatusId('processing')
-                    }
+                    };
                     model.qBillOperations.push(operation);
-                    model.save();
-                    aCallback(operation);
+                    model.save(function(){
+                        operation.id = model.qBillOperations[model.qBillOperations.length - 1].bill_operations_id;
+                        aCallback(operation);
+                    });
                 }
             });
         };
@@ -56,7 +58,7 @@ define(['orm', 'Messages', 'Events', 'AccountsModule'], function (Orm, Messages,
          * TODO добавить сюда логгер
          */
         self.setOperationDone = function(anOperationId, aCallback){
-            model.qBillOperations.params.operation_id = anOperationId;
+            model.qBillOperations.params.operation_id = +anOperationId;
             model.qBillOperations.requery(function(){
                 if(model.qBillOperations.length){
                     model.qBillAccounts.params.account_id = model.qBillOperations[0].account_id;
@@ -87,6 +89,32 @@ define(['orm', 'Messages', 'Events', 'AccountsModule'], function (Orm, Messages,
                     aCallback({error: msg.get('errFindOperation')});
                 }
             });
+        };
+        
+        /*
+         * Запланировать оперцию на срок aDate
+         * @param {type} anOperationId
+         * @param {type} aDate
+         * @param {type} aCallback
+         * @returns {undefined}
+         */
+        self.setOperationPlanned = function(anOperationId, aDate, aCallback){
+            model.qBillOperations.params.operation_id = +anOperationId;
+            if(aDate){
+                aDate = new Date(aDate);
+                model.qBillOperations.requery(function(){
+                    if(model.qBillOperations.length){
+                        model.qBillOperations[0].date = aDate;
+                        model.qBillOperations[0].status = getStatusId('planned');
+                        model.save();
+                        aCallback({result: "ok", error: null});
+                    } else {
+                        aCallback({error: msg.get('errFindOperation')});
+                    }
+                });
+            } else {
+                aCallback({error: msg.get('errWrongDate')});
+            }
         };
         
         /*

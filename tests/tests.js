@@ -50,25 +50,47 @@ QUnit.test( "Create Billing account", function( assert ) {
 
 QUnit.test( "Add 500 coins on Account", function( assert ) {
     var done = assert.async();
-    request("POST", "operation/create", {id: accountId, sum: 500}, function(res){
-        assert.ok( res.result, "Result: " + res.result+ errorMsg(res));
-        done();
+    request("POST", "operations/create", {id: accountId, sum: 500}, function(res){
+        assert.ok( res.id, "Operation Processing: " + res.id + errorMsg(res));
+        request("POST", "operations/done", {id: res.id}, function(r){
+            assert.ok( r.result, "Operation done: " + r.result + errorMsg(r));
+            done();
+        });
     });
 });
 
 QUnit.test( "Remove 400 coins on Account", function( assert ) {
     var done = assert.async();
-    request("POST", "operation/create", {id: accountId, sum: 400, withdraw:true}, function(res){
-        assert.ok( res.result, "Result: " + res.result+ errorMsg(res));
-        done();
+    request("POST", "operations/create", {id: accountId, sum: 400, withdraw:true}, function(res){
+        assert.ok( res.id, "Operation Processing: " + res.id + errorMsg(res));
+        request("POST", "operations/done", {id: res.id}, function(r){
+            assert.ok( r.result, "Operation done: " + r.result + errorMsg(r));
+            done();
+        });
     });
 });
 
 QUnit.test( "Remove 101 coins on Account", function( assert ) {
     var done = assert.async();
-    request("POST", "operation/create", {id: accountId, sum: 101, withdraw:true}, function(res){
-        assert.ok( res.error, "Result: " + res.result+ errorMsg(res));
-        done();
+    request("POST", "operations/create", {id: accountId, sum: 101, withdraw:true}, function(res){
+        assert.ok( res.id, "Operation Processing: " + res.id + errorMsg(res));
+        request("POST", "operations/done", {id: res.id}, function(r){
+            assert.ok( !r.result, "Operation done: " + r.result + errorMsg(r));
+            done();
+        });
+    });
+});
+
+QUnit.test( "Remove 303 coins on the next Week", function( assert ) {
+    var done = assert.async();
+    request("POST", "operations/create", {id: accountId, sum: 303, withdraw:true}, function(res){
+        assert.ok( res.id, "Operation Processing: " + res.id + errorMsg(res));
+        var date = new Date();
+        date.setDate(date.getDay() + 6);
+        request("POST", "operations/planned", {id: res.id, date: date}, function(r){
+            assert.ok( r.result, "Operation done: " + r.result + errorMsg(r));
+            done();
+        });
     });
 });
 
@@ -82,7 +104,7 @@ QUnit.test( "Get Sum from existing account", function( assert ) {
 
 QUnit.test( "Get All operations from account", function( assert ) {
     var done = assert.async();
-    request("POST", "operation/get", {id: accountId}, function(res){
+    request("POST", "operations/get", {id: accountId}, function(res){
         assert.ok( res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
         done();
     });
@@ -90,7 +112,7 @@ QUnit.test( "Get All operations from account", function( assert ) {
 
 QUnit.test( "Get All DONE operations from account", function( assert ) {
     var done = assert.async();
-    request("POST", "operation/get", {id: accountId, status: 'done'}, function(res){
+    request("POST", "operations/get", {id: accountId, status: 'done'}, function(res){
         assert.ok( res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
         done();
     });
@@ -98,7 +120,7 @@ QUnit.test( "Get All DONE operations from account", function( assert ) {
 
 QUnit.test( "Get DONE Withdraw operations from account", function( assert ) {
     var done = assert.async();
-    request("POST", "operation/get", {id: accountId, type: 'withdraw', status: 'done'}, function(res){
+    request("POST", "operations/get", {id: accountId, type: 'withdraw', status: 'done'}, function(res){
         assert.ok( res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
         done();
     });
@@ -106,7 +128,7 @@ QUnit.test( "Get DONE Withdraw operations from account", function( assert ) {
 
 QUnit.test( "Get CANCEL Withdraw operations from account", function( assert ) {
     var done = assert.async();
-    request("POST", "operation/get", {id: accountId, type: 'withdraw', status: 'canceled'}, function(res){
+    request("POST", "operations/get", {id: accountId, type: 'withdraw', status: 'canceled'}, function(res){
         assert.ok( res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
         done();
     });
