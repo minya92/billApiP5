@@ -29,33 +29,60 @@ function errorMsg(aResult){
     return res;
 }
 
+var accountId = null;
+
+QUnit.test( "Get Sum from NOT existing account", function( assert ) {
+    var done = assert.async();
+    request("POST", "accounts/get_sum", {id: accountId}, function(res){
+        assert.ok( !res.sum , "Sum: " + res.sum + errorMsg(res));
+        done();
+    });
+});
+
 QUnit.test( "Create Billing account", function( assert ) {
     var done = assert.async();
     request("POST", "accounts/create", null, function(res){
         assert.ok( res.account_id, "Bill account created: id=" + res.account_id + errorMsg(res));
+        accountId = res.account_id;
+        done();
+    });
+});
+
+QUnit.test( "Add 500 coins on Account", function( assert ) {
+    var done = assert.async();
+    request("POST", "operation/create", {id: accountId, sum: 500}, function(res){
+        assert.ok( res.result, "Result: " + res.result+ errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test( "Remove 400 coins on Account", function( assert ) {
+    var done = assert.async();
+    request("POST", "operation/create", {id: accountId, sum: 400, withdraw:true}, function(res){
+        assert.ok( res.result, "Result: " + res.result+ errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test( "Remove 101 coins on Account", function( assert ) {
+    var done = assert.async();
+    request("POST", "operation/create", {id: accountId, sum: 101, withdraw:true}, function(res){
+        assert.ok( res.error, "Result: " + res.result+ errorMsg(res));
         done();
     });
 });
 
 QUnit.test( "Get Sum from existing account", function( assert ) {
     var done = assert.async();
-    request("POST", "accounts/get_sum", {id: '145069357181001'}, function(res){
+    request("POST", "accounts/get_sum", {id: accountId}, function(res){
         assert.ok( res.sum, "Sum: " + res.sum + errorMsg(res));
-        done();
-    });
-});
-
-QUnit.test( "Get Sum from NOT existing account", function( assert ) {
-    var done = assert.async();
-    request("POST", "accounts/get_sum", {id: '145069357181'}, function(res){
-        assert.ok( !res.sum , "Sum: " + res.sum + errorMsg(res));
         done();
     });
 });
 
 QUnit.test( "Del Bill Account account", function( assert ) {
     var done = assert.async();
-    request("POST", "accounts/delete", {id: '145079353812919'}, function(res){
+    request("POST", "accounts/delete", {id: accountId}, function(res){
         assert.ok( res.message , "Message: " + res.message + errorMsg(res));
         done();
     });
