@@ -31,6 +31,21 @@ define(['orm', 'http-context', 'ApiLibs', 'OperationsModule', 'Messages'], funct
             }
         };
         
+        /*
+         * @POST /operation/get
+         */
+        self.operationGet = function(aPath, onSucces){
+            var http = new HttpContext();
+            http = libs.checkRequiredParams(http.request.params, ["id"]);
+            if(http.error){
+                return http;
+            } else {
+                operationsModule.getOperations(http.id, http.type, http.status, function(res){
+                    onSucces(res);
+                });
+            }
+        };
+        
         self.execute = function () {
             return {msg: "I'am running!!!"};
         };

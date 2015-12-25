@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel>
+  <parameters>
+    <parameter description="" name="account_id" nullable="true" parameterMode="1" selectionForm="null" type="Number"/>
+    <parameter description="" name="type" nullable="true" parameterMode="1" selectionForm="null" type="String"/>
+    <parameter description="" name="status" nullable="true" parameterMode="1" selectionForm="null" type="Number"/>
+  </parameters>
+  <parametersEntity entityHeight="200" entityIconified="false" entityLocationX="8" entityLocationY="7" entityWidth="150"/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="145102966140386" entityLocationX="250" entityLocationY="12" entityWidth="150" tableAlias="t" tableName="bill_operations" tableSchemaName=""/>
+  <relation leftEntityId="-1" leftEntityParameterName="type" rightEntityFieldName="operation_type" rightEntityId="145102966140386"/>
+  <relation leftEntityId="-1" leftEntityParameterName="status" rightEntityFieldName="operation_status" rightEntityId="145102966140386"/>
+  <relation leftEntityId="-1" leftEntityParameterName="account_id" rightEntityFieldName="account_id" rightEntityId="145102966140386"/>
+</datamodel>

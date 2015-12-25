@@ -80,6 +80,38 @@ QUnit.test( "Get Sum from existing account", function( assert ) {
     });
 });
 
+QUnit.test( "Get All operations from account", function( assert ) {
+    var done = assert.async();
+    request("POST", "operation/get", {id: accountId}, function(res){
+        assert.ok( res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test( "Get All DONE operations from account", function( assert ) {
+    var done = assert.async();
+    request("POST", "operation/get", {id: accountId, status: 'done'}, function(res){
+        assert.ok( res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test( "Get DONE Withdraw operations from account", function( assert ) {
+    var done = assert.async();
+    request("POST", "operation/get", {id: accountId, type: 'withdraw', status: 'done'}, function(res){
+        assert.ok( res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test( "Get CANCEL Withdraw operations from account", function( assert ) {
+    var done = assert.async();
+    request("POST", "operation/get", {id: accountId, type: 'withdraw', status: 'canceled'}, function(res){
+        assert.ok( res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
+        done();
+    });
+});
+
 QUnit.test( "Del Bill Account account", function( assert ) {
     var done = assert.async();
     request("POST", "accounts/delete", {id: accountId}, function(res){
