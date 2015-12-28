@@ -14,8 +14,7 @@ define(['orm', 'http-context', 'ApiLibs', 'BillServicesModule', 'Messages'], fun
          * @POST /service/create
          */
         self.serviceCreatePOST = function(aPath, onSucces){
-            var http = new HttpContext();
-            http = libs.checkRequiredParams(http.request.params, ["name", "sum"]);
+            var http = libs.checkRequiredParams((new HttpContext()), ["name", "sum"]);
             if(http.error){
                 return http;
             } else {

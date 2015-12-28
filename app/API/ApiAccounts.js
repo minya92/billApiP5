@@ -23,8 +23,7 @@ define(['orm', 'ApiLibs','AccountsModule', 'http-context', 'Messages'], function
          * @POST /accounts/get_sum
          */
         self.getSumFromAccount = function(aPath, aSuccessCallback){
-            var http =  new HttpContext();
-            http = libs.checkRequiredParams(http.request.params, ['id']);
+            var http = libs.checkRequiredParams((new HttpContext()), ['id']);
             if(http.error)
                 aSuccessCallback(http.error);
             else {
@@ -38,8 +37,7 @@ define(['orm', 'ApiLibs','AccountsModule', 'http-context', 'Messages'], function
          * @POST /accounts/delete
          */
         self.delBillAccount = function(aPath, aSuccessCallback){
-            var http =  new HttpContext();
-            http = libs.checkRequiredParams(http.request.params, ['id']);
+            var http = libs.checkRequiredParams((new HttpContext()), ['id']);
             if(http.error)
                 aSuccessCallback(http.error);
             else {

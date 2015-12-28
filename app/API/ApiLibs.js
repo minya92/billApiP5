@@ -15,8 +15,9 @@ define(['Messages'], function (Messages, ModuleName) {
          * @param {mas} aRequiredFields - массив обязательных параметров
          * @returns {unresolved}
          */
-        self.checkRequiredParams = function(aParams, aRequiredFields){
+        self.checkRequiredParams = function(aHttpContext, aRequiredFields){
             var err = false;
+            var aParams = (aHttpContext.request ? aHttpContext.request.params : aHttpContext);
             aRequiredFields.forEach(function(field){
                 err = true;
                 for (var i in aParams){

@@ -14,8 +14,7 @@ define(['orm', 'http-context', 'ApiLibs', 'OperationsModule', 'Messages'], funct
          * @POST /operations/create
          */
         self.operationCreate = function(aPath, onSucces){
-            var http = new HttpContext();
-            http = libs.checkRequiredParams(http.request.params, ["id", "sum"]);
+            var http = libs.checkRequiredParams((new HttpContext()), ["id", "sum"]);
             if(http.error){
                 return http;
             } else {
@@ -29,8 +28,7 @@ define(['orm', 'http-context', 'ApiLibs', 'OperationsModule', 'Messages'], funct
          * @POST /operations/done
          */
         self.operationDone = function(aPath, onSucces){
-            var http = new HttpContext();
-            http = libs.checkRequiredParams(http.request.params, ["id"]);
+            var http = libs.checkRequiredParams((new HttpContext()), ["id"]);
             if(http.error){
                 return http;
             } else {
@@ -44,8 +42,7 @@ define(['orm', 'http-context', 'ApiLibs', 'OperationsModule', 'Messages'], funct
          * @POST /operations/get
          */
         self.operationGet = function(aPath, onSucces){
-            var http = new HttpContext();
-            http = libs.checkRequiredParams(http.request.params, ["id"]);
+            var http = libs.checkRequiredParams((new HttpContext()), ["id"]);
             if(http.error){
                 return http;
             } else {
@@ -60,8 +57,7 @@ define(['orm', 'http-context', 'ApiLibs', 'OperationsModule', 'Messages'], funct
          * @POST /operations/planned
          */
         self.operationPlanned = function(aPath, onSucces){
-            var http = new HttpContext();
-            http = libs.checkRequiredParams(http.request.params, ["id", "date"]);
+            var http = libs.checkRequiredParams((new HttpContext()), ["id", "date"]);
             if(http.error){
                 return http;
             } else {
