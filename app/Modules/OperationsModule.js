@@ -102,18 +102,22 @@ define(['orm', 'Messages', 'Events', 'AccountsModule'], function (Orm, Messages,
             model.qBillOperations.params.operation_id = +anOperationId;
             if(aDate){
                 aDate = new Date(aDate);
-                model.qBillOperations.requery(function(){
-                    if(model.qBillOperations.length){
-                        model.qBillOperations[0].date = aDate;
-                        model.qBillOperations[0].status = getStatusId('planned');
-                        model.save();
-                        aCallback({result: "ok", error: null});
-                    } else {
-                        aCallback({error: msg.get('errFindOperation')});
-                    }
-                });
+                if((new Date()) < aDate.valueOf()){
+                    model.qBillOperations.requery(function(){
+                        if(model.qBillOperations.length){
+                            model.qBillOperations[0].date = aDate;
+                            model.qBillOperations[0].status = getStatusId('planned');
+                            model.save();
+                            aCallback({result: "ok", error: null});
+                        } else {
+                            aCallback({error: msg.get('errFindOperation')});
+                        }
+                    });
+                } else {
+                    aCallback({error: msg.get('errWrongDate')});
+                }
             } else {
-                aCallback({error: msg.get('errWrongDate')});
+                aCallback({error: msg.get('errUnknownDate')});
             }
         };
         

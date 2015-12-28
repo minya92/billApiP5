@@ -86,8 +86,8 @@ QUnit.test( "Remove 303 coins on the next Week", function( assert ) {
     request("POST", "operations/create", {id: accountId, sum: 303, withdraw:true}, function(res){
         assert.ok( res.id, "Operation Processing: " + res.id + errorMsg(res));
         var date = new Date();
-        date.setDate(date.getDay() + 6);
-        request("POST", "operations/planned", {id: res.id, date: date}, function(r){
+        date.setDate(date.getDate() + 7);
+        request("POST", "operations/planned", {id: res.id, date: date.toDateString()}, function(r){
             assert.ok( r.result, "Operation done: " + r.result + errorMsg(r));
             done();
         });
