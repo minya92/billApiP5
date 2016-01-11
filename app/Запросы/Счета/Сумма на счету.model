@@ -3,8 +3,10 @@
     <parameter description="" name="account_id" nullable="true" parameterMode="1" selectionForm="null" type="Number"/>
   </parameters>
   <parametersEntity entityHeight="200" entityIconified="false" entityLocationX="8" entityLocationY="7" entityWidth="150"/>
-  <entity Title="" entityHeight="200" entityIconified="false" entityId="141086909244952" entityLocationX="399" entityLocationY="0" entityWidth="150" tableAlias="t" tableName="bill_operations_type" tableSchemaName=""/>
-  <entity Title="" entityHeight="200" entityIconified="false" entityId="141086877889663" entityLocationX="191" entityLocationY="7" entityWidth="150" tableAlias="t1" tableName="bill_operations" tableSchemaName=""/>
-  <relation leftEntityFieldName="operation_type" leftEntityId="141086877889663" rightEntityFieldName="bill_operations_type_id" rightEntityId="141086909244952"/>
-  <relation leftEntityId="-1" leftEntityParameterName="account_id" rightEntityFieldName="account_id" rightEntityId="141086877889663"/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="141086909244952" entityLocationX="539" entityLocationY="13" entityWidth="150" tableAlias="t" tableName="bill_operations_type" tableSchemaName=""/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="145251652553675" entityLocationX="184" entityLocationY="14" entityWidth="150" tableAlias="t1" tableName="bill_accounts" tableSchemaName=""/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="145251652553611" entityLocationX="356" entityLocationY="18" entityWidth="150" tableAlias="t2" tableName="bill_operations" tableSchemaName=""/>
+  <relation leftEntityFieldName="bill_accounts_id" leftEntityId="145251652553675" rightEntityFieldName="account_id" rightEntityId="145251652553611"/>
+  <relation leftEntityFieldName="operation_type" leftEntityId="145251652553611" rightEntityFieldName="bill_operations_type_id" rightEntityId="141086909244952"/>
+  <relation leftEntityId="-1" leftEntityParameterName="account_id" rightEntityFieldName="bill_accounts_id" rightEntityId="145251652553675"/>
 </datamodel>
