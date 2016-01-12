@@ -7,7 +7,7 @@ function request(httpMethod, apiMethod, params, callback){
         data: params,
         type: httpMethod,
         complete : function(dat){
-            console.log(dat);
+            //console.log(dat);
             if(dat.status == 200){
                 callback(JSON.parse(dat.responseText));
             } else {
@@ -25,11 +25,12 @@ function errorMsg(aResult){
     if(aResult.error)
         res += "Error: " + aResult.error;
     if(aResult.response)
-        res += " Respose: " + aResult.response;
+        res += " Response: " + aResult.response;
     return res;
 }
 
 var accountId = null;
+var serviceId = null;
 
 QUnit.test( "Get Sum from NOT existing account", function( assert ) {
     var done = assert.async();
@@ -129,6 +130,24 @@ QUnit.test( "Get DONE Withdraw operations from account", function( assert ) {
 QUnit.test( "Get CANCEL Withdraw operations from account", function( assert ) {
     var done = assert.async();
     request("POST", "operations/get", {id: accountId, type: 'withdraw', status: 'canceled'}, function(res){
+        assert.ok( res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test( "Create Service", function( assert ) {
+    var done = assert.async();
+    request("POST", "services/create", {name: "TEST SERVICE", sum: 500}, function(res){
+        serviceId = res.service_id;
+        assert.ok( res.service_id, "RESULT: " + JSON.stringify(res.service_id) + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test( "Add service on account", function( assert ) {
+    var done = assert.async();
+    request("POST", "services/addOnAccount", {service_id: serviceId, account_id: accountId}, function(res){
+        console.log(res);
         assert.ok( res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
         done();
     });

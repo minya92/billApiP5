@@ -17,8 +17,8 @@ define([], function (ModuleName) {
                 ru  : "Заполнены не все обязательные поля!"
             },
             errFindAccount  :    {
-                en  : "Account was not found or is not used",
-                ru  : "Аккаунт не найден или не используется"
+                en  : "Account was not found",
+                ru  : "Аккаунт не найден"
             },
             errFindOperation  :    {
                 en  : "Billing Operation was not found",
@@ -39,6 +39,10 @@ define([], function (ModuleName) {
             errWrongDate :    {
                 en  : "Date it should be different from the current date",
                 ru  : "Дата должна отличаться от текущей даты"
+            },
+            errFindService :    {
+                en  : "The service is not found",
+                ru  : "Услуга не найдена"
             },
             successDelAccount:   {
                 en  : "Account deleted successfully",

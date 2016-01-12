@@ -7,5 +7,5 @@ From bill_accounts t1
  Left Join bill_operations t2 on t1.bill_accounts_id = t2.account_id
  Left Join bill_operations_type t on t2.operation_type = t.bill_operations_type_id
  Where (t2.operation_status = 1 or t2.operation_status is null)
- and  :account_id = t1.bill_accounts_id
- Group by t1.bill_accounts_id
+ and  :account_id = t1.bill_accounts_id and t1.active = true
+ Group by t1.bill_accounts_id 
