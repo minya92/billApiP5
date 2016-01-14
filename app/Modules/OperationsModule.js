@@ -28,10 +28,7 @@ define(['orm', 'Messages', 'Events', 'AccountsModule'], function (Orm, Messages,
             }
             if(!anAccountId || !aSum)
                 error = msg.get("reqFields");
-            if(!anOperationType) //TODO добавить проверку на сущ типа
-                anOperationType = 'replenish';
-            else
-                anOperationType = 'withdraw';
+            anOperationType = anOperationType ? anOperationType = 'withdraw' : anOperationType = 'replenish';
             model.qBillAccounts.params.account_id = +anAccountId;
             model.qBillAccounts.requery(function(){
                 if(model.qBillAccounts.length){

@@ -31,8 +31,9 @@ function errorMsg(aResult){
 
 var accountId = null;
 var serviceId = null;
+var servicePrepayment = null;
 
-QUnit.test( "Get Sum from NOT existing account", function( assert ) {
+QUnit.test( "Получить остаток на НЕ существующем счету", function( assert ) {
     var done = assert.async();
     request("POST", "accounts/get_sum", {id: accountId}, function(res){
         assert.ok( !res.sum , "Sum: " + res.sum + errorMsg(res));
@@ -40,7 +41,7 @@ QUnit.test( "Get Sum from NOT existing account", function( assert ) {
     });
 });
 
-QUnit.test( "Create Billing account", function( assert ) {
+QUnit.test( "Создать новый счет", function( assert ) {
     var done = assert.async();
     request("POST", "accounts/create", null, function(res){
         assert.ok( res.account_id, "Bill account created: id=" + res.account_id + errorMsg(res));
@@ -49,7 +50,7 @@ QUnit.test( "Create Billing account", function( assert ) {
     });
 });
 
-QUnit.test( "Add 500 coins on Account", function( assert ) {
+QUnit.test( "Пополнить счет на 500", function( assert ) {
     var done = assert.async();
     request("POST", "operations/create", {id: accountId, sum: 500}, function(res){
         assert.ok( res.id, "Operation Processing: " + res.id + errorMsg(res));
@@ -60,7 +61,7 @@ QUnit.test( "Add 500 coins on Account", function( assert ) {
     });
 });
 
-QUnit.test( "Remove 400 coins on Account", function( assert ) {
+QUnit.test( "Снять со счета 400", function( assert ) {
     var done = assert.async();
     request("POST", "operations/create", {id: accountId, sum: 400, withdraw:true}, function(res){
         assert.ok( res.id, "Operation Processing: " + res.id + errorMsg(res));
@@ -71,7 +72,7 @@ QUnit.test( "Remove 400 coins on Account", function( assert ) {
     });
 });
 
-QUnit.test( "Remove 101 coins on Account", function( assert ) {
+QUnit.test( "Снять со счета 101", function( assert ) {
     var done = assert.async();
     request("POST", "operations/create", {id: accountId, sum: 101, withdraw:true}, function(res){
         assert.ok( res.id, "Operation Processing: " + res.id + errorMsg(res));
@@ -82,7 +83,7 @@ QUnit.test( "Remove 101 coins on Account", function( assert ) {
     });
 });
 
-QUnit.test( "Remove 303 coins on the next Week", function( assert ) {
+QUnit.test( "Снять со счета 303 на след. неделе", function( assert ) {
     var done = assert.async();
     request("POST", "operations/create", {id: accountId, sum: 303, withdraw:true}, function(res){
         assert.ok( res.id, "Operation Processing: " + res.id + errorMsg(res));
@@ -95,7 +96,7 @@ QUnit.test( "Remove 303 coins on the next Week", function( assert ) {
     });
 });
 
-QUnit.test( "Get Sum from existing account", function( assert ) {
+QUnit.test( "Получить остаток средств на счете", function( assert ) {
     var done = assert.async();
     request("POST", "accounts/get_sum", {id: accountId}, function(res){
         assert.ok( res.sum, "Sum: " + res.sum + errorMsg(res));
@@ -103,7 +104,7 @@ QUnit.test( "Get Sum from existing account", function( assert ) {
     });
 });
 
-QUnit.test( "Get All operations from account", function( assert ) {
+QUnit.test( "Все операции по счету", function( assert ) {
     var done = assert.async();
     request("POST", "operations/get", {id: accountId}, function(res){
         assert.ok( res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
@@ -111,7 +112,7 @@ QUnit.test( "Get All operations from account", function( assert ) {
     });
 });
 
-QUnit.test( "Get All DONE operations from account", function( assert ) {
+QUnit.test( "Все пройденные операции по счету", function( assert ) {
     var done = assert.async();
     request("POST", "operations/get", {id: accountId, status: 'done'}, function(res){
         assert.ok( res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
@@ -119,7 +120,7 @@ QUnit.test( "Get All DONE operations from account", function( assert ) {
     });
 });
 
-QUnit.test( "Get DONE Withdraw operations from account", function( assert ) {
+QUnit.test( "Пройденные операции списания по счету", function( assert ) {
     var done = assert.async();
     request("POST", "operations/get", {id: accountId, type: 'withdraw', status: 'done'}, function(res){
         assert.ok( res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
@@ -127,7 +128,7 @@ QUnit.test( "Get DONE Withdraw operations from account", function( assert ) {
     });
 });
 
-QUnit.test( "Get CANCEL Withdraw operations from account", function( assert ) {
+QUnit.test( "НЕ пройденные операции списания по счету", function( assert ) {
     var done = assert.async();
     request("POST", "operations/get", {id: accountId, type: 'withdraw', status: 'canceled'}, function(res){
         assert.ok( res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
@@ -135,16 +136,26 @@ QUnit.test( "Get CANCEL Withdraw operations from account", function( assert ) {
     });
 });
 
-QUnit.test( "Create Service", function( assert ) {
+//12
+QUnit.test( "Создание услуги с предоплатой (50)", function( assert ) {
     var done = assert.async();
-    request("POST", "services/create", {name: "TEST SERVICE", sum: 500, days: 7}, function(res){
+    request("POST", "services/create", {name: "test service with prepayment", cost: 50, days: 14, prepayment: true}, function(res){
+        servicePrepayment = res.service_id;
+        assert.ok( res.service_id, "RESULT: " + JSON.stringify(res.service_id) + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test( "Создание услуги", function( assert ) {
+    var done = assert.async();
+    request("POST", "services/create", {name: "test service", cost: 500}, function(res){
         serviceId = res.service_id;
         assert.ok( res.service_id, "RESULT: " + JSON.stringify(res.service_id) + errorMsg(res));
         done();
     });
 });
 
-QUnit.test( "Get last added service", function( assert ) {
+QUnit.test( "Получить инфу по предыдущей услуге", function( assert ) {
     var done = assert.async();
     request("POST", "services/get", {service_id: serviceId}, function(res){
         assert.ok( res.services, "RESULT: " + JSON.stringify(res.services) + errorMsg(res));
@@ -152,7 +163,7 @@ QUnit.test( "Get last added service", function( assert ) {
     });
 });
 
-QUnit.test( "Get All Services List", function( assert ) {
+QUnit.test( "Список всех услуг", function( assert ) {
     var done = assert.async();
     request("POST", "services/get", {}, function(res){
         assert.ok( res.services, "RESULT: " + JSON.stringify(res.services) + errorMsg(res));
@@ -160,16 +171,47 @@ QUnit.test( "Get All Services List", function( assert ) {
     });
 });
 
-QUnit.test( "Add service on account", function( assert ) {
+QUnit.test( "Подключить обычную услугу на счет", function( assert ) {
     var done = assert.async();
     request("POST", "services/addOnAccount", {service_id: serviceId, account_id: accountId}, function(res){
-        console.log(res);
         assert.ok( res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
         done();
     });
 });
 
-QUnit.test( "Del Bill Account account", function( assert ) {
+QUnit.test( "Подключить услугу c предоплатой на счет", function( assert ) {
+    var done = assert.async();
+    request("POST", "services/addOnAccount", {service_id: servicePrepayment, account_id: accountId}, function(res){
+        assert.ok( res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test( "Изменение услуги c спредоплатой (с 50 на 1000)", function( assert ) {
+    var done = assert.async();
+    request("POST", "services/change", {service_id: servicePrepayment, cost: 1000, days: 7}, function(res){
+        assert.ok( res.service_id, "RESULT: " + JSON.stringify(res.service_id) + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test( "Подключить услугу c предоплатой на счет (не хватит денег)", function( assert ) {
+    var done = assert.async();
+    request("POST", "services/addOnAccount", {service_id: servicePrepayment, account_id: accountId}, function(res){
+        assert.ok( res.error, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test( "Получить остаток средств на счете", function( assert ) {
+    var done = assert.async();
+    request("POST", "accounts/get_sum", {id: accountId}, function(res){
+        assert.ok( res.sum, "Sum: " + res.sum + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test( "Удалить счет", function( assert ) {
     var done = assert.async();
     request("POST", "accounts/delete", {id: accountId}, function(res){
         assert.ok( res.message , "Message: " + res.message + errorMsg(res));

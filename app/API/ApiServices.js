@@ -12,12 +12,26 @@ define(['orm', 'http-context', 'ApiLibs', 'BillServicesModule', 'Messages'], fun
         /*
          * @POST /services/create
          */
-        self.serviceCreatePOST = function(aPath, onSucces){
-            var http = libs.checkRequiredParams((new HttpContext()), ["name", "sum"]);
+        self.serviceCreate = function(aPath, onSucces){
+            var http = libs.checkRequiredParams((new HttpContext()), ["name", "cost"]);
             if(http.error){
                 return http;
             } else {
-                billServicesModule.CreateService(http.name, http.sum, http.days, http.lock, http.afterMonth, http.prepayment, http.once, function(res){
+                billServicesModule.CreateService(http.name, http.cost, http.days, http.lock, http.afterMonth, http.prepayment, http.once, function(res){
+                    onSucces({service_id: res});
+                });
+            }
+        };
+        
+        /*
+         * @POST /services/change
+         */
+        self.serviceChange = function(aPath, onSucces){
+            var http = libs.checkRequiredParams((new HttpContext()), ["service_id"]);
+            if(http.error){
+                return http;
+            } else {
+                billServicesModule.ChangeService(http.service_id, http.cost, http.days, http.afterMonth, http.prepayment, http.once, function(res){
                     onSucces({service_id: res});
                 });
             }

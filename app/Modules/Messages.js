@@ -30,7 +30,7 @@ define([], function (ModuleName) {
             },
             errNoMoney  :    {
                 en  : "No money, no honey!",
-                ru  : "Нет денег"
+                ru  : "Нет хватает денег"
             },
             errUnknownDate :    {
                 en  : "Date is not set or has an unknown format",
