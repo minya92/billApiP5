@@ -1,6 +1,7 @@
 /**
  * @author Work
  * @name qServiceList
+ * @writable bill_services
  */ 
 Select * 
 From bill_services t1

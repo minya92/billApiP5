@@ -17,7 +17,7 @@ define(['orm', 'http-context', 'ApiLibs', 'BillServicesModule', 'Messages'], fun
             if(http.error){
                 return http;
             } else {
-                billServicesModule.CreateService(http.name, http.sum, http.days, http.lock, http.afterMonth, function(res){
+                billServicesModule.CreateService(http.name, http.sum, http.days, http.lock, http.afterMonth, http.prepayment, http.once, function(res){
                     onSucces({service_id: res});
                 });
             }
@@ -35,6 +35,16 @@ define(['orm', 'http-context', 'ApiLibs', 'BillServicesModule', 'Messages'], fun
                     onSucces(res);
                 });
             }
+        };
+        
+        /*
+         * @POST /services/get
+         */
+        self.servicesGet = function(aPath, onSucces){
+            var http = (new HttpContext()).request.params;
+            billServicesModule.GetService(http.service_id, function(res){
+                onSucces(res);
+            });
         };
         
         self.execute = function () {

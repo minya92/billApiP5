@@ -22,36 +22,59 @@ define(['orm', 'AccountsModule', 'Messages', 'Events'], function (Orm, AccountsM
         self.execute = function () {
             // TODO : place application code here
         };
-
+        
+        /* Получить услугу или все услуги
+         * @param {type} aServiceId
+         * @param {type} aCallBack
+         * @returns {undefined}
+         */
+        self.GetService = function(aServiceId, aCallBack){
+            aServiceId = aServiceId ? +aServiceId : null;
+            model.qServiceList.params.service_id = aServiceId;
+            model.qServiceList.requery(function(){
+                if(model.qServiceList.length){
+                    aCallBack({services: model.qServiceList, error : null});
+                } else {
+                    aCallBack({services:null, error: msg.get('errFindService')});
+                }
+            });
+        };
+        
         /*
          * Создание новой услуги
          * aDays - промежуток дней для снятия абонентской платы
          * aDays (null) - ежемесячное списание абонентской платы
+         * aPrepayment - if true списать деньги сразу при активации услуги
+         * anOnce - одноразовая
          * @param {type} aName
          * @param {type} aSum
          * @param {type} aDays
          * @returns {Boolean}
          */
-        self.CreateService = function (aName, aSum, aDays, aLock, anAfterMonth, aCallBack) {
-            var aMonth = false;
+        self.CreateService = function (aName, aSum, aDays, aLock, anAfterMonth, aPrepayment, anOnce, aCallBack) {
+            anAfterMonth = anAfterMonth ? true : null;
+            aPrepayment = aPrepayment ? true : null;
+            anOnce = anOnce ? true : null;
             if (aDays == false || aDays == 0 || aDays == null || aDays === undefined || !aDays) {
-                aMonth = true;
+                anAfterMonth = true;
                 aDays = 0;
             }
             model.qServiceList.push({
-                //service_id : model.qServiceList.cursor.bill_services_id,
-                item_cost: aSum,
-                service_days: aDays,
-                service_month: aMonth,
                 service_name: aName,
                 locked: aLock,
+            });
+            model.qServiceSetting.push({
+                service_id: model.qServiceList[0].bill_services_id,
+                item_cost: aSum,
+                service_days: aDays,
+                service_month: anAfterMonth,
                 start_date: new Date(),
-                after_days: anAfterMonth
+                prepayment: aPrepayment,
+                once: anOnce
             });
             model.save(function () {
-                aCallBack(model.qServiceList.cursor.bill_services_id);
+                aCallBack(model.qServiceList[0].bill_services_id);
             });
-            //eventProcessor.addEvent('serviceCreated', service);
         };
 
         self.AddServiceOnAccount = function (anAccountId, aServiceId, aCallback) {

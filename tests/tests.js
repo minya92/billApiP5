@@ -137,9 +137,25 @@ QUnit.test( "Get CANCEL Withdraw operations from account", function( assert ) {
 
 QUnit.test( "Create Service", function( assert ) {
     var done = assert.async();
-    request("POST", "services/create", {name: "TEST SERVICE", sum: 500}, function(res){
+    request("POST", "services/create", {name: "TEST SERVICE", sum: 500, days: 7}, function(res){
         serviceId = res.service_id;
         assert.ok( res.service_id, "RESULT: " + JSON.stringify(res.service_id) + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test( "Get last added service", function( assert ) {
+    var done = assert.async();
+    request("POST", "services/get", {service_id: serviceId}, function(res){
+        assert.ok( res.services, "RESULT: " + JSON.stringify(res.services) + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test( "Get All Services List", function( assert ) {
+    var done = assert.async();
+    request("POST", "services/get", {}, function(res){
+        assert.ok( res.services, "RESULT: " + JSON.stringify(res.services) + errorMsg(res));
         done();
     });
 });
