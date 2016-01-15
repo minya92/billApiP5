@@ -38,7 +38,7 @@ define(['orm', 'http-context', 'ApiLibs', 'BillServicesModule', 'Messages'], fun
         };
         
         /*
-         * @POST /services/addOnAccount
+         * @POST /services/add
          */
         self.serviceAddOnAccount = function(aPath, onSucces){
             var http = libs.checkRequiredParams((new HttpContext()), ["service_id", "account_id"]);
@@ -46,6 +46,34 @@ define(['orm', 'http-context', 'ApiLibs', 'BillServicesModule', 'Messages'], fun
                 return http;
             } else {
                 billServicesModule.AddServiceOnAccount(http.account_id, http.service_id, function(res){
+                    onSucces(res);
+                });
+            }
+        };
+        
+        /*
+         * @POST /services/disable
+         */
+        self.disableOnAccount = function(aPath, onSucces){
+            var http = libs.checkRequiredParams((new HttpContext()), ["service_id", "account_id"]);
+            if(http.error){
+                return http;
+            } else {
+                billServicesModule.DisableService(http.account_id, http.service_id, function(res){
+                    onSucces(res);
+                });
+            }
+        };
+        
+        /*
+         * @POST /services/delete
+         */
+        self.deleteService = function(aPath, onSucces){
+            var http = libs.checkRequiredParams((new HttpContext()), ["service_id"]);
+            if(http.error){
+                return http;
+            } else {
+                billServicesModule.DeleteService(http.service_id, http.unsubscribe, function(res){
                     onSucces(res);
                 });
             }

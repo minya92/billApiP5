@@ -79,7 +79,7 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
                 aCallBack(model.qServiceList[model.qServiceList.length - 1].bill_services_id);
             });
         };
-        
+
         /*
          * Изменение существующей услуги
          * @param {type} aServiceId
@@ -92,7 +92,7 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
          * @returns {undefined} 
          */
         self.ChangeService = function (aServiceId, aCost, aDays, anAfterMonth, aPrepayment, anOnce, aCallBack) {
-            function closeCostCallback(){
+            function closeCostCallback() {
                 model.qServiceSetting.push({
                     service_id: aServiceId,
                     service_cost: aCost,
@@ -126,10 +126,10 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
          * Добавление услуги на лицевой счет
          */
         self.AddServiceOnAccount = function (anAccountId, aServiceId, aCallback) {
-            function addService(account_id, service_id) {
+            function addService() {
                 model.qAddService.push({
-                    account_id: account_id,
-                    service_id: service_id,
+                    account_id: anAccountId,
+                    service_id: aServiceId,
                     service_start_date: new Date()
                 });
                 model.save();
@@ -174,5 +174,66 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
                 }
             });
         };
+        
+        /*
+         * Отключить услугу на выбранном счету
+         */
+        self.DisableService = function (anAccountId, aServiceId, aCallback) {
+            model.qAddService.params.service_id = +aServiceId;
+            model.qAddService.params.account_id = +anAccountId;
+            model.qAddService.requery(function () {
+                if (model.qAddService.length) {
+                    var link_id = model.qAddService[model.qAddService.length - 1].bill_services_accounts_id;
+                    model.qAddService.splice(model.qAddService.length - 1, 1);
+                    model.save();
+                    aCallback({result: "ok", link_id : link_id, error: null});
+                } else {
+                    aCallback({error: msg.get('errFindServiceOnAccount')});
+                }
+            });
+        };
+        
+        /*
+         * Удалить услугу
+         * unsubscrible - отключить ее у всех пользователей (если нет, не удалится) PS пока не работает
+         */
+        self.DeleteService = function(aServiceId, unsubscribe, aCallback){
+            function delService(){
+                model.qServiceList.params.service_id = +aServiceId;
+                model.qServiceList.requery(function(){
+                    if(model.qServiceList.length){
+                        model.qServiceList.splice(0, 1);
+                        model.save();
+                        aCallback({result: "ok", error: null});
+                    } else {
+                        aCallback({error: msg.get('errFindService')})
+                    }
+                });
+            }
+            if (typeof(unsubscribe) == 'function') {
+                aCallback = unsubscribe;
+                unsubscribe = null;
+            }
+            model.qAddService.params.service_id = +aServiceId;
+            model.qAddService.requery(function(){
+                if(model.qAddService.length){
+                    if(unsubscribe){
+                        var mas = model.qAddService;
+                        for(var i in mas){
+                            (function(i, mas){
+                                self.DisableService(mas[i].account_id, aServiceId, function(){
+                                    if(i == mas.length - 1)
+                                        delService();
+                                });
+                            })(i, mas);
+                        }
+                    } else {
+                        aCallback({error: msg.get('errDeleteService'), accounts: model.qAddService});
+                    }
+                } else {
+                    delService();
+                }
+            });
+        }; 
     };
 });

@@ -9,7 +9,10 @@
 <node CREATED="1450277472887" ID="ID_845924748" MODIFIED="1450869246985" TEXT="&#x41f;&#x43e;&#x43f;&#x43e;&#x43b;&#x43d;&#x438;&#x442;&#x44c; &#x431;&#x430;&#x43b;&#x430;&#x43d;&#x441; &#x447;&#x435;&#x440;&#x435;&#x437; &#x441;&#x438;&#x441;&#x442;&#x435;&#x43c;&#x443; &#x43e;&#x43f;&#x43b;&#x430;&#x442;&#x44b;"/>
 </node>
 <node CREATED="1450277504106" ID="ID_26819877" MODIFIED="1450277507229" TEXT="&#x423;&#x441;&#x43b;&#x443;&#x433;&#x438;">
-<node CREATED="1450277510603" HGAP="24" ID="ID_387794995" MODIFIED="1450278824458" TEXT="&#x41f;&#x43e;&#x434;&#x43a;&#x43b;&#x44e;&#x447;&#x438;&#x442;&#x44c; &#x443;&#x441;&#x43b;&#x443;&#x433;&#x443;" VSHIFT="20"/>
+<node CREATED="1450277510603" HGAP="24" ID="ID_387794995" MODIFIED="1452867527906" TEXT="&#x41f;&#x43e;&#x434;&#x43a;&#x43b;&#x44e;&#x447;&#x438;&#x442;&#x44c; &#x443;&#x441;&#x43b;&#x443;&#x433;&#x443;" VSHIFT="20">
+<icon BUILTIN="button_ok"/>
+<icon BUILTIN="messagebox_warning"/>
+</node>
 <node COLOR="#990000" CREATED="1450277526552" HGAP="27" ID="ID_1229026575" MODIFIED="1450278821621" TEXT="&#x41e;&#x442;&#x43a;&#x43b;&#x44e;&#x447;&#x438;&#x442;&#x44c; &#x443;&#x441;&#x43b;&#x443;&#x433;&#x443;">
 <font NAME="SansSerif" SIZE="12"/>
 <node CREATED="1450277544194" HGAP="30" ID="ID_1294899600" MODIFIED="1450278837574" TEXT="&#x415;&#x441;&#x43b;&#x438; &#x43d;&#x435; &#x437;&#x430;&#x431;&#x43b;&#x43e;&#x43a;&#x438;&#x440;&#x43e;&#x432;&#x430;&#x43d;&#x430;" VSHIFT="-19"/>
@@ -43,7 +46,9 @@
 <icon BUILTIN="button_ok"/>
 </node>
 </node>
-<node CREATED="1450278992117" ID="ID_1850429951" MODIFIED="1450278996007" TEXT="&#x423;&#x434;&#x430;&#x43b;&#x438;&#x442;&#x44c; &#x443;&#x441;&#x43b;&#x443;&#x433;&#x443;"/>
+<node CREATED="1450278992117" ID="ID_1850429951" MODIFIED="1452867517334" TEXT="&#x423;&#x434;&#x430;&#x43b;&#x438;&#x442;&#x44c; &#x443;&#x441;&#x43b;&#x443;&#x433;&#x443;">
+<icon BUILTIN="button_ok"/>
+</node>
 </node>
 <node CREATED="1450279045767" HGAP="23" ID="ID_1002281971" MODIFIED="1450350841878" TEXT="&#x421;&#x447;&#x435;&#x442;&#x430;" VSHIFT="6">
 <node CREATED="1450279052831" ID="ID_1508956450" MODIFIED="1450858073698" TEXT="&#x414;&#x43e;&#x431;&#x430;&#x432;&#x438;&#x442;&#x44c; &#x441;&#x447;&#x435;&#x442;">
@@ -72,7 +77,9 @@
 <icon BUILTIN="button_ok"/>
 <icon BUILTIN="messagebox_warning"/>
 </node>
-<node CREATED="1450350866481" ID="ID_230864245" MODIFIED="1450350890733" TEXT="&#x41e;&#x442;&#x43a;&#x43b;&#x44e;&#x447;&#x438;&#x442;&#x44c; &#x443;&#x441;&#x43b;&#x443;&#x433;&#x443; &#x441;&#x43e; &#x441;&#x447;&#x435;&#x442;&#x430;"/>
+<node CREATED="1450350866481" ID="ID_230864245" MODIFIED="1452867513943" TEXT="&#x41e;&#x442;&#x43a;&#x43b;&#x44e;&#x447;&#x438;&#x442;&#x44c; &#x443;&#x441;&#x43b;&#x443;&#x433;&#x443; &#x441;&#x43e; &#x441;&#x447;&#x435;&#x442;&#x430;">
+<icon BUILTIN="button_ok"/>
+</node>
 </node>
 </node>
 </node>

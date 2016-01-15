@@ -29,7 +29,7 @@ define([], function (ModuleName) {
                 ru  : "Ошибка создания операции по счету"
             },
             errNoMoney  :    {
-                en  : "No money, no honey!",
+                en  : "Not enough money",
                 ru  : "Нет хватает денег"
             },
             errUnknownDate :    {
@@ -43,6 +43,14 @@ define([], function (ModuleName) {
             errFindService :    {
                 en  : "The service is not found",
                 ru  : "Услуга не найдена"
+            },
+            errDeleteService :    {
+                en  : "Exists no disabled account",
+                ru  : "Существуют не отключенныe счета"
+            },
+            errFindServiceOnAccount :    {
+                en  : "The service is not found on account",
+                ru  : "Услуга не найдена на счету"
             },
             successDelAccount:   {
                 en  : "Account deleted successfully",

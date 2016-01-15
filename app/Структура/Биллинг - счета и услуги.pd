@@ -4,7 +4,7 @@
   <fieldsEntity entityHeight="189" entityIconified="false" entityId="143574122601249" entityLocationX="423" entityLocationY="363" entityWidth="198" tableName="bill_cost"/>
   <fieldsEntity entityHeight="134" entityIconified="false" entityId="141562894711466" entityLocationX="896" entityLocationY="95" entityWidth="150" tableName="bill_item_cost"/>
   <fieldsEntity entityHeight="115" entityIconified="false" entityId="141562894711733" entityLocationX="663" entityLocationY="94" entityWidth="184" tableName="bill_operations_items"/>
-  <fieldsEntity entityHeight="156" entityIconified="false" entityId="141562894712117" entityLocationX="423" entityLocationY="194" entityWidth="197" tableName="bill_services_accounts"/>
+  <fieldsEntity entityHeight="156" entityIconified="false" entityId="141562894712117" entityLocationX="424" entityLocationY="194" entityWidth="197" tableName="bill_services_accounts"/>
   <fieldsEntity entityHeight="149" entityIconified="false" entityId="141562894711559" entityLocationX="423" entityLocationY="18" entityWidth="150" tableName="bill_operations"/>
-  <fieldsEntity entityHeight="137" entityIconified="false" entityId="141562894711959" entityLocationX="232" entityLocationY="276" entityWidth="150" tableName="bill_services"/>
+  <fieldsEntity entityHeight="137" entityIconified="false" entityId="141562894711959" entityLocationX="231" entityLocationY="276" entityWidth="150" tableName="bill_services"/>
 </datamodel>

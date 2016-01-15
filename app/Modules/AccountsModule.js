@@ -55,7 +55,7 @@ define(['orm', 'Messages', 'Events'], function (Orm, Messages, Events, ModuleNam
                     model.save();
                     events.addEvent("accountDeleted", {account_id: anAccountId});
                     aCallBack({
-                        message : msg.get("successDelAccount"),
+                        result : msg.get("successDelAccount"),
                         error   : null
                     });
                 } else {
