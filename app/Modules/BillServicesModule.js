@@ -126,6 +126,7 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
          * Добавление услуги на лицевой счет
          */
         self.AddServiceOnAccount = function (anAccountId, aServiceId, aCallback) {
+            var servicesOnAccountId = null; 
             function addService() {
                 model.qAddService.push({
                     account_id: anAccountId,
@@ -133,23 +134,30 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
                     service_start_date: new Date()
                 });
                 model.save();
+                servicesOnAccountId = model.qAddService[0].bill_services_accounts_id;
                 aCallback({
-                    result: model.qAddService[0].bill_services_accounts_id,
+                    result: servicesOnAccountId,
                     error: null
                 });
             }
-            function createOperationCallback(operation) {
-                if (operation.id) { // удалось провести операцию
-                    operations.setOperationDone(operation.id, function (status) { //пометить выполненной
+            function setOperationDone(date) {
+                return function(operation){
+                    function setStatus(status){
                         if (status.result) {
                             addService();
                         } else {
                             aCallback({error: status.error});
                         }
-                    });
-                } else {
-                    aCallback({error: operation.error});
-                }
+                    }
+                    if (operation.id) { // удалось провести операцию
+                        if(!date)
+                            operations.setOperationDone(operation.id, setStatus);
+                        else
+                            operations.setOperationPlanned(operation.id, date, setStatus);
+                    } else {
+                        aCallback({error: operation.error});
+                    }
+                };
             }
             accounts.getSumFromAccount(anAccountId, function (res) {
                 if (!res.error) {
@@ -158,13 +166,18 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
                         if (model.qServiceList.length) {
                             if (model.qServiceList[0].prepayment) { // предоплата
                                 if (res.sum >= model.qServiceList[0].service_cost) {
-                                    operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', createOperationCallback);
+                                    operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId,(setOperationDone()));
                                 } else {
                                     aCallback({error: msg.get('errNoMoney')});
+                                    return true;
                                 }
-                            } else {
-                                addService();
-                            }
+                            }  
+                            var date = new Date();
+                            if(model.qServiceList[0].service_month)
+                                date.setMonth(date.getMonth() + 1);
+                            else
+                                date.setDate(date.getDate() + model.qServiceList[0].service_days);
+                            operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId,(setOperationDone(date))); 
                         } else {
                             aCallback({error: msg.get('errFindService')});
                         }
@@ -195,7 +208,7 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
         
         /*
          * Удалить услугу
-         * unsubscrible - отключить ее у всех пользователей (если нет, не удалится) PS пока не работает
+         * unsubscrible - сначала отключить ее у всех пользователей (если нет, не удалится)
          */
         self.DeleteService = function(aServiceId, unsubscribe, aCallback){
             function delService(){
@@ -219,13 +232,18 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
                 if(model.qAddService.length){
                     if(unsubscribe){
                         var mas = model.qAddService;
-                        for(var i in mas){
-                            (function(i, mas){
-                                self.DisableService(mas[i].account_id, aServiceId, function(){
-                                    if(i == mas.length - 1)
-                                        delService();
+                        var length = model.qAddService.length;
+                        for(var i = 0; i < length; i++){
+                            (function(i, mas, length){
+                                self.DisableService(mas[i].account_id, aServiceId, function(status){
+                                    if(status.result){
+                                        if(i == length - 1)
+                                            delService();
+                                    } else {
+                                        aCallback({error: msg.get('errDeleteService'), accounts: model.qAddService});
+                                    }
                                 });
-                            })(i, mas);
+                            })(i, mas, length);
                         }
                     } else {
                         aCallback({error: msg.get('errDeleteService'), accounts: model.qAddService});

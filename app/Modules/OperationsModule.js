@@ -20,11 +20,11 @@ define(['orm', 'Messages', 'Events', 'AccountsModule'], function (Orm, Messages,
          * @param {type} aCallback
          * @returns {undefined}
          */
-        self.createOperation = function(anAccountId, aSum, anOperationType, aCallback){
+        self.createOperation = function(anAccountId, aSum, anOperationType, servicesOnAccountId, aCallback){
             var error = null;
-            if (typeof(anOperationType) == 'function') {
-                aCallback = anOperationType;
-                anOperationType = null;
+            if (typeof(servicesOnAccountId) == 'function') {
+                aCallback = servicesOnAccountId;
+                servicesOnAccountId = null;
             }
             if(!anAccountId || !aSum)
                 error = msg.get("reqFields");
@@ -37,7 +37,8 @@ define(['orm', 'Messages', 'Events', 'AccountsModule'], function (Orm, Messages,
                         operation_sum: aSum,
                         operation_date: new Date(),
                         operation_type: anOperationType,
-                        operation_status: getStatusId('processing')
+                        operation_status: self.getStatusId('processing'),
+                        bill_services_accounts: servicesOnAccountId
                     };
                     model.qBillOperations.push(operation);
                     model.save(function(){
@@ -64,17 +65,17 @@ define(['orm', 'Messages', 'Events', 'AccountsModule'], function (Orm, Messages,
                             if(getMultiplier(model.qBillOperations[0].operation_type) === -1){ // операция списания
                                 accountsModule.getSumFromAccount(model.qBillOperations[0].account_id, function(res){
                                     if(res.sum && res.sum >= model.qBillOperations[0].operation_sum){
-                                        model.qBillOperations[0].operation_status = getStatusId('done');
+                                        model.qBillOperations[0].operation_status = self.getStatusId('done');
                                         model.save();
                                         aCallback({result: "ok", error: null});
                                     } else {
-                                        model.qBillOperations[0].operation_status = getStatusId('canceled');
+                                        model.qBillOperations[0].operation_status = self.getStatusId('canceled');
                                         model.save();
                                         aCallback({error: msg.get('errNoMoney')});
                                     }
                                 });
                             } else {
-                                model.qBillOperations[0].operation_status = getStatusId('done');
+                                model.qBillOperations[0].operation_status = self.getStatusId('done');
                                 model.save();
                                 aCallback({result: "ok", error: null});
                             }
@@ -102,8 +103,8 @@ define(['orm', 'Messages', 'Events', 'AccountsModule'], function (Orm, Messages,
                 if((new Date()) < aDate.valueOf()){
                     model.qBillOperations.requery(function(){
                         if(model.qBillOperations.length){
-                            model.qBillOperations[0].date = aDate;
-                            model.qBillOperations[0].status = getStatusId('planned');
+                            model.qBillOperations[0].operation_date = aDate;
+                            model.qBillOperations[0].operation_status = self.getStatusId('planned');
                             model.save();
                             aCallback({result: "ok", error: null});
                         } else {
@@ -125,7 +126,7 @@ define(['orm', 'Messages', 'Events', 'AccountsModule'], function (Orm, Messages,
         self.getOperations = function(anAccountId, anOperationType, anOperationStatus, aCallback){
             model.qBillOperationsOnAccount.params.account_id = +anAccountId;
             model.qBillOperationsOnAccount.params.type = (anOperationType?anOperationType:null);
-            model.qBillOperationsOnAccount.params.status = (anOperationStatus?getStatusId(anOperationStatus):null);
+            model.qBillOperationsOnAccount.params.status = (anOperationStatus?self.getStatusId(anOperationStatus):null);
             model.qBillOperationsOnAccount.requery(function(){
                 if(model.qBillOperationsOnAccount.length){
                     aCallback({result: model.qBillOperationsOnAccount, error: null});
@@ -144,7 +145,7 @@ define(['orm', 'Messages', 'Events', 'AccountsModule'], function (Orm, Messages,
             return multiplier;
         }
         
-        function getStatusId (aShortName){
+        self.getStatusId = function (aShortName) {
             var operationStatus = null;
             model.qBillOperationStatus.forEach(function(cursor){
                 if (cursor.short_name == aShortName)
