@@ -4,7 +4,7 @@
   <fieldsEntity entityHeight="107" entityIconified="false" entityId="145318904764718" entityLocationX="512" entityLocationY="430" entityWidth="150" tableName="bill_services_types"/>
   <fieldsEntity entityHeight="200" entityIconified="false" entityId="140448308377715" entityLocationX="231" entityLocationY="34" entityWidth="195" tableName="bill_operations"/>
   <fieldsEntity entityHeight="174" entityIconified="false" entityId="145319208237626" entityLocationX="536" entityLocationY="27" entityWidth="231" tableName="bill_operations_accounts"/>
-  <fieldsEntity entityHeight="93" entityIconified="false" entityId="140783434683757" entityLocationX="7" entityLocationY="134" entityWidth="182" tableName="bill_operations_status"/>
+  <fieldsEntity entityHeight="93" entityIconified="false" entityId="140783434683757" entityLocationX="7" entityLocationY="135" entityWidth="182" tableName="bill_operations_status"/>
   <fieldsEntity entityHeight="193" entityIconified="false" entityId="145318878491249" entityLocationX="276" entityLocationY="378" entityWidth="150" tableName="bill_cost"/>
   <fieldsEntity entityHeight="106" entityIconified="false" entityId="140448268097366" entityLocationX="245" entityLocationY="249" entityWidth="162" tableName="bill_accounts"/>
   <fieldsEntity entityHeight="155" entityIconified="false" entityId="140784307977567" entityLocationX="454" entityLocationY="212" entityWidth="200" tableName="bill_services_accounts"/>

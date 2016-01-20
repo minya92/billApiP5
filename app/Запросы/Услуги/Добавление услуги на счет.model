@@ -6,7 +6,9 @@
   </parameters>
   <parametersEntity entityHeight="200" entityIconified="false" entityLocationX="11" entityLocationY="7" entityWidth="150"/>
   <entity Title="" entityHeight="170" entityIconified="false" entityId="145252382186261" entityLocationX="217" entityLocationY="37" entityWidth="150" tableAlias="t1" tableName="bill_services_accounts" tableSchemaName=""/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="145329951562628" entityLocationX="412" entityLocationY="38" entityWidth="150" tableAlias="t" tableName="bill_services" tableSchemaName=""/>
   <relation leftEntityFieldName="bill_services_accounts_id" leftEntityId="145252382186261" rightEntityId="-1" rightEntityParameterName="service_account_id"/>
   <relation leftEntityFieldName="account_id" leftEntityId="145252382186261" rightEntityId="-1" rightEntityParameterName="account_id"/>
   <relation leftEntityFieldName="service_id" leftEntityId="145252382186261" rightEntityId="-1" rightEntityParameterName="service_id"/>
+  <relation leftEntityFieldName="bill_services_id" leftEntityId="145329951562628" rightEntityFieldName="service_id" rightEntityId="145252382186261"/>
 </datamodel>

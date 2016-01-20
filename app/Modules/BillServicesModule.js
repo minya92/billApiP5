@@ -52,7 +52,8 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
          * @param {type} aDays
          * @returns {Boolean}
          */
-        self.CreateService = function (aName, aCost, aDays, aLock, anAfterMonth, aPrepayment, anOnce, aCallBack) {
+        self.CreateService = function (aName, aCost, aDays, aLock, anAfterMonth, aPrepayment, anOnce, aCounter, aCallBack) {
+            var service_type = aCounter ? 'CounterServiceModule' : 'PeriodServiceModule'
             aPrepayment = aPrepayment ? true : null;
             anOnce = anOnce ? true : null;
             if (aDays == false || aDays == 0 || aDays == null || aDays === undefined || !aDays) {
@@ -63,7 +64,8 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
             }
             model.qServiceList.push({
                 service_name: aName,
-                locked: aLock
+                locked: aLock,
+                service_type_id: service_type
             });
             model.save();
             model.qServiceSetting.push({
@@ -73,7 +75,8 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
                 service_month: anAfterMonth,
                 start_date: new Date(),
                 prepayment: aPrepayment,
-                once: anOnce
+                once: anOnce,
+                cost_counts: (aCounter ? +aCounter : null)
             });
             model.save(function () {
                 aCallBack(model.qServiceList[model.qServiceList.length - 1].bill_services_id);
@@ -91,7 +94,7 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
          * @param {type} aCallBack
          * @returns {undefined} 
          */
-        self.ChangeService = function (aServiceId, aCost, aDays, anAfterMonth, aPrepayment, anOnce, aCallBack) {
+        self.ChangeService = function (aServiceId, aCost, aDays, anAfterMonth, aPrepayment, anOnce, aCounter, aCallBack) {
             function closeCostCallback() {
                 model.qServiceSetting.push({
                     service_id: aServiceId,
@@ -100,7 +103,8 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
                     service_month: anAfterMonth,
                     start_date: new Date(),
                     prepayment: aPrepayment,
-                    once: anOnce
+                    once: anOnce,
+                    cost_counts: (aCounter ? +aCounter : null)
                 });
                 model.save(function () {
                     aCallBack(aServiceId);
@@ -120,7 +124,7 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
                     aCallBack({error: msg.get('errFindService')});
                 }
             });
-        }
+        };
 
         /*
          * Добавление услуги на лицевой счет
@@ -187,51 +191,7 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
                 }
             });
         };
-        
-        /*
-         * Отключить услугу на выбранном счету
-         */
-        self.DisableService = function (anAccountId, aServiceId, aCallback) {
-            model.qAddService.params.service_id = +aServiceId;
-            model.qAddService.params.account_id = +anAccountId;
-            model.qAddService.requery(function () {
-                if (model.qAddService.length) {
-                    var service_account_id = model.qAddService[model.qAddService.length - 1].bill_services_accounts_id;
-                    model.qAddService.splice(model.qAddService.length - 1, 1);
-                    model.save();
-                    aCallback({result: "ok", service_account_id : service_account_id, error: null});
-                } else {
-                    aCallback({error: msg.get('errFindServiceOnAccount')});
-                }
-            });
-        };
-        
-        /*
-         * Приотсановить услугу
-         */
-        self.PauseService = function (anAccountId, aServiceId, aServiceAccountId, aCallback) {
-            if (typeof(aServiceAccountId) == 'function') {
-                aCallback = aServiceAccountId;
-                aServiceAccountId = null;
-            }
-            anAccountId = anAccountId ? +anAccountId : null;
-            aServiceId = aServiceId ? +aServiceId : null;
-            aServiceAccountId = aServiceAccountId ? +aServiceAccountId : null;
-            model.qAddService.params.service_id = aServiceId;
-            model.qAddService.params.account_id = anAccountId;
-            model.qAddService.params.service_account_id = aServiceAccountId;
-            model.qAddService.requery(function () {
-                if (model.qAddService.length) {
-                    var service_account_id = model.qAddService[model.qAddService.length - 1].bill_services_accounts_id;
-                    model.qAddService[model.qAddService.length - 1].paused = true;
-                    model.save();
-                    aCallback({result: "ok", service_account_id : service_account_id, error: null});
-                } else {
-                    aCallback({error: msg.get('errFindServiceOnAccount')});
-                }
-            });
-        };
-        
+
         /*
          * Удалить услугу
          * unsubscrible - сначала отключить ее у всех пользователей (если нет, не удалится)
@@ -278,6 +238,81 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
                     delService();
                 }
             });
-        }; 
+        };
+        
+        function getServiceOnAccount(anAccountId, aServiceId, aServiceAccountId, aCallback){
+            anAccountId = anAccountId ? +anAccountId : null;
+            aServiceId = aServiceId ? +aServiceId : null;
+            aServiceAccountId = aServiceAccountId ? +aServiceAccountId : null;
+            model.qAddService.params.service_id = aServiceId;
+            model.qAddService.params.account_id = anAccountId;
+            model.qAddService.params.service_account_id = aServiceAccountId;
+            model.qAddService.requery(aCallback);
+            //TODO сюда добавить проверку, если больше одной то не давать ниче делать!
+        }
+        
+        /*
+         * Отключить услугу на выбранном счету
+         */
+        self.DisableService = function (anAccountId, aServiceId, aServiceAccountId, aCallback) {
+            getServiceOnAccount(anAccountId, aServiceId, aServiceAccountId, function () {
+                if (model.qAddService.length) {
+                    var service_account_id = model.qAddService[model.qAddService.length - 1].bill_services_accounts_id;
+                    model.qAddService.splice(model.qAddService.length - 1, 1);
+                    model.save();
+                    aCallback({result: "ok", service_account_id : service_account_id, error: null});
+                } else {
+                    aCallback({error: msg.get('errFindServiceOnAccount')});
+                }
+            });
+        };
+        
+        /*
+         * Список всех услуг на аккаунте
+         * либо инфа по конкретной услуге
+         * @param {type} anAccountId
+         * @param {type} cb
+         * @returns {undefined}
+         */
+        self.GetServiceOnAccount = function(anAccountId, aServiceId, aServiceAccountId, cb){
+            getServiceOnAccount(anAccountId, aServiceId, aServiceAccountId, function(){
+                if(model.qAddService.lenght){
+                   cb({error: null, result: model.qAddService});
+                } else {
+                    cb({error: msg.get('errFindAccount'), result: model.qAddService});
+                }
+            });
+        };
+        
+        /*
+         * Приотсановить услугу
+         */
+        self.PauseService = function (anAccountId, aServiceId, aServiceAccountId, aCallback) {
+            getServiceOnAccount(anAccountId, aServiceId, aServiceAccountId, function () {
+                if (model.qAddService.length) {
+                    var service_account_id = model.qAddService[model.qAddService.length - 1].bill_services_accounts_id;
+                    model.qAddService[model.qAddService.length - 1].paused = true;
+                    model.save();
+                    aCallback({result: "ok", service_account_id : service_account_id, error: null});
+                } else {
+                    aCallback({error: msg.get('errFindServiceOnAccount')});
+                }
+            });
+        };
+        
+        /*
+         * изменить счетчик у услги на счету
+         */
+        self.setCounterService = function (anAccountId, aServiceId, aServiceAccountId, aCount, aCallback) {
+            getServiceOnAccount(anAccountId, aServiceId, aServiceAccountId, function(){
+                if(model.qAddService.length) {
+                    model.qAddService[0].services_counts = model.qAddService[0].services_counts - (aCount?aCount:1);
+                    model.save();
+                    aCallback({result: "ok", count : model.qAddService[0].services_counts, error: null});
+                } else {
+                    aCallback({error: msg.get('errFindServiceOnAccount')});
+                }
+            });
+        };
     };
 });

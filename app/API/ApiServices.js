@@ -17,7 +17,7 @@ define(['orm', 'http-context', 'ApiLibs', 'BillServicesModule', 'Messages'], fun
             if(http.error){
                 return http;
             } else {
-                billServicesModule.CreateService(http.name, http.cost, http.days, http.lock, http.afterMonth, http.prepayment, http.once, function(res){
+                billServicesModule.CreateService(http.name, http.cost, http.days, http.lock, http.afterMonth, http.prepayment, http.once, http.counts, function(res){
                     onSucces({service_id: res});
                 });
             }
@@ -31,7 +31,7 @@ define(['orm', 'http-context', 'ApiLibs', 'BillServicesModule', 'Messages'], fun
             if(http.error){
                 return http;
             } else {
-                billServicesModule.ChangeService(http.service_id, http.cost, http.days, http.afterMonth, http.prepayment, http.once, function(res){
+                billServicesModule.ChangeService(http.service_id, http.cost, http.days, http.afterMonth, http.prepayment, http.once, http.counts, function(res){
                     onSucces({service_id: res});
                 });
             }
@@ -59,7 +59,7 @@ define(['orm', 'http-context', 'ApiLibs', 'BillServicesModule', 'Messages'], fun
             if(http.error){
                 return http;
             } else {
-                billServicesModule.DisableService(http.account_id, http.service_id, function(res){
+                billServicesModule.DisableService(http.account_id, http.service_id, http.service_account_id, function(res){
                     onSucces(res);
                 });
             }
@@ -87,7 +87,7 @@ define(['orm', 'http-context', 'ApiLibs', 'BillServicesModule', 'Messages'], fun
             if(http.error){
                 return http;
             } else {
-                billServicesModule.PauseService(http.account_id, http.service_id, function(res){
+                billServicesModule.PauseService(http.account_id, http.service_id, http.service_account_id, function(res){
                     onSucces(res);
                 });
             }
@@ -99,6 +99,16 @@ define(['orm', 'http-context', 'ApiLibs', 'BillServicesModule', 'Messages'], fun
         self.servicesGet = function(aPath, onSucces){
             var http = (new HttpContext()).request.params;
             billServicesModule.GetService(http.service_id, function(res){
+                onSucces(res);
+            });
+        };
+        
+        /*
+         * @POST /services/on_account
+         */
+        self.servicesGetOnAccount = function(aPath, onSucces){
+             var http = libs.checkRequiredParams((new HttpContext()), ["account_id"]);
+            billServicesModule.GetServiceOnAccount(http.account_id, http.service_id, http.service_account_id, function(res){
                 onSucces(res);
             });
         };
