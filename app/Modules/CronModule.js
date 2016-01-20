@@ -3,13 +3,14 @@
  * @author Work
  * @module CronModule
  */
-define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], function (Orm, AccountsModule, Messages, Events, OperationsModule, ModuleName) {
+define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule', 'BillServicesModule'], function (Orm, AccountsModule, Messages, Events, OperationsModule, BillServicesModule, ModuleName) {
     function module_constructor() {
         var self = this, model = Orm.loadModel(ModuleName);
         var accounts = new AccountsModule();
         var operations = new OperationsModule();
         var msg = new Messages();
         var events = new Events();
+        var services = new BillServicesModule();
         
         self.execute = function () {
             // TODO : place application code here
@@ -29,7 +30,7 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
                                         model.qListPlannedOperations[i].operation_status = operations.getStatusId('done');
                                         model.save();
                                     } else {
-                                        //здесь приостановить услугу!!!
+                                        services.PauseService(null, null, model.qListPlannedOperations[i].bill_services_accounts, function(){});
                                     }
                                 } 
                                 if(i == model.qListPlannedOperations.length - 1)

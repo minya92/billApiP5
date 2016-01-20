@@ -213,6 +213,15 @@ QUnit.test( "Подключить обычную услугу на счет", fu
     });
 });
 
+QUnit.test( "Приостановить обычную услугу со счета", function( assert ) {
+    var done = assert.async();
+    request("POST", "services/pause", {service_id: serviceId, account_id: accountId}, function(res){
+        console.log(res);
+        assert.ok( res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
+        done();
+    });
+});
+
 QUnit.test( "Отключить обычную услугу со счета", function( assert ) {
     var done = assert.async();
     request("POST", "services/disable", {service_id: serviceId, account_id: accountId}, function(res){
@@ -253,21 +262,21 @@ QUnit.test( "Получить остаток средств на счете", fu
     });
 });
 
-//QUnit.test( "Удалить обычную услугу", function( assert ) {
-//    var done = assert.async();
-//    request("POST", "services/delete", {service_id: serviceId}, function(res){
-//        assert.ok( res.result , "Message: " + res.result + errorMsg(res));
-//        done();
-//    });
-//});
-//
-//QUnit.test( "Удалить услугу с предоплатой", function( assert ) {
-//    var done = assert.async();
-//    request("POST", "services/delete", {service_id: servicePrepayment, unsubscribe: true}, function(res){
-//        assert.ok( res.result , "Message: " + res.result + errorMsg(res));
-//        done();
-//    });
-//});
+QUnit.test( "Удалить обычную услугу", function( assert ) {
+    var done = assert.async();
+    request("POST", "services/delete", {service_id: serviceId}, function(res){
+        assert.ok( res.result , "Message: " + res.result + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test( "Удалить услугу с предоплатой", function( assert ) {
+    var done = assert.async();
+    request("POST", "services/delete", {service_id: servicePrepayment, unsubscribe: true}, function(res){
+        assert.ok( res.result , "Message: " + res.result + errorMsg(res));
+        done();
+    });
+});
 
 QUnit.test( "Удалить счет", function( assert ) {
     var done = assert.async();

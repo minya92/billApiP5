@@ -80,6 +80,20 @@ define(['orm', 'http-context', 'ApiLibs', 'BillServicesModule', 'Messages'], fun
         };
         
         /*
+         * @POST /services/pause
+         */
+        self.pauseService = function(aPath, onSucces){
+            var http = libs.checkRequiredParams((new HttpContext()), ["service_id", "account_id"]);
+            if(http.error){
+                return http;
+            } else {
+                billServicesModule.PauseService(http.account_id, http.service_id, function(res){
+                    onSucces(res);
+                });
+            }
+        };
+        
+        /*
          * @POST /services/get
          */
         self.servicesGet = function(aPath, onSucces){

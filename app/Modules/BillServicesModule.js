@@ -196,10 +196,36 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
             model.qAddService.params.account_id = +anAccountId;
             model.qAddService.requery(function () {
                 if (model.qAddService.length) {
-                    var link_id = model.qAddService[model.qAddService.length - 1].bill_services_accounts_id;
+                    var service_account_id = model.qAddService[model.qAddService.length - 1].bill_services_accounts_id;
                     model.qAddService.splice(model.qAddService.length - 1, 1);
                     model.save();
-                    aCallback({result: "ok", link_id : link_id, error: null});
+                    aCallback({result: "ok", service_account_id : service_account_id, error: null});
+                } else {
+                    aCallback({error: msg.get('errFindServiceOnAccount')});
+                }
+            });
+        };
+        
+        /*
+         * Приотсановить услугу
+         */
+        self.PauseService = function (anAccountId, aServiceId, aServiceAccountId, aCallback) {
+            if (typeof(aServiceAccountId) == 'function') {
+                aCallback = aServiceAccountId;
+                aServiceAccountId = null;
+            }
+            anAccountId = anAccountId ? +anAccountId : null;
+            aServiceId = aServiceId ? +aServiceId : null;
+            aServiceAccountId = aServiceAccountId ? +aServiceAccountId : null;
+            model.qAddService.params.service_id = aServiceId;
+            model.qAddService.params.account_id = anAccountId;
+            model.qAddService.params.service_account_id = aServiceAccountId;
+            model.qAddService.requery(function () {
+                if (model.qAddService.length) {
+                    var service_account_id = model.qAddService[model.qAddService.length - 1].bill_services_accounts_id;
+                    model.qAddService[model.qAddService.length - 1].paused = true;
+                    model.save();
+                    aCallback({result: "ok", service_account_id : service_account_id, error: null});
                 } else {
                     aCallback({error: msg.get('errFindServiceOnAccount')});
                 }
