@@ -135,10 +135,11 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
                 model.qAddService.push({
                     account_id: anAccountId,
                     service_id: aServiceId,
-                    service_start_date: new Date()
+                    service_start_date: new Date(),
+                    service_counts: model.qServiceList[0].cost_counts
                 });
                 model.save();
-                servicesOnAccountId = model.qAddService[0].bill_services_accounts_id;
+                servicesOnAccountId = model.qAddService[model.qAddService.length - 1].bill_services_accounts_id;
                 aCallback({
                     result: servicesOnAccountId,
                     error: null
@@ -303,12 +304,12 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
         /*
          * изменить счетчик у услги на счету
          */
-        self.setCounterService = function (anAccountId, aServiceId, aServiceAccountId, aCount, aCallback) {
+        self.SetCounterService = function (anAccountId, aServiceId, aServiceAccountId, aCount, aCallback) {
             getServiceOnAccount(anAccountId, aServiceId, aServiceAccountId, function(){
                 if(model.qAddService.length) {
-                    model.qAddService[0].services_counts = model.qAddService[0].services_counts - (aCount?aCount:1);
+                    model.qAddService[0].service_counts = model.qAddService[0].service_counts - (aCount?aCount:1);
                     model.save();
-                    aCallback({result: "ok", count : model.qAddService[0].services_counts, error: null});
+                    aCallback({result: model.qAddService, service_counts : model.qAddService[0].service_counts, error: null});
                 } else {
                     aCallback({error: msg.get('errFindServiceOnAccount')});
                 }

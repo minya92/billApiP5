@@ -107,8 +107,18 @@ define(['orm', 'http-context', 'ApiLibs', 'BillServicesModule', 'Messages'], fun
          * @POST /services/on_account
          */
         self.servicesGetOnAccount = function(aPath, onSucces){
-             var http = libs.checkRequiredParams((new HttpContext()), ["account_id"]);
+            var http = (new HttpContext()).request.params;
             billServicesModule.GetServiceOnAccount(http.account_id, http.service_id, http.service_account_id, function(res){
+                onSucces(res);
+            });
+        };
+        
+        /*
+         * @POST /services/set_count
+         */
+        self.setCount = function(aPath, onSucces){
+            var http = (new HttpContext()).request.params;
+            billServicesModule.SetCounterService(http.account_id, http.service_id, http.service_account_id, http.count, function(res){
                 onSucces(res);
             });
         };

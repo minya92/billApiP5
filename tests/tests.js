@@ -32,6 +32,7 @@ function errorMsg(aResult){
 var accountId = null;
 var serviceId = null;
 var servicePrepayment = null;
+var serviceCounter = null;
 
 QUnit.test( "Получить остаток на НЕ существующем счету", function( assert ) {
     var done = assert.async();
@@ -189,6 +190,15 @@ QUnit.test( "Создание услуги", function( assert ) {
     });
 });
 
+QUnit.test( "Создание услуги со счетчиком", function( assert ) {
+    var done = assert.async();
+    request("POST", "services/create", {name: "service counter!!!", cost: 500, counts:5}, function(res){
+        serviceCounter = res.service_id;
+        assert.ok( res.service_id, "RESULT: " + JSON.stringify(res.service_id) + errorMsg(res));
+        done();
+    });
+});
+
 QUnit.test( "Получить инфу по предыдущей услуге", function( assert ) {
     var done = assert.async();
     request("POST", "services/get", {service_id: serviceId}, function(res){
@@ -212,6 +222,35 @@ QUnit.test( "Подключить обычную услугу на счет", fu
         done();
     });
 });
+
+var serviceAccountCounter = null; //id подключенной услуги со счетчиком 
+QUnit.test( "Подключить услугу со счетчиком на счет", function( assert ) {
+    var done = assert.async();
+    console.log("!!!!!!!!!!!!!!=" + serviceCounter);
+    request("POST", "services/add", {service_id: serviceCounter, account_id: accountId}, function(res){
+        serviceAccountCounter = res.result;
+        assert.ok( res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
+        console.log(serviceAccountCounter);
+        request("POST", "services/on_account", {service_account_id: serviceAccountCounter}, function(service){
+            console.log(service);
+            assert.equal(service.result[0].service_counts, 5, "Counts limit on this Service = 5; Errors:" + errorMsg(service));
+            request("POST", "services/set_count", {service_account_id: serviceAccountCounter}, function(service2){
+                console.log(service2);
+                assert.equal(service2.result[0].service_counts, 4, "-1 count. Counts limit on this Service = 4; Errors:" + errorMsg(service2));
+                done();
+            });
+        });
+    });
+});
+
+//QUnit.test( "Баланс счетчика", function( assert ) {
+//    var done = assert.async();
+//    request("POST", "services/on_account", {service_account_id: serviceAccountCounter}, function(service){
+//        console.log(service);
+//        assert.equal(service.result[0].service_counts, 10, "Counts limit on this Service = 10; Errors:" + errorMsg(res));
+//        done();
+//    });
+//});
 
 QUnit.test( "Подключить услугу c предоплатой на счет", function( assert ) {
     var done = assert.async();
