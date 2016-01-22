@@ -318,14 +318,14 @@ QUnit.test( "Получить остаток средств на счете", fu
 //        done();
 //    });
 //});
-//
-//QUnit.test( "Удалить услугу с предоплатой", function( assert ) {
-//    var done = assert.async();
-//    request("POST", "services/delete", {service_id: servicePrepayment, unsubscribe: true}, function(res){
-//        assert.ok( res.result , "Message: " + res.result + errorMsg(res));
-//        done();
-//    });
-//});
+
+QUnit.test( "Удалить услугу с предоплатой", function( assert ) {
+    var done = assert.async();
+    request("POST", "services/delete", {service_id: servicePrepayment, unsubscribe: true}, function(res){
+        assert.ok( res.result , "Message: " + res.result + errorMsg(res));
+        done();
+    });
+});
 
 QUnit.test( "Удалить счет", function( assert ) {
     var done = assert.async();

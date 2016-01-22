@@ -192,7 +192,31 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
                 }
             });
         };
-
+        
+        self.UnsubscribeService = function(aServiceId, aCallback){
+            model.qAddService.params.service_id = +aServiceId;
+            model.qAddService.requery(function(){
+                if(model.qAddService.length){
+                    var mas = model.qAddService;
+                    var length = model.qAddService.length;
+                    for(var i = 0; i < length; i++){
+                        (function(i, mas, length){
+                            self.DisableService(mas[i].account_id, aServiceId, null, function(status){
+                                if(status.result){
+                                    if(i == length - 1)
+                                        aCallback({result: "ok", service_id: aServiceId});
+                                } else {
+                                    aCallback({error: status.error, accounts: model.qAddService});
+                                }
+                            });
+                        })(i, mas, length);
+                    }
+                } else {
+                    aCallback({error: msg.get('errFindServiceOnAccount'), accounts: model.qAddService});
+                }
+            });
+        };
+        
         /*
          * Удалить услугу
          * unsubscrible - сначала отключить ее у всех пользователей (если нет, не удалится)
@@ -218,20 +242,12 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
             model.qAddService.requery(function(){
                 if(model.qAddService.length){
                     if(unsubscribe){
-                        var mas = model.qAddService;
-                        var length = model.qAddService.length;
-                        for(var i = 0; i < length; i++){
-                            (function(i, mas, length){
-                                self.DisableService(mas[i].account_id, aServiceId, function(status){
-                                    if(status.result){
-                                        if(i == length - 1)
-                                            delService();
-                                    } else {
-                                        aCallback({error: msg.get('errDeleteService'), accounts: model.qAddService});
-                                    }
-                                });
-                            })(i, mas, length);
-                        }
+                        self.UnsubscribeService(aServiceId, function(res){
+                            if(res.result)
+                                delService();
+                            else
+                                aCallback({error: res.error});
+                        });
                     } else {
                         aCallback({error: msg.get('errDeleteService'), accounts: model.qAddService});
                     }
