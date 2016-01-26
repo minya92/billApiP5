@@ -119,7 +119,7 @@ define(['orm', 'AccountsModule', 'Messages', 'Events', 'OperationsModule'], func
                     aCost = (aCost ? aCost : model.qServiceList[0].service_cost);
                     aDays = (aDays ? aDays : model.qServiceList[0].service_days);
                     model.qCloseCostService.params.service_id = +aServiceId;
-                    model.qCloseCostService.execute(closeCostCallback, closeCostCallback);
+                    model.qCloseCostService.executeUpdate(closeCostCallback);
                 } else {
                     aCallBack({error: msg.get('errFindService')});
                 }
