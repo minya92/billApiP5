@@ -1,9 +1,8 @@
 /**
- * 
  * @author Work
  * @module Events
  */
-define(['orm'], function (Orm, ModuleName) {
+define('Events', ['orm'], function (Orm, ModuleName) {
     return function () {
         var self = this, model = Orm.loadModel(ModuleName);
         

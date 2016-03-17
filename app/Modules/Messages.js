@@ -1,9 +1,7 @@
 /**
- * 
  * @author Work
- * @module Messages
  */
-define([], function (ModuleName) {
+define('Messages', [], function (ModuleName) {
     return function () {
         var self = this;
         
@@ -56,7 +54,7 @@ define([], function (ModuleName) {
                 en  : "Account deleted successfully",
                 ru  : "Аккаунт успешно удален"
             }
-        }
+        };
         
         self.get = function(msg, lang){
             if(MSG[msg]){
@@ -68,7 +66,7 @@ define([], function (ModuleName) {
             } else {
                 return null;
             }
-        }
+        };
         
         self.execute = function () {
             // TODO : place application code here

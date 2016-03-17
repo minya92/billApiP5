@@ -2,3 +2,5 @@ META-INF/*
 WEB-INF/*
 web/*
 *.properties
+watcher-config.json
+.babelrc
