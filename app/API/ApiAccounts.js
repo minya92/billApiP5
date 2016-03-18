@@ -34,7 +34,7 @@ define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Mess
                  * @POST /accounts/delete
                  */
                 self.delBillAccount = function (aPath, aSuccessCallback) {
-                    var http = libs.checkRequiredParams((new HttpContext()), ['id'], function(p){
+                    libs.checkRequiredParams((new HttpContext()), ['id'], function(p){
                         accountsModule.delAccount(p.id, function (res) {
                             aSuccessCallback(res);
                         });
