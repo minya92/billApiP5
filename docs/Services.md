@@ -43,7 +43,7 @@
     account_id  *
     return {result: servicesOnAccountId, error: xxxx}
     
- **Отключение услуги на счету **
+ **Отключение услуги на счету**
  
     @POST /services/disable
     service_id  *
