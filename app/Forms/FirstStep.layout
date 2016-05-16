@@ -9,7 +9,7 @@
   <Button cursor="0" horizontalTextPosition="0" name="btnOpenAc" parent="view" prefHeight="30px" prefWidth="200px" text="Войти в существующий счёт">
     <AnchorsPaneConstraints height="30px" left="90px" right="90px" top="140px"/>
   </Button>
-  <TextField name="tfRes" parent="view" prefHeight="25px" prefWidth="150px" text="тут будет результат">
+  <TextField name="tfRes" parent="view" prefHeight="25px" prefWidth="150px" text="id писать сюда!">
     <AnchorsPaneConstraints height="25px" left="115px" right="115px" top="200px"/>
   </TextField>
 </layout>

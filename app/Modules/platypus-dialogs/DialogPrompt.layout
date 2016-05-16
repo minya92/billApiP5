@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><layout title="" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="141px" prefWidth="400px"/>
+  <Label cursor="0" name="lblMessage" parent="view" prefHeight="30px" prefWidth="380px" text="label">
+    <AnchorsPaneConstraints height="30px" left="10px" top="10px" width="380px"/>
+  </Label>
+  <TextField name="tfData" parent="view" prefHeight="30px" prefWidth="380px">
+    <AnchorsPaneConstraints height="30px" left="10px" right="10px" top="50px"/>
+  </TextField>
+  <Button cursor="0" name="btnOk" parent="view" prefHeight="30px" prefWidth="100px" text="Ok">
+    <AnchorsPaneConstraints bottom="11px" height="30px" right="120px" width="100px"/>
+  </Button>
+  <Button cursor="0" name="btnCancel" parent="view" prefHeight="30px" prefWidth="100px" text="Отмена">
+    <AnchorsPaneConstraints bottom="11px" height="30px" right="10px" width="100px"/>
+  </Button>
+</layout>

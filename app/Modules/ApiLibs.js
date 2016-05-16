@@ -25,7 +25,8 @@ define('ApiLibs', ['Messages'], function (Messages, ModuleName) {
             });
             if(err){
                 aHttpContext.response.status = 400;
-                aHttpContext.response.body = JSON.stringify({error: msg.reqFields});
+                var res = JSON.stringify({error: msg.get('reqFields')});
+                aHttpContext.response.body = res;
                 return {error: msg.reqFields};
             }
             else{

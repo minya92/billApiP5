@@ -18,7 +18,6 @@ define('AccountsModule', ['orm', 'Messages', 'Events'],
                     });
                     model.save(function () {
                         events.addEvent("accountCreated", {account_id: model.qBillAccounts.cursor.bill_accounts_id});
-
                         aCallBack(model.qBillAccounts.cursor.bill_accounts_id);
                     });
                 };
@@ -64,7 +63,25 @@ define('AccountsModule', ['orm', 'Messages', 'Events'],
                             });
                         }
                     });
-                }
+                };
+
+                /*
+                 * Проверяет есть ли такой аккаунт в бд
+                 */
+                self.checkExistAccount = function (aAcId, aCallBack) {
+                    model.qBillAccounts.params.account_id = +aAcId;
+                    model.qBillAccounts.requery(function () {
+                        if (model.qBillAccounts.length != 0) {
+                            aCallBack({
+                                id: model.qBillAccounts.cursor.bill_accounts_id
+                            });
+                        } else {
+                            aCallBack({
+                                error: msg.get("errFindAccount")
+                            });
+                        }
+                    });
+                };
 
                 self.execute = function () {
                     // TODO : place application code here

@@ -28,7 +28,7 @@ define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Mess
                             aSuccessCallback(res);
                         });
                     });
-                }
+                };
 
                 /*
                  * @POST /accounts/delete
@@ -36,6 +36,17 @@ define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Mess
                 self.delBillAccount = function (aPath, aSuccessCallback) {
                     libs.checkRequiredParams((new HttpContext()), ['id'], function(p){
                         accountsModule.delAccount(p.id, function (res) {
+                            aSuccessCallback(res);
+                        });
+                    });
+                };
+                
+                /*
+                 * @POST /accounts/check_exist_account
+                 */
+                self.checkExistAccount = function (aPath, aSuccessCallback) {
+                    libs.checkRequiredParams((new HttpContext()), ['id'], function(p){
+                        accountsModule.checkExistAccount(p.id, function (res) {
                             aSuccessCallback(res);
                         });
                     });

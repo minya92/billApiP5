@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><layout title="" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="230px" prefWidth="348px"/>
+  <Button cursor="0" name="btnPrompt" parent="view" prefHeight="30px" prefWidth="100px" text="Prompt">
+    <AnchorsPaneConstraints height="30px" left="10px" top="130px" width="100px"/>
+  </Button>
+  <Button cursor="0" name="btnConfirm" parent="view" prefHeight="30px" prefWidth="100px" text="Confirm">
+    <AnchorsPaneConstraints height="30px" left="120px" top="130px" width="100px"/>
+  </Button>
+  <Button cursor="0" name="btnAlert" parent="view" prefHeight="30px" prefWidth="100px" text="Alert">
+    <AnchorsPaneConstraints height="30px" left="230px" top="130px" width="100px"/>
+  </Button>
+  <Label cursor="0" name="label" parent="view" prefHeight="30px" prefWidth="100px" text="Результат:">
+    <AnchorsPaneConstraints bottom="17px" height="30px" left="10px" width="100px"/>
+  </Label>
+  <TextField cursor="0" emptyText="Здесь будет результат" focusable="false" name="tfRes" parent="view" prefHeight="30px" prefWidth="210px">
+    <AnchorsPaneConstraints bottom="17px" height="30px" left="120px" right="18px"/>
+  </TextField>
+  <Label cursor="0" name="label1" parent="view" prefHeight="30px" prefWidth="100px" text="Сообщение">
+    <AnchorsPaneConstraints height="30px" left="10px" top="10px" width="100px"/>
+  </Label>
+  <Label cursor="0" name="label2" parent="view" prefHeight="30px" prefWidth="100px" text="Заглушка">
+    <AnchorsPaneConstraints height="30px" left="10px" top="50px" width="100px"/>
+  </Label>
+  <TextField cursor="0" name="tfMessage" parent="view" prefHeight="30px" prefWidth="220px" text="Заголовок сообщения">
+    <AnchorsPaneConstraints height="30px" left="110px" right="18px" top="10px"/>
+  </TextField>
+  <TextField cursor="0" name="tfEmptyText" parent="view" prefHeight="30px" prefWidth="220px" text="Введите значение">
+    <AnchorsPaneConstraints height="30px" left="110px" right="18px" top="50px"/>
+  </TextField>
+  <CheckBox cursor="0" name="cbWindowCaption" parent="view" prefHeight="30px" prefWidth="220px" selected="true" text="Передавать заголовок">
+    <AnchorsPaneConstraints height="30px" left="110px" top="90px" width="220px"/>
+  </CheckBox>
+</layout>

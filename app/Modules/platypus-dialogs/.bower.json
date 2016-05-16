@@ -1,0 +1,14 @@
+{
+  "name": "platypus-dialogs",
+  "homepage": "https://github.com/AlexeyKashintsev/platypus_dialogs",
+  "version": "0.0.1",
+  "_release": "0.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.1",
+    "commit": "e54f6be7f7f2e5ef75cdf0862668ccf4abcb25a6"
+  },
+  "_source": "https://github.com/AlexeyKashintsev/platypus_dialogs.git",
+  "_target": "*",
+  "_originalSource": "platypus-dialogs"
+}

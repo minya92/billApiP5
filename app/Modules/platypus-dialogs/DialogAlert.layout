@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><layout view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="108px" prefWidth="400px"/>
+  <Label cursor="0" name="lblMessage" parent="view" prefHeight="30px" prefWidth="380px" text="label">
+    <AnchorsPaneConstraints height="30px" left="10px" top="10px" width="380px"/>
+  </Label>
+  <Button cursor="0" name="btnOk" parent="view" prefHeight="30px" prefWidth="100px" text="Ok">
+    <AnchorsPaneConstraints bottom="11px" height="30px" right="10px" width="100px"/>
+  </Button>
+</layout>

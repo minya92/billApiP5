@@ -16,8 +16,8 @@ define('BillApiFunctions', ['orm', 'CrossRequest', 'logger'], function (Orm, Cro
                 success(JSON.parse(res));
             } catch(e) {
                 Logger.severe('\n\n BILL API ERROR! ' + e);
-                res = {error: e};
-                fail(JSON.parse(res));
+                
+                fail({error: e.toString()});
             }
         }
         
@@ -27,6 +27,10 @@ define('BillApiFunctions', ['orm', 'CrossRequest', 'logger'], function (Orm, Cro
         
         self.getSumFromAccount = function(accountId, success, fail){
             request("POST", "accounts/get_sum", {id: accountId}, success, fail);
+        };
+        
+        self.checkExistAccount = function(accountId, success){
+            request("POST", "accounts/check_exist_account", {id: accountId}, success, success);
         };
         
         self.execute = function () {

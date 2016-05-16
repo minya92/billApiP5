@@ -1,0 +1,6 @@
+{
+  "name": "cafeErp",
+  "dependencies": {   
+    "platypus-dialogs": "latest"
+  }
+}
