@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><layout resizable="false" title="Первый шаг" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="250px" prefWidth="380px"/>
+  <Label cursor="0" horizontalAlignment="0" horizontalTextPosition="0" name="lblFirst" parent="view" prefHeight="30px" prefWidth="150px" text="Пока начальное окно такое">
+    <AnchorsPaneConstraints height="30px" left="115px" right="115px" top="30px"/>
+  </Label>
+  <Button cursor="0" horizontalTextPosition="0" name="btnNewAc" parent="view" prefHeight="30px" prefWidth="150px" text="Создать новый счёт">
+    <AnchorsPaneConstraints height="30px" left="115px" right="115px" top="80px"/>
+  </Button>
+  <Button cursor="0" horizontalTextPosition="0" name="btnOpenAc" parent="view" prefHeight="30px" prefWidth="200px" text="Войти в существующий счёт">
+    <AnchorsPaneConstraints height="30px" left="90px" right="90px" top="140px"/>
+  </Button>
+  <TextField name="tfRes" parent="view" prefHeight="25px" prefWidth="150px" text="тут будет результат">
+    <AnchorsPaneConstraints height="25px" left="115px" right="115px" top="200px"/>
+  </TextField>
+</layout>
