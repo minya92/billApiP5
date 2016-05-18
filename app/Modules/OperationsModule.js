@@ -27,6 +27,7 @@ define('OperationsModule', ['orm', 'Messages', 'Events', 'AccountsModule'],
                     }
                     if (!anAccountId || !aSum)
                         error = msg.get("reqFields");
+                    //withdraw - снять; replenish - пополнить
                     anOperationType = anOperationType ? anOperationType = 'withdraw' : anOperationType = 'replenish';
                     model.qBillAccounts.params.account_id = +anAccountId;
                     model.qBillAccounts.requery(function () {

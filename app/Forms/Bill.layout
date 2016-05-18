@@ -1,3 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?><layout title="Ваш счёт" view="view">
-  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="300px" prefWidth="400px"/>
+  <ButtonGroup name="buttonGroup"/>
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="300px" prefWidth="377px"/>
+  <TabbedPane cursor="0" name="tabbedPane" parent="view" prefHeight="300px" prefWidth="380px">
+    <AnchorsPaneConstraints bottom="0px" left="0px" right="-3px" top="0px"/>
+  </TabbedPane>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlOperations" parent="tabbedPane" prefHeight="272px" prefWidth="375px">
+    <TabbedPaneConstraints tabTitle="Операции со счётом"/>
+  </AnchorsPane>
+  <ModelCombo cursor="0" name="mcChoose" nullable="false" parent="pnlOperations" prefHeight="30px" prefWidth="180px">
+    <AnchorsPaneConstraints height="30px" left="10px" top="20px" width="180px"/>
+  </ModelCombo>
+  <TextField name="tfSum" parent="pnlOperations" prefHeight="30px" prefWidth="100px">
+    <AnchorsPaneConstraints height="30px" left="210px" top="20px" width="100px"/>
+  </TextField>
+  <Label cursor="0" name="lbRub" parent="pnlOperations" prefHeight="30px" prefWidth="50px" text="руб.">
+    <AnchorsPaneConstraints height="30px" left="322px" top="20px" width="50px"/>
+  </Label>
+  <ModelDate cursor="0" enabled="false" name="modelDate" nullable="false" parent="pnlOperations" prefHeight="30px" prefWidth="190px">
+    <AnchorsPaneConstraints height="30px" left="141px" top="110px" width="190px"/>
+  </ModelDate>
+  <RadioButton buttonGroup="buttonGroup" cursor="0" name="rbToday" parent="pnlOperations" prefHeight="30px" prefWidth="80px" selected="true" text="Сейчас">
+    <AnchorsPaneConstraints height="30px" left="20px" top="70px" width="80px"/>
+  </RadioButton>
+  <RadioButton buttonGroup="buttonGroup" cursor="0" name="rbDate" parent="pnlOperations" prefHeight="30px" prefWidth="230px" text="Запланировать операцию на срок:">
+    <AnchorsPaneConstraints height="30px" left="120px" top="70px" width="230px"/>
+  </RadioButton>
+  <Button cursor="0" enabled="false" name="btnExecute" parent="pnlOperations" prefHeight="30px" prefWidth="148px" text="Провести операцию">
+    <AnchorsPaneConstraints height="30px" left="200px" top="225px" width="148px"/>
+  </Button>
+  <AnchorsPane background="#ffffff" cursor="0" name="panel1" parent="tabbedPane" prefHeight="272px" prefWidth="375px" visible="true">
+    <TabbedPaneConstraints tabTitle="tab1"/>
+  </AnchorsPane>
+  <AnchorsPane background="#ffffff" cursor="0" name="panel2" parent="tabbedPane" prefHeight="272px" prefWidth="375px" visible="false">
+    <TabbedPaneConstraints tabTitle="tab2"/>
+  </AnchorsPane>
 </layout>
