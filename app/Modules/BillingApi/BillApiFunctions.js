@@ -9,17 +9,18 @@ define('BillApiFunctions', ['orm', 'CrossRequest', 'logger'], function (Orm, Cro
         var BILL_SERVER_URL = 'http://127.0.0.1:8084/bill';
         var crossRequest = new CrossRequest();
         
-        function request(httpMethod, apiMethod, params, success, fail){
+        self.request =  function (httpMethod, apiMethod, params, success, fail){
             var res = null;
             try{
                 res = crossRequest.UrlConnection(BILL_SERVER_URL+'/application/'+apiMethod, params, httpMethod, null, null);
                 success(JSON.parse(res));
             } catch(e) {
                 Logger.severe('\n\n BILL API ERROR! ' + e);
-                
                 fail({error: e.toString()});
             }
-        }
+        };
+        
+        var request = self.request;
         
         self.createAccount = function(success, fail){
             request("POST", "accounts/create", null, success, fail);
