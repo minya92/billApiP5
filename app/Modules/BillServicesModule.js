@@ -151,9 +151,9 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                             }
                             if (operation.id) { // удалось провести операцию
                                 if (!date)
-                                    operations.setOperationDone(operation.id, setStatus);
+                                    operations.setOperationDone(operation.id, setStatus, setStatus);
                                 else
-                                    operations.setOperationPlanned(operation.id, date, setStatus);
+                                    operations.setOperationPlanned(operation.id, date, setStatus, setStatus);
                             } else {
                                 aErrCallback({error: operation.error});
                             }
@@ -165,7 +165,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                             if (model.qServiceList.length) {
                                 if (model.qServiceList[0].prepayment) { // предоплата
                                     if (res.sum >= model.qServiceList[0].service_cost) {
-                                        operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId, (setOperationDone()));
+                                        operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId, (setOperationDone()), (setOperationDone()));
                                     } else {
                                         aErrCallback({error: msg.get('errNoMoney')});
                                         return true;
@@ -176,7 +176,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                                     date.setMonth(date.getMonth() + 1);
                                 else
                                     date.setDate(date.getDate() + model.qServiceList[0].service_days);
-                                operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId, (setOperationDone(date)));
+                                operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId, (setOperationDone(date)), (setOperationDone(date)));
                             } else {
                                 aErrCallback({error: msg.get('errFindService')});
                             }

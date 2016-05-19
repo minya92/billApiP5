@@ -40,8 +40,8 @@ define('ApiLibs', ['Messages'], function (Messages, ModuleName) {
          * @param {type} aResponse
          * @returns {undefined}
          */
-        self.setResponseCode = function(aHttpContext, aCode, aResponse){
-            aHttpContext.response.status = aCode ? aCode : 200;
+        self.setResponseCode = function(aHttpContext, aResponse, aCode){
+            aHttpContext.response.status = aCode ? aCode : 500;
             aHttpContext.response.headers.add("Access-Control-Allow-Origin", "*");
             aHttpContext.response.contentType = 'text/json';
             aHttpContext.response.body = JSON.stringify(aResponse);

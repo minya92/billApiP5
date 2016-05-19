@@ -2,7 +2,7 @@
  * Выполнение метода api
  */
 function request(httpMethod, apiMethod, params, callback) {
-    $.ajax({
+     $.ajax({
         url: "/bill/application/" + apiMethod,
         data: params,
         type: httpMethod,
@@ -217,7 +217,7 @@ QUnit.test("Список всех услуг", function (assert) {
 
 QUnit.test("Подключить обычную услугу на счет", function (assert) {
     var done = assert.async();
-    request("POST", "services/add", {service_id: serviceId, account_id: accountId}, function (res) {
+    new request("POST", "services/add", {service_id: serviceId, account_id: accountId}, function (res) {
         assert.ok(res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
         done();
     });
@@ -254,6 +254,7 @@ QUnit.test("Подключить услугу со счетчиком на сч�
 
 QUnit.test("Подключить услугу c предоплатой на счет", function (assert) {
     var done = assert.async();
+    console.log({service_id: servicePrepayment, account_id: accountId});
     request("POST", "services/add", {service_id: servicePrepayment, account_id: accountId}, function (res) {
         assert.ok(res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
         done();

@@ -14,9 +14,11 @@ define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', '
                  * @POST /operations/create
                  */
                 self.operationCreate = function (aPath, onSucces) {
-                    libs.checkRequiredParams((new HttpContext()), ["id", "sum"], function(p){
+                    libs.checkRequiredParams((new HttpContext()), ["id", "sum"], function(p, aHttpContext){
                         operationsModule.createOperation(p.id, p.sum, p.withdraw, function (res) {
                             onSucces(res);
+                        }, function(err){
+                            libs.setResponseCode(aHttpContext, err);
                         });
                     });
                 };
@@ -25,9 +27,11 @@ define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', '
                  * @POST /operations/done
                  */
                 self.operationDone = function (aPath, onSucces) {
-                    libs.checkRequiredParams((new HttpContext()), ["id"], function(p){
+                    libs.checkRequiredParams((new HttpContext()), ["id"], function(p, aHttpContext){
                         operationsModule.setOperationDone(p.id, function (result) {
                             onSucces(result);
+                        }, function(err){
+                            libs.setResponseCode(aHttpContext, err);
                         });
                     });
                 };
@@ -36,9 +40,11 @@ define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', '
                  * @POST /operations/get
                  */
                 self.operationGet = function (aPath, onSucces) {
-                    libs.checkRequiredParams((new HttpContext()), ["id"], function(p){
+                    libs.checkRequiredParams((new HttpContext()), ["id"], function(p, aHttpContext){
                         operationsModule.getOperations(p.id, p.type, p.status, function (res) {
                             onSucces(res);
+                        }, function(err){
+                            libs.setResponseCode(aHttpContext, err);
                         });
                     });
                 };
@@ -48,15 +54,13 @@ define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', '
                  * @POST /operations/planned
                  */
                 self.operationPlanned = function (aPath, onSucces) {
-                    libs.checkRequiredParams((new HttpContext()), ["id", "date"], function(p){
+                    libs.checkRequiredParams((new HttpContext()), ["id", "date"], function(p, aHttpContext){
                         operationsModule.setOperationPlanned(p.id, p.date, function (res) {
                             onSucces(res);
+                        }, function(err){
+                            libs.setResponseCode(aHttpContext, err);
                         });
                     });
-                };
-
-                self.execute = function () {
-                    return {msg: "I'am running!!!"};
                 };
             };
         });

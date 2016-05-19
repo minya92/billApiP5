@@ -17,7 +17,7 @@ define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Mess
                     accountsModule.createBillAccount(function (res) {
                         aSuccessCallback({account_id: res});
                     }, function(err){
-                        libs.setResponseCode((new HttpContext()), 404, err);
+                        libs.setResponseCode((new HttpContext()), err);
                     });
                 };
 
@@ -30,7 +30,7 @@ define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Mess
                         accountsModule.getSumFromAccount(params.id, function (res) {
                             aSuccessCallback(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, 404, err);
+                            libs.setResponseCode(aHttpContext, err);
                         });
                     });
                 };
@@ -43,7 +43,7 @@ define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Mess
                         accountsModule.delAccount(p.id, function (res) {
                             aSuccessCallback(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, 404, err);
+                            libs.setResponseCode(aHttpContext, err);
                         });
                     });
                 };
@@ -56,7 +56,7 @@ define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Mess
                         accountsModule.checkExistAccount(p.id, function (res) {
                             aSuccessCallback(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, 404, err);
+                            libs.setResponseCode(aHttpContext, err);
                         });
                     });
                 };
