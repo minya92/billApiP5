@@ -296,7 +296,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                  */
                 self.GetServiceOnAccount = function (anAccountId, aServiceId, aServiceAccountId, aCallback, aErrCallback) {
                     getServiceOnAccount(anAccountId, aServiceId, aServiceAccountId, function () {
-                        if (model.qAddService.lenght) {
+                        if (model.qAddService.length) {
                             aCallback({result: model.qAddService});
                         } else {
                             aErrCallback({error: msg.get('errFindAccount'), result: model.qAddService});

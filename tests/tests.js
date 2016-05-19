@@ -305,6 +305,7 @@ QUnit.test("Подключить услугу c предоплатой на сч
 
 QUnit.test("Получить остаток средств на счете", function (assert) {
     var done = assert.async();
+    console.log(accountId);
     request("POST", "accounts/get_sum", {id: accountId}, function (res) {
         assert.ok(res.sum, "Sum: " + res.sum + errorMsg(res));
         done();
