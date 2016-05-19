@@ -53,6 +53,14 @@ define('Messages', [], function (ModuleName) {
             successDelAccount:   {
                 en  : "Account deleted successfully",
                 ru  : "Аккаунт успешно удален"
+            },
+            errQuery :   {
+                en  : "Server Error. 500",
+                ru  : "Ошибка сервера. 500"
+            }, 
+            errSaving : {
+                en  : "Error Saving Transactions. 500",
+                ru  : "Ошибка проведения транзакций. 500"
             }
         };
         

@@ -16,16 +16,21 @@ define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Mess
                 self.createAccountPOST = function (aPath, aSuccessCallback) {
                     accountsModule.createBillAccount(function (res) {
                         aSuccessCallback({account_id: res});
+                    }, function(err){
+                        libs.setResponseCode((new HttpContext()), 404, err);
                     });
                 };
 
                 /*
                  * @POST /accounts/get_sum
+                 * 
                  */
                 self.getSumFromAccount = function (aPath, aSuccessCallback) {
-                    libs.checkRequiredParams((new HttpContext()), ['id'], function(params){
+                    libs.checkRequiredParams((new HttpContext()), ['id'], function(params, aHttpContext){
                         accountsModule.getSumFromAccount(params.id, function (res) {
                             aSuccessCallback(res);
+                        }, function(err){
+                            libs.setResponseCode(aHttpContext, 404, err);
                         });
                     });
                 };
@@ -33,10 +38,12 @@ define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Mess
                 /*
                  * @POST /accounts/delete
                  */
-                self.delBillAccount = function (aPath, aSuccessCallback) {
-                    libs.checkRequiredParams((new HttpContext()), ['id'], function(p){
+                self.delBillAccount = function (aPath, aSuccessCallback, aErrCallback) {
+                    libs.checkRequiredParams((new HttpContext()), ['id'], function(p, aHttpContext){
                         accountsModule.delAccount(p.id, function (res) {
                             aSuccessCallback(res);
+                        }, function(err){
+                            libs.setResponseCode(aHttpContext, 404, err);
                         });
                     });
                 };
@@ -44,16 +51,14 @@ define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Mess
                 /*
                  * @POST /accounts/check_exist_account
                  */
-                self.checkExistAccount = function (aPath, aSuccessCallback) {
-                    libs.checkRequiredParams((new HttpContext()), ['id'], function(p){
+                self.checkExistAccount = function (aPath, aSuccessCallback, aErrCallback) {
+                    libs.checkRequiredParams((new HttpContext()), ['id'], function(p, aHttpContext){
                         accountsModule.checkExistAccount(p.id, function (res) {
                             aSuccessCallback(res);
+                        }, function(err){
+                            libs.setResponseCode(aHttpContext, 404, err);
                         });
                     });
-                };
-
-                self.execute = function () {
-                    // TODO : place application code here
                 };
             };
         });

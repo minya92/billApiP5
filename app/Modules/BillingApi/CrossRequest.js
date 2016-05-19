@@ -2,7 +2,7 @@
  * @author Work
  * @constructor
  */
-define('CrossRequest', [], function(){
+define('CrossRequest', ['logger'], function(Logger, ModuleName){
     function CrossRequest() {
         var self = this;
         var HTTP_METHOD_GET = "GET";
@@ -33,9 +33,11 @@ define('CrossRequest', [], function(){
                     wr.close();
                 }
             }
-            //TODO тут что-то не работает =)
-            //if (anUserName) con.setRequestProperty(BASIC_AUTH_HEADER_NAME, getBasicAuthHeaderValue(anUserName, aPassword));
-            //var responseCode = con.getResponseCode();
+//            var res = {
+//                code    : con.getResponseCode(),
+//                response: getResponseFromCon(con)
+//            };
+//            Logger.info('\n' + res.code + ' res: ' + res.response)
             return getResponseFromCon(con);
             //aCallBack(getResponseFromCon(con));
         };   
@@ -53,7 +55,10 @@ define('CrossRequest', [], function(){
                     }
                     response = response + inputLine + "\n";
                 }
-            } finally {
+            } catch(e) {
+                Logger.severe(e);
+            }
+            finally {
                 reader.close();
             }
             return response;

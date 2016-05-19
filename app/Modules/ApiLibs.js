@@ -24,10 +24,7 @@ define('ApiLibs', ['Messages'], function (Messages, ModuleName) {
                     err = true;
             });
             if(err){
-                aHttpContext.response.status = 400;
-                var res = JSON.stringify({error: msg.get('reqFields')});
-                aHttpContext.response.body = res;
-                return {error: msg.reqFields};
+                self.setResponseCode(aHttpContext, 400, {error: msg.get('reqFields')});
             }
             else{
                 if(!callback)
@@ -35,9 +32,19 @@ define('ApiLibs', ['Messages'], function (Messages, ModuleName) {
                 else callback(requestParams, aHttpContext);
             }
         };
-
-        self.execute = function () {
-            // TODO : place application code here
+        
+        /**
+         * Вернуть ответ с http кодом
+         * @param {type} aHttpContext
+         * @param {type} aCode
+         * @param {type} aResponse
+         * @returns {undefined}
+         */
+        self.setResponseCode = function(aHttpContext, aCode, aResponse){
+            aHttpContext.response.status = aCode ? aCode : 200;
+            aHttpContext.response.headers.add("Access-Control-Allow-Origin", "*");
+            aHttpContext.response.contentType = 'text/json';
+            aHttpContext.response.body = JSON.stringify(aResponse);
         };
     };
 });

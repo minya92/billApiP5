@@ -11,7 +11,7 @@ define('AccountsModule', ['orm', 'Messages', 'Events'],
                 /*
                  * Создает новый биллинговый аккаунт и возвращает его ID
                  */
-                self.createBillAccount = function (aCallBack) {
+                self.createBillAccount = function (aCallBack, aErrCallback) {
                     model.qBillAccounts.push({
                         currnt_sum: 0, //TODO А нужно ли?
                         active: true
@@ -19,72 +19,69 @@ define('AccountsModule', ['orm', 'Messages', 'Events'],
                     model.save(function () {
                         events.addEvent("accountCreated", {account_id: model.qBillAccounts.cursor.bill_accounts_id});
                         aCallBack(model.qBillAccounts.cursor.bill_accounts_id);
+                    }, function(){
+                        aErrCallback(false);
                     });
                 };
 
                 /*
                  * Получить остаток суммы на счету
                  */
-                self.getSumFromAccount = function (anAccountId, aCallBack) {
+                self.getSumFromAccount = function (anAccountId, aCallBack, aErrCallback) {
                     model.qGetAccountBalance.params.account_id = +anAccountId;
                     var sum = 0, error = null;
                     model.requery(function () {
                         if (model.qGetAccountBalance.length)
-                            sum = model.qGetAccountBalance[0].account_balance;
+                            aCallBack({
+                                account_id: anAccountId,
+                                sum: model.qGetAccountBalance[0].account_balance
+                            });
                         else {
-                            sum = null;
-                            error = msg.get('errFindAccount');
+                            aErrCallback({error: msg.get('errFindAccount')});
                         }
-                        aCallBack({
-                            account_id: anAccountId,
-                            sum: sum,
-                            error: error
-                        });
+                    }, function(){
+                        aErrCallback({error: msg.get('errQuery')});
                     });
                 };
 
                 /*
                  * Удалить счет (сделать неактивным)
                  */
-                self.delAccount = function (anAccountId, aCallBack) {
+                self.delAccount = function (anAccountId, aCallBack, aErrCallback) {
                     model.qBillAccounts.params.account_id = +anAccountId;
                     model.requery(function () {
                         if (model.qBillAccounts.length) {
                             model.qBillAccounts[0].active = false;
-                            model.save();
-                            events.addEvent("accountDeleted", {account_id: anAccountId});
-                            aCallBack({
-                                result: msg.get("successDelAccount"),
-                                error: null
+                            model.save(function(){
+                                events.addEvent("accountDeleted", {account_id: anAccountId});
+                                aCallBack({
+                                    result: msg.get("successDelAccount")
+                                });
+                            }, function(){
+                                aErrCallback({error: msg.get('errSaving')});
                             });
                         } else {
-                            aCallBack({
-                                error: msg.get("errFindAccount")
-                            });
+                            aErrCallback({error: msg.get("errFindAccount")});
                         }
+                    }, function(){
+                        aErrCallback({error: msg.get('errQuery')});
                     });
                 };
 
                 /*
                  * Проверяет есть ли такой аккаунт в бд
                  */
-                self.checkExistAccount = function (aAcId, aCallBack) {
+                self.checkExistAccount = function (aAcId, aCallBack, aErrCallback) {
                     model.qBillAccounts.params.account_id = +aAcId;
                     model.qBillAccounts.requery(function () {
                         if (model.qBillAccounts.length != 0) {
-                            aCallBack({
-                                id: model.qBillAccounts.cursor.bill_accounts_id
-                            });
+                            aCallBack({id: model.qBillAccounts.cursor.bill_accounts_id});
                         } else {
-                            aCallBack({
-                                error: msg.get("errFindAccount")
-                            });
+                            aErrCallback({error: msg.get("errFindAccount")});
                         }
+                    }, function(){
+                        aErrCallback({error: msg.get('errQuery')});
                     });
-                };
-
-                self.execute = function () {
-                    // TODO : place application code here
                 };
             };
         });

@@ -2,7 +2,7 @@
  * @public
  * @author Work
  */
-define('BillApiFunctions', ['orm', 'CrossRequest', 'logger'], function (Orm, CrossRequest, Logger, ModuleName) {
+define('BillApiFunctions', ['orm', 'CrossRequest', 'logger', 'resource'], function (Orm, CrossRequest, Logger, Resource, ModuleName) {
     function module_constructor() {
         var self = this, model = Orm.loadModel(ModuleName);
         
@@ -10,10 +10,11 @@ define('BillApiFunctions', ['orm', 'CrossRequest', 'logger'], function (Orm, Cro
         var crossRequest = new CrossRequest();
         
         self.request =  function (httpMethod, apiMethod, params, success, fail){
-            var res = null;
+            var res = null, response = null;
             try{
                 res = crossRequest.UrlConnection(BILL_SERVER_URL+'/application/'+apiMethod, params, httpMethod, null, null);
-                success(JSON.parse(res));
+                response = JSON.parse(res);
+                success(response);
             } catch(e) {
                 Logger.severe('\n\n BILL API ERROR! ' + e);
                 fail({error: e.toString()});
