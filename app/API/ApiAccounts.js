@@ -12,6 +12,7 @@ define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Mess
 
                 /*
                  * @POST /accounts/create
+                 * @GET /accounts/create
                  */
                 self.createAccountPOST = function (aPath, aSuccessCallback) {
                     accountsModule.createBillAccount(function (res) {
@@ -23,7 +24,7 @@ define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Mess
 
                 /*
                  * @POST /accounts/get_sum
-                 * 
+                 * @GET /accounts/get_sum
                  */
                 self.getSumFromAccount = function (aPath, aSuccessCallback) {
                     libs.checkRequiredParams((new HttpContext()), ['id'], function(params, aHttpContext){
@@ -37,6 +38,7 @@ define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Mess
 
                 /*
                  * @POST /accounts/delete
+                 * @GET /accounts/delete
                  */
                 self.delBillAccount = function (aPath, aSuccessCallback, aErrCallback) {
                     libs.checkRequiredParams((new HttpContext()), ['id'], function(p, aHttpContext){
@@ -50,6 +52,7 @@ define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Mess
                 
                 /*
                  * @POST /accounts/check_exist_account
+                 * @GET /accounts/check_exist_account
                  */
                 self.checkExistAccount = function (aPath, aSuccessCallback, aErrCallback) {
                     libs.checkRequiredParams((new HttpContext()), ['id'], function(p, aHttpContext){

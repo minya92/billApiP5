@@ -11,6 +11,7 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
 
                 /*
                  * @POST /services/create
+                 * @GET /services/create
                  */
                 self.serviceCreate = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ["name", "cost"], function(p, aHttpContext){
@@ -24,6 +25,7 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
 
                 /*
                  * @POST /services/change
+                 * @GET /services/change
                  */
                 self.serviceChange = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ["service_id"], function(p, aHttpContext){
@@ -37,6 +39,7 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
 
                 /*
                  * @POST /services/add
+                 * @GET /services/add
                  */
                 self.serviceAddOnAccount = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ["service_id", "account_id"], function(p, aHttpContext){
@@ -50,6 +53,7 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
 
                 /*
                  * @POST /services/disable
+                 * @GET /services/disable
                  */
                 self.disableOnAccount = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ["service_id", "account_id"], function(p, aHttpContext){
@@ -63,6 +67,7 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
 
                 /*
                  * @POST /services/delete
+                 * @GET /services/delete
                  */
                 self.deleteService = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ["service_id"], function(p, aHttpContext){
@@ -76,6 +81,7 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
 
                 /*
                  * @POST /services/pause
+                 * @GET /services/pause
                  */
                 self.pauseService = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ["service_id", "account_id"], function(p, aHttpContext){
@@ -89,6 +95,7 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
 
                 /*
                  * @POST /services/get
+                 * @GET /services/get
                  */
                 self.servicesGet = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), [], function(p, aHttpContext){
@@ -102,6 +109,7 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
 
                 /*
                  * @POST /services/on_account
+                 * @GET /services/on_account
                  */
                 self.servicesGetOnAccount = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), [], function(p, aHttpContext){
@@ -115,6 +123,7 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
 
                 /*
                  * @POST /services/set_count
+                 * @GET /services/set_count
                  */
                 self.setCount = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), [], function(p, aHttpContext){

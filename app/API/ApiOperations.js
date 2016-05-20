@@ -12,6 +12,7 @@ define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', '
 
                 /*
                  * @POST /operations/create
+                 * @GET /operations/create
                  */
                 self.operationCreate = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ["id", "sum"], function(p, aHttpContext){
@@ -25,6 +26,7 @@ define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', '
 
                 /*
                  * @POST /operations/done
+                 * @GET /operations/done
                  */
                 self.operationDone = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ["id"], function(p, aHttpContext){
@@ -38,6 +40,7 @@ define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', '
 
                 /*
                  * @POST /operations/get
+                 * @GET /operations/get
                  */
                 self.operationGet = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ["id"], function(p, aHttpContext){
@@ -52,6 +55,7 @@ define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', '
 
                 /*
                  * @POST /operations/planned
+                 * @GET /operations/planned
                  */
                 self.operationPlanned = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ["id", "date"], function(p, aHttpContext){
