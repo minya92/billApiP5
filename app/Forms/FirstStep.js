@@ -25,15 +25,17 @@ define('FirstStep', ['orm', 'forms', 'ui', 'rpc', 'Bill'],
                 };
 
                 form.btnOpenAc.onActionPerformed = function () {
-                    BillFunc.checkExistAccount(form.tfRes.text, function (res) {
-                        if (res.id) {
-                            FormBill.setParams(res.id);
+                    BillFunc.checkExistAccount(form.tfRes.text, function (success_chek) {
+                        console.log(success_chek);
+                        if (success_chek.id) {
+                            FormBill.setParams(success_chek.id);
                             FormBill.show();
                         } else {
-                            md.alert("Неверный id счёта!")
+                            md.alert("Неверный id счёта!");
                         }
-                    }, function (e) {
-                        console.log(e);
+                    }, function (chek_error) {
+                        console.log(chek_error);
+                        md.alert(chek_error);
                     });
                 };
 

@@ -31,8 +31,8 @@ define('BillApiFunctions', ['orm', 'CrossRequest', 'logger', 'resource'], functi
             request("POST", "accounts/get_sum", {id: accountId}, success, fail);
         };
         
-        self.checkExistAccount = function(accountId, success){
-            request("POST", "accounts/check_exist_account", {id: accountId}, success, success);
+        self.checkExistAccount = function(accountId, success, fail){
+            request("POST", "accounts/check_exist_account", {id: accountId}, success, fail);
         };
         
         self.execute = function () {
