@@ -26,14 +26,11 @@ define('FirstStep', ['orm', 'forms', 'ui', 'rpc', 'Bill'],
 
                 form.btnOpenAc.onActionPerformed = function () {
                     BillFunc.checkExistAccount(form.tfRes.text, function (res) {
-                        if (res.id) {
-                            FormBill.setParams(res.id);
-                            FormBill.show();
-                        } else {
-                            md.alert("Неверный id счёта!")
-                        }
+                        FormBill.setParams(res.id);
+                        FormBill.show();
                     }, function (e) {
-                        console.log(e);
+                        //В 'e' какая то дичь)
+                        md.alert("Неверный id счёта!");
                     });
                 };
 
