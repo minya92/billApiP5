@@ -4,8 +4,8 @@
   <TabbedPane cursor="0" name="tabbedPane" parent="view" prefHeight="311px" prefWidth="380px" selectedComponent="pnlOperations">
     <AnchorsPaneConstraints bottom="0px" left="0px" right="-3px" top="0px"/>
   </TabbedPane>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlOperations" parent="tabbedPane" prefHeight="283px" prefWidth="375px">
-    <TabbedPaneConstraints tabTitle="Операции со счётом" tabToolTip=""/>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlOperations" parent="tabbedPane" prefHeight="275px" prefWidth="375px">
+    <TabbedPaneConstraints tabIcon="icons/22x22/currency_dollar_blue.png" tabTitle="Операции со счётом" tabToolTip="Пополнение/списание средств"/>
   </AnchorsPane>
   <ModelCombo cursor="0" name="mcChoose" nullable="false" parent="pnlOperations" prefHeight="30px" prefWidth="180px">
     <AnchorsPaneConstraints height="30px" left="18px" top="20px" width="180px"/>
@@ -37,10 +37,10 @@
   <ModelFormattedField cursor="0" editable="false" focusable="false" format="" name="mffBalance" nullable="false" parent="pnlOperations" prefHeight="30px" prefWidth="110px" toolTipText="Скрыть нажатием на любую кнопку мыши" visible="false">
     <AnchorsPaneConstraints height="30px" left="219px" top="170px" width="110px"/>
   </ModelFormattedField>
-  <AnchorsPane background="#ffffff" cursor="0" name="panel1" parent="tabbedPane" prefHeight="283px" prefWidth="375px" visible="false">
-    <TabbedPaneConstraints tabTitle="tab1" tabToolTip=""/>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlStatistics" parent="tabbedPane" prefHeight="275px" prefWidth="375px" visible="false">
+    <TabbedPaneConstraints tabIcon="icons/22x22/old-openofficeorg-calc.png" tabTitle="Статистика операций" tabToolTip="Просмотр всех совершённых операций по счёту"/>
   </AnchorsPane>
-  <AnchorsPane background="#ffffff" cursor="0" name="panel2" parent="tabbedPane" prefHeight="283px" prefWidth="375px" visible="false">
+  <AnchorsPane background="#ffffff" cursor="0" name="panel2" parent="tabbedPane" prefHeight="275px" prefWidth="375px" visible="false">
     <TabbedPaneConstraints tabTitle="tab2" tabToolTip=""/>
   </AnchorsPane>
 </layout>

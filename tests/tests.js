@@ -329,14 +329,6 @@ QUnit.test("Удалить услугу с предоплатой", function (as
     });
 });
 
-QUnit.test("Удалить счет", function (assert) {
-    var done = assert.async();
-    request("POST", "accounts/delete", {id: accountId}, function (res) {
-        assert.ok(res.result, "Message: " + res.result + errorMsg(res));
-        done();
-    });
-});
-
 QUnit.test("Пополнить счет на 150 на несуществующем id", function (assert) {
     var done = assert.async();
     request("POST", "operations/create", {id: 555, sum: 150}, function (res) {
@@ -376,5 +368,17 @@ QUnit.test("Операция со счетом, сумма 10, тип опера
     var done = assert.async();
     request("POST", "operations/create", {id: accountId, sum: 10, withdraw: "y4f+"}, function (res) {
         assert.ok(res.error, "Неверный тип операции " + res + " " + errorMsg(res));
+    });
+});
+
+
+
+
+//
+QUnit.test("Удалить счет", function (assert) {
+    var done = assert.async();
+    request("POST", "accounts/delete", {id: accountId}, function (res) {
+        assert.ok(res.result, "Message: " + res.result + errorMsg(res));
+        done();
     });
 });

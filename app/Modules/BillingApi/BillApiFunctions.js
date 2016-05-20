@@ -2,41 +2,53 @@
  * @public
  * @author Work
  */
-define('BillApiFunctions', ['orm', 'CrossRequest', 'logger', 'resource'], function (Orm, CrossRequest, Logger, Resource, ModuleName) {
+define('BillApiFunctions', ['logger', 'resource'], function (Logger, Resource, ModuleName) {
     function module_constructor() {
-        var self = this, model = Orm.loadModel(ModuleName);
+        var self = this;
         
         var BILL_SERVER_URL = 'http://127.0.0.1:8084/bill';
-        var crossRequest = new CrossRequest();
         
-        self.request =  function (httpMethod, apiMethod, params, success, fail){
-            var res = null, response = null;
-            try{
-                res = crossRequest.UrlConnection(BILL_SERVER_URL+'/application/'+apiMethod, params, httpMethod, null, null);
-                response = JSON.parse(res);
-                success(response);
-            } catch(e) {
-                Logger.severe('\n\n BILL API ERROR! ' + e);
-                fail({error: e.toString()});
+        self.getUrlString = function(aURL, aParams){
+            return aParams ? 
+                        aURL + (aURL[aURL.length-1] === '/' ? '' : '/') 
+                        + '?' + serializeUrlEncoded(aParams)
+                    :
+                        aURL;
+        };
+        
+        function serializeUrlEncoded(obj, prefix) {
+            var str = [];
+            for (var p in obj) {
+                var k = prefix ? prefix + "[]" : p, v = obj[p];
+                str.push(typeof v === "object" ?
+                        serializeUrlEncoded(v, k) :
+                        encodeURIComponent(k) + "=" + encodeURIComponent(v));
             }
+            return str.join("&");
+        }
+
+        self.request = function(apiMethod, params, success, fail){
+            Resource.loadText(self.getUrlString(BILL_SERVER_URL+'/application/'+apiMethod, params), function(res){
+                try{
+                    success(JSON.parse(res));
+                }catch(e){
+                    success(res);
+                }
+            }, fail);
         };
         
         var request = self.request;
         
         self.createAccount = function(success, fail){
-            request("POST", "accounts/create", null, success, fail);
+            request("accounts/create", null, success, fail);
         };
         
         self.getSumFromAccount = function(accountId, success, fail){
-            request("POST", "accounts/get_sum", {id: accountId}, success, fail);
+            request("accounts/get_sum", {id: accountId}, success, fail);
         };
         
         self.checkExistAccount = function(accountId, success, fail){
-            request("POST", "accounts/check_exist_account", {id: accountId}, success, fail);
-        };
-        
-        self.execute = function () {
-            
+            request("accounts/check_exist_account", {id: accountId}, success, fail);
         };
     }
     return module_constructor;
