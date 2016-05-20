@@ -371,6 +371,76 @@ QUnit.test("Операция со счетом, сумма 10, тип опера
     });
 });
 
+QUnit.test("Снять со счета 03 на несуществующей дате", function (assert) {
+    var done = assert.async();
+    request("POST", "operations/create", {id: accountId, sum: 03, withdraw: true}, function (res) {
+        assert.ok(res.id, "Operation Processing: " + res.id + errorMsg(res));
+        var date = new Date();
+        date.setDate(date.getDate() + 7);
+        request("POST", "operations/planned", {id: res.id}, function (r) {
+            assert.ok(r.error, "Не указана дата " + r + errorMsg(r));
+            done();
+        });
+    });
+});
+
+QUnit.test("Снять со счета 03 на невалидной дате", function (assert) {
+    var done = assert.async();
+    request("POST", "operations/create", {id: accountId, sum: 03, withdraw: true}, function (res) {
+        assert.ok(res.id, "Operation Processing: " + res.id + errorMsg(res));
+        var date = new Date();
+        date.setDate(date.getDate() + 7);
+        request("POST", "operations/planned", {id: res.id, date: "r5yh"}, function (r) {
+            assert.ok(r.error, "Не верная дата " + r + errorMsg(r));
+            done();
+        });
+    });
+});
+
+QUnit.test("Снять со счета 5 на прошедшей дате", function (assert) {
+    var done = assert.async();
+    request("POST", "operations/create", {id: accountId, sum: 03, withdraw: true}, function (res) {
+        assert.ok(res.id, "Operation Processing: " + res.id + errorMsg(res));
+        var date = new Date();
+        date.setDate(date.getDate() + 7);
+        request("POST", "operations/planned", {id: res.id, date: date.toDateString()-5}, function (r) {
+            assert.ok(r.error, "Нельзя списать деньги задним числом " + r + errorMsg(r));
+            done();
+        });
+    });
+});
+
+QUnit.test("Есть ли НЕсуществующий аккаунт", function (assert) {
+    var done = assert.async();
+    request("POST", "accounts/check_exist_account", {id: 846}, function (res) {
+        assert.ok(res.error, "Аккаунт не существует " + res + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test("Есть ли НЕзаданный аккаунт", function (assert) {
+    var done = assert.async();
+    request("POST", "accounts/check_exist_account", {}, function (res) {
+        assert.ok(res.error, "Аккаунт не задан " + res + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test("Есть ли НЕвалидный аккаунт", function (assert) {
+    var done = assert.async();
+    request("POST", "accounts/check_exist_account", {id: "g45d/ж"}, function (res) {
+        assert.ok(res.error, "Неверный формат id счёта: " + res + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test("Есть ли существующий аккаунт", function (assert) {
+    var done = assert.async();
+    request("POST", "accounts/check_exist_account", {id: accountId}, function (res) {
+        assert.ok(res.id, "Счёт существует " + res + errorMsg(res));
+        done();
+    });
+});
 
 
 
