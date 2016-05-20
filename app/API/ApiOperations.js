@@ -16,7 +16,7 @@ define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', '
                  */
                 self.operationCreate = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ["id", "sum"], function(p, aHttpContext){
-                        operationsModule.createOperation(p.id, p.sum, p.withdraw, function (res) {
+                        operationsModule.createOperation(p.id, p.sum, p.withdraw, null, function (res) {
                             onSucces(res);
                         }, function(err){
                             libs.setResponseCode(aHttpContext, err);

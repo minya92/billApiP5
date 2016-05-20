@@ -1,8 +1,8 @@
 /**
  * @author Work
  */
-define('OperationsModule', ['orm', 'Messages', 'Events', 'AccountsModule'],
-        function (Orm, Messages, Events, AccountsModule, ModuleName) {
+define('OperationsModule', ['orm', 'Messages', 'Events', 'AccountsModule', 'logger'],
+        function (Orm, Messages, Events, AccountsModule, Logger, ModuleName) {
             return function () {
                 var self = this, model = Orm.loadModel(ModuleName);
                 var msg = new Messages();
@@ -19,10 +19,6 @@ define('OperationsModule', ['orm', 'Messages', 'Events', 'AccountsModule'],
                  */
                 self.createOperation = function (anAccountId, aSum, anOperationType, servicesOnAccountId, aCallback, aErrCallback) {
                     var error = null;
-                    if (typeof (servicesOnAccountId) == 'function') {
-                        aCallback = servicesOnAccountId;
-                        servicesOnAccountId = null;
-                    }
                     if (!anAccountId || !aSum)
                         error = msg.get("reqFields");
                     //withdraw - снять; replenish - пополнить
@@ -43,10 +39,14 @@ define('OperationsModule', ['orm', 'Messages', 'Events', 'AccountsModule'],
                                 operation.id = model.qBillOperations[model.qBillOperations.length - 1].bill_operations_id;
                                 aCallback(operation);
                             }, function(){
+                                model.revert();
                                 aErrCallback({error: msg.get('errSaving')});
                             });
+                        } else {
+                            aErrCallback({error: msg.get('errFindAccount')});
                         }
-                    }, function(){
+                    }, function(err){
+                        Logger.severe(err);
                         aErrCallback({error: msg.get('errQuery')});
                     });
                 };

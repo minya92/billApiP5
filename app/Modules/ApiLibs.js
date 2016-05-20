@@ -24,7 +24,7 @@ define('ApiLibs', ['Messages'], function (Messages, ModuleName) {
                     err = true;
             });
             if(err){
-                self.setResponseCode(aHttpContext, 400, {error: msg.get('reqFields')});
+                self.setResponseCode(aHttpContext, {error: msg.get('reqFields')}, 400);
             }
             else{
                 if(!callback)

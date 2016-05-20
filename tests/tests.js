@@ -7,9 +7,9 @@ function request(httpMethod, apiMethod, params, callback) {
         data: params,
         type: httpMethod,
         complete: function (dat) {
-            //console.log(dat);
-            if (dat.status == 200) {
-                callback(JSON.parse(dat.responseText));
+//            console.log(dat);
+            if (dat.responseJSON) {
+                callback(dat.responseJSON);
             } else {
                 callback({
                     error: "Server error: " + dat.status,
@@ -19,6 +19,13 @@ function request(httpMethod, apiMethod, params, callback) {
         }
     });
 }
+
+//function request(m, apiMethod, params, callback){
+//    $.get("/bill/application/" + apiMethod, params, function(res){
+//        console.log(res);
+//        callback(res);
+//    });
+//}
 
 function errorMsg(aResult) {
     var res = " ";
@@ -256,6 +263,7 @@ QUnit.test("Подключить услугу c предоплатой на сч
     var done = assert.async();
     console.log({service_id: servicePrepayment, account_id: accountId});
     request("POST", "services/add", {service_id: servicePrepayment, account_id: accountId}, function (res) {
+        console.log(res);
         assert.ok(res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
         done();
     });
@@ -332,28 +340,20 @@ QUnit.test("Удалить услугу с предоплатой", function (as
 QUnit.test("Пополнить счет на 150 на несуществующем id", function (assert) {
     var done = assert.async();
     request("POST", "operations/create", {id: 555, sum: 150}, function (res) {
-        assert.ok(res.id, "Operation Processing: " + res.id + errorMsg(res));
-        request("POST", "operations/done", {id: res.id}, function (r) {
-            assert.ok(r.result, "Operation done: " + r.result + errorMsg(r));
-            done();
-        });
+        assert.ok(res.error, "Operation Processing: " + res.id + errorMsg(res));
+        done();
     });
 });
 
 
-
-//Томины тесты        
-QUnit.test("Пополнить счет на 150 на несуществующем id №2", function (assert) {
-    var done = assert.async();
-    request("POST", "operations/create", {id: 555, sum: 150}, function (res) {
-        assert.ok(res.error, "Неверный ID " + res + " " + errorMsg(res));
-    });
-});
+//
+////Томины тесты        
 
 QUnit.test("Пополнить счет, но не передать сумму", function (assert) {
     var done = assert.async();
     request("POST", "operations/create", {id: accountId}, function (res) {
-        assert.ok(res.error, "Пустая сумма " + res + " " + errorMsg(res));        
+        assert.ok(res.error, "Пустая сумма " + res + " " + errorMsg(res));
+        done();
     });
 });
 
@@ -361,13 +361,7 @@ QUnit.test("Пополнить счет на '8рк.9' (некорректная
     var done = assert.async();
     request("POST", "operations/create", {id: accountId, sum: "8рк.9"}, function (res) {
         assert.ok(res.error, "Неверная сумма " + res + " " + errorMsg(res));
-    });
-});
-
-QUnit.test("Операция со счетом, сумма 10, тип операции некорректен ('y4f+')", function (assert) {
-    var done = assert.async();
-    request("POST", "operations/create", {id: accountId, sum: 10, withdraw: "y4f+"}, function (res) {
-        assert.ok(res.error, "Неверный тип операции " + res + " " + errorMsg(res));
+        done();
     });
 });
 
@@ -429,7 +423,7 @@ QUnit.test("Есть ли НЕзаданный аккаунт", function (assert
 QUnit.test("Есть ли НЕвалидный аккаунт", function (assert) {
     var done = assert.async();
     request("POST", "accounts/check_exist_account", {id: "g45d/ж"}, function (res) {
-        assert.ok(res.error, "Неверный формат id счёта: " + res + errorMsg(res));
+        assert.ok(res.error, "Неверный формат id счёта: " + errorMsg(res));
         done();
     });
 });
@@ -437,12 +431,10 @@ QUnit.test("Есть ли НЕвалидный аккаунт", function (assert
 QUnit.test("Есть ли существующий аккаунт", function (assert) {
     var done = assert.async();
     request("POST", "accounts/check_exist_account", {id: accountId}, function (res) {
-        assert.ok(res.id, "Счёт существует " + res + errorMsg(res));
+        assert.ok(res.id, "Счёт существует " + res.id + " " +  errorMsg(res));
         done();
     });
 });
-
-
 
 //
 QUnit.test("Удалить счет", function (assert) {
