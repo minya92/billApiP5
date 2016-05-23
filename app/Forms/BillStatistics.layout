@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?><layout title="" view="view">
   <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="275px" prefWidth="375px"/>
-  <ModelGrid cursor="0" name="mgOperations" parent="view" prefHeight="215px" prefWidth="375px">
+  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgOperations" parent="view" prefHeight="215px" prefWidth="375px">
     <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="60px"/>
+    <ModelGridColumn name="operation_sum" preferredWidth="40px" title="Сумма" width="68px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
+    <ModelGridColumn name="operation_type" title="Тип" width="103px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
+    <ModelGridColumn name="operation_status" title="Статус" width="103px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
+    <ModelGridColumn name="operation_date" preferredWidth="70px" title="Дата" width="99px">
+      <ModelFormattedField valueType="1"/>
+    </ModelGridColumn>
   </ModelGrid>
   <SplitPane cursor="0" dividerLocation="140" foreground="#000000" leftComponent="mcType" name="splitPane" parent="view" prefHeight="30px" prefWidth="355px" rightComponent="mсStatus">
     <font family="Tahoma" size="11" style="0"/>
     <AnchorsPaneConstraints height="30px" left="10px" right="10px" top="10px"/>
   </SplitPane>
-  <ModelCombo cursor="0" name="mcType" parent="splitPane" prefHeight="28px" prefWidth="139px"/>
-  <ModelCombo cursor="0" name="mсStatus" parent="splitPane" prefHeight="28px" prefWidth="214px"/>
+  <ModelCombo cursor="0" name="mcType" parent="splitPane" prefHeight="28px" prefWidth="348px"/>
+  <ModelCombo cursor="0" name="mсStatus" parent="splitPane" prefHeight="28px" prefWidth="5px"/>
 </layout>

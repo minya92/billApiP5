@@ -15,13 +15,14 @@ define('Bill', ['orm', 'forms', 'ui', 'rpc', 'BillStatistics'], function (Orm, F
         };
 
         var billId;
-        var billStatistics = new BillStatistics();
+        var billStatistics = new BillStatistics();       
         billStatistics.show(form.pnlStatistics);
 
         self.setParams = function (aTitle) {
             if (aTitle) {
                 form.title = "Ваш счёт (" + aTitle + ")";
                 billId = +aTitle;
+                billStatistics.setParams(billId);
             }
 
             var Choose = [{list: "Пополнить счет на "},
