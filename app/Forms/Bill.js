@@ -2,7 +2,7 @@
  * 
  * @author User
  */
-define('Bill', ['orm', 'forms', 'ui', 'rpc'], function (Orm, Forms, Ui, Rpc, ModuleName) {
+define('Bill', ['orm', 'forms', 'ui', 'rpc', 'BillStatistics'], function (Orm, Forms, Ui, Rpc, BillStatistics, ModuleName) {
     function module_constructor() {
         var self = this
                 , model = Orm.loadModel(ModuleName)
@@ -15,6 +15,8 @@ define('Bill', ['orm', 'forms', 'ui', 'rpc'], function (Orm, Forms, Ui, Rpc, Mod
         };
 
         var billId;
+        var billStatistics = new BillStatistics();
+        billStatistics.show(form.pnlStatistics);
 
         self.setParams = function (aTitle) {
             if (aTitle) {
@@ -24,7 +26,7 @@ define('Bill', ['orm', 'forms', 'ui', 'rpc'], function (Orm, Forms, Ui, Rpc, Mod
         };
 
         var Choose = [{list: "Пополнить счет на "},
-                       {list: "Снять со счета "}];
+            {list: "Снять со счета "}];
         form.mcChoose.displayList = Choose;
         form.mcChoose.displayField = 'list';
         form.mcChoose.value = form.mcChoose.displayList[0];
@@ -44,27 +46,27 @@ define('Bill', ['orm', 'forms', 'ui', 'rpc'], function (Orm, Forms, Ui, Rpc, Mod
             md.confirm(strConfirm + date.toLocaleString(), function (answer) {
                 if (answer) {
                     /*Если тут поменять billId на 555 то пиздец*/
-                    BillFunc.request("POST", "operations/create", params, function (success_create) {
+                    BillFunc.request("operations/create", params, function (success_create) {
                         //Выбран пункт "Сегодня"
                         if (form.rbToday.selected) {
-                            BillFunc.request("POST", "operations/done", {id: success_create.id}, function (success_done) {
+                            BillFunc.request("operations/done", {id: success_create.id}, function (success_done) {
                                 console.log(success_done);
                                 if (success_done.error == null && success_done.result == "ok")
                                     md.alert(type1 + " успешно!");
                                 else
-                                    md.alert(success_done.error);
+                                    md.alert("Ошибка разрешения " + type2 + " на сервере!");
                             }, function (done_error) {
                                 console.log(done_error);
                                 md.alert("Ошибка разрешения " + type2 + "!");
                             });
                             //Выбрана определённая дата
                         } else {
-                            BillFunc.request("POST", "operations/planned", {id: success_create.id, date: date.toDateString()}, function (success_plan) {
+                            BillFunc.request("operations/planned", {id: success_create.id, date: date.toDateString()}, function (success_plan) {
                                 console.log(success_plan);
                                 if (success_plan.error == null && success_plan.result == "ok")
                                     md.alert(type1 + " счёта успешно запланировано!");
                                 else
-                                    md.alert(success_plan.error);
+                                    md.alert("Ошибка разрешения запланированного " + type2 + " на сервере!");
                             }, function (plan_error) {
                                 console.log(plan_error);
                                 md.alert("Ошибка разрешения запланированного " + type2 + "!");
@@ -126,7 +128,7 @@ define('Bill', ['orm', 'forms', 'ui', 'rpc'], function (Orm, Forms, Ui, Rpc, Mod
 
         form.btnBalance.onActionPerformed = function () {
             if (form.mffBalance.text == "") {
-                BillFunc.request("POST", "accounts/get_sum", {id: billId}, function (res_sum) {
+                BillFunc.request("accounts/get_sum", {id: billId}, function (res_sum) {
                     console.log(res_sum);
                     if (res_sum.error == null && res_sum.sum != null) {
                         form.mffBalance.text = res_sum.sum + " руб.";
@@ -136,7 +138,7 @@ define('Bill', ['orm', 'forms', 'ui', 'rpc'], function (Orm, Forms, Ui, Rpc, Mod
                         form.btnBalance.visible = false;
                         form.mffBalance.visible = true;
                     } else
-                        md.alert(res_sum.error);
+                        md.alert("Ошибка получения суммы на сервере!");
                 }, function (sum_error) {
                     console.log(sum_error);
                     md.alert("Ошибка получения суммы!");

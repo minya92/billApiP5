@@ -8,28 +8,28 @@
     <TabbedPaneConstraints tabIcon="icons/22x22/currency_dollar_blue.png" tabTitle="Операции со счётом" tabToolTip="Пополнение/списание средств"/>
   </AnchorsPane>
   <ModelCombo cursor="0" name="mcChoose" nullable="false" parent="pnlOperations" prefHeight="30px" prefWidth="180px">
-    <AnchorsPaneConstraints height="30px" left="18px" top="20px" width="180px"/>
+    <AnchorsPaneConstraints height="30px" left="20px" top="20px" width="180px"/>
   </ModelCombo>
   <TextField cursor="0" name="tfSum" parent="pnlOperations" prefHeight="30px" prefWidth="100px">
-    <AnchorsPaneConstraints height="30px" left="212px" top="20px" width="100px"/>
+    <AnchorsPaneConstraints height="30px" left="217px" top="20px" width="100px"/>
   </TextField>
   <Label cursor="0" name="lbRub" parent="pnlOperations" prefHeight="30px" prefWidth="50px" text="руб.">
     <AnchorsPaneConstraints height="30px" left="324px" top="20px" width="50px"/>
   </Label>
   <ModelDate cursor="0" enabled="false" focusable="false" name="modelDate" nullable="false" parent="pnlOperations" prefHeight="30px" prefWidth="190px">
-    <AnchorsPaneConstraints height="30px" left="141px" top="110px" width="190px"/>
+    <AnchorsPaneConstraints height="30px" left="148px" top="110px" width="190px"/>
   </ModelDate>
   <RadioButton buttonGroup="buttonGroup" cursor="0" name="rbToday" parent="pnlOperations" prefHeight="30px" prefWidth="80px" selected="true" text="Сейчас">
-    <AnchorsPaneConstraints height="30px" left="20px" top="70px" width="80px"/>
+    <AnchorsPaneConstraints height="30px" left="22px" top="70px" width="80px"/>
   </RadioButton>
   <RadioButton buttonGroup="buttonGroup" cursor="0" name="rbDate" parent="pnlOperations" prefHeight="30px" prefWidth="230px" text="Запланировать операцию на срок:">
-    <AnchorsPaneConstraints height="30px" left="120px" top="70px" width="230px"/>
+    <AnchorsPaneConstraints height="30px" left="127px" top="70px" width="230px"/>
   </RadioButton>
   <Button cursor="0" enabled="false" icon="icons/22x22/dialog-apply.png" name="btnExecute" parent="pnlOperations" prefHeight="32px" prefWidth="335px" text="Провести операцию">
-    <AnchorsPaneConstraints height="32px" left="20px" top="225px" width="335px"/>
+    <AnchorsPaneConstraints height="32px" left="20px" top="227px" width="335px"/>
   </Button>
   <Label cursor="0" name="lbBalance" parent="pnlOperations" prefHeight="30px" prefWidth="170px" text="Остаток средств на счёте:">
-    <AnchorsPaneConstraints height="30px" left="30px" top="170px" width="170px"/>
+    <AnchorsPaneConstraints height="30px" left="22px" top="170px" width="170px"/>
   </Label>
   <Button cursor="0" name="btnBalance" parent="pnlOperations" prefHeight="30px" prefWidth="110px" text="Показать">
     <AnchorsPaneConstraints height="30px" left="219px" top="170px" width="110px"/>
