@@ -36,7 +36,7 @@ define('BillApiFunctions', ['logger', 'resource'], function (Logger, Resource, M
                 }
             }, fail);
         };
-        
+         
         var request = self.request;
         
         self.createAccount = function(success, fail){
