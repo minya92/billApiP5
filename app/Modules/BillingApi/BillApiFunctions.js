@@ -48,7 +48,15 @@ define('BillApiFunctions', ['logger', 'resource'], function (Logger, Resource, M
         };
         
         self.checkExistAccount = function(accountId, success, fail){
-            request("accounts/check_exist_account", {id: accountId}, success, fail);
+            request("operations/getTypes", {id: accountId}, success, fail);
+        };
+        
+        self.getAllOperationsStatuses = function(accountId, success, fail){
+            request("/operations/get_statuses", {}, success, fail);
+        };
+        
+        self.getAllOperationsTypes = function(accountId, success, fail){
+            request("/operations/get_types", {}, success, fail);
         };
     }
     return module_constructor;

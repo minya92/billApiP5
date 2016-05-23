@@ -181,5 +181,25 @@ define('OperationsModule', ['orm', 'Messages', 'Events', 'AccountsModule', 'logg
                     });
                     return operationStatus;
                 };
+                
+                /*
+                 * Получить все статусы операций
+                 */
+                self.getAllOperationsStatuses = function(aCallback, aErrCallback){
+                    if(model.qBillOperationStatus.length)
+                        aCallback(model.qBillOperationStatus);
+                    else
+                        aErrCallback({error: 'empty'});
+                };
+                
+                /*
+                 * Получить все типы операций
+                 */
+                self.getAllOperationsTypes = function(aCallback, aErrCallback){
+                    if(model.qBillOperationsTypes.length)
+                        aCallback(model.qBillOperationsTypes);
+                    else
+                        aErrCallback({error: 'empty'});
+                };
             };
         });

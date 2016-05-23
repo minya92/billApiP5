@@ -80,7 +80,7 @@ QUnit.test("Снять со счета 400", function (assert) {
     });
 });
 
-QUnit.test("Снять со счета 101", function (assert) {
+QUnit.test("Снять со счета 101 (не хватит денег)", function (assert) {
     var done = assert.async();
     request("POST", "operations/create", {id: accountId, sum: 101, withdraw: true}, function (res) {
         assert.ok(res.id, "Operation Processing: " + res.id + errorMsg(res));
@@ -432,6 +432,24 @@ QUnit.test("Есть ли существующий аккаунт", function (as
     var done = assert.async();
     request("POST", "accounts/check_exist_account", {id: accountId}, function (res) {
         assert.ok(res.id, "Счёт существует " + res.id + " " +  errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test("Получить список статусов оперций", function (assert) {
+    var done = assert.async();
+    request("POST", "operations/get_statuses", {}, function (res) {
+        console.log(res);
+        assert.ok(!res.error, "Status [0]: " + res[0].status_name + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test("Получить список типов оперций", function (assert) {
+    var done = assert.async();
+    request("POST", "operations/get_types", {}, function (res) {
+        console.log(res);
+        assert.ok(!res.error, "Type [0]: " + res[0].type_name + errorMsg(res));
         done();
     });
 });
