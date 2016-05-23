@@ -3,10 +3,10 @@
   <ModelGrid cursor="0" name="mgOperations" parent="view" prefHeight="215px" prefWidth="375px">
     <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="60px"/>
   </ModelGrid>
-  <SplitPane cursor="0" dividerLocation="175" foreground="#000000" leftComponent="mсStatus" name="splitPane" parent="view" prefHeight="30px" prefWidth="355px" rightComponent="mcType">
+  <SplitPane cursor="0" dividerLocation="140" foreground="#000000" leftComponent="mcType" name="splitPane" parent="view" prefHeight="30px" prefWidth="355px" rightComponent="mсStatus">
     <font family="Tahoma" size="11" style="0"/>
     <AnchorsPaneConstraints height="30px" left="10px" right="10px" top="10px"/>
   </SplitPane>
-  <ModelCombo cursor="0" name="mсStatus" parent="splitPane" prefHeight="28px" prefWidth="174px"/>
-  <ModelCombo cursor="0" name="mcType" parent="splitPane" prefHeight="28px" prefWidth="174px"/>
+  <ModelCombo cursor="0" name="mcType" parent="splitPane" prefHeight="28px" prefWidth="139px"/>
+  <ModelCombo cursor="0" name="mсStatus" parent="splitPane" prefHeight="28px" prefWidth="214px"/>
 </layout>

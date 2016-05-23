@@ -23,14 +23,14 @@ define('Bill', ['orm', 'forms', 'ui', 'rpc', 'BillStatistics'], function (Orm, F
                 form.title = "Ваш счёт (" + aTitle + ")";
                 billId = +aTitle;
             }
-        };
 
-        var Choose = [{list: "Пополнить счет на "},
-            {list: "Снять со счета "}];
-        form.mcChoose.displayList = Choose;
-        form.mcChoose.displayField = 'list';
-        form.mcChoose.value = form.mcChoose.displayList[0];
-        form.modelDate.value = new Date;
+            var Choose = [{list: "Пополнить счет на "},
+                {list: "Снять со счета "}];
+            form.mcChoose.displayList = Choose;
+            form.mcChoose.displayField = 'list';
+            form.mcChoose.value = form.mcChoose.displayList[0];
+            form.modelDate.value = new Date;
+        };
 
 //        form.buttonGroup.onItemSelected = function () {
 //            if (form.rbToday.selected = true) {
