@@ -5,7 +5,7 @@
     <AnchorsPaneConstraints bottom="0px" left="0px" right="-3px" top="0px"/>
   </TabbedPane>
   <AnchorsPane background="#ffffff" cursor="0" name="pnlOperations" parent="tabbedPane" prefHeight="275px" prefWidth="375px">
-    <TabbedPaneConstraints tabIcon="icons/22x22/currency_dollar_blue.png" tabTitle="Операции со счётом" tabToolTip="Пополнение/списание средств"/>
+    <TabbedPaneConstraints tabIcon="icons/22x22/currency_dollar_blue.png" tabTitle="Операции со счётом" tabToolTip=""/>
   </AnchorsPane>
   <ModelCombo cursor="0" name="mcChoose" nullable="false" parent="pnlOperations" prefHeight="30px" prefWidth="180px">
     <AnchorsPaneConstraints height="30px" left="20px" top="20px" width="180px"/>
@@ -16,8 +16,8 @@
   <Label cursor="0" name="lbRub" parent="pnlOperations" prefHeight="30px" prefWidth="50px" text="руб.">
     <AnchorsPaneConstraints height="30px" left="324px" top="20px" width="50px"/>
   </Label>
-  <ModelDate cursor="0" enabled="false" focusable="false" name="modelDate" nullable="false" parent="pnlOperations" prefHeight="30px" prefWidth="190px">
-    <AnchorsPaneConstraints height="30px" left="148px" top="110px" width="190px"/>
+  <ModelDate cursor="0" enabled="false" focusable="false" name="modelDate" nullable="false" parent="pnlOperations" prefHeight="30px" prefWidth="130px" timePicker="false">
+    <AnchorsPaneConstraints height="30px" left="176px" top="110px" width="130px"/>
   </ModelDate>
   <RadioButton buttonGroup="buttonGroup" cursor="0" name="rbToday" parent="pnlOperations" prefHeight="30px" prefWidth="80px" selected="true" text="Сейчас">
     <AnchorsPaneConstraints height="30px" left="22px" top="70px" width="80px"/>
@@ -38,7 +38,7 @@
     <AnchorsPaneConstraints height="30px" left="219px" top="170px" width="110px"/>
   </ModelFormattedField>
   <AnchorsPane background="#ffffff" cursor="0" name="pnlStatistics" parent="tabbedPane" prefHeight="275px" prefWidth="375px" visible="false">
-    <TabbedPaneConstraints tabIcon="icons/22x22/old-openofficeorg-calc.png" tabTitle="Статистика операций" tabToolTip="Просмотр всех совершённых операций по счёту"/>
+    <TabbedPaneConstraints tabIcon="icons/22x22/old-openofficeorg-calc.png" tabTitle="Статистика операций" tabToolTip=""/>
   </AnchorsPane>
   <AnchorsPane background="#ffffff" cursor="0" name="panel2" parent="tabbedPane" prefHeight="275px" prefWidth="375px" visible="false">
     <TabbedPaneConstraints tabTitle="tab2" tabToolTip=""/>

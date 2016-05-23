@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><datamodel datasource="null">
-  <fieldsEntity entityHeight="119" entityIconified="false" entityId="141563034325805" entityLocationX="126" entityLocationY="69" entityWidth="220" tableName="bill_operations_items"/>
-  <fieldsEntity entityHeight="100" entityIconified="false" entityId="141562939818990" entityLocationX="578" entityLocationY="369" entityWidth="184" tableName="bill_operations_status"/>
+  <fieldsEntity entityHeight="100" entityIconified="false" entityId="141562939818990" entityLocationX="582" entityLocationY="369" entityWidth="184" tableName="bill_operations_status"/>
   <fieldsEntity entityHeight="87" entityIconified="false" entityId="141562939819176" entityLocationX="573" entityLocationY="274" entityWidth="167" tableName="bill_operations_type"/>
   <fieldsEntity entityHeight="135" entityIconified="false" entityId="141562939818619" entityLocationX="193" entityLocationY="223" entityWidth="150" tableName="bill_accounts"/>
   <fieldsEntity entityHeight="130" entityIconified="false" entityId="141563027309085" entityLocationX="573" entityLocationY="137" entityWidth="293" tableName="bill_operation_trade_operations_connect"/>
-  <fieldsEntity entityHeight="155" entityIconified="false" entityId="141562939819271" entityLocationX="910" entityLocationY="128" entityWidth="215" tableName="trade_cash_box_operation"/>
-  <fieldsEntity entityHeight="69" entityIconified="false" entityId="141562939818272" entityLocationX="17" entityLocationY="231" entityWidth="150" tableName="bill_account_types"/>
   <fieldsEntity entityHeight="154" entityIconified="false" entityId="141562939818867" entityLocationX="368" entityLocationY="206" entityWidth="150" tableName="bill_operations"/>
 </datamodel>

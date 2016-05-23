@@ -43,7 +43,7 @@ define('Bill', ['orm', 'forms', 'ui', 'rpc', 'BillStatistics'], function (Orm, F
         function Operations(strConfirm, params, type1, type2) {
             var date = form.rbToday.selected ? form.rbToday.text : form.modelDate.value;
 
-            md.confirm(strConfirm + date.toLocaleString(), function (answer) {
+            md.confirm(strConfirm + date.toLocaleDateString(), function (answer) {
                 if (answer) {
                     /*Если тут поменять billId на 555 то пиздец*/
                     BillFunc.request("operations/create", params, function (success_create) {
