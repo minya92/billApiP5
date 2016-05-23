@@ -440,7 +440,7 @@ QUnit.test("Получить список статусов оперций", func
     var done = assert.async();
     request("POST", "operations/get_statuses", {}, function (res) {
         console.log(res);
-        assert.ok(!res.error, "Status [0]: " + res[0].status_name + errorMsg(res));
+        assert.ok(!res.error, "Statuses : " + res + errorMsg(res));
         done();
     });
 });
@@ -449,7 +449,16 @@ QUnit.test("Получить список типов оперций", function (
     var done = assert.async();
     request("POST", "operations/get_types", {}, function (res) {
         console.log(res);
-        assert.ok(!res.error, "Type [0]: " + res[0].type_name + errorMsg(res));
+        assert.ok(!res.error, "Types : " + res + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test("Получить список статусов и типов оперций одновременно", function (assert) {
+    var done = assert.async();
+    request("POST", "operations/get_types_statuses", {}, function (res) {
+        console.log(res);
+        assert.ok(!res.error, "Types : " + res + errorMsg(res));
         done();
     });
 });

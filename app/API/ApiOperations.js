@@ -94,5 +94,26 @@ define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', '
                         });
                     });
                 };
+                
+                /*
+                 * @POST /operations/get_types_statuses
+                 * @GET /operations/get_types_statuses
+                 */
+                self.getAllOperationsTypesAndStatuses = function (aPath, onSucces) {
+                    libs.checkRequiredParams((new HttpContext()), [], function(p, aHttpContext){
+                        operationsModule.getAllOperationsTypes(function (types) {
+                            operationsModule.getAllOperationsStatuses(function (statuses) {
+                                onSucces({
+                                    types: types,
+                                    statuses: statuses
+                                });
+                            }, function(err){
+                                libs.setResponseCode(aHttpContext, err);
+                            });
+                        }, function(err){
+                            libs.setResponseCode(aHttpContext, err);
+                        });
+                    });
+                };
             };
         });
