@@ -146,40 +146,7 @@ QUnit.test("Получить остаток средств на счете", fun
     });
 });
 
-QUnit.test("Все операции по счету", function (assert) {
-    var done = assert.async();
-    request("POST", "operations/get", {id: accountId}, function (res) {
-        assert.ok(res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
-        done();
-    });
-});
-
-QUnit.test("Все пройденные операции по счету", function (assert) {
-    var done = assert.async();
-    request("POST", "operations/get", {id: accountId, status: 'done'}, function (res) {
-        assert.ok(res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
-        done();
-    });
-});
-
-QUnit.test("Пройденные операции списания по счету", function (assert) {
-    var done = assert.async();
-    request("POST", "operations/get", {id: accountId, type: 'withdraw', status: 'done'}, function (res) {
-        assert.ok(res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
-        done();
-    });
-});
-
-QUnit.test("НЕ пройденные операции списания по счету", function (assert) {
-    var done = assert.async();
-    request("POST", "operations/get", {id: accountId, type: 'withdraw', status: 'canceled'}, function (res) {
-        assert.ok(res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
-        done();
-    });
-});
-
-//12
-QUnit.test("Создание услуги с предоплатой (50)", function (assert) {
+QUnit.test("Создание услуги с предоплатой (стоимость 50)", function (assert) {
     var done = assert.async();
     request("POST", "services/create", {name: "test service with prepayment", cost: 50, days: 14, prepayment: true}, function (res) {
         servicePrepayment = res.service_id;
@@ -188,7 +155,7 @@ QUnit.test("Создание услуги с предоплатой (50)", funct
     });
 });
 
-QUnit.test("Создание услуги", function (assert) {
+QUnit.test("Создание услуги (стоимость 500)", function (assert) {
     var done = assert.async();
     request("POST", "services/create", {name: "test service", cost: 500}, function (res) {
         serviceId = res.service_id;
@@ -197,16 +164,16 @@ QUnit.test("Создание услуги", function (assert) {
     });
 });
 
-QUnit.test("Создание услуги со счетчиком", function (assert) {
+QUnit.test("Создание услуги со счетчиком (стоимость 400)", function (assert) {
     var done = assert.async();
-    request("POST", "services/create", {name: "service counter!!!", cost: 500, counts: 5}, function (res) {
+    request("POST", "services/create", {name: "service counter!!!", cost: 400, counts: 5}, function (res) {
         serviceCounter = res.service_id;
         assert.ok(res.service_id, "RESULT: " + JSON.stringify(res.service_id) + errorMsg(res));
         done();
     });
 });
 
-QUnit.test("Получить инфу по предыдущей услуге", function (assert) {
+QUnit.test("Получить инфу по услуге со счетчиком (пред.)", function (assert) {
     var done = assert.async();
     request("POST", "services/get", {service_id: serviceId}, function (res) {
         assert.ok(res.services, "RESULT: " + JSON.stringify(res.services) + errorMsg(res));
@@ -273,7 +240,48 @@ QUnit.test("Все услуги на счету", function (assert) {
     var done = assert.async();
     request("POST", "services/on_account", {account_id: accountId}, function (res) {
         console.log(res);
-        assert.ok(res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
+        assert.equal(res.result.length, 3, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test("Все операции по счету", function (assert) {
+    var done = assert.async();
+    request("POST", "operations/get", {id: accountId}, function (res) {
+        assert.equal(res.result.length, 8, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test("Все пройденные операции по счету", function (assert) {
+    var done = assert.async();
+    request("POST", "operations/get", {id: accountId, status: 'done'}, function (res) {
+        assert.equal(res.result.length, 3, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test("Запланированные операции по счету", function (assert) {
+    var done = assert.async();
+    request("POST", "operations/get", {id: accountId, status: 'planned'}, function (res) {
+        assert.equal(res.result.length, 4, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
+        done();
+    });
+});
+
+
+QUnit.test("Пройденные операции списания по счету", function (assert) {
+    var done = assert.async();
+    request("POST", "operations/get", {id: accountId, type: 'withdraw', status: 'done'}, function (res) {
+        assert.equal(res.result.length, 2, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test("НЕ пройденные операции списания по счету", function (assert) {
+    var done = assert.async();
+    request("POST", "operations/get", {id: accountId, type: 'withdraw', status: 'canceled'}, function (res) {
+        assert.equal(res.result.length, 1, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
         done();
     });
 });
@@ -316,7 +324,7 @@ QUnit.test("Получить остаток средств на счете", fun
     var done = assert.async();
     console.log(accountId);
     request("POST", "accounts/get_sum", {id: accountId}, function (res) {
-        assert.ok(res.sum, "Sum: " + res.sum + errorMsg(res));
+        assert.equal(res.sum, 50, "Sum: " + res.sum + errorMsg(res));
         done();
     });
 });
@@ -440,7 +448,7 @@ QUnit.test("Получить список статусов оперций", func
     var done = assert.async();
     request("POST", "operations/get_statuses", {}, function (res) {
         console.log(res);
-        assert.ok(!res.error, "Statuses : " + res + errorMsg(res));
+        assert.ok(!res.error, "Statuses : " + JSON.stringify(res) + errorMsg(res));
         done();
     });
 });
@@ -449,7 +457,7 @@ QUnit.test("Получить список типов оперций", function (
     var done = assert.async();
     request("POST", "operations/get_types", {}, function (res) {
         console.log(res);
-        assert.ok(!res.error, "Types : " + res + errorMsg(res));
+        assert.ok(!res.error, "Types : " + JSON.stringify(res) + errorMsg(res));
         done();
     });
 });
@@ -458,7 +466,7 @@ QUnit.test("Получить список статусов и типов опе�
     var done = assert.async();
     request("POST", "operations/get_types_statuses", {}, function (res) {
         console.log(res);
-        assert.ok(!res.error, "Types : " + res + errorMsg(res));
+        assert.ok(!res.error, "Types : " + JSON.stringify(res) + errorMsg(res));
         done();
     });
 });

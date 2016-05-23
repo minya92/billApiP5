@@ -150,10 +150,10 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                                 }
                             }
                             if (operation.id) { // удалось провести операцию
-                                if (!date)
-                                    operations.setOperationDone(operation.id, setStatus, setStatus);
-                                else
+                                if (date)
                                     operations.setOperationPlanned(operation.id, date, setStatus, setStatus);
+                                else
+                                    operations.setOperationDone(operation.id, setStatus, setStatus);
                             } else {
                                 aErrCallback({error: operation.error});
                             }
@@ -162,21 +162,32 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                     accounts.getSumFromAccount(anAccountId, function (res) {
                         model.qServiceList.params.service_id = +aServiceId;
                         model.qServiceList.requery(function () {
-                            if (model.qServiceList.length) {
-                                if (model.qServiceList[0].prepayment) { // предоплата
-                                    if (res.sum >= model.qServiceList[0].service_cost) {
-                                        operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId, (setOperationDone()), (setOperationDone()));
-                                    } else {
-                                        aErrCallback({error: msg.get('errNoMoney')});
-                                        return true;
-                                    }
-                                }
+                            if (model.qServiceList.length) {                        
                                 var date = new Date();
                                 if (model.qServiceList[0].service_month)
                                     date.setMonth(date.getMonth() + 1);
                                 else
                                     date.setDate(date.getDate() + model.qServiceList[0].service_days);
-                                operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId, (setOperationDone(date)), (setOperationDone(date)));
+                                
+                                if (model.qServiceList[0].prepayment) { // предоплата
+                                    if (res.sum >= model.qServiceList[0].service_cost) {
+                                        operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId, function(op){
+                                            if(op.id){
+                                                operations.setOperationDone(op.id, function(){
+                                                    operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId, (setOperationDone(date)), (setOperationDone()));
+                                                }, function(err){
+                                                    aErrCallback({error: err});
+                                                });
+                                            } else {
+                                                aErrCallback({error: op.error});
+                                            }
+                                        }, (setOperationDone()));
+                                    } else {
+                                        aErrCallback({error: msg.get('errNoMoney')});
+                                    }
+                                } else { // без предоплаты
+                                    operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId, (setOperationDone(date)), (setOperationDone()));
+                                }
                             } else {
                                 aErrCallback({error: msg.get('errFindService')});
                             }
