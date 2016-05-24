@@ -15,7 +15,7 @@ define('Bill', ['orm', 'forms', 'ui', 'rpc', 'BillStatistics'], function (Orm, F
         };
 
         var billId;
-        var billStatistics = new BillStatistics();       
+        var billStatistics = new BillStatistics();
         billStatistics.show(form.pnlStatistics);
 
         self.setParams = function (aTitle) {
@@ -43,8 +43,13 @@ define('Bill', ['orm', 'forms', 'ui', 'rpc', 'BillStatistics'], function (Orm, F
 
         function Operations(strConfirm, params, type1, type2) {
             var date = form.rbToday.selected ? form.rbToday.text : form.modelDate.value;
-
-            md.confirm(strConfirm + date.toLocaleDateString(), function (answer) {
+            var md = {};
+            md.alert = function (msg) {
+                window.md.alert(msg);
+                billStatistics.setParams(billId);
+            };
+            console.log("!!!!!!" + date);
+            window.md.confirm(strConfirm + (date.toLocaleDateString ? date.toLocaleDateString() : date), function (answer) {
                 if (answer) {
                     /*Если тут поменять billId на 555 то пиздец*/
                     BillFunc.request("operations/create", params, function (success_create) {
@@ -129,6 +134,7 @@ define('Bill', ['orm', 'forms', 'ui', 'rpc', 'BillStatistics'], function (Orm, F
 
         form.btnBalance.onActionPerformed = function () {
             if (form.mffBalance.text == "") {
+                var замыкание = 85;
                 BillFunc.request("accounts/get_sum", {id: billId}, function (res_sum) {
                     console.log(res_sum);
                     if (res_sum.error == null && res_sum.sum != null) {
