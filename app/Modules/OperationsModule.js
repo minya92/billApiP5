@@ -153,7 +153,7 @@ define('OperationsModule', ['orm', 'Messages', 'Events', 'AccountsModule', 'logg
                         if (model.qBillOperationsOnAccount.length) {
                             aCallback({result: model.qBillOperationsOnAccount, error: null});
                         } else {
-                            aCallback({error: msg.get('errFindOperation'), result: null});
+                            aErrCallback({error: msg.get('errFindOperation'), result: null});
                         }
                     }, function(){
                         aErrCallback({error: msg.get('errQuery')});
