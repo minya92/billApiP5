@@ -30,7 +30,7 @@ define('AccountsModule', ['orm', 'Messages', 'Events'],
                 self.getSumFromAccount = function (anAccountId, aCallBack, aErrCallback) {
                     model.qGetAccountBalance.params.account_id = +anAccountId;
                     var sum = 0, error = null;
-                    model.requery(function () {
+                    model.qGetAccountBalance.requery(function () {
                         if (model.qGetAccountBalance.length)
                             aCallBack({
                                 account_id: anAccountId,
@@ -49,7 +49,7 @@ define('AccountsModule', ['orm', 'Messages', 'Events'],
                  */
                 self.delAccount = function (anAccountId, aCallBack, aErrCallback) {
                     model.qBillAccounts.params.account_id = +anAccountId;
-                    model.requery(function () {
+                    model.qBillAccounts.requery(function () {
                         if (model.qBillAccounts.length) {
                             model.qBillAccounts[0].active = false;
                             model.save(function(){
@@ -60,6 +60,35 @@ define('AccountsModule', ['orm', 'Messages', 'Events'],
                             }, function(){
                                 aErrCallback({error: msg.get('errSaving')});
                             });
+                        } else {
+                            aErrCallback({error: msg.get("errFindAccount")});
+                        }
+                    }, function(){
+                        aErrCallback({error: msg.get('errQuery')});
+                    });
+                };
+                
+                /*
+                 * (!!!!) Удалить счет полностью со всеми данными (!!!!)
+                 * (!!!!) Сначала нужно сделать неактивным (!!!!)
+                 */
+                self.delAccountHardcore = function (anAccountId, aCallBack, aErrCallback) {
+                    model.qBillAccounts.params.account_id = +anAccountId;
+                    model.qBillAccounts.requery(function () {
+                        if (model.qBillAccounts.length) {
+                            if(!model.qBillAccounts[0].active){
+                                model.qBillAccounts.splice(0, 1);
+                                model.save(function(){
+                                    events.addEvent("accountDeleted", {account_id: anAccountId});
+                                    aCallBack({
+                                        result: msg.get("successDelAccount")
+                                    });
+                                }, function(){
+                                    aErrCallback({error: msg.get('errSaving')});
+                                });
+                            } else {
+                                aErrCallback({error: msg.get('errDeleteAccount')});
+                            }
                         } else {
                             aErrCallback({error: msg.get("errFindAccount")});
                         }

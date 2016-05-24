@@ -224,7 +224,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                 };
 
                 /*
-                 * Удалить услугу
+                 * Удалить услугу (сдалать неактивной) 
                  * unsubscrible - сначала отключить ее у всех пользователей (если нет, не удалится)
                  */
                 self.DeleteService = function (aServiceId, unsubscribe, aCallback, aErrCallback) {
@@ -232,9 +232,13 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                         model.qServiceList.params.service_id = +aServiceId;
                         model.qServiceList.requery(function () {
                             if (model.qServiceList.length) {
-                                model.qServiceList.splice(0, 1);
-                                model.save();
-                                aCallback({result: "ok"});
+                                //model.qServiceList.splice(0, 1);
+                                model.qServiceList[0].deleted = true;
+                                model.save(function(){
+                                    aCallback({result: "ok"});
+                                }, function(){
+                                    aErrCallback({error: msg.get('errSaving')});
+                                });
                             } else {
                                 aErrCallback({error: msg.get('errFindService')})
                             }
@@ -263,6 +267,26 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                         }
                     }, function(){
                         aErrCallback({error: msg.get('errQuery')});
+                    });
+                };
+                
+                self.HardDeleteService = function(aServiceId, aCallback, aErrCallback){
+                    model.qDelService.params.service_id = +aServiceId;
+                    model.qDelService.requery(function () {
+                        if (model.qDelService.length) {
+                            if(model.qDelService[0].deleted){
+                                model.qDelService.splice(0, 1);
+                                model.save(function(){
+                                    aCallback({result: "ok"});
+                                }, function(){
+                                    aErrCallback({error: msg.get('errSaving')});
+                                });
+                            } else {
+                                aErrCallback({error: msg.get('errHardDeleteService')});
+                            }
+                        } else {
+                            aErrCallback({error: msg.get('errFindService')});
+                        }
                     });
                 };
 

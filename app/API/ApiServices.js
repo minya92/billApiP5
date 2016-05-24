@@ -78,6 +78,20 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                         });
                     });
                 };
+                
+                /*
+                 * @POST /services/hard_delete
+                 * @GET /services/hard_delete
+                 */
+                self.hardDeleteService = function (aPath, onSucces) {
+                    libs.checkRequiredParams((new HttpContext()), ["service_id"], function(p, aHttpContext){
+                        billServicesModule.HardDeleteService(p.service_id, function (res) {
+                            onSucces(res);
+                        }, function(err){
+                            libs.setResponseCode(aHttpContext, err);
+                        });
+                    });
+                };
 
                 /*
                  * @POST /services/pause

@@ -295,6 +295,14 @@ QUnit.test("Приостановить обычную услугу со счет
     });
 });
 
+QUnit.test( "Удалить обычную услугу (не получится, она подключена на счет)", function( assert ) {
+    var done = assert.async();
+    request("POST", "services/delete", {service_id: serviceId}, function(res){
+        assert.ok( res.error , "Message: " + res.result + errorMsg(res));
+        done();
+    });
+});
+
 QUnit.test("Отключить обычную услугу со счета", function (assert) {
     var done = assert.async();
     request("POST", "services/disable", {service_id: serviceId, account_id: accountId}, function (res) {
@@ -303,6 +311,13 @@ QUnit.test("Отключить обычную услугу со счета", fun
     });
 });
 
+QUnit.test( "Удалить обычную услугу", function( assert ) {
+    var done = assert.async();
+    request("POST", "services/delete", {service_id: serviceId}, function(res){
+        assert.ok(res.result , "Message: " + res.result + errorMsg(res));
+        done();
+    });
+});
 
 QUnit.test("Изменение услуги c спредоплатой (с 50 на 1000)", function (assert) {
     var done = assert.async();
@@ -329,17 +344,25 @@ QUnit.test("Получить остаток средств на счете", fun
     });
 });
 
-//QUnit.test( "Удалить обычную услугу", function( assert ) {
-//    var done = assert.async();
-//    request("POST", "services/delete", {service_id: serviceId}, function(res){
-//        assert.ok( res.result , "Message: " + res.result + errorMsg(res));
-//        done();
-//    });
-//});
+QUnit.test("Полностью удалить услугу с предоплатой (не выйдет, надо сначала отключить)", function (assert) {
+    var done = assert.async();
+    request("POST", "services/hard_delete", {service_id: servicePrepayment}, function (res) {
+        assert.ok(res.error, "Message: " + res.result + errorMsg(res));
+        done();
+    });
+});
 
-QUnit.test("Удалить услугу с предоплатой", function (assert) {
+QUnit.test("Удалить услугу с предоплатой (отключить) и отписать со всех счетов", function (assert) {
     var done = assert.async();
     request("POST", "services/delete", {service_id: servicePrepayment, unsubscribe: true}, function (res) {
+        assert.ok(res.result, "Message: " + res.result + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test("Полностью удалить услугу с предоплатой", function (assert) {
+    var done = assert.async();
+    request("POST", "services/hard_delete", {service_id: servicePrepayment}, function (res) {
         assert.ok(res.result, "Message: " + res.result + errorMsg(res));
         done();
     });
@@ -352,10 +375,6 @@ QUnit.test("Пополнить счет на 150 на несуществующе
         done();
     });
 });
-
-
-//
-////Томины тесты        
 
 QUnit.test("Пополнить счет, но не передать сумму", function (assert) {
     var done = assert.async();
@@ -471,10 +490,25 @@ QUnit.test("Получить список статусов и типов опе�
     });
 });
 
-//
-QUnit.test("Удалить счет", function (assert) {
+QUnit.test("Удалить счет (полное удаление, c ошибкой. Сначала надо сделать неактивным)", function (assert) {
+    var done = assert.async();
+    request("POST", "accounts/hard_delete", {id: accountId}, function (res) {
+        assert.ok(res.error, "Message: " + res.result + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test("Удалить счет (сделать неактивным)", function (assert) {
     var done = assert.async();
     request("POST", "accounts/delete", {id: accountId}, function (res) {
+        assert.ok(res.result, "Message: " + res.result + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test("Удалить счет (полное удаление)", function (assert) {
+    var done = assert.async();
+    request("POST", "accounts/hard_delete", {id: accountId}, function (res) {
         assert.ok(res.result, "Message: " + res.result + errorMsg(res));
         done();
     });

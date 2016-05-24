@@ -61,6 +61,14 @@ define('Messages', [], function (ModuleName) {
             errSaving : {
                 en  : "Error Saving Transactions. 500",
                 ru  : "Ошибка проведения транзакций. 500"
+            },
+            errDeleteAccount : {
+                en  : "Failed to delete bill account. Please first make inactive. /accoutns/delete?id=xxxxxx",
+                ru  : "Ошибка удаление счета. Сначала сделайте счет неактивным. /accoutns/delete?id=xxxxxx"
+            }, 
+            errHardDeleteService : {
+                en  : "Failed to delete service. Please first make inactive. /services/delete?service_id=xxxxxx",
+                ru  : "Ошибка удаление услуги. Сначала сделайте услгу неактивной. /services/delete?service_id=xxxxxx"
             }
         };
         

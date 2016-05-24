@@ -51,6 +51,20 @@ define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Mess
                 };
                 
                 /*
+                 * @POST /accounts/hard_delete
+                 * @GET /accounts/hard_delete
+                 */
+                self.delAccountHardcore = function (aPath, aSuccessCallback, aErrCallback) {
+                    libs.checkRequiredParams((new HttpContext()), ['id'], function(p, aHttpContext){
+                        accountsModule.delAccountHardcore(p.id, function (res) {
+                            aSuccessCallback(res);
+                        }, function(err){
+                            libs.setResponseCode(aHttpContext, err);
+                        });
+                    });
+                };
+                
+                /*
                  * @POST /accounts/check_exist_account
                  * @GET /accounts/check_exist_account
                  */

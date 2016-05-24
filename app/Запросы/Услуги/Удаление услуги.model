@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel>
+  <parameters>
+    <parameter description="" name="service_id" nullable="true" parameterMode="1" selectionForm="null" type="Number"/>
+  </parameters>
+  <parametersEntity entityHeight="200" entityIconified="false" entityLocationX="8" entityLocationY="7" entityWidth="150"/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="146409154217667" entityLocationX="189" entityLocationY="11" entityWidth="150" tableAlias="t" tableName="bill_services" tableSchemaName=""/>
+  <relation leftEntityId="-1" leftEntityParameterName="service_id" rightEntityFieldName="bill_services_id" rightEntityId="146409154217667"/>
+</datamodel>
