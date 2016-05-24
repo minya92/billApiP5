@@ -319,6 +319,14 @@ QUnit.test( "Удалить обычную услугу", function( assert ) {
     });
 });
 
+QUnit.test("Полностью удалить обычную услугу", function (assert) {
+    var done = assert.async();
+    request("POST", "services/hard_delete", {service_id: serviceId}, function (res) {
+        assert.ok(res.result, "Message: " + res.result + errorMsg(res));
+        done();
+    });
+});
+
 QUnit.test("Изменение услуги c спредоплатой (с 50 на 1000)", function (assert) {
     var done = assert.async();
     request("POST", "services/change", {service_id: servicePrepayment, cost: 1000, days: 7}, function (res) {
@@ -360,9 +368,25 @@ QUnit.test("Удалить услугу с предоплатой (отключ�
     });
 });
 
+QUnit.test("Удалить услугу со счетчиком (отключить) и отписать со всех счетов", function (assert) {
+    var done = assert.async();
+    request("POST", "services/delete", {service_id: serviceCounter, unsubscribe: true}, function (res) {
+        assert.ok(res.result, "Message: " + res.result + errorMsg(res));
+        done();
+    });
+});
+
 QUnit.test("Полностью удалить услугу с предоплатой", function (assert) {
     var done = assert.async();
     request("POST", "services/hard_delete", {service_id: servicePrepayment}, function (res) {
+        assert.ok(res.result, "Message: " + res.result + errorMsg(res));
+        done();
+    });
+});
+
+QUnit.test("Полностью удалить услугу со счетчиком", function (assert) {
+    var done = assert.async();
+    request("POST", "services/hard_delete", {service_id: serviceCounter}, function (res) {
         assert.ok(res.result, "Message: " + res.result + errorMsg(res));
         done();
     });
