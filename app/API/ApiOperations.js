@@ -19,9 +19,9 @@ define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', '
                         operationsModule.createOperation(p.id, p.sum, p.withdraw, null, function (res) {
                             onSucces(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
 
                 /*
@@ -33,9 +33,9 @@ define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', '
                         operationsModule.setOperationDone(p.id, function (result) {
                             onSucces(result);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
 
                 /*
@@ -47,9 +47,9 @@ define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', '
                         operationsModule.getOperations(p.id, p.type, p.status, function (res) {
                             onSucces(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
 
 
@@ -62,9 +62,9 @@ define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', '
                         operationsModule.setOperationPlanned(p.id, p.date, function (res) {
                             onSucces(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
                 
                 /*
@@ -76,9 +76,9 @@ define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', '
                         operationsModule.getAllOperationsStatuses(function (res) {
                             onSucces(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
                 
                 /*
@@ -90,9 +90,9 @@ define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', '
                         operationsModule.getAllOperationsTypes(function (res) {
                             onSucces(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
                 
                 /*
@@ -108,12 +108,12 @@ define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', '
                                     statuses: statuses
                                 });
                             }, function(err){
-                                libs.setResponseCode(aHttpContext, err);
+                                onSucces(err);
                             });
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
             };
         });

@@ -13,7 +13,7 @@ define('ApiLibs', ['Messages'], function (Messages, ModuleName) {
          * @param {mas} aRequiredFields - массив обязательных параметров
          * @returns {unresolved}
          */
-        self.checkRequiredParams = function(aHttpContext, aRequiredFields, callback){
+        self.checkRequiredParams = function(aHttpContext, aRequiredFields, callback, onSuccessCallback){
             var err = false;
             var requestParams = (aHttpContext.request ? aHttpContext.request.params : aHttpContext);
             aHttpContext.response.status = 200;
@@ -24,7 +24,7 @@ define('ApiLibs', ['Messages'], function (Messages, ModuleName) {
                     err = true;
             });
             if(err){
-                self.setResponseCode(aHttpContext, {error: msg.get('reqFields')}, 400);
+                self.setResponseCode(aHttpContext, {error: msg.get('reqFields')}, 200, onSuccessCallback);
             }
             else{
                 if(!callback)
@@ -40,11 +40,14 @@ define('ApiLibs', ['Messages'], function (Messages, ModuleName) {
          * @param {type} aResponse
          * @returns {undefined}
          */
-        self.setResponseCode = function(aHttpContext, aResponse, aCode){
-            aHttpContext.response.status = aCode ? aCode : 500;
+        self.setResponseCode = function(aHttpContext, aResponse, aCode, aCallback){
+            aHttpContext.response.status = aCode ? aCode : 200; 
             aHttpContext.response.headers.add("Access-Control-Allow-Origin", "*");
             aHttpContext.response.contentType = 'text/json';
-            aHttpContext.response.body = JSON.stringify(aResponse);
+            if(aCallback)
+                aCallback(aResponse);
+            else
+                aHttpContext.response.body = JSON.stringify(aResponse); //так лучше не делать, почему то все ломает
         };
     };
 });
