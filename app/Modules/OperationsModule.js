@@ -151,9 +151,9 @@ define('OperationsModule', ['orm', 'Messages', 'Events', 'AccountsModule', 'logg
                     model.qBillOperationsOnAccount.params.status = (anOperationStatus ? self.getStatusId(anOperationStatus) : null);
                     model.qBillOperationsOnAccount.requery(function () {
                         if (model.qBillOperationsOnAccount.length) {
-                            aCallback({result: model.qBillOperationsOnAccount, error: null});
+                            aCallback({result: model.qBillOperationsOnAccount});
                         } else {
-                            aErrCallback({error: msg.get('errFindOperation'), result: null});
+                            aCallback({info: msg.get('errFindOperation'), result: []});
                         }
                     }, function(){
                         aErrCallback({error: msg.get('errQuery')});

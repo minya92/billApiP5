@@ -7,7 +7,7 @@ function request(httpMethod, apiMethod, params, callback) {
         data: params,
         type: httpMethod,
         complete: function (dat) {
-//            console.log(dat);
+            //console.log(dat);
             if (dat.responseJSON) {
                 callback(dat.responseJSON);
             } else {
@@ -16,16 +16,17 @@ function request(httpMethod, apiMethod, params, callback) {
                     response: dat.responseText
                 });
             }
+        },
+        error: function(e){
+            //console.log(e);
+            //callback(e);
+        },
+        success: function (data, textStatus, jqXHR) {
+            //console.log("error " + data);
+            //callback(data);
         }
     });
 }
-
-//function request(m, apiMethod, params, callback){
-//    $.get("/bill/application/" + apiMethod, params, function(res){
-//        console.log(res);
-//        callback(res);
-//    });
-//}
 
 function errorMsg(aResult) {
     var res = " ";

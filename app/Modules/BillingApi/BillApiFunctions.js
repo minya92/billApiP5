@@ -34,6 +34,16 @@ define('BillApiFunctions', ['logger', 'resource'], function (Logger, Resource, M
                 }catch(e){
                     success(res);
                 }
+//                var result = null;
+//                try{
+//                    result = JSON.parse(res);
+//                    if(result.error)
+//                        fail(result);
+//                    else
+//                        success(result);
+//                }catch(e){
+//                    fail(res);
+//                }
             }, fail);
         };
          
