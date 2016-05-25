@@ -51,6 +51,17 @@ QUnit.test("Создать новый счет", function (assert) {
     });
 });
 
+QUnit.test("Снять с пустого счета 200", function (assert) {
+    var done = assert.async();
+    request("POST", "operations/create", {id: accountId, sum: 200, withdraw: true}, function (res) {
+        assert.ok(res.id, "Operation Processing: " + res.id + errorMsg(res));
+        request("POST", "operations/done", {id: res.id}, function (r) {
+            assert.ok(r.result, "Operation done: " + r.result + errorMsg(r));
+            done();
+        });
+    });
+});
+
 QUnit.test("Пополнить счет на 500", function (assert) {
     var done = assert.async();
     request("POST", "operations/create", {id: accountId, sum: 500}, function (res) {

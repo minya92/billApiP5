@@ -2,7 +2,7 @@
  * 
  * @author User
  */
-define('FirstStep', ['orm', 'forms', 'ui', 'rpc', 'Bill'],
+define('FirstStep', ['orm', 'forms', 'ui', 'rpc', 'Bill'], 
         function (Orm, Forms, Ui, Rpc, Bill, ModuleName) {
             function module_constructor() {
                 var self = this

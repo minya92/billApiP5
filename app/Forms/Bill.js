@@ -48,10 +48,8 @@ define('Bill', ['orm', 'forms', 'ui', 'rpc', 'BillStatistics'], function (Orm, F
                 window.md.alert(msg);
                 billStatistics.setParams(billId);
             };
-            console.log("!!!!!!" + date);
             window.md.confirm(strConfirm + (date.toLocaleDateString ? date.toLocaleDateString() : date), function (answer) {
                 if (answer) {
-                    /*Если тут поменять billId на 555 то пиздец*/
                     BillFunc.request("operations/create", params, function (success_create) {
                         //Выбран пункт "Сегодня"
                         if (form.rbToday.selected) {
