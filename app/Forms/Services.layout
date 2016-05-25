@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><layout title="" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="399px" prefWidth="400px"/>
+  <ToolBar cursor="0" name="toolBar" parent="view" prefHeight="30px" prefWidth="400px">
+    <AnchorsPaneConstraints height="30px" left="0px" right="0px" top="0px"/>
+  </ToolBar>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/add.png" name="btnNewService" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Создать услугу" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/aptana.png" name="btnSettings" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Изменить/Подключить на счёт" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/active.png" name="btnActive" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Активировать/деактивировать услугу" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/delete.png" name="btnDel" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Деактивировать и отписать от всех счетов" verticalTextPosition="3"/>
+  <CheckBox cursor="0" focusable="false" name="cbActive" parent="toolBar" prefHeight="30px" prefWidth="100px" text="Активные"/>
+  <ModelCombo cursor="0" name="modelCombo" parent="toolBar" prefHeight="30px" prefWidth="180px"/>
+</layout>
