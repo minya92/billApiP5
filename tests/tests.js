@@ -16,14 +16,6 @@ function request(httpMethod, apiMethod, params, callback) {
                     response: dat.responseText
                 });
             }
-        },
-        error: function(e){
-            //console.log(e);
-            //callback(e);
-        },
-        success: function (data, textStatus, jqXHR) {
-            //console.log("error " + data);
-            //callback(data);
         }
     });
 }

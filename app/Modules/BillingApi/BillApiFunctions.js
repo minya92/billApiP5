@@ -29,21 +29,16 @@ define('BillApiFunctions', ['logger', 'resource'], function (Logger, Resource, M
 
         self.request = function(apiMethod, params, success, fail){
             Resource.loadText(self.getUrlString(BILL_SERVER_URL+'/application/'+apiMethod, params), function(res){
+                var result = null;
                 try{
-                    success(JSON.parse(res));
+                    result = JSON.parse(res);
+                    if(result.error)
+                        fail(result);
+                    else
+                        success(result);
                 }catch(e){
-                    success(res);
+                    fail(res);
                 }
-//                var result = null;
-//                try{
-//                    result = JSON.parse(res);
-//                    if(result.error)
-//                        fail(result);
-//                    else
-//                        success(result);
-//                }catch(e){
-//                    fail(res);
-//                }
             }, fail);
         };
          

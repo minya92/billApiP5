@@ -26,56 +26,56 @@ define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Mess
                  * @POST /accounts/get_sum
                  * @GET /accounts/get_sum
                  */
-                self.getSumFromAccount = function (aPath, aSuccessCallback) {
+                self.getSumFromAccount = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ['id'], function(params, aHttpContext){
                         accountsModule.getSumFromAccount(params.id, function (res) {
-                            aSuccessCallback(res);
+                            onSucces(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
 
                 /*
                  * @POST /accounts/delete
                  * @GET /accounts/delete
                  */
-                self.delBillAccount = function (aPath, aSuccessCallback, aErrCallback) {
+                self.delBillAccount = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ['id'], function(p, aHttpContext){
                         accountsModule.delAccount(p.id, function (res) {
-                            aSuccessCallback(res);
+                            onSucces(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
                 
                 /*
                  * @POST /accounts/hard_delete
                  * @GET /accounts/hard_delete
                  */
-                self.delAccountHardcore = function (aPath, aSuccessCallback, aErrCallback) {
+                self.delAccountHardcore = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ['id'], function(p, aHttpContext){
                         accountsModule.delAccountHardcore(p.id, function (res) {
-                            aSuccessCallback(res);
+                            onSucces(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
                 
                 /*
                  * @POST /accounts/check_exist_account
                  * @GET /accounts/check_exist_account
                  */
-                self.checkExistAccount = function (aPath, aSuccessCallback, aErrCallback) {
+                self.checkExistAccount = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ['id'], function(p, aHttpContext){
                         accountsModule.checkExistAccount(p.id, function (res) {
-                            aSuccessCallback(res);
+                            onSucces(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
             };
         });
