@@ -56,7 +56,7 @@ QUnit.test("Снять с пустого счета 200", function (assert) {
     request("POST", "operations/create", {id: accountId, sum: 200, withdraw: true}, function (res) {
         assert.ok(res.id, "Operation Processing: " + res.id + errorMsg(res));
         request("POST", "operations/done", {id: res.id}, function (r) {
-            assert.ok(r.result, "Operation done: " + r.result + errorMsg(r));
+            assert.ok(r.error, "Operation done: " + r.result + errorMsg(r));
             done();
         });
     });

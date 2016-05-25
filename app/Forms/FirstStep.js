@@ -2,8 +2,8 @@
  * 
  * @author User
  */
-define('FirstStep', ['orm', 'forms', 'ui', 'rpc', 'Bill'], 
-        function (Orm, Forms, Ui, Rpc, Bill, ModuleName) {
+define('FirstStep', ['orm', 'forms', 'ui', 'rpc', 'Bill', 'Services'],
+        function (Orm, Forms, Ui, Rpc, Bill, Services, ModuleName) {
             function module_constructor() {
                 var self = this
                         , model = Orm.loadModel(ModuleName)
@@ -11,6 +11,7 @@ define('FirstStep', ['orm', 'forms', 'ui', 'rpc', 'Bill'],
 
                 var BillFunc = new Rpc.Proxy('BillApiFunctions');
                 var FormBill = new Bill;
+                var FormServices = new Services;
 
                 self.show = function () {
                     form.show();
@@ -26,7 +27,7 @@ define('FirstStep', ['orm', 'forms', 'ui', 'rpc', 'Bill'],
 
                 form.btnOpenAc.onActionPerformed = function () {
                     BillFunc.checkExistAccount(form.tfRes.text, function (success_chek) {
-                        console.log(success_chek);                        
+                        console.log(success_chek);
                         FormBill.setParams(success_chek.id);
                         FormBill.show();
                     }, function (chek_error) {
@@ -34,6 +35,11 @@ define('FirstStep', ['orm', 'forms', 'ui', 'rpc', 'Bill'],
                         //В 'e' какая то дичь)
                         md.alert("Неверный id счёта!");
                     });
+                };
+
+                form.btnServices.onActionPerformed = function () {
+//                    FormServices.setParams(res.account_id);
+                    FormServices.show();
                 };
 
             }
