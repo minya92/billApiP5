@@ -18,9 +18,9 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                         billServicesModule.CreateService(p.name, p.cost, p.days, p.lock, p.afterMonth, p.prepayment, p.once, p.counts, function (res) {
                             onSucces({service_id: res});
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
 
                 /*
@@ -32,9 +32,9 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                         billServicesModule.ChangeService(p.service_id, p.cost, p.days, p.afterMonth, p.prepayment, p.once, p.counts, function (res) {
                             onSucces({service_id: res});
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
 
                 /*
@@ -46,9 +46,9 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                         billServicesModule.AddServiceOnAccount(p.account_id, p.service_id, function (res) {
                             onSucces(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
 
                 /*
@@ -60,9 +60,9 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                          billServicesModule.DisableService(p.account_id, p.service_id, p.service_account_id, function (res) {
                             onSucces(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);;
                 };
 
                 /*
@@ -74,9 +74,9 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                         billServicesModule.DeleteService(p.service_id, p.unsubscribe, function (res) {
                             onSucces(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
                 
                 /*
@@ -88,9 +88,9 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                         billServicesModule.HardDeleteService(p.service_id, function (res) {
                             onSucces(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
 
                 /*
@@ -102,9 +102,9 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                         billServicesModule.PauseService(p.account_id, p.service_id, p.service_account_id, function (res) {
                             onSucces(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
 
                 /*
@@ -116,9 +116,9 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                         billServicesModule.GetService(p.service_id, function (res) {
                             onSucces(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
 
                 /*
@@ -130,9 +130,9 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                         billServicesModule.GetServiceOnAccount(p.account_id, p.service_id, p.service_account_id, function (res) {
                             onSucces(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
 
                 /*
@@ -144,9 +144,9 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                         billServicesModule.SetCounterService(p.account_id, p.service_id, p.service_account_id, p.count, function (res) {
                             onSucces(res);
                         }, function(err){
-                            libs.setResponseCode(aHttpContext, err);
+                            onSucces(err);
                         });
-                    });
+                    }, onSucces);
                 };
             };
         });
