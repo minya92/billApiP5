@@ -9,10 +9,10 @@
   <Button cursor="0" horizontalTextPosition="0" name="btnOpenAc" parent="view" prefHeight="30px" prefWidth="200px" text="Войти в существующий счёт">
     <AnchorsPaneConstraints height="30px" left="90px" right="90px" top="140px"/>
   </Button>
-  <TextField cursor="0" name="tfRes" parent="view" prefHeight="25px" prefWidth="150px" text="146410025784135">
+  <TextField cursor="0" name="tfRes" parent="view" prefHeight="25px" prefWidth="150px" text="146416040363821">
     <AnchorsPaneConstraints height="25px" left="115px" right="115px" top="200px"/>
   </TextField>
-  <Label cursor="0" horizontalAlignment="0" horizontalTextPosition="0" name="label" parent="view" prefHeight="20px" prefWidth="140px" text="id счёта пиши сюда!">
+  <Label cursor="0" horizontalAlignment="0" horizontalTextPosition="0" name="label" parent="view" prefHeight="20px" prefWidth="140px" text="id счёта пиши сюда! ">
     <AnchorsPaneConstraints height="20px" left="120px" right="120px" top="230px"/>
   </Label>
 </layout>

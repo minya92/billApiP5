@@ -7,7 +7,7 @@ function request(httpMethod, apiMethod, params, callback) {
         data: params,
         type: httpMethod,
         complete: function (dat) {
-//            console.log(dat);
+            //console.log(dat);
             if (dat.responseJSON) {
                 callback(dat.responseJSON);
             } else {
@@ -16,16 +16,17 @@ function request(httpMethod, apiMethod, params, callback) {
                     response: dat.responseText
                 });
             }
+        },
+        error: function(e){
+            //console.log(e);
+            //callback(e);
+        },
+        success: function (data, textStatus, jqXHR) {
+            //console.log("error " + data);
+            //callback(data);
         }
     });
 }
-
-//function request(m, apiMethod, params, callback){
-//    $.get("/bill/application/" + apiMethod, params, function(res){
-//        console.log(res);
-//        callback(res);
-//    });
-//}
 
 function errorMsg(aResult) {
     var res = " ";
@@ -55,6 +56,17 @@ QUnit.test("Создать новый счет", function (assert) {
         assert.ok(res.account_id, "Bill account created: id=" + res.account_id + errorMsg(res));
         accountId = res.account_id;
         done();
+    });
+});
+
+QUnit.test("Снять с пустого счета 200", function (assert) {
+    var done = assert.async();
+    request("POST", "operations/create", {id: accountId, sum: 200, withdraw: true}, function (res) {
+        assert.ok(res.id, "Operation Processing: " + res.id + errorMsg(res));
+        request("POST", "operations/done", {id: res.id}, function (r) {
+            assert.ok(r.result, "Operation done: " + r.result + errorMsg(r));
+            done();
+        });
     });
 });
 
