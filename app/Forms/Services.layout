@@ -1,12 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?><layout title="" view="view">
-  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="399px" prefWidth="400px"/>
-  <ToolBar cursor="0" name="toolBar" parent="view" prefHeight="30px" prefWidth="400px">
+<?xml version="1.0" encoding="UTF-8"?><layout title="Управление услугами" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="399px" prefWidth="533px"/>
+  <ToolBar cursor="0" name="toolBar" parent="view" prefHeight="30px" prefWidth="533px">
     <AnchorsPaneConstraints height="30px" left="0px" right="0px" top="0px"/>
   </ToolBar>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/add.png" name="btnNewService" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Создать услугу" verticalTextPosition="3"/>
-  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/aptana.png" name="btnSettings" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Изменить/Подключить на счёт" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/settings_2.png" name="btnSettings" parent="toolBar" prefHeight="30px" prefWidth="34px" toolTipText="Изменить/Подключить на счёт" verticalTextPosition="3"/>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/active.png" name="btnActive" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Активировать/деактивировать услугу" verticalTextPosition="3"/>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/delete.png" name="btnDel" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Деактивировать и отписать от всех счетов" verticalTextPosition="3"/>
-  <CheckBox cursor="0" focusable="false" name="cbActive" parent="toolBar" prefHeight="30px" prefWidth="100px" text="Активные"/>
-  <ModelCombo cursor="0" name="modelCombo" parent="toolBar" prefHeight="30px" prefWidth="180px"/>
+  <Label cursor="0" name="label" parent="toolBar" prefHeight="30px" prefWidth="20px"/>
+  <CheckBox cursor="0" focusable="false" name="cbActive" parent="toolBar" prefHeight="30px" prefWidth="100px" selected="true" text="Активные" toolTipText="Фильтр"/>
+  <Label cursor="0" name="label1" parent="toolBar" prefHeight="30px" prefWidth="15px"/>
+  <Label cursor="0" name="label2" parent="toolBar" prefHeight="30px" prefWidth="50px" text="Поиск:"/>
+  <ModelFormattedField cursor="0" name="mffSearch" parent="toolBar" prefHeight="30px" prefWidth="210px" toolTipText="Поиск"/>
+  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="modelGrid" parent="view" prefHeight="369px" prefWidth="533px" toolTipText="Список услуг">
+    <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="30px"/>
+    <ModelGridColumn name="colName" preferredWidth="80px" title="Имя услуги" width="144px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colType" preferredWidth="70px" title="Тип" width="133px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
+    <CheckGridColumn maxWidth="100px" minWidth="75px" name="colChekPrepay" preferredWidth="80px" title="Предоплата"/>
+    <ModelGridColumn name="colCost" preferredWidth="60px" title="Стоимость" width="124px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
+    <CheckGridColumn maxWidth="75px" minWidth="50px" name="colActive" preferredWidth="50px" title="Активна"/>
+  </ModelGrid>
 </layout>
