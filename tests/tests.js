@@ -243,7 +243,6 @@ QUnit.test("Подключить услугу c предоплатой на сч
 QUnit.test("Все услуги на счету", function (assert) {
     var done = assert.async();
     request("POST", "services/on_account", {account_id: accountId}, function (res) {
-        console.log(res);
         assert.equal(res.result.length, 3, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
         done();
     });
@@ -299,11 +298,22 @@ QUnit.test("Приостановить обычную услугу со счет
     });
 });
 
-QUnit.test( "Удалить обычную услугу (не получится, она подключена на счет)", function( assert ) {
+QUnit.test( "Удалить обычную услугу (получится, хотя она подключена на счет)", function( assert ) {
     var done = assert.async();
     request("POST", "services/delete", {service_id: serviceId}, function(res){
-        assert.ok( res.error , "Message: " + res.result + errorMsg(res));
-        done();
+        assert.ok(res.result , "Удаление услуги. Message: " + res.result + errorMsg(res));
+        request("POST", "services/on_account", {account_id: accountId}, function (res) {
+            assert.equal(res.result.length, 3, "Сколько услуг на аккаунте: " + JSON.stringify(res.result) + errorMsg(res));
+            request("POST", "services/get", {}, function (res) {
+                var match = false;
+                for(var i in res.services){
+                    if(res.services[i].bill_services_id == serviceId)
+                        match = true;
+                }
+                assert.notOk(match, "Есть ли удаленная услуга в общем списке: " + JSON.stringify(res.services) + errorMsg(res));
+                done();
+            });
+        });
     });
 });
 
@@ -311,14 +321,6 @@ QUnit.test("Отключить обычную услугу со счета", fun
     var done = assert.async();
     request("POST", "services/disable", {service_id: serviceId, account_id: accountId}, function (res) {
         assert.ok(res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
-        done();
-    });
-});
-
-QUnit.test( "Удалить обычную услугу", function( assert ) {
-    var done = assert.async();
-    request("POST", "services/delete", {service_id: serviceId}, function(res){
-        assert.ok(res.result , "Message: " + res.result + errorMsg(res));
         done();
     });
 });

@@ -225,7 +225,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
 
                 /*
                  * Удалить услугу (сдалать неактивной) 
-                 * unsubscrible - сначала отключить ее у всех пользователей (если нет, не удалится)
+                 * unsubscrible - сначала отключить ее у всех пользователей
                  */
                 self.DeleteService = function (aServiceId, unsubscribe, aCallback, aErrCallback) {
                     function delService() {
@@ -260,7 +260,8 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                                         aErrCallback({error: res.error});
                                 });
                             } else {
-                                aErrCallback({error: msg.get('errDeleteService'), accounts: model.qAddService});
+                                //aErrCallback({error: msg.get('errDeleteService'), accounts: model.qAddService});
+                                delService();
                             }
                         } else {
                             delService();
