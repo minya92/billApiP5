@@ -24,6 +24,6 @@
     <ModelGridColumn name="colCost" preferredWidth="60px" title="Стоимость" width="124px">
       <ModelFormattedField/>
     </ModelGridColumn>
-    <CheckGridColumn maxWidth="75px" minWidth="50px" name="colActive" preferredWidth="50px" title="Активна"/>
+    <CheckGridColumn maxWidth="75px" minWidth="50px" name="colActive" preferredWidth="50px" resizable="true" title="Активна"/>
   </ModelGrid>
 </layout>
