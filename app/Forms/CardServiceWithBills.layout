@@ -3,10 +3,10 @@
   <TabbedPane cursor="0" name="tabbedPane" parent="view" prefHeight="359px" prefWidth="400px">
     <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="0px"/>
   </TabbedPane>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseCard" parent="tabbedPane" prefHeight="331px" prefWidth="395px">
-    <TabbedPaneConstraints tabTitle="Карточка услуги"/>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseCard" parent="tabbedPane" prefHeight="329px" prefWidth="395px">
+    <TabbedPaneConstraints tabIcon="icons/16x16/edit2.png" tabTitle="Карточка услуги" tabToolTip="Просмотр и изменение информации об услуге"/>
   </AnchorsPane>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseWithBill" parent="tabbedPane" prefHeight="331px" prefWidth="395px" visible="false">
-    <TabbedPaneConstraints tabTitle="Подключенные счета"/>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseWithBill" parent="tabbedPane" prefHeight="329px" prefWidth="395px" visible="false">
+    <TabbedPaneConstraints tabIcon="icons/16x16/bill.png" tabTitle="Подключенные счета" tabToolTip="Управление счетами/Добавление услуги на счёт"/>
   </AnchorsPane>
 </layout>

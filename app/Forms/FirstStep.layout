@@ -15,7 +15,7 @@
   <Label cursor="0" horizontalAlignment="0" horizontalTextPosition="0" name="label" parent="view" prefHeight="20px" prefWidth="140px" text="id счёта пиши сюда! ">
     <AnchorsPaneConstraints height="20px" left="120px" right="120px" top="230px"/>
   </Label>
-  <Button cursor="0" horizontalTextPosition="0" name="btnServices" parent="view" prefHeight="30px" prefWidth="150px" text="Услуги">
-    <AnchorsPaneConstraints height="30px" left="115px" top="280px" width="150px"/>
+  <Button cursor="0" horizontalTextPosition="0" name="btnServices" parent="view" prefHeight="35px" prefWidth="150px" text="Услуги">
+    <AnchorsPaneConstraints height="35px" left="115px" top="280px" width="150px"/>
   </Button>
 </layout>

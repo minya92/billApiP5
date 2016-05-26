@@ -4,7 +4,7 @@
     <AnchorsPaneConstraints height="30px" left="0px" right="0px" top="0px"/>
   </ToolBar>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/add.png" name="btnNewService" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Создать услугу" verticalTextPosition="3"/>
-  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/settings_2.png" name="btnSettings" parent="toolBar" prefHeight="30px" prefWidth="34px" toolTipText="Изменить/Подключить на счёт" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/32x32/settings_2.png" name="btnSettings" parent="toolBar" prefHeight="30px" prefWidth="34px" toolTipText="Изменить/Подключить на счёт" verticalTextPosition="3"/>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/active.png" name="btnActive" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Активировать/деактивировать услугу" verticalTextPosition="3"/>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/delete.png" name="btnDel" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Деактивировать и отписать от всех счетов" verticalTextPosition="3"/>
   <Label cursor="0" name="label" parent="toolBar" prefHeight="30px" prefWidth="20px"/>

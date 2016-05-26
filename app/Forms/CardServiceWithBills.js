@@ -12,12 +12,9 @@ define('CardServiceWithBills', ['orm', 'forms', 'ui'], function (Orm, Forms, Ui,
             form.show();
         };
         
-        // TODO : place your code here
-        
-        model.requery(function () {
-            // TODO : place your code here
-        });
-        
+        self.showModal = function(callback) {
+           form.showModal(callback);
+       };        
     }
     return module_constructor;
 });

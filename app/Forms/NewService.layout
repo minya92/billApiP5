@@ -31,8 +31,8 @@
   <Label cursor="0" enabled="false" name="lbDays" parent="view" prefHeight="25px" prefWidth="40px" text="дней">
     <AnchorsPaneConstraints height="25px" left="340px" top="160px" width="40px"/>
   </Label>
-  <ModelCheckBox cursor="0" enabled="false" name="mcbCounter" nullable="false" parent="view" prefHeight="25px" prefWidth="90px" text="Счётчик:" toolTipText="Пакет услуг">
-    <AnchorsPaneConstraints height="25px" left="10px" top="210px" width="90px"/>
+  <ModelCheckBox cursor="0" enabled="false" name="mcbCounter" nullable="false" parent="view" prefHeight="25px" prefWidth="80px" text="Счётчик:" toolTipText="Пакет услуг">
+    <AnchorsPaneConstraints height="25px" left="10px" top="210px" width="80px"/>
   </ModelCheckBox>
   <ModelFormattedField cursor="0" enabled="false" name="mffCounter" nullable="false" parent="view" prefHeight="25px" prefWidth="50px">
     <AnchorsPaneConstraints height="25px" left="100px" top="210px" width="50px"/>
