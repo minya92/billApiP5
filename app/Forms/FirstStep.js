@@ -38,7 +38,7 @@ define('FirstStep', ['orm', 'forms', 'ui', 'rpc', 'Bill', 'Services'],
                 };
 
                 form.btnServices.onActionPerformed = function () {
-//                    FormServices.setParams(res.account_id);
+                    FormServices.setParams();
                     FormServices.show();
                 };
 

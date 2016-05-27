@@ -1,12 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?><layout title="Управление услугой:" view="view">
-  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="359px" prefWidth="400px"/>
-  <TabbedPane cursor="0" name="tabbedPane" parent="view" prefHeight="359px" prefWidth="400px">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="389px" prefWidth="405px"/>
+  <TabbedPane cursor="0" name="tabbedPane" parent="view" prefHeight="389px" prefWidth="405px">
     <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="0px"/>
   </TabbedPane>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseCard" parent="tabbedPane" prefHeight="329px" prefWidth="395px">
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseCard" parent="tabbedPane" prefHeight="359px" prefWidth="400px">
     <TabbedPaneConstraints tabIcon="icons/16x16/edit2.png" tabTitle="Карточка услуги" tabToolTip="Просмотр и изменение информации об услуге"/>
   </AnchorsPane>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseWithBill" parent="tabbedPane" prefHeight="329px" prefWidth="395px" visible="false">
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseWithBill" parent="tabbedPane" prefHeight="359px" prefWidth="400px" visible="false">
     <TabbedPaneConstraints tabIcon="icons/16x16/bill.png" tabTitle="Подключенные счета" tabToolTip="Управление счетами/Добавление услуги на счёт"/>
   </AnchorsPane>
+  <ToolBar cursor="0" name="toolBar" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="140px">
+    <AnchorsPaneConstraints height="30px" left="0px" right="260px" top="0px"/>
+  </ToolBar>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/folder/users-add.png" name="btnAddBill" parent="toolBar" prefHeight="30px" prefWidth="32px" toolTipText="Добавить услугу на счёт" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/media-playback-pause.png" name="btnPause" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Приостановить услугу на счету" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/delete.png" name="btnDel" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Безвозвратно удалить услугу со счёта" verticalTextPosition="3"/>
+  <Label cursor="0" horizontalAlignment="4" name="lbSearch" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="67px" text="Поиск: ">
+    <AnchorsPaneConstraints height="30px" left="140px" top="0px" width="67px"/>
+  </Label>
+  <ModelFormattedField cursor="0" name="mffSearch" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="185px" toolTipText="Поиск по ID">
+    <AnchorsPaneConstraints height="30px" left="215px" right="0px" top="0px"/>
+  </ModelFormattedField>
+  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgBillsOnService" parent="pnlServiseWithBill" prefHeight="329px" prefWidth="400px">
+    <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="30px"/>
+    <ModelGridColumn name="colBillId" preferredWidth="80px" title="ID счета" width="102px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colMoney" preferredWidth="65px" title="Сумма на счету (руб)" width="87px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colCount" preferredWidth="50px" title="Остаток" width="72px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colDate" preferredWidth="65px" title="Дата списания" width="87px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
+    <CheckGridColumn maxWidth="110px" name="colPause" preferredWidth="50px" title="Приостановлен"/>
+  </ModelGrid>
 </layout>

@@ -12,18 +12,22 @@
   <Label cursor="0" name="label1" parent="toolBar" prefHeight="30px" prefWidth="15px"/>
   <Label cursor="0" name="label2" parent="toolBar" prefHeight="30px" prefWidth="50px" text="Поиск:"/>
   <ModelFormattedField cursor="0" name="mffSearch" parent="toolBar" prefHeight="30px" prefWidth="210px" toolTipText="Поиск"/>
-  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="modelGrid" parent="view" prefHeight="369px" prefWidth="533px" toolTipText="Список услуг">
+  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgServises" parent="view" prefHeight="369px" prefWidth="533px" toolTipText="Список услуг">
     <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="30px"/>
-    <ModelGridColumn name="colName" preferredWidth="80px" title="Имя услуги" width="144px">
+    <ModelGridColumn minWidth="105px" name="colName" preferredWidth="110px" title="Имя услуги" width="173px">
       <ModelFormattedField/>
     </ModelGridColumn>
-    <ModelGridColumn name="colType" preferredWidth="70px" title="Тип" width="133px">
+    <ModelGridColumn minWidth="70px" name="colType" preferredWidth="85px" title="Тип" width="148px">
       <ModelFormattedField/>
     </ModelGridColumn>
-    <CheckGridColumn maxWidth="100px" minWidth="75px" name="colChekPrepay" preferredWidth="80px" title="Предоплата"/>
-    <ModelGridColumn name="colCost" preferredWidth="60px" title="Стоимость" width="124px">
+    <ModelGridColumn maxWidth="100px" minWidth="50px" name="colChekPrepay" preferredWidth="55px" title="Предоплата" width="55px">
+      <ModelCheckBox nullable="false"/>
+    </ModelGridColumn>
+    <ModelGridColumn minWidth="50px" name="colCost" preferredWidth="52px" title="Стоимость" width="115px">
       <ModelFormattedField/>
     </ModelGridColumn>
-    <CheckGridColumn maxWidth="75px" minWidth="50px" name="colActive" preferredWidth="50px" resizable="true" title="Активна"/>
+    <ModelGridColumn maxWidth="75px" minWidth="35px" name="colActive" preferredWidth="40px" title="Активна" width="40px">
+      <ModelCheckBox nullable="false"/>
+    </ModelGridColumn>
   </ModelGrid>
 </layout>
