@@ -15,9 +15,10 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                  * @param {type} aCallBack
                  * @returns {undefined}
                  */
-                self.GetService = function (aServiceId, aCallBack, aErrCallback) {
+                self.GetService = function (aServiceId, aDeleted, aCallBack, aErrCallback) {
                     aServiceId = aServiceId ? +aServiceId : null;
                     model.qServiceList.params.service_id = aServiceId;
+                    model.qServiceList.params.deleted = aDeleted ? true : false;
                     model.qServiceList.requery(function () {
                         if (model.qServiceList.length) {
                             aCallBack({services: model.qServiceList});
@@ -268,6 +269,22 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                         }
                     }, function(){
                         aErrCallback({error: msg.get('errQuery')});
+                    });
+                };
+                
+                self.EnableService = function(aServiceId, aCallback, aErrCallback){
+                    model.qDelService.params.service_id = +aServiceId;
+                    model.qDelService.requery(function () {
+                        if (model.qDelService.length) {
+                            model.qDelService[0].deleted = false;
+                            model.save(function(){
+                                aCallback({result: "ok"});
+                            }, function(){
+                                aErrCallback({error: msg.get('errSaving')});
+                            });
+                        } else {
+                            aErrCallback({error: msg.get('errFindService')});
+                        }
                     });
                 };
                 

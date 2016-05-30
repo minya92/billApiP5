@@ -317,11 +317,21 @@ QUnit.test( "Удалить обычную услугу (получится, х�
     });
 });
 
-QUnit.test("Отключить обычную услугу со счета", function (assert) {
+QUnit.test("Вернуть услуге активность после удаления", function (assert) {
     var done = assert.async();
-    request("POST", "services/disable", {service_id: serviceId, account_id: accountId}, function (res) {
+    request("POST", "services/enable", {service_id: serviceId}, function (res) {
         assert.ok(res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
         done();
+    });
+});
+
+QUnit.test("Отключить обычную услугу со счета", function (assert) {
+    var done = assert.async();
+    request("POST", "services/delete", {service_id: serviceId}, function(res){
+        request("POST", "services/disable", {service_id: serviceId, account_id: accountId}, function (res) {
+            assert.ok(res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
+            done();
+        });
     });
 });
 

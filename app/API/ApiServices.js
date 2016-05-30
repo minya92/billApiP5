@@ -79,6 +79,20 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                     }, onSucces);
                 };
                 
+                 /*
+                 * @POST /services/enable
+                 * @GET /services/enable
+                 */
+                self.enableService = function (aPath, onSucces) {
+                    libs.checkRequiredParams((new HttpContext()), ["service_id"], function(p, aHttpContext){
+                        billServicesModule.EnableService(p.service_id, function (res) {
+                            onSucces(res);
+                        }, function(err){
+                            onSucces(err);
+                        });
+                    }, onSucces);
+                };
+                
                 /*
                  * @POST /services/hard_delete
                  * @GET /services/hard_delete
@@ -106,14 +120,14 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                         });
                     }, onSucces);
                 };
-
+ 
                 /*
                  * @POST /services/get
                  * @GET /services/get
                  */
                 self.servicesGet = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), [], function(p, aHttpContext){
-                        billServicesModule.GetService(p.service_id, function (res) {
+                        billServicesModule.GetService(p.service_id, p.deleted, function (res) {
                             onSucces(res);
                         }, function(err){
                             onSucces(err);

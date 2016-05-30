@@ -12,6 +12,7 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                 var BillFunc = new Rpc.Proxy('BillApiFunctions');
                 var FormNewService = new NewService;
                 var FormCardServiceWithBills = new CardServiceWithBills;
+                var Delete = null;
 
                 self.show = function () {
                     form.show();
@@ -21,33 +22,14 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                     Request();
                 };
 
-//                function RequeryAnimate(aGrid, aQuery) {
-//                    var parent = aGrid.parent;
-//                    var lbLoad = new P.Label('null');
-//                    P.Icon.load('icons/loading5.gif', function (data) {
-//                        lbLoad.icon = data;
-//                        lbLoad.text = null;
-//
-//                        var w = Math.round(parent.width / 2 - 100);
-//                        var h = Math.round(parent.height / 2 - 100);
-//                        parent.add(lbLoad, new P.Anchors(w, 200, w, h, 200, h));
-//
-//                        aGrid.visible = false;
-//
-//                        aQuery.requery(function () {
-//                            aGrid.visible = true;
-//                            parent.remove(lbLoad);
-//                        });
-//                    });
-//                }
-
                 function Request() {
-//                    RequeryAnimate(form.mgServises, aQuery)
-
-
-
-                    BillFunc.request("services/get", {}, function (success_get) {
+                    BillFunc.request("services/get", {deleted: Delete ? Delete : null}, function (success_get) {
                         console.log(success_get);
+
+                        if (form.lbWating.visible == true) {
+                            form.mgServises.visible = true;
+                            form.lbWating.visible = false;
+                        }
 
                         form.mgServises.data = success_get.services;
                         form.mgServises.colName.field = 'service_name';
@@ -69,9 +51,71 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
 
                     }, function (get_error) {
                         console.log(get_error);
+                        if (form.lbWating.visible == true) {
+                            form.mgServises.visible = true;
+                            form.lbWating.visible = false;
+                        }
                         md.alert("Ошибка получения списка услуг");
                     });
                 }
+
+                form.btnActive.onActionPerformed = function () {
+                    if (!form.mgServises.selected[0])
+                        md.alert("Выберите услугу!");
+                    else {
+                        if (form.mgServises.selected[0].active == true) {
+                            form.mgServises.selected[0].active = false;
+                            DeleteRequest();
+
+                        } else {
+                            form.mgServises.selected[0].active = true;
+                            EnableRequest();
+                        }
+
+                    }
+                };
+
+                form.cbActive.onValueChange = function () {
+                    if (form.cbActive.selected == true) {
+                        Delete = null;
+                        Request();
+                    } else {
+                        Delete = true;
+                        Request();
+                    }
+                };
+
+                form.mgServises.onItemSelected = function (e) {
+                    window.e = e;
+                    console.log(e);
+                    if (e.item.deleted == e.item.active)
+                        if (e.item.active)
+                            EnableRequest;
+                        else
+                            DeleteRequest;
+                };
+
+                DeleteRequest = function () {
+                    BillFunc.request("services/delete", {service_id: form.mgServises.selected[0].service_id}, function (success_del) {
+                        console.log(success_del);
+                        Request();
+                    }, function (error_del) {
+                        console.log(error_del);
+                        md.alert("Ошибка удаления услуги!");
+                        form.mgServises.selected[0].active = !form.mgServises.selected[0].active;
+                    });
+                };
+
+                EnableRequest = function () {
+                    BillFunc.request("services/enable", {service_id: form.mgServises.selected[0].service_id}, function (success_enabled) {
+                        console.log(success_enabled);
+                        Request();
+                    }, function (error_enabled) {
+                        console.log(error_enabled);
+                        md.alert("Ошибка изменения активности услуги!");
+                        form.mgServises.selected[0].active = !form.mgServises.selected[0].active;
+                    });
+                };
 
                 form.btnNewService.onActionPerformed = function () {
 //            FormNewService.setParams(res.account_id);
@@ -82,17 +126,6 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
 //            FormCardServiceWithBills.setParams(res.account_id);
                     FormCardServiceWithBills.showModal();
                 };
-
-                form.btnActive.onActionPerformed = function () {
-//                    console.log(form.mgServises.selected[0] ? form.mgServises.selected[0].active : "Выберите услугу!");
-
-//                    if (form.mgServises.selected[0].active == true)
-//                        form.mgServises.selected[0].active = false;
-
-////                    del.qItemTypesList.remove(form.modelGrid.selected[0] ? form.modelGrid.selected : [model.qItemTypesList.cursor]);
-////                    request("POST", "services/delete", {service_id: serviceId}, function(res){
-                };
-
             }
             return module_constructor;
         });

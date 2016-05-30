@@ -12,18 +12,21 @@
   <Label cursor="0" name="label1" parent="toolBar" prefHeight="30px" prefWidth="15px"/>
   <Label cursor="0" name="label2" parent="toolBar" prefHeight="30px" prefWidth="50px" text="Поиск:"/>
   <ModelFormattedField cursor="0" name="mffSearch" parent="toolBar" prefHeight="30px" prefWidth="210px" toolTipText="Поиск"/>
-  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgServises" parent="view" prefHeight="369px" prefWidth="533px" toolTipText="Список услуг">
+  <Label cursor="0" icon="https://raw.githubusercontent.com/AlexeyKashintsev/Clinic/p5/app/icons/loading5.gif" name="lbWating" parent="view" prefHeight="200px" prefWidth="200px">
+    <AnchorsPaneConstraints height="200px" left="166px" top="115px" width="200px"/>
+  </Label>
+  <ModelGrid cursor="0" deletable="false" insertable="false" name="mgServises" parent="view" prefHeight="369px" prefWidth="533px" toolTipText="Список услуг" visible="false">
     <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="30px"/>
-    <ModelGridColumn minWidth="105px" name="colName" preferredWidth="110px" title="Имя услуги" width="173px">
+    <ModelGridColumn minWidth="105px" name="colName" preferredWidth="110px" readonly="true" title="Имя услуги" width="173px">
       <ModelFormattedField/>
     </ModelGridColumn>
-    <ModelGridColumn minWidth="70px" name="colType" preferredWidth="85px" title="Тип" width="148px">
+    <ModelGridColumn minWidth="70px" name="colType" preferredWidth="85px" readonly="true" title="Тип" width="148px">
       <ModelFormattedField/>
     </ModelGridColumn>
-    <ModelGridColumn maxWidth="100px" minWidth="50px" name="colChekPrepay" preferredWidth="55px" title="Предоплата" width="55px">
+    <ModelGridColumn maxWidth="100px" minWidth="50px" name="colChekPrepay" preferredWidth="55px" readonly="true" title="Предоплата" width="55px">
       <ModelCheckBox nullable="false"/>
     </ModelGridColumn>
-    <ModelGridColumn minWidth="50px" name="colCost" preferredWidth="52px" title="Стоимость" width="115px">
+    <ModelGridColumn minWidth="50px" name="colCost" preferredWidth="52px" readonly="true" title="Стоимость" width="115px">
       <ModelFormattedField/>
     </ModelGridColumn>
     <ModelGridColumn maxWidth="75px" minWidth="35px" name="colActive" preferredWidth="40px" title="Активна" width="40px">
