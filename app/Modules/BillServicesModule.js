@@ -400,8 +400,10 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                     });
                 };
                 
+                model.qBillServicesTypes.requery();
+                
                  /*
-                 * Получить все типы операций
+                 * Получить все типы услуг
                  */
                 self.getAllServicesTypes = function(aCallback, aErrCallback){
                     if(model.qBillServicesTypes.length)

@@ -3,122 +3,135 @@
  * @author User
  */
 define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 'rpc'],
-    function (Orm, Forms, Ui, NewService, CardServiceWithBills, Rpc, ModuleName) {
-        function module_constructor() {
-            var self = this
-                    , model = Orm.loadModel(ModuleName)
-                    , form = Forms.loadForm(ModuleName, model);
+        function (Orm, Forms, Ui, NewService, CardServiceWithBills, Rpc, ModuleName) {
+            function module_constructor() {
+                var self = this
+                        , model = Orm.loadModel(ModuleName)
+                        , form = Forms.loadForm(ModuleName, model);
 
-            var BillFunc = new Rpc.Proxy('BillApiFunctions');
-            var FormNewService = new NewService;
-            var FormCardServiceWithBills = new CardServiceWithBills;
-            var Delete = null;
+                var BillFunc = new Rpc.Proxy('BillApiFunctions');
+                var FormNewService = new NewService;
+                var FormCardServiceWithBills = new CardServiceWithBills;
+                var Delete = null;
+                var ListOfTypes;
 
-            self.show = function () {
-                form.show();
-            };
+                self.show = function () {
+                    form.show();
+                };
 
-            self.setParams = function () {
-                Request();
-            };
-            
-            //Запрос данных грида
-            function Request() {
-                BillFunc.request("services/get", {deleted: Delete ? Delete : null}, function (success_get) {
-                    console.log(success_get);
+                self.setParams = function () {
+                    form.lbWating.visible = true;
+                    BillFunc.request("services/get_types", {}, function (success_getTypes) {
+                        console.log(success_getTypes);
+                        ListOfTypes = success_getTypes;
+                        Request();
+                    }, function (error_getTypes) {
+                        console.log(error_getTypes);
+                        if (form.lbWating.visible == true) {
+                            form.mgServises.visible = true;
+                            form.lbWating.visible = false;
+                        }
+                        md.alert("Ошибка получения типов!");
+                    });
+                };
 
-                    if (form.lbWating.visible == true) {
-                        form.mgServises.visible = true;
-                        form.lbWating.visible = false;
-                    }
+                //Запрос данных грида
+                function Request() {
+                    BillFunc.request("services/get", {deleted: Delete ? Delete : null}, function (success_get) {
+                        console.log(success_get);
 
-                    form.mgServises.data = success_get.services;
-                    form.mgServises.colName.field = 'service_name';
-                    form.mgServises.colType.field = 'service_type_id';
-                    form.mgServises.colChekPrepay.field = 'prepayment';
-                    form.mgServises.colCost.field = 'service_cost';
+                        if (form.lbWating.visible == true) {
+                            form.mgServises.visible = true;
+                            form.lbWating.visible = false;
+                        }
 
-                    for (var i = 0; i < success_get.services.length; i++) {
-                        success_get.services[i].active = !success_get.services[i].deleted;
+                        form.mgServises.data = success_get.services;
+                        form.mgServises.colName.field = 'service_name';                        
+                        form.mgServises.colChekPrepay.field = 'prepayment';
+                        form.mgServises.colCost.field = 'service_cost';
 
-////                            for (var k = 0; k < succ_getType.types.length; k++) {
-////                                if (succ_getType.types[k].bill_operations_type_id == success_get.services[i].service_type_id) {
-////                                    success_get.services[i].service_type = succ_getType.types[k].type_name;
-////                                    break;
-////                                }
-////                            }
-                    }
-                    form.mgServises.colActive.field = 'active';
+                        for (var i = 0; i < success_get.services.length; i++) {
+                            success_get.services[i].active = !success_get.services[i].deleted;
 
-                }, function (get_error) {
-                    console.log(get_error);
-                    if (form.lbWating.visible == true) {
-                        form.mgServises.visible = true;
-                        form.lbWating.visible = false;
-                    }
-                    md.alert("Ошибка получения списка услуг");
-                });
-            }
-            
-            //Активировать/Деактивировать услугу
-            form.btnActive.onActionPerformed = function () {
-                if (!form.mgServises.selected[0])
-                    md.alert("Выберите услугу!");
-                else {
-                    if (form.mgServises.selected[0].active == true) {
-                        form.mgServises.selected[0].active = false;
-                        DeleteRequest();
+                            for (var k = 0; k < ListOfTypes.length; k++) {
+                                if (ListOfTypes[k].bill_services_types_id == success_get.services[i].service_type_id) {
+                                    success_get.services[i].service_type = ListOfTypes[k].type_name;
+                                    break;
+                                }
+                            }
+                        }
+                        form.mgServises.colType.field = 'service_type';
+                        form.mgServises.colActive.field = 'active';
 
-                    } else {
-                        form.mgServises.selected[0].active = true;
-                        EnableRequest();
-                    }
-
+                    }, function (get_error) {
+                        console.log(get_error);
+                        if (form.lbWating.visible == true) {
+                            form.mgServises.visible = true;
+                            form.lbWating.visible = false;
+                        }
+                        md.alert("Ошибка получения списка услуг");
+                    });
                 }
-            };
-            
-            //Дезактивация услуги и удаление со счетов
-            form.btnDel.onActionPerformed = function () {
-                if (!form.mgServises.selected[0])
-                    md.alert("Выберите услугу!");
-                else {
-                    if (form.mgServises.selected[0].active == true) {
-                        md.confirm("Вы уверены что хотите сделать услугу неактивной и отписать её от всех счетов? Действие необратимо!"
-                                , function (res) {
-                                    if (res) {
-                                        form.mgServises.selected[0].active = false;
-                                        DeleteRequest(true);
-                                    }
-                                });
-                    } else {
-                        md.confirm("Услуга не активна! Отписать её от всех счетов? Действие необратимо!"
-                                , function (res) {
-                                    if (res) {
-                                        BillFunc.request("services/enable", {service_id: form.mgServises.selected[0].service_id}, function (success_enabled) {
-                                            console.log(success_enabled);
+
+                //Активировать/Деактивировать услугу
+                form.btnActive.onActionPerformed = function () {
+                    if (!form.mgServises.selected[0])
+                        md.alert("Выберите услугу!");
+                    else {
+                        if (form.mgServises.selected[0].active == true) {
+                            form.mgServises.selected[0].active = false;
+                            DeleteRequest();
+
+                        } else {
+                            form.mgServises.selected[0].active = true;
+                            EnableRequest();
+                        }
+
+                    }
+                };
+
+                //Дезактивация услуги и удаление со счетов
+                form.btnDel.onActionPerformed = function () {
+                    if (!form.mgServises.selected[0])
+                        md.alert("Выберите услугу!");
+                    else {
+                        if (form.mgServises.selected[0].active == true) {
+                            md.confirm("Вы уверены что хотите сделать услугу неактивной и отписать её от всех счетов? Действие необратимо!"
+                                    , function (res) {
+                                        if (res) {
+                                            form.mgServises.selected[0].active = false;
                                             DeleteRequest(true);
-                                        }, function (error_enabled) {
-                                            console.log(error_enabled);
-                                            md.alert("Ошибка изменения активности услуги!");
-                                            form.mgServises.selected[0].active = !form.mgServises.selected[0].active;
-                                        });
-                                    }
-                                });
-                    }
+                                        }
+                                    });
+                        } else {
+                            md.confirm("Услуга не активна! Отписать её от всех счетов? Действие необратимо!"
+                                    , function (res) {
+                                        if (res) {
+                                            BillFunc.request("services/enable", {service_id: form.mgServises.selected[0].service_id}, function (success_enabled) {
+                                                console.log(success_enabled);
+                                                DeleteRequest(true);
+                                            }, function (error_enabled) {
+                                                console.log(error_enabled);
+                                                md.alert("Ошибка изменения активности услуги!");
+                                                form.mgServises.selected[0].active = !form.mgServises.selected[0].active;
+                                            });
+                                        }
+                                    });
+                        }
 
-                }
-            };
-            
-            //Фильтр активных услуг
-            form.cbActive.onValueChange = function () {
-                if (form.cbActive.selected == true) {
-                    Delete = null;
-                    Request();
-                } else {
-                    Delete = true;
-                    Request();
-                }
-            };
+                    }
+                };
+
+                //Фильтр активных услуг
+                form.cbActive.onValueChange = function () {
+                    if (form.cbActive.selected == true) {
+                        Delete = null;
+                        Request();
+                    } else {
+                        Delete = true;
+                        Request();
+                    }
+                };
 
 //                //Нажатие галки в столбце активна - не работает
 //                form.mgServises.onItemSelected = function (e) {
@@ -131,42 +144,53 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
 //                            DeleteRequest;
 //                };
 
-            //Запрос на удаление (Деактивацию)
-            DeleteRequest = function (aUnsubscribe) {
-                BillFunc.request("services/delete", {service_id: form.mgServises.selected[0].service_id,
-                    unsubscribe: aUnsubscribe ? !!aUnsubscribe : null}, function (success_del) {
-                    console.log(success_del);
-                    Request();
-                }, function (error_del) {
-                    console.log(error_del);
-                    md.alert("Ошибка удаления услуги!");
-                    form.mgServises.selected[0].active = !form.mgServises.selected[0].active;
-                });
-            };
+//                //Запрос списка типов
+//                GetListOfTypes = function () {
+//                    BillFunc.request("services/get_types", {}, function (success_getTypes) {
+//                        console.log(success_getTypes);
+////                    Request();
+//                    }, function (error_getTypes) {
+//                        console.log(error_getTypes);
+//                        md.alert("Ошибка получения типов!");
+//                    });
+//                };
 
-            //Запрос на Активацию
-            EnableRequest = function () {
-                BillFunc.request("services/enable", {service_id: form.mgServises.selected[0].service_id}, function (success_enabled) {
-                    console.log(success_enabled);
-                    Request();
-                }, function (error_enabled) {
-                    console.log(error_enabled);
-                    md.alert("Ошибка изменения активности услуги!");
-                    form.mgServises.selected[0].active = !form.mgServises.selected[0].active;
-                });
-            };
-            
-            //Создание услуги
-            form.btnNewService.onActionPerformed = function () {
+                //Запрос на удаление (Деактивацию)
+                DeleteRequest = function (aUnsubscribe) {
+                    BillFunc.request("services/delete", {service_id: form.mgServises.selected[0].service_id,
+                        unsubscribe: aUnsubscribe ? !!aUnsubscribe : null}, function (success_del) {
+                        console.log(success_del);
+                        Request();
+                    }, function (error_del) {
+                        console.log(error_del);
+                        md.alert("Ошибка удаления услуги!");
+                        form.mgServises.selected[0].active = !form.mgServises.selected[0].active;
+                    });
+                };
+
+                //Запрос на Активацию
+                EnableRequest = function () {
+                    BillFunc.request("services/enable", {service_id: form.mgServises.selected[0].service_id}, function (success_enabled) {
+                        console.log(success_enabled);
+                        Request();
+                    }, function (error_enabled) {
+                        console.log(error_enabled);
+                        md.alert("Ошибка изменения активности услуги!");
+                        form.mgServises.selected[0].active = !form.mgServises.selected[0].active;
+                    });
+                };
+
+                //Создание услуги
+                form.btnNewService.onActionPerformed = function () {
 //            FormNewService.setParams(res.account_id);
-                FormNewService.showModal();
-            };
-            
-            //Настройка услуги
-            form.btnSettings.onActionPerformed = function () {
+                    FormNewService.showModal();
+                };
+
+                //Настройка услуги
+                form.btnSettings.onActionPerformed = function () {
 //            FormCardServiceWithBills.setParams(res.account_id);
-                FormCardServiceWithBills.showModal();
-            };
-        }
-        return module_constructor;
-    });
+                    FormCardServiceWithBills.showModal();
+                };
+            }
+            return module_constructor;
+        });
