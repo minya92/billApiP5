@@ -25,7 +25,7 @@
   <RadioButton buttonGroup="buttonGroup" cursor="0" name="rbDate" parent="pnlOperations" prefHeight="30px" prefWidth="230px" text="Запланировать операцию на срок:">
     <AnchorsPaneConstraints height="30px" left="127px" top="70px" width="230px"/>
   </RadioButton>
-  <Button cursor="0" enabled="false" icon="icons/22x22/dialog-apply.png" name="btnExecute" parent="pnlOperations" prefHeight="32px" prefWidth="335px" text="Провести операцию">
+  <Button cursor="0" enabled="false" icon="icons/Ok.Cancel/apply4.png" name="btnExecute" parent="pnlOperations" prefHeight="32px" prefWidth="335px" text="Провести операцию">
     <AnchorsPaneConstraints height="32px" left="20px" top="227px" width="335px"/>
   </Button>
   <Label cursor="0" name="lbBalance" parent="pnlOperations" prefHeight="30px" prefWidth="170px" text="Остаток средств на счёте:">

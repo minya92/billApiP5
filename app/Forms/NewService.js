@@ -21,11 +21,17 @@ define('NewService', ['orm', 'forms', 'ui'], function (Orm, Forms, Ui, ModuleNam
                     form.onWindowOpened();
             } else
                 form.show();
-            form.mgOperations.data = null;
         };
 
         self.showModal = function (callback) {
             form.showModal(callback);
+        };
+
+        self.SetParamsOpen = function () {
+            form.btnCreate.visible = false;
+            form.btnDel.visible = true;
+            form.cbUnsubscribe.visible = true;
+            form.btnSave.visible = true;
         };
 
     }

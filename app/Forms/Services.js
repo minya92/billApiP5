@@ -204,7 +204,8 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
 
                 //Настройка услуги
                 form.btnSettings.onActionPerformed = function () {
-//            FormCardServiceWithBills.setParams(res.account_id);
+                    FormCardServiceWithBills.setParams();
+//                    FormCardServiceWithBills.setParams(res.account_id);
                     FormCardServiceWithBills.showModal();
                 };
             }
