@@ -14,6 +14,7 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                 var FormCardServiceWithBills = new CardServiceWithBills;
                 var Delete = null;
                 var ListOfTypes;
+                var ServisesList;
 
                 self.show = function () {
                     form.show();
@@ -39,6 +40,7 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                 function Request() {
                     BillFunc.request("services/get", {deleted: Delete ? Delete : null}, function (success_get) {
                         console.log(success_get);
+                        ServisesList = success_get.services;
 
                         if (form.lbWating.visible == true) {
                             form.mgServises.visible = true;
@@ -46,7 +48,7 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                         }
 
                         form.mgServises.data = success_get.services;
-                        form.mgServises.colName.field = 'service_name';                        
+                        form.mgServises.colName.field = 'service_name';
                         form.mgServises.colChekPrepay.field = 'prepayment';
                         form.mgServises.colCost.field = 'service_cost';
 
@@ -72,6 +74,20 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                         md.alert("Ошибка получения списка услуг");
                     });
                 }
+
+                //Обновить грид
+                form.btnRefresh.onActionPerformed = function () {
+                    Request();
+                };
+
+                //Поиск
+                form.mffSearch.onValueChange = form.mffSearch.onKeyReleased = function () {
+                    var filterKey = form.mffSearch.text;
+                    var filtered = ServisesList.filter(function (aItems) {
+                        return aItems.service_name.toLowerCase().indexOf(filterKey.toLowerCase()) !== -1;
+                    });
+                    form.mgServises.data = filtered;
+                };
 
                 //Активировать/Деактивировать услугу
                 form.btnActive.onActionPerformed = function () {
