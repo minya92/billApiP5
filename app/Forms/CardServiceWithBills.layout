@@ -4,7 +4,7 @@
     <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="0px"/>
   </TabbedPane>
   <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseCard" parent="tabbedPane" prefHeight="359px" prefWidth="400px">
-    <TabbedPaneConstraints tabIcon="icons/16x16/edit2.png" tabTitle="Карточка услуги" tabToolTip="Просмотр и изменение информации об услуге"/>
+    <TabbedPaneConstraints tabIcon="icons/Settings/edit2.png" tabTitle="Карточка услуги" tabToolTip="Просмотр и изменение информации об услуге"/>
   </AnchorsPane>
   <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseWithBill" parent="tabbedPane" prefHeight="359px" prefWidth="400px" visible="false">
     <TabbedPaneConstraints tabIcon="icons/16x16/bill.png" tabTitle="Подключенные счета" tabToolTip="Управление счетами/Добавление услуги на счёт"/>
@@ -12,8 +12,8 @@
   <ToolBar cursor="0" name="toolBar" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="140px">
     <AnchorsPaneConstraints height="30px" left="0px" right="260px" top="0px"/>
   </ToolBar>
-  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/folder/users-add.png" name="btnAddBill" parent="toolBar" prefHeight="30px" prefWidth="32px" toolTipText="Добавить услугу на счёт" verticalTextPosition="3"/>
-  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/media-playback-pause.png" name="btnPause" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Приостановить услугу на счету" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/new_bill/new_bill.png" name="btnAddBill" parent="toolBar" prefHeight="30px" prefWidth="32px" toolTipText="Добавить услугу на счёт" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/Play.Pause/pause.png" name="btnPause" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Приостановить услугу на счету" verticalTextPosition="3"/>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/delete.png" name="btnDel" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Безвозвратно удалить услугу со счёта" verticalTextPosition="3"/>
   <Label cursor="0" horizontalAlignment="4" name="lbSearch" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="67px" text="Поиск: ">
     <AnchorsPaneConstraints height="30px" left="140px" top="0px" width="67px"/>

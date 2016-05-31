@@ -162,5 +162,19 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                         });
                     }, onSucces);
                 };
+                
+                /*
+                 * @POST /services/get_types
+                 * @GET /services/get_types
+                 */
+                self.getAllServicesTypes = function (aPath, onSucces) {
+                    libs.checkRequiredParams((new HttpContext()), [], function(p, aHttpContext){
+                        billServicesModule.getAllServicesTypes(function (res) {
+                            onSucces(res);
+                        }, function(err){
+                            onSucces(err);
+                        });
+                    }, onSucces);
+                };
             };
         });

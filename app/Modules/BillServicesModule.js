@@ -399,5 +399,15 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                         aErrCallback({error: msg.get('errQuery')});
                     });
                 };
+                
+                 /*
+                 * Получить все типы операций
+                 */
+                self.getAllServicesTypes = function(aCallback, aErrCallback){
+                    if(model.qBillServicesTypes.length)
+                        aCallback(model.qBillServicesTypes);
+                    else
+                        aErrCallback({error: 'empty'});
+                };
             };
         });
