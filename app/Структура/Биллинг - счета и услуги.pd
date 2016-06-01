@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><datamodel datasource="null">
-  <fieldsEntity entityHeight="90" entityIconified="false" entityId="145027135928364" entityLocationX="21" entityLocationY="343" entityWidth="173" tableName="bill_services_types"/>
+  <fieldsEntity entityHeight="90" entityIconified="false" entityId="145027135928364" entityLocationX="20" entityLocationY="345" entityWidth="173" tableName="bill_services_types"/>
   <fieldsEntity entityHeight="132" entityIconified="false" entityId="141562894711262" entityLocationX="153" entityLocationY="66" entityWidth="150" tableName="bill_accounts"/>
   <fieldsEntity entityHeight="199" entityIconified="false" entityId="143574122601249" entityLocationX="423" entityLocationY="363" entityWidth="198" tableName="bill_cost"/>
   <fieldsEntity entityHeight="156" entityIconified="false" entityId="141562894712117" entityLocationX="424" entityLocationY="194" entityWidth="197" tableName="bill_services_accounts"/>

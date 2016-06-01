@@ -19,8 +19,8 @@ define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService'], function (O
         var newService = new NewService();
         newService.show(form.pnlServiseCard);
         
-        self.setParams = function () {
-            newService.SetParamsOpen();
+        self.setParams = function (aListOfTypes) {
+            newService.setParamsOpen(aListOfTypes);
         };
     }
     return module_constructor;

@@ -22,6 +22,7 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
 
                 self.setParams = function () {
                     form.lbWating.visible = true;
+                    form.mgServises.visible = false;
                     BillFunc.request("services/get_types", {}, function (success_getTypes) {
                         console.log(success_getTypes);
                         ListOfTypes = success_getTypes;
@@ -142,11 +143,10 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                 form.cbActive.onValueChange = function () {
                     if (form.cbActive.selected == true) {
                         Delete = null;
-                        Request();
                     } else {
                         Delete = true;
-                        Request();
                     }
+                    Request();
                 };
 
 //                //Нажатие галки в столбце активна - не работает
@@ -198,13 +198,13 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
 
                 //Создание услуги
                 form.btnNewService.onActionPerformed = function () {
-//            FormNewService.setParams(res.account_id);
+                    FormNewService.setParamsNew(ListOfTypes);
                     FormNewService.showModal();
                 };
 
                 //Настройка услуги
                 form.btnSettings.onActionPerformed = function () {
-                    FormCardServiceWithBills.setParams();
+                    FormCardServiceWithBills.setParams(ListOfTypes);
 //                    FormCardServiceWithBills.setParams(res.account_id);
                     FormCardServiceWithBills.showModal();
                 };
