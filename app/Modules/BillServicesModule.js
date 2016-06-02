@@ -85,7 +85,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                  * @returns {undefined} 
                  */
                 self.ChangeService = function (aServiceId, aCost, aDays, anAfterMonth, aPrepayment, anOnce, aCounter, aCallBack, aErrCallback) {
-                    function closeCostCallback() {
+                    function closeCostCallback(result) {
                         model.qServiceSetting.push({
                             service_id: aServiceId,
                             service_cost: aCost,
@@ -97,7 +97,12 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                             cost_counts: (aCounter ? +aCounter : null)
                         });
                         model.save(function () {
-                            aCallBack(aServiceId);
+                            model.qServiceList.params.service_id = +aServiceId;
+                            model.qServiceList.requery(function () {
+                                aCallBack(model.qServiceList[0]);
+                            }, function(){
+                                aErrCallback({error: msg.get('errQuery')});
+                            });
                         }, function(){
                             aErrCallback({error: msg.get('errSaving')});
                         });
@@ -105,9 +110,9 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                     model.qServiceList.params.service_id = +aServiceId;
                     model.qServiceList.requery(function () {
                         if (model.qServiceList.length) {
-                            aPrepayment = (aPrepayment == false ? false : model.qServiceList[0].prepayment);
-                            anAfterMonth = (anAfterMonth == false ? false : model.qServiceList[0].service_month);
-                            anOnce = (anOnce == false ? false : model.qServiceList[0].once);
+                            aPrepayment = ((aPrepayment == false || aPrepayment == 'false')  ? false : model.qServiceList[0].prepayment);
+                            anAfterMonth = ((anAfterMonth == false || anAfterMonth == 'false') ? false : model.qServiceList[0].service_month);
+                            anOnce = ((anOnce == false || anOnce == 'false') ? false : model.qServiceList[0].once);
                             aCost = (aCost ? aCost : model.qServiceList[0].service_cost);
                             aDays = (aDays ? aDays : model.qServiceList[0].service_days);
                             model.qCloseCostService.params.service_id = +aServiceId;
