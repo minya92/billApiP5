@@ -5,7 +5,7 @@
   </ToolBar>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/add.png" name="btnNewService" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Создать услугу" verticalTextPosition="3"/>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/Settings/settings.png" name="btnSettings" parent="toolBar" prefHeight="30px" prefWidth="34px" toolTipText="Изменить/Подключить на счёт" verticalTextPosition="3"/>
-  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/active.png" name="btnActive" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Активировать/деактивировать услугу" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/Ok.Cancel/active.png" name="btnActive" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Активировать/деактивировать услугу" verticalTextPosition="3"/>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/delete.png" name="btnDel" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Деактивировать и отписать от всех счетов" verticalTextPosition="3"/>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/refresh/refresh.png" name="btnRefresh" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Обновить список услуг" verticalTextPosition="3"/>
   <Label cursor="0" name="label" parent="toolBar" prefHeight="30px" prefWidth="20px"/>
