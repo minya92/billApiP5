@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?><layout title="Управление услугой:" view="view">
-  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="389px" prefWidth="405px"/>
-  <TabbedPane cursor="0" name="tabbedPane" parent="view" prefHeight="389px" prefWidth="405px" selectedComponent="pnlServiseCard">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="445px" prefWidth="405px"/>
+  <TabbedPane cursor="0" name="tabbedPane" parent="view" prefHeight="445px" prefWidth="405px" selectedComponent="pnlServiseCard">
     <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="0px"/>
   </TabbedPane>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseCard" parent="tabbedPane" prefHeight="359px" prefWidth="400px">
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseCard" parent="tabbedPane" prefHeight="415px" prefWidth="400px">
     <TabbedPaneConstraints tabIcon="icons/Settings/edit2.png" tabTitle="Карточка услуги" tabToolTip=""/>
   </AnchorsPane>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseWithBill" parent="tabbedPane" prefHeight="359px" prefWidth="400px" visible="false">
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseWithBill" parent="tabbedPane" prefHeight="415px" prefWidth="400px" visible="false">
     <TabbedPaneConstraints tabIcon="icons/16x16/bill.png" tabTitle="Подключенные счета" tabToolTip=""/>
   </AnchorsPane>
   <ToolBar cursor="0" name="toolBar" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="140px">
@@ -21,7 +21,7 @@
   <ModelFormattedField cursor="0" format="" name="mffSearch" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="185px" toolTipText="Поиск по ID">
     <AnchorsPaneConstraints height="30px" left="215px" right="0px" top="0px"/>
   </ModelFormattedField>
-  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgBillsOnService" parent="pnlServiseWithBill" prefHeight="329px" prefWidth="400px">
+  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgBillsOnService" parent="pnlServiseWithBill" prefHeight="385px" prefWidth="400px">
     <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="30px"/>
     <ModelGridColumn name="colBillId" preferredWidth="80px" title="ID счета" width="102px">
       <ModelFormattedField format=""/>

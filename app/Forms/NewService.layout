@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><layout title="Создание услуги" view="view">
   <ButtonGroup name="buttonGroup"/>
-  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="359px" prefWidth="400px"/>
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="415px" prefWidth="400px"/>
   <Button cursor="0" icon="icons/Save/save2.png" name="btnSave" parent="view" prefHeight="33px" prefWidth="112px" text="Сохранить" visible="false">
-    <AnchorsPaneConstraints height="33px" right="12px" top="310px" width="112px"/>
+    <AnchorsPaneConstraints height="33px" right="12px" top="366px" width="112px"/>
   </Button>
   <Label cursor="0" name="lbName" parent="view" prefHeight="25px" prefWidth="80px" text="Имя услуги">
     <AnchorsPaneConstraints height="25px" left="10px" top="10px" width="80px"/>
@@ -19,7 +19,7 @@
   <ModelFormattedField cursor="0" format="" name="mffName" nullable="false" parent="view" prefHeight="25px" prefWidth="290px">
     <AnchorsPaneConstraints height="25px" left="90px" right="20px" top="10px"/>
   </ModelFormattedField>
-  <ModelCheckBox cursor="0" enabled="false" focusable="false" name="mcbPeriod" nullable="false" parent="view" prefHeight="15px" prefWidth="13px" toolTipText="Период, через который будет производиться списание средств со счёта">
+  <ModelCheckBox cursor="0" focusable="true" name="mcbPeriod" nullable="false" parent="view" prefHeight="15px" prefWidth="13px" toolTipText="Период, через который будет производиться списание средств со счёта">
     <AnchorsPaneConstraints height="15px" left="10px" top="165px" width="13px"/>
   </ModelCheckBox>
   <Label cursor="0" name="lbPeriod" parent="view" prefHeight="25px" prefWidth="174px" text="Период действия/списания:" toolTipText="Период, через который будет производиться списание средств со счёта">
@@ -44,7 +44,7 @@
     <AnchorsPaneConstraints height="25px" left="90px" top="210px" width="60px"/>
   </ModelFormattedField>
   <ModelCheckBox cursor="0" name="mcbPrepayment" nullable="false" parent="view" prefHeight="25px" prefWidth="100px" text="Предоплата" toolTipText="Означает списание со счёта средств единовременно с подключением">
-    <AnchorsPaneConstraints height="25px" left="10px" top="260px" width="100px"/>
+    <AnchorsPaneConstraints height="25px" left="10px" top="311px" width="100px"/>
   </ModelCheckBox>
   <ModelCombo cursor="0" editable="true" name="mcType" nullable="false" parent="view" prefHeight="25px" prefWidth="290px">
     <AnchorsPaneConstraints height="25px" left="90px" right="20px" top="110px"/>
@@ -53,13 +53,13 @@
     <AnchorsPaneConstraints height="25px" left="10px" top="110px" width="80px"/>
   </Label>
   <Button cursor="0" icon="icons/Ok.Cancel/cancel3.png" name="btnDel" parent="view" prefHeight="33px" prefWidth="112px" text="Удалить" visible="false">
-    <AnchorsPaneConstraints height="33px" left="10px" top="310px" width="112px"/>
+    <AnchorsPaneConstraints height="33px" left="10px" top="366px" width="112px"/>
   </Button>
   <CheckBox cursor="0" name="cbUnsubscribe" parent="view" prefHeight="30px" prefWidth="120px" text="Со всех счетов" visible="false">
-    <AnchorsPaneConstraints height="30px" left="125px" top="311px" width="120px"/>
+    <AnchorsPaneConstraints height="30px" left="125px" top="367px" width="120px"/>
   </CheckBox>
   <Button cursor="0" icon="icons/Ok.Cancel/apply3.png" name="btnCreate" parent="view" prefHeight="35px" prefWidth="150px" text="Создать">
-    <AnchorsPaneConstraints height="35px" right="20px" top="305px" width="150px"/>
+    <AnchorsPaneConstraints height="35px" right="20px" top="361px" width="150px"/>
   </Button>
   <Label cursor="0" enabled="false" name="lbCounter" parent="view" prefHeight="25px" prefWidth="50px" text="единиц">
     <AnchorsPaneConstraints height="25px" left="157px" top="210px" width="50px"/>
@@ -67,4 +67,7 @@
   <Label cursor="0" name="label" parent="view" prefHeight="25px" prefWidth="63px" text="Счётчик:" toolTipText="Пакет услуг">
     <AnchorsPaneConstraints height="25px" left="27px" top="210px" width="63px"/>
   </Label>
+  <ModelCheckBox cursor="0" name="mcbOnce" nullable="false" parent="view" prefHeight="25px" prefWidth="180px" text="Единоразовое списание" toolTipText="Списание будет произведено только один раз">
+    <AnchorsPaneConstraints height="25px" left="10px" top="260px" width="180px"/>
+  </ModelCheckBox>
 </layout>

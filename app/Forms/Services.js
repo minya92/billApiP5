@@ -172,7 +172,7 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
 //                };
 
                 //Запрос на удаление (Деактивацию)
-                DeleteRequest = function (aUnsubscribe) {
+                function DeleteRequest(aUnsubscribe) {
                     BillFunc.request("services/delete", {service_id: form.mgServises.selected[0].service_id,
                         unsubscribe: aUnsubscribe ? !!aUnsubscribe : null}, function (success_del) {
                         console.log(success_del);
@@ -182,10 +182,11 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                         md.alert("Ошибка удаления услуги!");
                         form.mgServises.selected[0].active = !form.mgServises.selected[0].active;
                     });
-                };
+                }
+                ;
 
                 //Запрос на Активацию
-                EnableRequest = function () {
+                function EnableRequest() {
                     BillFunc.request("services/enable", {service_id: form.mgServises.selected[0].service_id}, function (success_enabled) {
                         console.log(success_enabled);
                         Request();
@@ -194,7 +195,8 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                         md.alert("Ошибка изменения активности услуги!");
                         form.mgServises.selected[0].active = !form.mgServises.selected[0].active;
                     });
-                };
+                }
+                ;
 
                 //Создание услуги
                 form.btnNewService.onActionPerformed = function () {
