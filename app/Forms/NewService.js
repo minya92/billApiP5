@@ -130,41 +130,50 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, For
 
         //Кликнули галочку на счетчике
         form.mcbCounter.onActionPerformed = function () {
-            if (form.mcbCounter.value) {
-                form.mcbPeriod.value = true;
-                if (form.mcbOnce.value) {
-                    //ChangeType('OneTime');
-                } else {
+//            if (form.mcbCounter.value) {
+//                form.mcbPeriod.value = true;
+//                if (form.mcbOnce.value) {
+//                    //ChangeType('OneTime');
+//                } else {
+//                    ChangeType('PeriodServiceModule');
+//                }
+//            } else {
+//                if (form.mcbOnce.value) {
+//                    form.mcbPeriod.value = false;
+//                    //ChangeType('OneTime');
+//                } else {
+//                    if (form.mcbPeriod.value)
+//                        ChangeType('PeriodCounterServiceModule');
+//                    else
+//                        ChangeType('CounterServiceModule');
+//                }
+//            }
+//            //form.mcbPeriod.enabled = form.mcbCounter.value;
+
+            if (form.mcbCounter.value)
+                if (!form.mcbOnce.value)
                     ChangeType('PeriodServiceModule');
-                }
-            } else {
-                if (form.mcbOnce.value) {
-                    form.mcbPeriod.value = false;
-                    //ChangeType('OneTime');
-                } else {
-                    if (form.mcbPeriod.value)
-                        ChangeType('PeriodCounterServiceModule');
-                    else
-                        ChangeType('CounterServiceModule');
-                }
-            }
-            //form.mcbPeriod.enabled = form.mcbCounter.value;
+                else
+                    form.mcbPeriod.value = true;
+            else if (!form.mcbPeriod.value)
+                ChangeType('CounterServiceModule');
+            else if (!form.mcbOnce.value)
+                ChangeType('PeriodCounterServiceModule');
+            else
+                form.mcbPeriod.value = false;
         };
 
         //Нажатие на галочку "Единоразово"
         form.mcbOnce.onActionPerformed = function () {
             if (!form.mcbOnce.value)
                 ChangeType('OneTime');
-            
+
             else if (!form.mcbCounter.value)
                 ChangeType('PeriodServiceModule');
             else if (!form.mcbPeriod.value)
                 ChangeType('CounterServiceModule');
-            else
-                ChangeType('PeriodCounterServiceModule');
-
-
-
+            //else
+            //ChangeType('PeriodCounterServiceModule');
         };
 
 
