@@ -39,7 +39,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                  * @param {type} aName
                  * @param {type} aSum
                  * @param {type} aDays
-                 * @returns {Boolean}
+                 * @returns {Boolean} 
                  */
                 self.CreateService = function (aName, aCost, aDays, aLock, anAfterMonth, aPrepayment, anOnce, aCounter, aCallBack, aErrCallback) {
                     var service_type = aCounter ? 'CounterServiceModule' : 'PeriodServiceModule'
@@ -84,7 +84,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                  * @param {type} aCallBack
                  * @returns {undefined} 
                  */
-                self.ChangeService = function (aServiceId, aCost, aDays, anAfterMonth, aPrepayment, anOnce, aCounter, aCallBack, aErrCallback) {
+                self.ChangeService = function (aServiceId, aCost, aDays, anAfterMonth, aPrepayment, anOnce, aCounter, aType, aCallBack, aErrCallback) {
                     function closeCostCallback(result) {
                         model.qServiceSetting.push({
                             service_id: aServiceId,
@@ -94,6 +94,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                             start_date: new Date(),
                             prepayment: aPrepayment,
                             once: anOnce,
+                            service_type_id: aType,
                             cost_counts: (aCounter ? +aCounter : null)
                         });
                         model.save(function () {
