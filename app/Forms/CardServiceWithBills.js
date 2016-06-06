@@ -14,13 +14,13 @@ define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService'], function (O
 
         self.showModal = function (callback) {
             form.showModal(callback);
-        };
+        };        
         
-        var newService = new NewService();
-        newService.show(form.pnlServiseCard);
-        
-        self.setParams = function (aListOfTypes) {
-            newService.setParamsOpen(aListOfTypes);
+        self.setParams = function (aListOfTypes, serviceId) {
+            form.title = "Управление услугой: ";
+            var newService = new NewService(form);
+            newService.show(form.pnlServiseCard);
+            newService.setParamsOpen(aListOfTypes, serviceId);
         };
     }
     return module_constructor;

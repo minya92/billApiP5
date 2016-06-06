@@ -25,7 +25,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                         } else {
                             aErrCallback({error: msg.get('errFindService')});
                         }
-                    }, function(){
+                    }, function () {
                         aErrCallback({error: msg.get('errQuery')});
                     });
                 };
@@ -41,10 +41,11 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                  * @param {type} aDays
                  * @returns {Boolean}
                  */
-                self.CreateService = function (aName, aCost, aDays, aLock, anAfterMonth, aPrepayment, anOnce, aCounter, aCallBack, aErrCallback) {
-                    var service_type = aCounter ? 'CounterServiceModule' : 'PeriodServiceModule'
-                    aPrepayment = aPrepayment ? true : null;
-                    anOnce = anOnce ? true : null;
+                self.CreateService = function (aName, aCost, aDays, aLock, anAfterMonth, aPrepayment, anOnce, aCounter, aType, aCallBack, aErrCallback) {
+//                    var service_type = aCounter ? 'CounterServiceModule' : 'PeriodServiceModule'
+                    var service_type = (aType == 'false' || aType == 'null') ? 'PeriodServiceModule' : aType;
+                    aPrepayment = (aPrepayment == 'false' || aPrepayment == 'null') ? null : true;
+                    anOnce = (anOnce == 'false' || anOnce == 'null') ? null : true;
                     if (aDays == false || aDays == 0 || aDays == null || aDays === undefined || !aDays) {
                         anAfterMonth = true;
                         aDays = 0;
@@ -68,7 +69,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                     });
                     model.save(function () {
                         aCallBack(model.qServiceList[model.qServiceList.length - 1].bill_services_id);
-                    }, function(){
+                    }, function () {
                         aErrCallback({error: msg.get('errSaving')});
                     });
                 };
@@ -100,17 +101,17 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                             model.qServiceList.params.service_id = +aServiceId;
                             model.qServiceList.requery(function () {
                                 aCallBack(model.qServiceList[0]);
-                            }, function(){
+                            }, function () {
                                 aErrCallback({error: msg.get('errQuery')});
                             });
-                        }, function(){
+                        }, function () {
                             aErrCallback({error: msg.get('errSaving')});
                         });
                     }
                     model.qServiceList.params.service_id = +aServiceId;
                     model.qServiceList.requery(function () {
                         if (model.qServiceList.length) {
-                            aPrepayment = ((aPrepayment == false || aPrepayment == 'false')  ? false : model.qServiceList[0].prepayment);
+                            aPrepayment = ((aPrepayment == false || aPrepayment == 'false') ? false : model.qServiceList[0].prepayment);
                             anAfterMonth = ((anAfterMonth == false || anAfterMonth == 'false') ? false : model.qServiceList[0].service_month);
                             anOnce = ((anOnce == false || anOnce == 'false') ? false : model.qServiceList[0].once);
                             aCost = (aCost ? aCost : model.qServiceList[0].service_cost);
@@ -120,7 +121,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                         } else {
                             aErrCallback({error: msg.get('errFindService')});
                         }
-                    }, function(){
+                    }, function () {
                         aErrCallback({error: msg.get('errQuery')});
                     });
                 };
@@ -137,12 +138,12 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                             service_start_date: new Date(),
                             service_counts: model.qServiceList[0].cost_counts
                         });
-                        model.save(function(){
+                        model.save(function () {
                             servicesOnAccountId = model.qAddService[model.qAddService.length - 1].bill_services_accounts_id;
                             aCallback({
                                 result: servicesOnAccountId
                             });
-                        }, function(){
+                        }, function () {
                             aErrCallback({error: msg.get('errSaving')});
                         });
                     }
@@ -168,20 +169,20 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                     accounts.getSumFromAccount(anAccountId, function (res) {
                         model.qServiceList.params.service_id = +aServiceId;
                         model.qServiceList.requery(function () {
-                            if (model.qServiceList.length) {                        
+                            if (model.qServiceList.length) {
                                 var date = new Date();
                                 if (model.qServiceList[0].service_month)
                                     date.setMonth(date.getMonth() + 1);
                                 else
                                     date.setDate(date.getDate() + model.qServiceList[0].service_days);
-                                
+
                                 if (model.qServiceList[0].prepayment) { // предоплата
                                     if (res.sum >= model.qServiceList[0].service_cost) {
-                                        operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId, function(op){
-                                            if(op.id){
-                                                operations.setOperationDone(op.id, function(){
+                                        operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId, function (op) {
+                                            if (op.id) {
+                                                operations.setOperationDone(op.id, function () {
                                                     operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId, (setOperationDone(date)), (setOperationDone()));
-                                                }, function(err){
+                                                }, function (err) {
                                                     aErrCallback({error: err});
                                                 });
                                             } else {
@@ -198,7 +199,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                                 aErrCallback({error: msg.get('errFindService')});
                             }
                         });
-                    }, function(){
+                    }, function () {
                         aErrCallback({error: msg.get('errQuery')});
                     });
                 };
@@ -224,7 +225,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                         } else {
                             aErrCallback({error: msg.get('errFindServiceOnAccount'), accounts: model.qAddService});
                         }
-                    }, function(){
+                    }, function () {
                         aErrCallback({error: msg.get('errQuery')});
                     });
                 };
@@ -240,9 +241,9 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                             if (model.qServiceList.length) {
                                 //model.qServiceList.splice(0, 1);
                                 model.qServiceList[0].deleted = true;
-                                model.save(function(){
+                                model.save(function () {
                                     aCallback({result: "ok"});
-                                }, function(){
+                                }, function () {
                                     aErrCallback({error: msg.get('errSaving')});
                                 });
                             } else {
@@ -272,19 +273,19 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                         } else {
                             delService();
                         }
-                    }, function(){
+                    }, function () {
                         aErrCallback({error: msg.get('errQuery')});
                     });
                 };
-                
-                self.EnableService = function(aServiceId, aCallback, aErrCallback){
+
+                self.EnableService = function (aServiceId, aCallback, aErrCallback) {
                     model.qDelService.params.service_id = +aServiceId;
                     model.qDelService.requery(function () {
                         if (model.qDelService.length) {
                             model.qDelService[0].deleted = false;
-                            model.save(function(){
+                            model.save(function () {
                                 aCallback({result: "ok"});
-                            }, function(){
+                            }, function () {
                                 aErrCallback({error: msg.get('errSaving')});
                             });
                         } else {
@@ -292,16 +293,16 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                         }
                     });
                 };
-                
-                self.HardDeleteService = function(aServiceId, aCallback, aErrCallback){
+
+                self.HardDeleteService = function (aServiceId, aCallback, aErrCallback) {
                     model.qDelService.params.service_id = +aServiceId;
                     model.qDelService.requery(function () {
                         if (model.qDelService.length) {
-                            if(model.qDelService[0].deleted){
+                            if (model.qDelService[0].deleted) {
                                 model.qDelService.splice(0, 1);
-                                model.save(function(){
+                                model.save(function () {
                                     aCallback({result: "ok"});
-                                }, function(){
+                                }, function () {
                                     aErrCallback({error: msg.get('errSaving')});
                                 });
                             } else {
@@ -332,15 +333,15 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                         if (model.qAddService.length) {
                             var service_account_id = model.qAddService[model.qAddService.length - 1].bill_services_accounts_id;
                             model.qAddService.splice(model.qAddService.length - 1, 1);
-                            model.save(function(){
+                            model.save(function () {
                                 aCallback({result: "ok", service_account_id: service_account_id});
-                            }, function(){
+                            }, function () {
                                 aErrCallback({error: msg.get('errSaving')});
                             });
                         } else {
                             aErrCallback({error: msg.get('errFindServiceOnAccount')});
                         }
-                    }, function(){
+                    }, function () {
                         aErrCallback({error: msg.get('errQuery')});
                     });
                 };
@@ -359,7 +360,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                         } else {
                             aErrCallback({error: msg.get('errFindAccount'), result: model.qAddService});
                         }
-                    }, function(){
+                    }, function () {
                         aErrCallback({error: msg.get('errQuery')});
                     });
                 };
@@ -372,15 +373,15 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                         if (model.qAddService.length) {
                             var service_account_id = model.qAddService[model.qAddService.length - 1].bill_services_accounts_id;
                             model.qAddService[model.qAddService.length - 1].paused = true;
-                            model.save(function(){
+                            model.save(function () {
                                 aCallback({result: "ok", service_account_id: service_account_id});
-                            }, function(){
+                            }, function () {
                                 aErrCallback({error: msg.get('errSaving')});
                             });
                         } else {
                             aErrCallback({error: msg.get('errFindServiceOnAccount')});
                         }
-                    }, function(){
+                    }, function () {
                         aErrCallback({error: msg.get('errQuery')});
                     });
                 };
@@ -392,26 +393,26 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                     getServiceOnAccount(anAccountId, aServiceId, aServiceAccountId, function () {
                         if (model.qAddService.length) {
                             model.qAddService[0].service_counts = model.qAddService[0].service_counts - (aCount ? aCount : 1);
-                            model.save(function(){
-                               aCallback({result: model.qAddService, service_counts: model.qAddService[0].service_counts}); 
-                            }, function(){
+                            model.save(function () {
+                                aCallback({result: model.qAddService, service_counts: model.qAddService[0].service_counts});
+                            }, function () {
                                 aErrCallback({error: msg.get('errSaving')});
                             });
                         } else {
                             aErrCallback({error: msg.get('errFindServiceOnAccount')});
                         }
-                    }, function(){
+                    }, function () {
                         aErrCallback({error: msg.get('errQuery')});
                     });
                 };
-                
+
                 model.qBillServicesTypes.requery();
-                
-                 /*
+
+                /*
                  * Получить все типы услуг
                  */
-                self.getAllServicesTypes = function(aCallback, aErrCallback){
-                    if(model.qBillServicesTypes.length)
+                self.getAllServicesTypes = function (aCallback, aErrCallback) {
+                    if (model.qBillServicesTypes.length)
                         aCallback(model.qBillServicesTypes);
                     else
                         aErrCallback({error: 'empty'});

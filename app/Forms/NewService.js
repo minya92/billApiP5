@@ -3,13 +3,13 @@
  * @author User
  */
 define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, Forms, Ui, Rpc, invoke, ModuleName) {
-    function module_constructor() {
+    function module_constructor(parentForm) {
         var self = this
                 , model = Orm.loadModel(ModuleName)
                 , form = Forms.loadForm(ModuleName, model);
 
         var BillFunc = new Rpc.Proxy('BillApiFunctions');
-        //var ListOfTypes;
+        var ServiceId;
 
         self.show = function (aPanel) {
             var cont = aPanel ? (typeof (aPanel) === 'object' ? aPanel
@@ -36,23 +36,58 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, For
         form.mcbOnce.value = false;
 
         //Открытие для редактирования
-        self.setParamsOpen = function (aListOfTypes) {
+        self.setParamsOpen = function (aListOfTypes, serviceId) {
             form.btnCreate.visible = false;
             form.btnDel.visible = true;
             form.cbUnsubscribe.visible = true;
             form.btnSave.visible = true;
+            form.mffName.enabled = false;
+            
+            ServiceId = serviceId;
 
             checkListOfTypes(aListOfTypes, function (types) {
                 SetData_mcType(types);
             });
+
+            GetServiseRequest(serviceId);
         };
 
         //Открытия для создания
         self.setParamsNew = function (aListOfTypes) {
+//            form.mcbPrepayment.value = false;
+//            form.mffName.text = "";
+//            form.mffCost.text = "";
+//            form.mffDays.text = "";
+//            form.mffCounter.text = "";
+//            form.rbMonth.selected = true;
+
             checkListOfTypes(aListOfTypes, function (types) {
                 SetData_mcType(types);
             });
         };
+
+        //Запрос услуги для заполнения формы
+        function GetServiseRequest(serviceId) {
+            BillFunc.request("services/get", {service_id: serviceId}, function (success_get) {
+                console.log(success_get);
+                DataFilling(success_get);
+            }, function (error_get) {
+                console.log(error_get);
+                md.alert("Ошибка загрузки дынных по услуге!");
+            });
+        }
+
+        //Заполнение формы
+        function DataFilling(success_get) {
+            parentForm.title += success_get.services[0].service_name;
+
+            form.mffName.value = success_get.services[0].service_name;
+            form.mffCost.value = +success_get.services[0].service_cost;
+            ChangeType(success_get.services[0].service_type_id);
+            form.mcbPrepayment.value = success_get.services[0].prepayment ? true : false;
+            form.mffCounter.value = success_get.services[0].cost_counts ? +success_get.services[0].cost_counts : "";
+            form.mffDays.value = success_get.services[0].service_days ? +success_get.services[0].service_days : "";
+        }
 
         //заполнение mcType
         function SetData_mcType(aListOfTypes) {
@@ -85,11 +120,6 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, For
             });
         }
 
-        //Кнопка сохранения
-        form.btnSave.onActionPerformed = function () {
-
-        };
-
         //Изменение значения типа в списке типов
         function ChangeType(TypeId) {
             form.mcType.value = form.mcType.displayList.filter(function (aItems) {
@@ -99,25 +129,6 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, For
 
         //Нажали галочку на периоде
         form.mcbPeriod.onActionPerformed = function () {
-//            if (form.mcbPeriod.value) {
-//                form.mcbCounter.value = true;
-//                if (form.mcbOnce.value) {
-//                    //ChangeType('OneTime');
-//                } else {
-//                    ChangeType('CounterServiceModule');
-//                }
-//            } else {
-//                if (form.mcbOnce.value) {
-//                    form.mcbCounter.value = false;
-//                    //ChangeType('OneTime');
-//                } else {
-//                    if (form.mcbCounter.value)
-//                        ChangeType('PeriodCounterServiceModule');
-//                    else
-//                        ChangeType('PeriodServiceModule');
-//                }
-//            }
-
             if (form.mcbPeriod.value) {
                 if (!form.mcbOnce.value)
                     ChangeType('CounterServiceModule');
@@ -139,33 +150,13 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, For
                     ChangeType('PeriodServiceModule');
                 else
                     form.mcbPeriod.value = true;
-            else if (!form.mcbPeriod.value)
-//                ChangeType('CounterServiceModule');
-                ;
-            else if (!form.mcbOnce.value)
-                ChangeType('PeriodCounterServiceModule');
-            else
-                form.mcbPeriod.value = false;
-//            if (form.mcbCounter.value) {
-//                form.mcbPeriod.value = true;
-//                if (form.mcbOnce.value) {
-//                    //ChangeType('OneTime');
-//                } else {
-//                    ChangeType('PeriodServiceModule');
-//                }
-//            } else {
-//                if (form.mcbOnce.value) {
-//                    form.mcbPeriod.value = false;
-//                    //ChangeType('OneTime');
-//                } else {
-//                    if (form.mcbPeriod.value)
-//                        ChangeType('PeriodCounterServiceModule');
-//                    else
-//                        ChangeType('CounterServiceModule');
-//                }
-//            }
-////            //form.mcbPeriod.enabled = form.mcbCounter.value;
-
+            else {
+                if (!form.mcbOnce.value)
+                    ChangeType('PeriodCounterServiceModule');
+                else
+                    form.mcbPeriod.value = false;
+            }
+//            form.mcbPeriod.enabled = form.mcbCounter.value;
         };
 
         //Нажатие на галочку "Единоразово"
@@ -177,10 +168,7 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, For
                 ChangeType('PeriodServiceModule');
             else if (!form.mcbPeriod.value)
                 ChangeType('CounterServiceModule');
-            //else
-            //ChangeType('PeriodCounterServiceModule');
         };
-
 
         //Смена значения списка типов
         form.mcType.onValueChange = function (evt) {
@@ -211,7 +199,7 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, For
 //                            form.mcbPeriod.value = true;
                         break;
                     default:
-                        ;
+                        md.alert("Ошибка присваивания типов!");
                         break;
                 }
         };
@@ -230,15 +218,25 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, For
 
         //Кнопка подверждения создания
         form.btnCreate.onActionPerformed = function () {
+            var Message = "Подтвердите создание услуги: Имя: " + form.mffName.text + ", Стоимость: " + form.mffCost.text + " руб., Тип: " + form.mcType.text +
+                    (form.mcbCounter.value ? ", Счётчик: " + form.mffCounter.text + " единиц" : "") +
+                    (form.mcbPeriod.value ? ", Период действия/списания: " + (form.rbMonth.selected ? "Месяц" : form.mffDays.text + " дней") : "") +
+                    (form.mcbPrepayment.value ? ", Оплата: Предварительная." : ".");
+            CheckData(Message, function (params) {
+                CreateService(params, function (aCallback) {
+                    form.close(aCallback);
+                });
+            });
+        };
+
+        //Проверка данных для создания/сохранения
+        function CheckData(Message, callback) {
             if (form.mffName.text == "" || form.mffCost.text == "" || /\D/.test(form.mffCost.text) ||
                     (form.rbDays.selected && (form.mffDays.text == "" || /\D/.test(form.mffDays.text))) ||
                     (form.mcbCounter.value && (form.mffCounter.text == "" || /\D/.test(form.mffCounter.text))))
                 md.alert("Данные введены неверно!!!");
             else {
-                md.confirm("Подтвердите создание услуги: Имя: " + form.mffName.text + ", Стоимость: " + form.mffCost.text + " рублей, Тип: " + form.mcType.text +
-                        (form.mcbCounter.value ? ", Счётчик: " + form.mffCounter.text + " единиц" : "") +
-                        (form.mcbPeriod.value ? ", Период действия/списания: " + (form.rbMonth.selected ? "Месяц " : form.mffDays.text + " дней") : "") +
-                        (form.mcbPrepayment.value ? ", Оплата: Предварительная." : "."), function (answer) {
+                md.confirm(Message, function (answer) {
                     if (answer) {
                         var params = {
                             name: form.mffName.text,
@@ -249,13 +247,33 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, For
                             counts: form.mcbCounter.value ? +form.mffCounter.text : null,
                             type: form.mcType.value.bill_services_types_id
                         };
-                        CreateService(params,function(aCallback){
-                            form.close(aCallback);
-                        });
+                        callback(params);
                     }
                 });
             }
+        }
+
+        //Кнопка сохранения
+        form.btnSave.onActionPerformed = function () {
+            CheckData("Подтвердите сохранение", function (params) {
+                params.service_id = ServiceId;
+                SaveService(params, function (aCallback) {
+                    form.close(aCallback);
+                });
+            });
         };
+        
+        //Запрос сохранения услуги
+        function SaveService(params, callback) {
+            BillFunc.request("services/change", params, function (success_change) {
+                console.log(success_change);
+                md.alert("Услуга успешно изменена!");
+                callback(true);
+            }, function (error_change) {
+                console.log(error_change);
+                md.alert("Ошибка изменения услуги!");
+            });
+        }
 
         //Изменение значения галочки периода
         form.mcbPeriod.onValueChange = function (evt) {

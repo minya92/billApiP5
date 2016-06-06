@@ -15,7 +15,7 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                  */
                 self.serviceCreate = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ["name", "cost"], function(p, aHttpContext){
-                        billServicesModule.CreateService(p.name, p.cost, p.days, p.lock, p.afterMonth, p.prepayment, p.once, p.counts, function (res) {
+                        billServicesModule.CreateService(p.name, p.cost, p.days, p.lock, p.afterMonth, p.prepayment, p.once, p.counts, p.type, function (res) {
                             onSucces({service_id: res});
                         }, function(err){
                             onSucces(err);

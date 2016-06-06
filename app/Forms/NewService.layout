@@ -10,7 +10,7 @@
   <Label cursor="0" name="lbCost" parent="view" prefHeight="25px" prefWidth="80px" text="Стоимость">
     <AnchorsPaneConstraints height="25px" left="10px" top="60px" width="80px"/>
   </Label>
-  <ModelFormattedField cursor="0" format="" name="mffCost" nullable="false" parent="view" prefHeight="25px" prefWidth="260px" valueType="0">
+  <ModelFormattedField cursor="0" format="" name="mffCost" nullable="false" parent="view" prefHeight="25px" prefWidth="260px">
     <AnchorsPaneConstraints height="25px" left="90px" right="50px" top="60px"/>
   </ModelFormattedField>
   <Label cursor="0" name="lbRub" parent="view" prefHeight="25px" prefWidth="30px" text="руб.">
@@ -31,7 +31,7 @@
   <RadioButton buttonGroup="buttonGroup" cursor="0" foreground="#ffffff" name="rbDays" parent="view" prefHeight="25px" prefWidth="90px" text="             дней">
     <AnchorsPaneConstraints height="25px" left="290px" top="160px" width="90px"/>
   </RadioButton>
-  <ModelFormattedField cursor="0" format="" name="mffDays" nullable="false" parent="view" prefHeight="25px" prefWidth="40px" valueType="0">
+  <ModelFormattedField cursor="0" format="" name="mffDays" nullable="false" parent="view" prefHeight="25px" prefWidth="40px">
     <AnchorsPaneConstraints height="25px" left="305px" top="160px" width="40px"/>
   </ModelFormattedField>
   <Label cursor="0" name="lbDays" parent="view" prefHeight="25px" prefWidth="40px" text="дней">

@@ -10,8 +10,6 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                         , form = Forms.loadForm(ModuleName, model);
 
                 var BillFunc = new Rpc.Proxy('BillApiFunctions');
-                var FormNewService = new NewService;
-                var FormCardServiceWithBills = new CardServiceWithBills;
                 var Delete = null;
                 var ListOfTypes;
                 var ServisesList;
@@ -198,17 +196,23 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
 
                 //Создание услуги
                 form.btnNewService.onActionPerformed = function () {
+                    var FormNewService = new NewService;
                     FormNewService.setParamsNew(ListOfTypes);
-                    FormNewService.showModal(function (res){
-                        if (res) Request();
+                    FormNewService.showModal(function (res) {
+                        if (res)
+                            Request();
                     });
                 };
 
                 //Настройка услуги
                 form.btnSettings.onActionPerformed = function () {
-                    FormCardServiceWithBills.setParams(ListOfTypes);
-//                    FormCardServiceWithBills.setParams(res.account_id);
-                    FormCardServiceWithBills.showModal();
+                    var FormCardServiceWithBills = new CardServiceWithBills;
+                    if (form.mgServises.selected.length == 0)
+                        md.alert("Выберите услугу!");
+                    else {
+                        FormCardServiceWithBills.setParams(ListOfTypes, form.mgServises.selected[0].service_id);
+                        FormCardServiceWithBills.showModal();
+                    }
                 };
             }
             return module_constructor;
