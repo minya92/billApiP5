@@ -29,7 +29,7 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                  */
                 self.serviceChange = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ["service_id"], function(p, aHttpContext){
-                        billServicesModule.ChangeService(p.service_id, p.cost, p.days, p.afterMonth, p.prepayment, p.once, p.counts, function (res) {
+                        billServicesModule.ChangeService(p.service_id, p.cost, p.days, p.afterMonth, p.prepayment, p.once, p.counts, p.type, function (res) {
                             onSucces(res);
                         }, function(err){
                             onSucces(err);
