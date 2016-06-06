@@ -60,7 +60,6 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, For
             form.mcType.displayField = 'type_name';
             form.mcType.value = form.mcType.displayList[0];
         }
-        ;
 
         //Если есть список типов, присваиваем, если нет, запрашиваем с сервера
         function checkListOfTypes(aListOfTypes, callback) {
@@ -85,12 +84,6 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, For
                 md.alert("Ошибка получения типов!");
             });
         }
-        ;
-
-        //Кнопка подверждения создания
-        form.btnCreate.onActionPerformed = function () {
-
-        };
 
         //Кнопка сохранения
         form.btnSave.onActionPerformed = function () {
@@ -105,31 +98,54 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, For
         }
 
         //Нажали галочку на периоде
-        form.mcbPeriod.onActionPerformed = function (evt) {
-            if (form.mcbPeriod.value) {
-                form.mcbCounter.value = true;
-                if (form.mcbOnce.value) {
-                    //ChangeType('OneTime');
-                } else {
-                    ChangeType('CounterServiceModule');
-                }
-            } else {
-                if (form.mcbOnce.value) {
-                    form.mcbCounter.value = false;
-                    //ChangeType('OneTime');
-                } else {
-                    if (form.mcbCounter.value)
-                        ChangeType('PeriodCounterServiceModule');
-                    else
-                        ChangeType('PeriodServiceModule');
-                }
-            }
+        form.mcbPeriod.onActionPerformed = function () {
+//            if (form.mcbPeriod.value) {
+//                form.mcbCounter.value = true;
+//                if (form.mcbOnce.value) {
+//                    //ChangeType('OneTime');
+//                } else {
+//                    ChangeType('CounterServiceModule');
+//                }
+//            } else {
+//                if (form.mcbOnce.value) {
+//                    form.mcbCounter.value = false;
+//                    //ChangeType('OneTime');
+//                } else {
+//                    if (form.mcbCounter.value)
+//                        ChangeType('PeriodCounterServiceModule');
+//                    else
+//                        ChangeType('PeriodServiceModule');
+//                }
+//            }
 
+            if (form.mcbPeriod.value) {
+                if (!form.mcbOnce.value)
+                    ChangeType('CounterServiceModule');
+                else
+                    form.mcbCounter.value = true;
+            } else {
+                if (!form.mcbOnce.value)
+                    ChangeType('PeriodCounterServiceModule');
+                else
+                    form.mcbCounter.value = false;
+            }
             //form.mcbCounter.enabled = form.mcbPeriod.value;
         };
 
         //Кликнули галочку на счетчике
         form.mcbCounter.onActionPerformed = function () {
+            if (form.mcbCounter.value)
+                if (!form.mcbOnce.value)
+                    ChangeType('PeriodServiceModule');
+                else
+                    form.mcbPeriod.value = true;
+            else if (!form.mcbPeriod.value)
+//                ChangeType('CounterServiceModule');
+                ;
+            else if (!form.mcbOnce.value)
+                ChangeType('PeriodCounterServiceModule');
+            else
+                form.mcbPeriod.value = false;
 //            if (form.mcbCounter.value) {
 //                form.mcbPeriod.value = true;
 //                if (form.mcbOnce.value) {
@@ -148,19 +164,8 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, For
 //                        ChangeType('CounterServiceModule');
 //                }
 //            }
-//            //form.mcbPeriod.enabled = form.mcbCounter.value;
+////            //form.mcbPeriod.enabled = form.mcbCounter.value;
 
-            if (form.mcbCounter.value)
-                if (!form.mcbOnce.value)
-                    ChangeType('PeriodServiceModule');
-                else
-                    form.mcbPeriod.value = true;
-            else if (!form.mcbPeriod.value)
-                ChangeType('CounterServiceModule');
-            else if (!form.mcbOnce.value)
-                ChangeType('PeriodCounterServiceModule');
-            else
-                form.mcbPeriod.value = false;
         };
 
         //Нажатие на галочку "Единоразово"
@@ -211,6 +216,46 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, For
                 }
         };
 
+        //Запрос создание услуги
+        function CreateService(params, callback) {
+            BillFunc.request("services/create", params, function (success_create) {
+                console.log(success_create);
+                md.alert("Услуга успешно создана!");
+                callback(true);
+            }, function (error_create) {
+                console.log(error_create);
+                md.alert("Ошибка создания услуги!");
+            });
+        }
+
+        //Кнопка подверждения создания
+        form.btnCreate.onActionPerformed = function () {
+            if (form.mffName.text == "" || form.mffCost.text == "" || /\D/.test(form.mffCost.text) ||
+                    (form.rbDays.selected && (form.mffDays.text == "" || /\D/.test(form.mffDays.text))) ||
+                    (form.mcbCounter.value && (form.mffCounter.text == "" || /\D/.test(form.mffCounter.text))))
+                md.alert("Данные введены неверно!!!");
+            else {
+                md.confirm("Подтвердите создание услуги: Имя: " + form.mffName.text + ", Стоимость: " + form.mffCost.text + " рублей, Тип: " + form.mcType.text +
+                        (form.mcbCounter.value ? ", Счётчик: " + form.mffCounter.text + " единиц" : "") +
+                        (form.mcbPeriod.value ? ", Период действия/списания: " + (form.rbMonth.selected ? "Месяц " : form.mffDays.text + " дней") : "") +
+                        (form.mcbPrepayment.value ? ", Оплата: Предварительная." : "."), function (answer) {
+                    if (answer) {
+                        var params = {
+                            name: form.mffName.text,
+                            cost: +form.mffCost.text,
+                            days: form.rbDays.selected ? +form.mffDays.text : null,
+                            prepayment: form.mcbPrepayment.value,
+                            once: form.mcbOnce.value,
+                            counts: form.mcbCounter.value ? +form.mffCounter.text : null,
+                            type: form.mcType.value.bill_services_types_id
+                        };
+                        CreateService(params,function(aCallback){
+                            form.close(aCallback);
+                        });
+                    }
+                });
+            }
+        };
 
         //Изменение значения галочки периода
         form.mcbPeriod.onValueChange = function (evt) {
@@ -224,6 +269,21 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, For
         form.mcbCounter.onValueChange = function (evt) {
             form.mffCounter.enabled = !form.mffCounter.enabled;
             form.lbCounter.enabled = !form.lbCounter.enabled;
+        };
+
+        //Изменяем текст поля с количеством дней
+        form.mffDays.onMouseClicked = function () {
+            form.rbDays.selected = true;
+        };
+
+        //Клик на текст с периодом
+        form.lbPeriod.onMouseClicked = function () {
+            form.mcbPeriod.onActionPerformed();
+        };
+
+        //Клик на текст со счётчиком
+        form.lbCount.onMouseClicked = function () {
+            form.mcbCounter.onActionPerformed();
         };
     }
     return module_constructor;

@@ -183,7 +183,6 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                         form.mgServises.selected[0].active = !form.mgServises.selected[0].active;
                     });
                 }
-                ;
 
                 //Запрос на Активацию
                 function EnableRequest() {
@@ -196,12 +195,13 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                         form.mgServises.selected[0].active = !form.mgServises.selected[0].active;
                     });
                 }
-                ;
 
                 //Создание услуги
                 form.btnNewService.onActionPerformed = function () {
                     FormNewService.setParamsNew(ListOfTypes);
-                    FormNewService.showModal();
+                    FormNewService.showModal(function (res){
+                        if (res) Request();
+                    });
                 };
 
                 //Настройка услуги

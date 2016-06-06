@@ -19,7 +19,7 @@
   <ModelFormattedField cursor="0" format="" name="mffName" nullable="false" parent="view" prefHeight="25px" prefWidth="290px">
     <AnchorsPaneConstraints height="25px" left="90px" right="20px" top="10px"/>
   </ModelFormattedField>
-  <ModelCheckBox cursor="0" focusable="true" name="mcbPeriod" nullable="false" parent="view" prefHeight="15px" prefWidth="13px" toolTipText="Период, через который будет производиться списание средств со счёта">
+  <ModelCheckBox cursor="0" name="mcbPeriod" nullable="false" parent="view" prefHeight="15px" prefWidth="13px" toolTipText="Период, через который будет производиться списание средств со счёта">
     <AnchorsPaneConstraints height="15px" left="10px" top="165px" width="13px"/>
   </ModelCheckBox>
   <Label cursor="0" name="lbPeriod" parent="view" prefHeight="25px" prefWidth="174px" text="Период действия/списания:" toolTipText="Период, через который будет производиться списание средств со счёта">
@@ -31,13 +31,13 @@
   <RadioButton buttonGroup="buttonGroup" cursor="0" foreground="#ffffff" name="rbDays" parent="view" prefHeight="25px" prefWidth="90px" text="             дней">
     <AnchorsPaneConstraints height="25px" left="290px" top="160px" width="90px"/>
   </RadioButton>
-  <ModelFormattedField cursor="0" focusable="true" format="" name="mffDays" nullable="false" parent="view" prefHeight="25px" prefWidth="40px" valueType="0">
+  <ModelFormattedField cursor="0" format="" name="mffDays" nullable="false" parent="view" prefHeight="25px" prefWidth="40px" valueType="0">
     <AnchorsPaneConstraints height="25px" left="305px" top="160px" width="40px"/>
   </ModelFormattedField>
   <Label cursor="0" name="lbDays" parent="view" prefHeight="25px" prefWidth="40px" text="дней">
     <AnchorsPaneConstraints height="25px" left="350px" top="160px" width="40px"/>
   </Label>
-  <ModelCheckBox cursor="0" focusable="true" name="mcbCounter" nullable="false" parent="view" prefHeight="15px" prefWidth="13px" toolTipText="Пакет услуг">
+  <ModelCheckBox cursor="0" name="mcbCounter" nullable="false" parent="view" prefHeight="15px" prefWidth="13px" toolTipText="Пакет услуг">
     <AnchorsPaneConstraints height="15px" left="10px" top="214px" width="13px"/>
   </ModelCheckBox>
   <ModelFormattedField cursor="0" enabled="false" focusable="false" format="" name="mffCounter" nullable="false" parent="view" prefHeight="25px" prefWidth="60px">
@@ -64,7 +64,7 @@
   <Label cursor="0" enabled="false" name="lbCounter" parent="view" prefHeight="25px" prefWidth="50px" text="единиц">
     <AnchorsPaneConstraints height="25px" left="157px" top="210px" width="50px"/>
   </Label>
-  <Label cursor="0" name="label" parent="view" prefHeight="25px" prefWidth="63px" text="Счётчик:" toolTipText="Пакет услуг">
+  <Label cursor="0" name="lbCount" parent="view" prefHeight="25px" prefWidth="63px" text="Счётчик:" toolTipText="Пакет услуг">
     <AnchorsPaneConstraints height="25px" left="27px" top="210px" width="63px"/>
   </Label>
   <ModelCheckBox cursor="0" name="mcbOnce" nullable="false" parent="view" prefHeight="25px" prefWidth="180px" text="Единоразовое списание" toolTipText="Списание будет произведено только один раз">
