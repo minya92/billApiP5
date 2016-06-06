@@ -16,14 +16,15 @@ define('ApiLibs', ['Messages'], function (Messages, ModuleName) {
         self.checkRequiredParams = function(aHttpContext, aRequiredFields, callback, onSuccessCallback){
             var err = false;
             var requestParams = (aHttpContext.request ? aHttpContext.request.params : aHttpContext);
+            var params = {};
             aHttpContext.response.status = 200;
             aHttpContext.response.headers.add("Access-Control-Allow-Origin", "*");
             aHttpContext.response.contentType = 'text/json';
             for (var i in requestParams){
-                requestParams[i] = self.str2Bool(requestParams[i]);
+                params[i] = self.str2Bool(requestParams[i]);
             }
             aRequiredFields.forEach(function(field){
-                if (!requestParams[field])
+                if (!params[field])
                     err = true;
             });
             if(err){
@@ -31,8 +32,8 @@ define('ApiLibs', ['Messages'], function (Messages, ModuleName) {
             }
             else{
                 if(!callback)
-                    return requestParams;
-                else callback(requestParams, aHttpContext);
+                    return params;
+                else callback(params, aHttpContext);
             }
         };
         
@@ -61,11 +62,11 @@ define('ApiLibs', ['Messages'], function (Messages, ModuleName) {
          * @returns {undefined}
          */
         self.str2Bool = function(str){
-            if(str === 'false' || str === false)
+            if(str == 'false' || str == false)
                 return false;
-            else if(str === 'true' || str === true)
+            else if(str == 'true' || str == true)
                 return true;
-            else if(str === 'null' || str === null)
+            else if(str == 'null' || str == null)
                 return null;
             else return str;
         }

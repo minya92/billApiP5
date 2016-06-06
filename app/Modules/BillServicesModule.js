@@ -43,9 +43,9 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                  */
                 self.CreateService = function (aName, aCost, aDays, aLock, anAfterMonth, aPrepayment, anOnce, aCounter, aType, aCallBack, aErrCallback) {
 //                    var service_type = aCounter ? 'CounterServiceModule' : 'PeriodServiceModule'
-                    var service_type = (aType == 'false' || aType == 'null' || aType == false || aType == null) ? 'PeriodServiceModule' : aType;
-                    aPrepayment = (aPrepayment == 'false' || aPrepayment == 'null' || aPrepayment == false || aPrepayment == null) ? null : true;
-                    anOnce = (anOnce == 'false' || anOnce == 'null' || anOnce == false || anOnce == null) ? null : true;
+                    var service_type = !aType? 'PeriodServiceModule' : aType;
+                    aPrepayment = !aPrepayment? null : true;
+                    anOnce = !anOnce ? null : true;
                     if (aDays == false || aDays == 0 || aDays == null || aDays === undefined || !aDays) {
                         anAfterMonth = true;
                         aDays = 0;
@@ -112,9 +112,9 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                     model.qServiceList.params.service_id = +aServiceId;
                     model.qServiceList.requery(function () {
                         if (model.qServiceList.length) {
-                            aPrepayment = ((aPrepayment == false || aPrepayment == 'false') ? false : model.qServiceList[0].prepayment);
-                            anAfterMonth = ((anAfterMonth == false || anAfterMonth == 'false') ? false : model.qServiceList[0].service_month);
-                            anOnce = ((anOnce == false || anOnce == 'false') ? false : model.qServiceList[0].once);
+                            aPrepayment = (typeof aPrepayment != 'undefined') ?  aPrepayment : model.qServiceList[0].prepayment;
+                            anAfterMonth = (typeof anAfterMonth != 'undefined') ? anAfterMonth : model.qServiceList[0].service_month;
+                            anOnce = (typeof anOnce != 'undefined') ? anOnce : model.qServiceList[0].once;
                             aCost = (aCost ? aCost : model.qServiceList[0].service_cost);
                             aDays = (aDays ? aDays : model.qServiceList[0].service_days);
                             model.qCloseCostService.params.service_id = +aServiceId;
