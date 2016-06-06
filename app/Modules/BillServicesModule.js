@@ -43,9 +43,9 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                  */
                 self.CreateService = function (aName, aCost, aDays, aLock, anAfterMonth, aPrepayment, anOnce, aCounter, aType, aCallBack, aErrCallback) {
 //                    var service_type = aCounter ? 'CounterServiceModule' : 'PeriodServiceModule'
-                    var service_type = (aType == 'false' || aType == 'null') ? 'PeriodServiceModule' : aType;
-                    aPrepayment = (aPrepayment == 'false' || aPrepayment == 'null') ? null : true;
-                    anOnce = (anOnce == 'false' || anOnce == 'null') ? null : true;
+                    var service_type = (aType == 'false' || aType == 'null' || aType == false || aType == null) ? 'PeriodServiceModule' : aType;
+                    aPrepayment = (aPrepayment == 'false' || aPrepayment == 'null' || aPrepayment == false || aPrepayment == null) ? null : true;
+                    anOnce = (anOnce == 'false' || anOnce == 'null' || anOnce == false || anOnce == null) ? null : true;
                     if (aDays == false || aDays == 0 || aDays == null || aDays === undefined || !aDays) {
                         anAfterMonth = true;
                         aDays = 0;
