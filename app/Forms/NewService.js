@@ -2,14 +2,16 @@
  * 
  * @author User
  */
-define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, Forms, Ui, Rpc, invoke, ModuleName) {
-    function module_constructor(parentForm) {
+define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], 
+function (Orm, Forms, Ui, Rpc, invoke, ModuleName) {
+    function module_constructor(parentForm, parentSelf) {
         var self = this
                 , model = Orm.loadModel(ModuleName)
                 , form = Forms.loadForm(ModuleName, model);
 
         var BillFunc = new Rpc.Proxy('BillApiFunctions');
         var ServiceId;
+        //var Services = Services(form);        
 
         self.show = function (aPanel) {
             var cont = aPanel ? (typeof (aPanel) === 'object' ? aPanel
@@ -42,7 +44,7 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, For
             form.cbUnsubscribe.visible = true;
             form.btnSave.visible = true;
             form.mffName.enabled = false;
-            
+
             ServiceId = serviceId;
 
             checkListOfTypes(aListOfTypes, function (types) {
@@ -80,7 +82,6 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, For
         //Заполнение формы
         function DataFilling(success_get) {
             parentForm.title += success_get.services[0].service_name;
-
             form.mffName.value = success_get.services[0].service_name;
             form.mffCost.value = +success_get.services[0].service_cost;
             ChangeType(success_get.services[0].service_type_id);
@@ -258,16 +259,18 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, For
             CheckData("Подтвердите сохранение", function (params) {
                 params.service_id = ServiceId;
                 SaveService(params, function (aCallback) {
-                    form.close(aCallback);
+                    //form.close(aCallback);
+                    //Services.request;
+                    parentSelf.Request();
                 });
             });
         };
-        
+
         //Запрос сохранения услуги
         function SaveService(params, callback) {
             BillFunc.request("services/change", params, function (success_change) {
                 console.log(success_change);
-                md.alert("Услуга успешно изменена!");
+                md.alert("Услуга успешно сохранена!");
                 callback(true);
             }, function (error_change) {
                 console.log(error_change);

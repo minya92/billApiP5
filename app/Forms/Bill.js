@@ -30,7 +30,7 @@ define('Bill', ['orm', 'forms', 'ui', 'rpc', 'BillStatistics'], function (Orm, F
             form.mcChoose.displayList = Choose;
             form.mcChoose.displayField = 'list';
             form.mcChoose.value = form.mcChoose.displayList[0];
-            form.modelDate.value = new Date;
+            form.modelDate.value = new Date();
         };
 
 //        form.buttonGroup.onItemSelected = function () {

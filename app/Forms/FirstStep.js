@@ -10,8 +10,8 @@ define('FirstStep', ['orm', 'forms', 'ui', 'rpc', 'Bill', 'Services'],
                         , form = Forms.loadForm(ModuleName, model);
 
                 var BillFunc = new Rpc.Proxy('BillApiFunctions');
-                var FormBill = new Bill;
-                var FormServices = new Services;
+                var FormBill = new Bill();
+                var FormServices = new Services();
 
                 self.show = function () {
                     form.show();

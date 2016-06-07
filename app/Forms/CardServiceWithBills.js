@@ -3,7 +3,7 @@
  * @author User
  */
 define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService'], function (Orm, Forms, Ui, NewService, ModuleName) {
-    function module_constructor() {
+    function module_constructor(ServicesSelf) {
         var self = this
                 , model = Orm.loadModel(ModuleName)
                 , form = Forms.loadForm(ModuleName, model);
@@ -14,13 +14,17 @@ define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService'], function (O
 
         self.showModal = function (callback) {
             form.showModal(callback);
-        };        
-        
+        };
+
         self.setParams = function (aListOfTypes, serviceId) {
             form.title = "Управление услугой: ";
-            var newService = new NewService(form);
-            newService.show(form.pnlServiseCard);
+            var newService = new NewService(form, ServicesSelf);
             newService.setParamsOpen(aListOfTypes, serviceId);
+            newService.show(form.pnlServiseCard);
+        };
+
+        form.onWindowClosing = function (evt) {
+            //form.close(true);
         };
     }
     return module_constructor;
