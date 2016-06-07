@@ -365,6 +365,22 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                         aErrCallback({error: msg.get('errQuery')});
                     });
                 };
+                
+                /**
+                 * Получить список счетов, которые подключены по заданной услуге
+                 * @param {type} aServiceId
+                 * @param {type} aCallback
+                 * @param {type} aErrCallback
+                 * @returns {undefined}
+                 */
+                self.GetAccountsOnService = function(aServiceId, aCallback, aErrCallback){
+                    model.qAccountsOnService.params.service_id = +aServiceId;
+                    model.qAccountsOnService.requery(function(){
+                        aCallback({result: model.qAccountsOnService});
+                    }, function(){
+                        aErrCallback({error: msg.get('errQuery')});
+                    });
+                };
 
                 /*
                  * Приотсановить услугу

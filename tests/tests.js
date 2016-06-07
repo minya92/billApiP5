@@ -220,6 +220,14 @@ QUnit.test("Подключить обычную услугу на счет", fun
     });
 });
 
+QUnit.test("Список аккаунтов подключенных к услуге", function (assert) {
+    var done = assert.async();
+    new request("POST", "/accounts/on_service", {service_id: serviceId}, function (res) {
+        assert.equal(res.result[0].account_id,  accountId, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
+        done();
+    });
+});
+
 var serviceAccountCounter = null; //id подключенной услуги со счетчиком 
 QUnit.test("Подключить услугу со счетчиком на счет", function (assert) {
     var done = assert.async();

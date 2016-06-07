@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel>
+  <parameters>
+    <parameter description="" name="service_id" nullable="true" parameterMode="1" selectionForm="null" type="Number"/>
+  </parameters>
+  <parametersEntity entityHeight="200" entityIconified="false" entityLocationX="8" entityLocationY="7" entityWidth="150"/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="146530036807100" entityLocationX="358" entityLocationY="6" entityWidth="150" tableAlias="t" tableName="bill_services_accounts" tableSchemaName=""/>
+  <entity Title="" entityHeight="75" entityIconified="false" entityId="146530035284900" entityLocationX="189" entityLocationY="12" entityWidth="150" tableAlias="t1" tableName="bill_accounts" tableSchemaName=""/>
+  <relation leftEntityId="-1" leftEntityParameterName="service_id" polyline="164;42 164;108 352;108 352;75" rightEntityFieldName="service_id" rightEntityId="146530036807100"/>
+  <relation leftEntityFieldName="account_id" leftEntityId="146530036807100" rightEntityFieldName="bill_accounts_id" rightEntityId="146530035284900"/>
+</datamodel>

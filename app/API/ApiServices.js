@@ -148,6 +148,20 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                         });
                     }, onSucces);
                 };
+                
+                /*
+                 * @POST /accounts/on_service
+                 * @GET /accounts/on_service
+                 */
+                self.accountsOnService = function (aPath, onSucces) {
+                    libs.checkRequiredParams((new HttpContext()), ['service_id'], function(p, aHttpContext){
+                        billServicesModule.GetAccountsOnService(p.service_id, function (res) {
+                            onSucces(res);
+                        }, function(err){
+                            onSucces(err);
+                        });
+                    }, onSucces);
+                };
 
                 /*
                  * @POST /services/set_count
