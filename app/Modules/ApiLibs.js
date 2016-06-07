@@ -16,11 +16,15 @@ define('ApiLibs', ['Messages'], function (Messages, ModuleName) {
         self.checkRequiredParams = function(aHttpContext, aRequiredFields, callback, onSuccessCallback){
             var err = false;
             var requestParams = (aHttpContext.request ? aHttpContext.request.params : aHttpContext);
+            var params = {};
             aHttpContext.response.status = 200;
             aHttpContext.response.headers.add("Access-Control-Allow-Origin", "*");
             aHttpContext.response.contentType = 'text/json';
+            for (var i in requestParams){
+                params[i] = self.str2Bool(requestParams[i]);
+            }
             aRequiredFields.forEach(function(field){
-                if (!requestParams[field])
+                if (!params[field])
                     err = true;
             });
             if(err){
@@ -28,8 +32,8 @@ define('ApiLibs', ['Messages'], function (Messages, ModuleName) {
             }
             else{
                 if(!callback)
-                    return requestParams;
-                else callback(requestParams, aHttpContext);
+                    return params;
+                else callback(params, aHttpContext);
             }
         };
         
@@ -49,5 +53,22 @@ define('ApiLibs', ['Messages'], function (Messages, ModuleName) {
             else
                 aHttpContext.response.body = JSON.stringify(aResponse); //так лучше не делать, почему то все ломает
         };
+        
+        /**
+         * На вход может приходить примитив типа boolean или null в качестве строки
+         * 'false', 'true', 'null' что не хорошо
+         * Этот метод производит сериализацию и возвращает false если 'false', null если null и т.д.
+         * @param {type} str
+         * @returns {undefined}
+         */
+        self.str2Bool = function(str){
+            if(str == 'false' || str == false)
+                return false;
+            else if(str == 'true' || str == true)
+                return true;
+            else if(str == 'null' || str == null)
+                return null;
+            else return str;
+        }
     };
 });
