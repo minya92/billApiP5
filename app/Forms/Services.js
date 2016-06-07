@@ -74,6 +74,8 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                     });
                 }
 
+                self.Request = Request;
+
                 //Обновить грид
                 form.btnRefresh.onActionPerformed = function () {
                     Request();
@@ -196,7 +198,7 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
 
                 //Создание услуги
                 form.btnNewService.onActionPerformed = function () {
-                    var FormNewService = new NewService;
+                    var FormNewService = new NewService();
                     FormNewService.setParamsNew(ListOfTypes);
                     FormNewService.showModal(function (res) {
                         if (res)
@@ -206,12 +208,24 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
 
                 //Настройка услуги
                 form.btnSettings.onActionPerformed = function () {
-                    var FormCardServiceWithBills = new CardServiceWithBills;
+                    var FormCardServiceWithBills = new CardServiceWithBills(self);
                     if (form.mgServises.selected.length == 0)
                         md.alert("Выберите услугу!");
+                    else
+                    if (form.mgServises.selected[0].deleted)
+                        md.alert("Услуга неактивна!");
                     else {
                         FormCardServiceWithBills.setParams(ListOfTypes, form.mgServises.selected[0].service_id);
-                        FormCardServiceWithBills.showModal();
+                        FormCardServiceWithBills.showModal(function (res) {
+                            if (res)
+                                Request();
+                        });
+                    }
+                };
+
+                form.mgServises.onMouseClicked = function (e) {
+                    if (e.clickCount == 2) {
+                        form.btnSettings.onActionPerformed();
                     }
                 };
             }
