@@ -54,8 +54,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                     }
                     model.qServiceList.push({
                         service_name: aName,
-                        locked: aLock,
-                        service_type_id: service_type
+                        locked: aLock
                     });
                     model.qServiceSetting.push({
                         service_id: model.qServiceList[model.qServiceList.length - 1].bill_services_id,
@@ -65,7 +64,8 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                         start_date: new Date(),
                         prepayment: aPrepayment,
                         once: anOnce,
-                        cost_counts: (aCounter ? +aCounter : null)
+                        cost_counts: (aCounter ? +aCounter : null),
+                        service_type_id: service_type
                     });
                     model.save(function () {
                         aCallBack(model.qServiceList[model.qServiceList.length - 1].bill_services_id);
@@ -117,6 +117,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                             anOnce = (typeof anOnce != 'undefined') ? anOnce : model.qServiceList[0].once;
                             aCost = (aCost ? aCost : model.qServiceList[0].service_cost);
                             aDays = (aDays ? aDays : model.qServiceList[0].service_days);
+                            aType = !aType? 'PeriodServiceModule' : model.qServiceList[0].service_type;
                             model.qCloseCostService.params.service_id = +aServiceId;
                             model.qCloseCostService.executeUpdate(closeCostCallback, closeCostCallback);
                         } else {
@@ -131,20 +132,33 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                  * Добавление услуги на лицевой счет
                  */
                 self.AddServiceOnAccount = function (anAccountId, aServiceId, aCallback, aErrCallback) {
-                    var servicesOnAccountId = null;
-                    function addService() {
+                    function revert(){
+                        model.qAddService.remove(model.qAddService.cursor);
+                        model.save(function(){}, function(){});
+                    }
+                    function getServicesOnAccountId(callback){
                         model.qAddService.push({
                             account_id: anAccountId,
                             service_id: aServiceId,
-                            service_start_date: new Date(),
-                            service_counts: model.qServiceList[0].cost_counts
+                            service_start_date: new Date()                             
                         });
+                        model.save(function(){
+                            callback(model.qAddService.cursor.bill_services_accounts_id);
+                        }, function(){
+                            model.revert();
+                            aErrCallback({error: msg.get('errSaving')});
+                        });
+                       
+                    };
+                    function addService() {
+                        model.qAddService.cursor.service_counts =  model.qServiceList[0].cost_counts;
                         model.save(function () {
-                            servicesOnAccountId = model.qAddService[model.qAddService.length - 1].bill_services_accounts_id;
+                            var servicesOnAccountId = model.qAddService.cursor.bill_services_accounts_id;
                             aCallback({
                                 result: servicesOnAccountId
                             });
                         }, function () {
+                            revert();
                             aErrCallback({error: msg.get('errSaving')});
                         });
                     }
@@ -154,6 +168,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                                 if (status.result) {
                                     addService();
                                 } else {
+                                    revert();
                                     aErrCallback({error: status.error});
                                 }
                             }
@@ -163,45 +178,51 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                                 else
                                     operations.setOperationDone(operation.id, setStatus, setStatus);
                             } else {
+                                revert();
                                 aErrCallback({error: operation.error});
                             }
                         };
                     }
-                    accounts.getSumFromAccount(anAccountId, function (res) {
-                        model.qServiceList.params.service_id = +aServiceId;
-                        model.qServiceList.requery(function () {
-                            if (model.qServiceList.length) {
-                                var date = new Date();
-                                if (model.qServiceList[0].service_month)
-                                    date.setMonth(date.getMonth() + 1);
-                                else
-                                    date.setDate(date.getDate() + model.qServiceList[0].service_days);
+                    getServicesOnAccountId(function(servicesOnAccountId){
+                        accounts.getSumFromAccount(anAccountId, function (res) {
+                            model.qServiceList.params.service_id = +aServiceId;
+                            model.qServiceList.requery(function () {
+                                if (model.qServiceList.length) {
+                                    var date = new Date();
+                                    if (model.qServiceList[0].service_month)
+                                        date.setMonth(date.getMonth() + 1);
+                                    else
+                                        date.setDate(date.getDate() + model.qServiceList[0].service_days);
 
-                                if (model.qServiceList[0].prepayment) { // предоплата
-                                    if (res.sum >= model.qServiceList[0].service_cost) {
-                                        operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId, function (op) {
-                                            if (op.id) {
-                                                operations.setOperationDone(op.id, function () {
-                                                    operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId, (setOperationDone(date)), (setOperationDone()));
-                                                }, function (err) {
-                                                    aErrCallback({error: err});
-                                                });
-                                            } else {
-                                                aErrCallback({error: op.error});
-                                            }
-                                        }, (setOperationDone()));
-                                    } else {
-                                        aErrCallback({error: msg.get('errNoMoney')});
+                                    if (model.qServiceList[0].prepayment) { // предоплата
+                                        if (res.sum >= model.qServiceList[0].service_cost) {
+                                            operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId, function (op) {
+                                                if (op.id) {
+                                                    operations.setOperationDone(op.id, function () {
+                                                        operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId, (setOperationDone(date)), (setOperationDone()));
+                                                    }, function (err) {
+                                                        aErrCallback({error: err});
+                                                    });
+                                                } else {
+                                                    aErrCallback({error: op.error});
+                                                }
+                                            }, (setOperationDone()));
+                                        } else {
+                                            revert();
+                                            aErrCallback({error: msg.get('errNoMoney')});
+                                        }
+                                    } else { // без предоплаты
+                                        operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId, (setOperationDone(date)), (setOperationDone()));
                                     }
-                                } else { // без предоплаты
-                                    operations.createOperation(anAccountId, model.qServiceList[0].service_cost, 'withdraw', servicesOnAccountId, (setOperationDone(date)), (setOperationDone()));
+                                } else {
+                                    revert();
+                                    aErrCallback({error: msg.get('errFindService')});
                                 }
-                            } else {
-                                aErrCallback({error: msg.get('errFindService')});
-                            }
+                            });
+                        }, function () {
+                            revert();
+                            aErrCallback({error: msg.get('errQuery')});
                         });
-                    }, function () {
-                        aErrCallback({error: msg.get('errQuery')});
                     });
                 };
 
