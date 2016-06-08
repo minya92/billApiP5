@@ -2,14 +2,16 @@
  * 
  * @author User
  */
-define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService', 'rpc'],
-        function (Orm, Forms, Ui, NewService, Rpc, ModuleName) {
+define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService', 'AllBills', 'rpc'],
+        function (Orm, Forms, Ui, NewService, AllBills, Rpc, ModuleName) {
             function module_constructor(ServicesSelf) {
                 var self = this
                         , model = Orm.loadModel(ModuleName)
                         , form = Forms.loadForm(ModuleName, model);
 
                 var BillFunc = new Rpc.Proxy('BillApiFunctions');
+                var ServiceId;
+                var AccountsList;
 
                 self.show = function () {
                     form.show();
@@ -19,6 +21,7 @@ define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService', 'rpc'],
                     form.showModal(callback);
                 };
 
+                //Подстраиваем вид грида под тип услуги
                 self.ChangeVisibleColums = function (period, counter) {
                     if (period)
                         form.mgBillsOnService.colDate.visible = true;
@@ -32,8 +35,10 @@ define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService', 'rpc'],
                     newService.setParamsOpen(aListOfTypes, serviceId);
                     newService.show(form.pnlServiseCard);
                     Request(serviceId);
+                    ServiceId = serviceId;
                 };
 
+                //Запрос списка аккаунтов
                 function Request(serviceId) {
                     BillFunc.request("accounts/on_service", {service_id: serviceId}, function (success_on_service) {
                         console.log(success_on_service);
@@ -45,14 +50,26 @@ define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService', 'rpc'],
                     });
                 }
 
+                //заполнение данных грида
                 function FillGrid(Data) {
+                    AccountsList = Data;
                     form.mgBillsOnService.data = Data;
                     form.mgBillsOnService.colBillId.field = 'account_id';
                     form.mgBillsOnService.colPause.field = 'paused';
                     form.mgBillsOnService.colCount.field = 'service_counts';
-                    form.mgBillsOnService.colDate.field = 'service_start_date';
+                    form.mgBillsOnService.colDate.field = 'operation_date';
                 }
 
+                //Добавить услугу на аккаунт
+                form.btnAddBill.onActionPerformed = function () {
+                    var FormAllBills = new AllBills();
+                    FormAllBills.showModal(function (res) {
+                        if (res)
+                            Request(ServiceId);
+                    });
+                };
+
+                //Кнопка получения остатка денег в рублях
                 form.btnMoney.onActionPerformed = function () {
                     if (!form.mgBillsOnService.selected[0])
                         md.alert("Выберите аккаунт!");
@@ -66,6 +83,7 @@ define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService', 'rpc'],
                         });
                 };
 
+                //Приостановить услугу на аккаунте
                 form.btnPause.onActionPerformed = function () {
                     var item = form.mgBillsOnService.selected[0];
                     if (!item)
@@ -73,13 +91,14 @@ define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService', 'rpc'],
                     else
                         BillFunc.request("services/pause", {service_account_id: item.bill_services_accounts_id}, function (res_pause) {
                             console.log(res_pause);
-                            Request(item.account_id);
+                            Request(ServiceId);
                         }, function (pause_error) {
                             console.log(pause_error);
                             md.alert("Ошибка! Услуга на аккаунте " + item.account_id + " не была приостановлена!");
                         });
                 };
 
+                //Отписать аккаунт от услуги
                 form.btnDel.onActionPerformed = function () {
                     var item = form.mgBillsOnService.selected[0];
                     if (!item)
@@ -90,13 +109,22 @@ define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService', 'rpc'],
                                 md.alert("Действие пока не активно");
 //                                BillFunc.request("services/disable", {service_account_id: item.bill_services_accounts_id}, function (res_disable) {
 //                                    console.log(res_disable);
-//                                    Request(item.account_id);
+//                                    Request(ServiceId);
 //                                }, function (disable_error) {
 //                                    console.log(disable_error);
 //                                    md.alert("Ошибка удаления услуги со счёта " +item.account_id+"!");
 //                                });
                             }
                         });
+                };
+
+                //Поиск
+                form.mffSearch.onValueChange = form.mffSearch.onKeyReleased = function () {
+                    var filterKey = form.mffSearch.text;
+                    var filtered = AccountsList.filter(function (aItems) {
+                        return (aItems.account_id + "").toLowerCase().indexOf(filterKey.toLowerCase()) !== -1;
+                    });
+                    form.mgBillsOnService.data = filtered;
                 };
 
                 form.onWindowClosing = function (evt) {

@@ -25,13 +25,13 @@
   <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgBillsOnService" parent="pnlServiseWithBill" prefHeight="385px" prefWidth="400px">
     <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="30px"/>
     <RadioGridColumn name="colSelected"/>
-    <ModelGridColumn name="colBillId" preferredWidth="80px" title="ID счета" width="124px">
+    <ModelGridColumn name="colBillId" preferredWidth="80px" title="ID счета" width="115px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="colCount" preferredWidth="50px" title="Остаток счетчика" visible="false" width="93px">
+    <ModelGridColumn name="colCount" preferredWidth="65px" title="Остаток счетчика" visible="false" width="100px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="colDate" preferredWidth="65px" title="Дата списания" visible="false" width="109px">
+    <ModelGridColumn name="colDate" title="Дата списания" visible="false" width="111px">
       <ModelDate/>
     </ModelGridColumn>
     <ModelGridColumn maxWidth="110px" minWidth="22px" name="colPause" preferredWidth="50px" title="Приостановлен" width="50px">
