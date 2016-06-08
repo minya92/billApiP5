@@ -173,6 +173,7 @@ QUnit.test("Получить предыдущую услугу ", function (asse
     request("POST", "services/get", {service_id: serviceId}, function (res) {
         assert.equal(res.services[0].service_id, serviceId, "Тот ли ID вернулся: " + JSON.stringify(res.services) + errorMsg(res));
         assert.equal(res.services[0].once, true, "C разовым ли списанием: " + JSON.stringify(res.services[0].once) + errorMsg(res));
+        assert.ok(res.services[0].service_type_id, "Есть ли тип: " + JSON.stringify(res.services[0].service_type_id) + errorMsg(res));
         done();
     });
 });
@@ -183,6 +184,7 @@ QUnit.test("Изменить услугу + проверка на однораз
         console.log(res);
         assert.equal(res.service_id, serviceId, "Тот ли ID: " + JSON.stringify(res.service_id) + errorMsg(res));
         assert.equal(res.once, false, "Одноразовость: " + JSON.stringify(res.once) + errorMsg(res));
+        assert.ok(res.service_type_id, "Есть ли тип: " + JSON.stringify(res.service_type_id) + errorMsg(res));
         done();
     });
 });
@@ -200,6 +202,7 @@ QUnit.test("Получить инфу по услуге со счетчиком 
     var done = assert.async();
     request("POST", "services/get", {service_id: serviceId}, function (res) {
         assert.ok(res.services, "RESULT: " + JSON.stringify(res.services) + errorMsg(res));
+        assert.ok(res.services[0].service_type_id, "Есть ли тип: " + JSON.stringify(res.services[0].service_type_id) + errorMsg(res));
         done();
     });
 });

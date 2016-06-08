@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?><datamodel>
   <entity Name="qServiseAddCost" Title="" entityHeight="200" entityIconified="false" entityId="145043108437598" entityLocationX="273" entityLocationY="23" entityWidth="150" queryId="qServiseAddCost" tableName="" tableSchemaName=""/>
   <entity Name="qAccountsOnService" Title="" entityHeight="81" entityIconified="false" entityId="146530051312300" entityLocationX="762" entityLocationY="331" entityWidth="150" queryId="qAccountsOnService" tableName="" tableSchemaName=""/>
-  <entity Name="qServiceList" Title="" entityHeight="309" entityIconified="false" entityId="145042832153460" entityLocationX="71" entityLocationY="24" entityWidth="150" queryId="qServiceList" tableName="" tableSchemaName=""/>
+  <entity Name="qServiceList" Title="" entityHeight="309" entityIconified="false" entityId="145042832153460" entityLocationX="69" entityLocationY="24" entityWidth="150" queryId="qServiceList" tableName="" tableSchemaName=""/>
   <entity Name="qBillServicesTypes" Title="" entityHeight="87" entityIconified="false" entityId="146468185477288" entityLocationX="528" entityLocationY="121" entityWidth="150" queryId="qBillServicesTypes" tableName="" tableSchemaName=""/>
-  <entity Name="qServiceSetting" Title="" entityHeight="200" entityIconified="false" entityId="145275917279332" entityLocationX="780" entityLocationY="31" entityWidth="150" queryId="qServiceSetting" tableName="" tableSchemaName=""/>
+  <entity Name="qServiceSetting" Title="" entityHeight="234" entityIconified="false" entityId="145275917279332" entityLocationX="780" entityLocationY="31" entityWidth="150" queryId="qServiceSetting" tableName="" tableSchemaName=""/>
   <entity Name="qAddService" Title="" entityHeight="274" entityIconified="false" entityId="145252383577188" entityLocationX="249" entityLocationY="245" entityWidth="150" queryId="qAddService" tableName="" tableSchemaName=""/>
   <entity Name="qCloseCostService" Title="" entityHeight="51" entityIconified="false" entityId="145277581191240" entityLocationX="57" entityLocationY="351" entityWidth="150" queryId="qCloseCostService" tableName="" tableSchemaName=""/>
   <entity Name="qDelService" Title="" entityHeight="137" entityIconified="false" entityId="146409165040341" entityLocationX="566" entityLocationY="312" entityWidth="150" queryId="qDelService" tableName="" tableSchemaName=""/>
-  <referenceRelation leftEntityFieldName="service_type_id" leftEntityId="145275917279332" rightEntityFieldName="bill_services_types_id" rightEntityId="146468185477288"/>
   <referenceRelation leftEntityFieldName="service_id" leftEntityId="145043108437598" rightEntityFieldName="bill_services_id" rightEntityId="145042832153460"/>
-  <referenceRelation leftEntityFieldName="service_id" leftEntityId="145042832153460" rightEntityFieldName="bill_services_id" rightEntityId="145042832153460"/>
-  <referenceRelation leftEntityFieldName="account_id" leftEntityId="145252383577188" rightEntityFieldName="bill_accounts_id" rightEntityId="146530051312300"/>
-  <referenceRelation leftEntityFieldName="service_id" leftEntityId="145042832153460" rightEntityFieldName="bill_services_id" rightEntityId="145252383577188"/>
+  <referenceRelation leftEntityFieldName="service_id" leftEntityId="145252383577188" rightEntityFieldName="bill_services_id" rightEntityId="146409165040341"/>
   <referenceRelation leftEntityFieldName="service_type_id" leftEntityId="145043108437598" rightEntityFieldName="bill_services_types_id" rightEntityId="146468185477288"/>
-  <referenceRelation leftEntityFieldName="service_id" leftEntityId="145275917279332" rightEntityFieldName="bill_services_id" rightEntityId="145252383577188"/>
-  <referenceRelation leftEntityFieldName="service_id" leftEntityId="145252383577188" rightEntityFieldName="bill_services_id" rightEntityId="145252383577188"/>
+  <referenceRelation leftEntityFieldName="service_id" leftEntityId="145043108437598" rightEntityFieldName="bill_services_id" rightEntityId="146409165040341"/>
+  <referenceRelation leftEntityFieldName="service_id" leftEntityId="145275917279332" rightEntityFieldName="bill_services_id" rightEntityId="145042832153460"/>
+  <referenceRelation leftEntityFieldName="service_id" leftEntityId="145042832153460" rightEntityFieldName="bill_services_id" rightEntityId="145252383577188"/>
   <referenceRelation leftEntityFieldName="service_id" leftEntityId="145275917279332" rightEntityFieldName="bill_services_id" rightEntityId="146409165040341"/>
   <referenceRelation leftEntityFieldName="service_id" leftEntityId="145042832153460" rightEntityFieldName="bill_services_id" rightEntityId="146409165040341"/>
-  <referenceRelation leftEntityFieldName="service_id" leftEntityId="145275917279332" rightEntityFieldName="bill_services_id" rightEntityId="145042832153460"/>
-  <referenceRelation leftEntityFieldName="service_id" leftEntityId="145043108437598" rightEntityFieldName="bill_services_id" rightEntityId="146409165040341"/>
-  <referenceRelation leftEntityFieldName="service_type_id" leftEntityId="145042832153460" rightEntityFieldName="bill_services_types_id" rightEntityId="146468185477288"/>
+  <referenceRelation leftEntityFieldName="account_id" leftEntityId="146530051312300" rightEntityFieldName="bill_accounts_id" rightEntityId="146530051312300"/>
+  <referenceRelation leftEntityFieldName="account_id" leftEntityId="145252383577188" rightEntityFieldName="bill_accounts_id" rightEntityId="146530051312300"/>
   <referenceRelation collectionPropertyName="ServiceList" leftEntityFieldName="service_id" leftEntityId="145252383577188" rightEntityFieldName="bill_services_id" rightEntityId="145042832153460" scalarPropertyName="AddService"/>
-  <referenceRelation leftEntityFieldName="service_id" leftEntityId="145252383577188" rightEntityFieldName="bill_services_id" rightEntityId="146409165040341"/>
+  <referenceRelation leftEntityFieldName="service_id" leftEntityId="145275917279332" rightEntityFieldName="bill_services_id" rightEntityId="145252383577188"/>
+  <referenceRelation leftEntityFieldName="service_id" leftEntityId="145042832153460" rightEntityFieldName="bill_services_id" rightEntityId="145042832153460"/>
+  <referenceRelation leftEntityFieldName="service_type_id" leftEntityId="145042832153460" rightEntityFieldName="bill_services_types_id" rightEntityId="146468185477288"/>
+  <referenceRelation leftEntityFieldName="service_id" leftEntityId="146530051312300" rightEntityFieldName="bill_services_id" rightEntityId="145042832153460"/>
   <referenceRelation leftEntityFieldName="service_id" leftEntityId="145043108437598" rightEntityFieldName="bill_services_id" rightEntityId="145252383577188"/>
+  <referenceRelation leftEntityFieldName="service_type_id" leftEntityId="145275917279332" rightEntityFieldName="bill_services_types_id" rightEntityId="146468185477288"/>
+  <referenceRelation leftEntityFieldName="service_id" leftEntityId="146530051312300" rightEntityFieldName="bill_services_id" rightEntityId="146409165040341"/>
+  <referenceRelation leftEntityFieldName="service_id" leftEntityId="145252383577188" rightEntityFieldName="bill_services_id" rightEntityId="145252383577188"/>
+  <referenceRelation leftEntityFieldName="service_id" leftEntityId="146530051312300" rightEntityFieldName="bill_services_id" rightEntityId="145252383577188"/>
 </datamodel>
