@@ -56,7 +56,7 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                  * @GET /services/disable
                  */
                 self.disableOnAccount = function (aPath, onSucces) {
-                    libs.checkRequiredParams((new HttpContext()), ["service_id", "account_id"], function(p, aHttpContext){
+                    libs.checkRequiredParams((new HttpContext()), [], function(p, aHttpContext){
                          billServicesModule.DisableService(p.account_id, p.service_id, p.service_account_id, function (res) {
                             onSucces(res);
                         }, function(err){
@@ -112,7 +112,7 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                  * @GET /services/pause
                  */
                 self.pauseService = function (aPath, onSucces) {
-                    libs.checkRequiredParams((new HttpContext()), ["service_id", "account_id"], function(p, aHttpContext){
+                    libs.checkRequiredParams((new HttpContext()), [], function(p, aHttpContext){
                         billServicesModule.PauseService(p.account_id, p.service_id, p.service_account_id, function (res) {
                             onSucces(res);
                         }, function(err){

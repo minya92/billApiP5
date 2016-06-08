@@ -15,6 +15,7 @@
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/new_bill/new_bill.png" name="btnAddBill" parent="toolBar" prefHeight="30px" prefWidth="32px" toolTipText="Добавить услугу на счёт" verticalTextPosition="3"/>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/Play.Pause/pause.png" name="btnPause" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Приостановить услугу на счету" verticalTextPosition="3"/>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/delete.png" name="btnDel" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Безвозвратно удалить услугу со счёта" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/money1.png" name="btnMoney" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Просмотреть остаток денежных средств на счету в рублях" verticalTextPosition="3"/>
   <Label cursor="0" horizontalAlignment="4" name="lbSearch" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="67px" text="Поиск: ">
     <AnchorsPaneConstraints height="30px" left="140px" top="0px" width="67px"/>
   </Label>
@@ -23,18 +24,18 @@
   </ModelFormattedField>
   <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgBillsOnService" parent="pnlServiseWithBill" prefHeight="385px" prefWidth="400px">
     <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="30px"/>
-    <ModelGridColumn name="colBillId" preferredWidth="80px" title="ID счета" width="102px">
+    <RadioGridColumn name="colSelected"/>
+    <ModelGridColumn name="colBillId" preferredWidth="80px" title="ID счета" width="124px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="colMoney" preferredWidth="65px" title="Сумма на счету (руб)" width="87px">
+    <ModelGridColumn name="colCount" preferredWidth="50px" title="Остаток счетчика" visible="false" width="93px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="colCount" preferredWidth="50px" title="Остаток" width="72px">
-      <ModelFormattedField format=""/>
+    <ModelGridColumn name="colDate" preferredWidth="65px" title="Дата списания" visible="false" width="109px">
+      <ModelDate/>
     </ModelGridColumn>
-    <ModelGridColumn name="colDate" preferredWidth="65px" title="Дата списания" width="87px">
-      <ModelFormattedField format=""/>
+    <ModelGridColumn maxWidth="110px" minWidth="22px" name="colPause" preferredWidth="50px" title="Приостановлен" width="50px">
+      <ModelCheckBox/>
     </ModelGridColumn>
-    <CheckGridColumn maxWidth="110px" name="colPause" preferredWidth="50px" resizable="true" title="Приостановлен" width="50px"/>
   </ModelGrid>
 </layout>

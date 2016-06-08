@@ -132,7 +132,6 @@ define('Bill', ['orm', 'forms', 'ui', 'rpc', 'BillStatistics'], function (Orm, F
 
         form.btnBalance.onActionPerformed = function () {
             if (form.mffBalance.text == "") {
-                var замыкание = 85;
                 BillFunc.request("accounts/get_sum", {id: billId}, function (res_sum) {
                     console.log(res_sum);
                     if (res_sum.error == null && res_sum.sum != null) {

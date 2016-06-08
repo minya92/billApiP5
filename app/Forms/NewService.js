@@ -4,7 +4,7 @@
  */
 define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'], 
 function (Orm, Forms, Ui, Rpc, invoke, ModuleName) {
-    function module_constructor(parentForm, parentSelf) {
+    function module_constructor(parentSelf, parentForm, parentServiceSelf) {
         var self = this
                 , model = Orm.loadModel(ModuleName)
                 , form = Forms.loadForm(ModuleName, model);
@@ -88,6 +88,8 @@ function (Orm, Forms, Ui, Rpc, invoke, ModuleName) {
             form.mcbPrepayment.value = success_get.services[0].prepayment ? true : false;
             form.mffCounter.value = success_get.services[0].cost_counts ? +success_get.services[0].cost_counts : "";
             form.mffDays.value = success_get.services[0].service_days ? +success_get.services[0].service_days : "";
+            form.rbDays.selected = success_get.services[0].service_days;
+            parentSelf.ChangeVisibleColums(form.mcbPeriod.value, form.mcbCounter.value);
         }
 
         //заполнение mcType
@@ -261,7 +263,7 @@ function (Orm, Forms, Ui, Rpc, invoke, ModuleName) {
                 SaveService(params, function (aCallback) {
                     //form.close(aCallback);
                     //Services.request;
-                    parentSelf.Request();
+                    parentServiceSelf.Request();
                 });
             });
         };
