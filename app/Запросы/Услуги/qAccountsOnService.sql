@@ -14,7 +14,6 @@ From bill_accounts t1
     Inner join bill_operations t3 on t3.bill_services_accounts = t4.bill_services_accounts_id
     where :service_id = t4.service_id
     order by t3.operation_date 
-    limit 1
 ) t2
 on t2.bill_services_acts = t.bill_services_accounts_id
  Where :service_id = t.service_id

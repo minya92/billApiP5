@@ -410,13 +410,13 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                 };
 
                 /*
-                 * Приотсановить услугу
+                 * Приотсановить или возобновить услугу
                  */
-                self.PauseService = function (anAccountId, aServiceId, aServiceAccountId, aCallback, aErrCallback) {
+                self.PauseOrResumeService = function (anAccountId, aServiceId, aServiceAccountId, aPause, aCallback, aErrCallback) {
                     getServiceOnAccount(anAccountId, aServiceId, aServiceAccountId, function () {
                         if (model.qAddService.length) {
                             var service_account_id = model.qAddService[model.qAddService.length - 1].bill_services_accounts_id;
-                            model.qAddService[model.qAddService.length - 1].paused = true;
+                            model.qAddService[model.qAddService.length - 1].paused = aPause;
                             model.save(function () {
                                 aCallback({result: "ok", service_account_id: service_account_id});
                             }, function () {

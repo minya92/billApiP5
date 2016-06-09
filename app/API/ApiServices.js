@@ -113,7 +113,21 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                  */
                 self.pauseService = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), [], function(p, aHttpContext){
-                        billServicesModule.PauseService(p.account_id, p.service_id, p.service_account_id, function (res) {
+                        billServicesModule.PauseOrResumeService(p.account_id, p.service_id, p.service_account_id, true, function (res) {
+                            onSucces(res);
+                        }, function(err){
+                            onSucces(err);
+                        });
+                    }, onSucces);
+                };
+                
+                /*
+                 * @POST /services/resume
+                 * @GET /services/resume
+                 */
+                self.resumeService = function (aPath, onSucces) {
+                    libs.checkRequiredParams((new HttpContext()), [], function(p, aHttpContext){
+                        billServicesModule.PauseOrResumeService(p.account_id, p.service_id, p.service_account_id, false, function (res) {
                             onSucces(res);
                         }, function(err){
                             onSucces(err);
