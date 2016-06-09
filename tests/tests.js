@@ -319,12 +319,17 @@ QUnit.test("НЕ пройденные операции списания по с�
     });
 });
 
-QUnit.test("Приостановить обычную услугу со счета", function (assert) {
+QUnit.test("Приостановить и возобновить обычную услугу со счета", function (assert) {
     var done = assert.async();
     request("POST", "services/pause", {service_id: serviceId, account_id: accountId}, function (res) {
-        console.log(res);
-        assert.ok(res.result, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
-        done();
+        assert.ok(res.result, "Приостановить : " + JSON.stringify(res.result) + errorMsg(res));
+        request("POST", "services/resume", {service_id: serviceId, account_id: accountId}, function (res) {
+            assert.ok(res.result, "Возобновить : " + JSON.stringify(res.result) + errorMsg(res));
+            request("POST", "services/pause", {service_id: serviceId, account_id: accountId}, function (res) {
+                assert.ok(res.result, "Еще разок приостановить: " + JSON.stringify(res.result) + errorMsg(res));
+                done();
+            });
+        });
     });
 });
 
