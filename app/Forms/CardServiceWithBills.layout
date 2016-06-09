@@ -9,15 +9,16 @@
   <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseWithBill" parent="tabbedPane" prefHeight="415px" prefWidth="400px" visible="false">
     <TabbedPaneConstraints tabIcon="icons/16x16/bill.png" tabTitle="Подключенные счета" tabToolTip=""/>
   </AnchorsPane>
-  <ToolBar cursor="0" name="toolBar" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="140px">
-    <AnchorsPaneConstraints height="30px" left="0px" right="260px" top="0px"/>
+  <ToolBar cursor="0" name="toolBar" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="160px">
+    <AnchorsPaneConstraints height="30px" left="0px" right="240px" top="0px"/>
   </ToolBar>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/new_bill/new_bill.png" name="btnAddBill" parent="toolBar" prefHeight="30px" prefWidth="32px" toolTipText="Добавить услугу на счёт" verticalTextPosition="3"/>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/Play.Pause/pause.png" name="btnPause" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Приостановить услугу на счету" verticalTextPosition="3"/>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/delete.png" name="btnDel" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Безвозвратно удалить услугу со счёта" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/refresh/reload_refresh.png" name="btnRefresh" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Обновить данные" verticalTextPosition="3"/>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/money1.png" name="btnMoney" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Просмотреть остаток денежных средств на счету в рублях" verticalTextPosition="3"/>
-  <Label cursor="0" horizontalAlignment="4" name="lbSearch" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="67px" text="Поиск: ">
-    <AnchorsPaneConstraints height="30px" left="140px" top="0px" width="67px"/>
+  <Label cursor="0" horizontalAlignment="4" name="lbSearch" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="47px" text="Поиск: ">
+    <AnchorsPaneConstraints height="30px" left="160px" top="0px" width="47px"/>
   </Label>
   <ModelFormattedField cursor="0" format="" name="mffSearch" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="185px" toolTipText="Поиск по ID">
     <AnchorsPaneConstraints height="30px" left="215px" right="0px" top="0px"/>
