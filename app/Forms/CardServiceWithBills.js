@@ -34,15 +34,15 @@ define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService', 'AllBills', 
                     var newService = new NewService(self, form, ServicesSelf);
                     newService.setParamsOpen(aListOfTypes, serviceId);
                     newService.show(form.pnlServiseCard);
-                    Request(serviceId);
                     ServiceId = serviceId;
+                    Request();
                 };
-                
-                self.request = Request;
+
+                form.btnRefresh.onActionPerformed = self.request = Request;
 
                 //Запрос списка аккаунтов
-                function Request(serviceId) {
-                    BillFunc.request("accounts/on_service", {service_id: serviceId}, function (success_on_service) {
+                function Request() {
+                    BillFunc.request("accounts/on_service", {service_id: ServiceId}, function (success_on_service) {
                         console.log(success_on_service);
                         if (success_on_service.result.length != 0)
                             FillGrid(success_on_service.result);
@@ -68,7 +68,7 @@ define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService', 'AllBills', 
                     FormAllBills.SetParams(ServiceId);
                     FormAllBills.showModal(function (res) {
                         if (res)
-                            Request(ServiceId);
+                            Request();
                     });
                 };
 

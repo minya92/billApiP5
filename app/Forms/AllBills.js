@@ -61,7 +61,8 @@ define('AllBills', ['orm', 'forms', 'ui', 'rpc'], function (Orm, Forms, Ui, Rpc,
                     form.close(true);
                 }, function (error_add) {
                     console.log(error_add);
-                    md.alert("Ошибка подключения услуги к аккаунту!");
+                    if (error_add.error == "Not enough money")md.alert("Недостаточно средств!");
+                    else md.alert("Ошибка подключения услуги к аккаунту!");
                 });
             else
                 md.alert("Не выбран ни один счет!");
