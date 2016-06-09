@@ -117,7 +117,13 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                             anOnce = (typeof anOnce != 'undefined') ? anOnce : model.qServiceList[0].once;
                             aCost = (aCost ? aCost : model.qServiceList[0].service_cost);
                             aDays = (aDays ? aDays : model.qServiceList[0].service_days);
-                            aType = !aType? 'PeriodServiceModule' : model.qServiceList[0].service_type;
+                            if(!aType){
+                                if(model.qServiceList[0].service_type){
+                                    aType = model.qServiceList[0].service_type;
+                                } else {
+                                    aType = 'PeriodServiceModule';
+                                }
+                            } 
                             model.qCloseCostService.params.service_id = +aServiceId;
                             model.qCloseCostService.executeUpdate(closeCostCallback, closeCostCallback);
                         } else {
