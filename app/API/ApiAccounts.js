@@ -77,5 +77,19 @@ define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Mess
                         });
                     }, onSucces);
                 };
+                
+                /*
+                * @POST /accounts/get_accounts
+                * @GET /accounts/get_accounts
+                */
+                self.getAllAccounts = function (aPath, onSucces) {
+                    libs.checkRequiredParams((new HttpContext()), [], function(params, aHttpContext){
+                        accountsModule.GetAllAccounts(function (res) {
+                            onSucces(res);
+                        }, function(err){
+                            onSucces(err);
+                        });
+                    }, onSucces);
+                };
             };
         });

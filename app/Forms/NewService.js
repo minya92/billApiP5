@@ -264,6 +264,7 @@ function (Orm, Forms, Ui, Rpc, invoke, ModuleName) {
                     //form.close(aCallback);
                     //Services.request;
                     parentServiceSelf.Request();
+                    parentSelf.request(ServiceId);
                 });
             });
         };

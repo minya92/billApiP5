@@ -112,5 +112,24 @@ define('AccountsModule', ['orm', 'Messages', 'Events'],
                         aErrCallback({error: msg.get('errQuery')});
                     });
                 };
+                
+                /*
+                 * Получить список всех аккаунтов
+                 */
+                self.GetAllAccounts = function (aCallBack, aErrCallback) {
+                    var error = null;
+                    model.qBillAccounts.requery(function () {
+                        if (model.qBillAccounts.length)
+                            aCallBack({
+                                accounts: model.qBillAccounts
+                            });
+                        else {
+                            aErrCallback({error: msg.get('errFindAccount')});
+                        }
+                    }, function(){
+                        aErrCallback({error: msg.get('errQuery')});
+                    });
+                };
+
             };
         });

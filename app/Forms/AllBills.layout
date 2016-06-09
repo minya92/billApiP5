@@ -1,12 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?><layout title="" view="view">
-  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="350px" prefWidth="334px"/>
+<?xml version="1.0" encoding="UTF-8"?><layout title="Счета" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="380px" prefWidth="334px"/>
   <ModelFormattedField cursor="0" format="" name="mffSearch" parent="view" prefHeight="30px" prefWidth="268px" toolTipText="Поиск по ID">
     <AnchorsPaneConstraints height="30px" left="56px" right="10px" top="10px"/>
   </ModelFormattedField>
   <Label cursor="0" horizontalTextPosition="2" name="lbSearch" parent="view" prefHeight="30px" prefWidth="50px" text="Поиск: ">
     <AnchorsPaneConstraints height="30px" left="10px" top="10px" width="50px"/>
   </Label>
-  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgBills" parent="view" prefHeight="300px" prefWidth="334px">
-    <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="50px"/>
+  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgBills" parent="view" prefHeight="280px" prefWidth="334px">
+    <AnchorsPaneConstraints bottom="50px" left="0px" right="0px" top="50px"/>
+    <ModelGridColumn name="colID" title="ID Счёта" width="332px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
   </ModelGrid>
+  <Button cursor="0" icon="icons/Ok.Cancel/apply3.png" name="btnChoose" parent="view" prefHeight="30px" prefWidth="130px" text="Выбрать">
+    <AnchorsPaneConstraints bottom="10px" height="30px" right="10px" width="130px"/>
+  </Button>
 </layout>

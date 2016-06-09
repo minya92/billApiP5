@@ -37,6 +37,8 @@ define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService', 'AllBills', 
                     Request(serviceId);
                     ServiceId = serviceId;
                 };
+                
+                self.request = Request;
 
                 //Запрос списка аккаунтов
                 function Request(serviceId) {
@@ -63,6 +65,7 @@ define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService', 'AllBills', 
                 //Добавить услугу на аккаунт
                 form.btnAddBill.onActionPerformed = function () {
                     var FormAllBills = new AllBills();
+                    FormAllBills.SetParams(ServiceId);
                     FormAllBills.showModal(function (res) {
                         if (res)
                             Request(ServiceId);
