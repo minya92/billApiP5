@@ -23,10 +23,8 @@ define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService', 'AllBills', 
 
                 //Подстраиваем вид грида под тип услуги
                 self.ChangeVisibleColums = function (period, counter) {
-                    if (period)
-                        form.mgBillsOnService.colDate.visible = true;
-                    if (counter)
-                        form.mgBillsOnService.colCount.visible = true;
+                    form.mgBillsOnService.colDate.visible = period;
+                    form.mgBillsOnService.colCount.visible = counter;
                 };
 
                 self.setParams = function (aListOfTypes, serviceId) {

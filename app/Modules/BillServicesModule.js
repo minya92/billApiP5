@@ -87,6 +87,18 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                  */
                 self.ChangeService = function (aServiceId, aCost, aDays, anAfterMonth, aPrepayment, anOnce, aCounter, aType, aCallBack, aErrCallback) {
                     function closeCostCallback(result) {
+                        aPrepayment = (typeof aPrepayment != 'undefined') ?  aPrepayment : model.qServiceList[0].prepayment;
+                        anAfterMonth = (typeof anAfterMonth != 'undefined') ? anAfterMonth : (aDays ? false : true);
+                        anOnce = (typeof anOnce != 'undefined') ? anOnce : model.qServiceList[0].once;
+                        aCost = (aCost ? aCost : model.qServiceList[0].service_cost);
+                        aDays = (aDays ? aDays : 0);
+                        if(!aType){
+                            if(model.qServiceList[0].service_type){
+                                aType = model.qServiceList[0].service_type;
+                            } else {
+                                aType = 'PeriodServiceModule';
+                            }
+                        } 
                         model.qServiceSetting.push({
                             service_id: aServiceId,
                             service_cost: aCost,
@@ -112,18 +124,6 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                     model.qServiceList.params.service_id = +aServiceId;
                     model.qServiceList.requery(function () {
                         if (model.qServiceList.length) {
-                            aPrepayment = (typeof aPrepayment != 'undefined') ?  aPrepayment : model.qServiceList[0].prepayment;
-                            anAfterMonth = (typeof anAfterMonth != 'undefined') ? anAfterMonth : model.qServiceList[0].service_month;
-                            anOnce = (typeof anOnce != 'undefined') ? anOnce : model.qServiceList[0].once;
-                            aCost = (aCost ? aCost : model.qServiceList[0].service_cost);
-                            aDays = (aDays ? aDays : model.qServiceList[0].service_days);
-                            if(!aType){
-                                if(model.qServiceList[0].service_type){
-                                    aType = model.qServiceList[0].service_type;
-                                } else {
-                                    aType = 'PeriodServiceModule';
-                                }
-                            } 
                             model.qCloseCostService.params.service_id = +aServiceId;
                             model.qCloseCostService.executeUpdate(closeCostCallback, closeCostCallback);
                         } else {

@@ -51,7 +51,7 @@ function (Orm, Forms, Ui, Rpc, invoke, ModuleName) {
                 SetData_mcType(types);
             });
 
-            GetServiseRequest(serviceId);
+            GetServiseRequest();
         };
 
         //Открытия для создания
@@ -69,8 +69,8 @@ function (Orm, Forms, Ui, Rpc, invoke, ModuleName) {
         };
 
         //Запрос услуги для заполнения формы
-        function GetServiseRequest(serviceId) {
-            BillFunc.request("services/get", {service_id: serviceId}, function (success_get) {
+        function GetServiseRequest() {
+            BillFunc.request("services/get", {service_id: ServiceId}, function (success_get) {
                 console.log(success_get);
                 DataFilling(success_get);
             }, function (error_get) {
@@ -81,7 +81,7 @@ function (Orm, Forms, Ui, Rpc, invoke, ModuleName) {
 
         //Заполнение формы
         function DataFilling(success_get) {
-            parentForm.title += success_get.services[0].service_name;
+            parentForm.title = "Управление услугой: " + success_get.services[0].service_name;
             form.mffName.value = success_get.services[0].service_name;
             form.mffCost.value = +success_get.services[0].service_cost;
             ChangeType(success_get.services[0].service_type_id);
@@ -264,7 +264,8 @@ function (Orm, Forms, Ui, Rpc, invoke, ModuleName) {
                     //form.close(aCallback);
                     //Services.request;
                     parentServiceSelf.Request();
-                    parentSelf.request();
+                    parentSelf.ChangeVisibleColums(form.mcbPeriod.value, form.mcbCounter.value);
+                    GetServiseRequest();
                 });
             });
         };
