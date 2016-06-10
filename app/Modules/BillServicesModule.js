@@ -88,7 +88,6 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                 self.ChangeService = function (aServiceId, aCost, aDays, anAfterMonth, aPrepayment, anOnce, aCounter, aType, aCallBack, aErrCallback) {
                     function closeCostCallback(result) {
                         aPrepayment = (typeof aPrepayment != 'undefined') ?  aPrepayment : model.qServiceList[0].prepayment;
-                        anAfterMonth = (typeof anAfterMonth != 'undefined') ? anAfterMonth : (aDays ? false : true);
                         anOnce = (typeof anOnce != 'undefined') ? anOnce : model.qServiceList[0].once;
                         aCost = (aCost ? aCost : model.qServiceList[0].service_cost);
                         aDays = (aDays ? aDays : 0);
@@ -99,6 +98,9 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                                 aType = 'PeriodServiceModule';
                             }
                         } 
+                        anAfterMonth = (typeof anAfterMonth != 'undefined') ? anAfterMonth : ((aDays && aDays!=0) ? false : 
+                                ((!aCounter || aType == 'PeriodCounterServiceModule')? true : false));
+                           
                         model.qServiceSetting.push({
                             service_id: aServiceId,
                             service_cost: aCost,
