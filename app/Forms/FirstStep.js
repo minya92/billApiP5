@@ -44,6 +44,7 @@ define('FirstStep', ['orm', 'forms', 'ui', 'rpc', 'Bill', 'Services'],
 
                 window.onkeyup = function (e) {
                     if (e.keyCode == 13)
+                        ;
 //                    md.alert("Ес");
 //                    else md.alert("Ноу");
                     //document.getElementById("go").click();
