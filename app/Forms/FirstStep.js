@@ -11,7 +11,7 @@ define('FirstStep', ['orm', 'forms', 'ui', 'rpc', 'Bill', 'Services'],
 
                 var BillFunc = new Rpc.Proxy('BillApiFunctions');
                 var FormBill = new Bill();
-                var FormServices = new Services();
+                var FormServices = new Services();                
 
                 self.show = function () {
                     form.show();
@@ -31,7 +31,7 @@ define('FirstStep', ['orm', 'forms', 'ui', 'rpc', 'Bill', 'Services'],
                         FormBill.setParams(success_chek.id);
                         FormBill.show();
                     }, function (chek_error) {
-                        console.log(chek_error);
+                        console.log(chek_error);                        
                         //В 'e' какая то дичь)
                         md.alert("Неверный id счёта!");
                     });
@@ -42,6 +42,12 @@ define('FirstStep', ['orm', 'forms', 'ui', 'rpc', 'Bill', 'Services'],
                     FormServices.show();
                 };
 
+                window.onkeyup = function (e) {
+                    if (e.keyCode == 13)
+//                    md.alert("Ес");
+//                    else md.alert("Ноу");
+                    //document.getElementById("go").click();
+                };
             }
             return module_constructor;
         });

@@ -293,6 +293,34 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'],
                     });
                 }
 
+                //Кнопка удаления
+                form.btnDel.onActionPerformed = function () {
+                    if (!form.cbUnsubscribe.selected)
+                        md.confirm("Вы хотите сделать услугу неактивной?", function (answer) {
+                            if (answer) {
+                                DeleteRequest();
+                            }
+                        });
+                    else
+                        md.confirm("Вы хотите сделать услугу неактивной и отписать её ото всех счетов? Действие необратимо!", function (answer) {
+                            if (answer) {
+                                DeleteRequest(true);
+                            }
+                        });
+                };
+
+                //Запрос на удаление (Деактивацию)
+                function DeleteRequest(aUnsubscribe) {
+                    BillFunc.request("services/delete", {service_id: ServiceId, unsubscribe: aUnsubscribe ? !!aUnsubscribe : null},
+                            function (success_del) {
+                                console.log(success_del);
+                                parentForm.close(true);
+                            }, function (error_del) {
+                        console.log(error_del);
+                        md.alert("Ошибка удаления услуги!");
+                    });
+                }
+
                 //Изменение значения галочки периода
                 form.mcbPeriod.onValueChange = function (evt) {
                     form.rbMonth.enabled = !form.rbMonth.enabled;
