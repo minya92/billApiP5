@@ -40,7 +40,7 @@
   <AnchorsPane background="#ffffff" cursor="0" name="pnlStatistics" parent="tabbedPane" prefHeight="275px" prefWidth="375px" visible="false">
     <TabbedPaneConstraints tabIcon="icons/22x22/old-openofficeorg-calc.png" tabTitle="Статистика операций" tabToolTip=""/>
   </AnchorsPane>
-  <AnchorsPane background="#ffffff" cursor="0" name="panel2" parent="tabbedPane" prefHeight="275px" prefWidth="375px" visible="false">
-    <TabbedPaneConstraints tabTitle="tab2" tabToolTip=""/>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlServicesOnBill" parent="tabbedPane" prefHeight="275px" prefWidth="375px" visible="false">
+    <TabbedPaneConstraints tabIcon="icons/list/todo-list.png" tabTitle="Услуги" tabToolTip="Операции с услугами"/>
   </AnchorsPane>
 </layout>

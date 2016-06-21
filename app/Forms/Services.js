@@ -27,7 +27,7 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                         Request();
                     }, function (error_getTypes) {
                         console.log(error_getTypes);
-                        if (form.lbWating.visible == true) {
+                        if (form.lbWating.visible) {
                             form.mgServises.visible = true;
                             form.lbWating.visible = false;
                         }
@@ -41,7 +41,7 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                         console.log(success_get);
                         ServisesList = success_get.services;
 
-                        if (form.lbWating.visible == true) {
+                        if (form.lbWating.visible) {
                             form.mgServises.visible = true;
                             form.lbWating.visible = false;
                         }
@@ -66,7 +66,7 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
 
                     }, function (get_error) {
                         console.log(get_error);
-                        if (form.lbWating.visible == true) {
+                        if (form.lbWating.visible) {
                             form.mgServises.visible = true;
                             form.lbWating.visible = false;
                         }
@@ -95,7 +95,7 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                     if (!form.mgServises.selected[0])
                         md.alert("Выберите услугу!");
                     else {
-                        if (form.mgServises.selected[0].active == true) {
+                        if (form.mgServises.selected[0].active) {
                             form.mgServises.selected[0].active = false;
                             DeleteRequest();
 
@@ -112,7 +112,7 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                     if (!form.mgServises.selected[0])
                         md.alert("Выберите услугу!");
                     else {
-                        if (form.mgServises.selected[0].active == true) {
+                        if (form.mgServises.selected[0].active) {
                             md.confirm("Вы уверены что хотите сделать услугу неактивной и отписать её от всех счетов? Действие необратимо!"
                                     , function (res) {
                                         if (res) {
@@ -141,7 +141,7 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
 
                 //Фильтр активных услуг
                 form.cbActive.onValueChange = function () {
-                    if (form.cbActive.selected == true) {
+                    if (form.cbActive.selected) {
                         Delete = null;
                     } else {
                         Delete = true;

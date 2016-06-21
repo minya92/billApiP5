@@ -2,7 +2,7 @@
  * 
  * @author User
  */
-define('Bill', ['orm', 'forms', 'ui', 'rpc', 'BillStatistics'], function (Orm, Forms, Ui, Rpc, BillStatistics, ModuleName) {
+define('Bill', ['orm', 'forms', 'ui', 'rpc', 'BillStatistics', 'ServisesOnBill'], function (Orm, Forms, Ui, Rpc, BillStatistics, ServisesOnBill, ModuleName) {
     function module_constructor() {
         var self = this
                 , model = Orm.loadModel(ModuleName)
@@ -17,12 +17,16 @@ define('Bill', ['orm', 'forms', 'ui', 'rpc', 'BillStatistics'], function (Orm, F
         var billId;
         var billStatistics = new BillStatistics();
         billStatistics.show(form.pnlStatistics);
+        
+        var servisesOnBill = new ServisesOnBill();
+        servisesOnBill.show(form.pnlServicesOnBill);
 
         self.setParams = function (aTitle) {
             if (aTitle) {
                 form.title = "Ваш счёт (" + aTitle + ")";
                 billId = +aTitle;
                 billStatistics.setParams(billId);
+                servisesOnBill.setParams(billId);
             }
 
             var Choose = [{list: "Пополнить счет на "},

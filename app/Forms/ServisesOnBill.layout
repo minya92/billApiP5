@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><layout title="Услуги на счету" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="275px" prefWidth="375px"/>
+  <ToolBar cursor="0" name="toolBar" parent="view" prefHeight="30px" prefWidth="140px">
+    <AnchorsPaneConstraints height="30px" left="0px" right="235px" top="0px"/>
+  </ToolBar>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/Create.png" name="btnAddService" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Добавить услугу" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/info/Information3.png" name="btnInfo" parent="toolBar" prefHeight="30px" prefWidth="34px" toolTipText="Информация об услуге" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/refresh/refresh.png" name="btnRefresh" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Обновить список услуг" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/delete.png" name="btnDel" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Удалить услугу со счёта" verticalTextPosition="3"/>
+  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgServisesOnBill" parent="view" prefHeight="245px" prefWidth="375px">
+    <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="30px"/>
+    <RadioGridColumn name="colSelected" resizable="true"/>
+    <ModelGridColumn name="colService_name" preferredWidth="85px" title="Имя услуги" width="89px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colStartDate" title="Дата подключения" width="79px">
+      <ModelDate timePicker="false"/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colCount" preferredWidth="50px" title="Остаток счетчика" width="54px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colDate" title="Дата списания" width="79px">
+      <ModelDate/>
+    </ModelGridColumn>
+    <ModelGridColumn maxWidth="110px" minWidth="22px" name="colPause" preferredWidth="50px" title="Приостановлен">
+      <ModelCheckBox/>
+    </ModelGridColumn>
+  </ModelGrid>
+  <ModelFormattedField cursor="0" format="" name="mffSearch" parent="view" prefHeight="30px" prefWidth="180px" toolTipText="Поиск по имени услуги">
+    <AnchorsPaneConstraints height="30px" left="190px" right="5px" top="0px"/>
+  </ModelFormattedField>
+  <Label cursor="0" name="lblSearch" parent="view" prefHeight="30px" prefWidth="50px" text="Поиск:">
+    <AnchorsPaneConstraints height="30px" left="140px" top="0px" width="50px"/>
+  </Label>
+</layout>

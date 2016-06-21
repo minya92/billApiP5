@@ -53,7 +53,7 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'],
 
                     GetServiseRequest();
                 };
-
+                
                 //Открытия для создания
                 self.setParamsNew = function (aListOfTypes) {
 //            form.mcbPrepayment.value = false;
@@ -75,13 +75,14 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'],
                         DataFilling(success_get);
                     }, function (error_get) {
                         console.log(error_get);
-                        md.alert("Ошибка загрузки дынных по услуге!");
+                        md.alert("Ошибка загрузки данных по услуге!");
                     });
                 }
 
                 //Заполнение формы
                 function DataFilling(success_get) {
-                    parentForm.title = "Управление услугой: " + success_get.services[0].service_name;
+                    if (parentForm)
+                        parentForm.title = "Управление услугой: " + success_get.services[0].service_name;
                     form.mffName.value = success_get.services[0].service_name;
                     form.mffCost.value = +success_get.services[0].service_cost;
 
@@ -99,7 +100,8 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'],
                     form.mffCounter.value = success_get.services[0].cost_counts ? +success_get.services[0].cost_counts : "";
                     form.mffDays.value = success_get.services[0].service_days ? +success_get.services[0].service_days : "";
                     form.rbDays.selected = success_get.services[0].service_days;
-                    parentSelf.ChangeVisibleColums(form.mcbPeriod.value, form.mcbCounter.value);
+                    if (parentSelf)
+                        parentSelf.ChangeVisibleColums(form.mcbPeriod.value, form.mcbCounter.value);
                 }
 
                 //заполнение mcType
