@@ -62,9 +62,10 @@ define('AllBills', ['orm', 'forms', 'ui', 'rpc'], function (Orm, Forms, Ui, Rpc,
                     ParentSelf.request();
                 }, function (error_add) {
                     console.log(error_add);
-                    if (error_add.error == "Not enough money")
+                    if (error_add.error == "Not enough money") {
                         md.alert("Недостаточно средств!");
-                    else
+                        ParentSelf.request();
+                    } else
                         md.alert("Ошибка подключения услуги к аккаунту!");
                 });
             } else
