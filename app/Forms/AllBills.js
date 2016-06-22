@@ -3,7 +3,7 @@
  * @author User
  */
 define('AllBills', ['orm', 'forms', 'ui', 'rpc'], function (Orm, Forms, Ui, Rpc, ModuleName) {
-    function module_constructor() {
+    function module_constructor(ParentSelf) {
         var self = this
                 , model = Orm.loadModel(ModuleName)
                 , form = Forms.loadForm(ModuleName, model);
@@ -55,17 +55,26 @@ define('AllBills', ['orm', 'forms', 'ui', 'rpc'], function (Orm, Forms, Ui, Rpc,
 
         //Кнопка выбрать
         form.btnChoose.onActionPerformed = function () {
-            if (form.mgBills.selected.length != 0)
+            if (form.mgBills.selected.length != 0) {
+                form.close(true);
                 BillFunc.request("services/add", {service_id: ServiceId, account_id: form.mgBills.selected[0].bill_accounts_id}, function (success_add) {
                     console.log(success_add);
-                    form.close(true);
+                    ParentSelf.request();
                 }, function (error_add) {
                     console.log(error_add);
-                    if (error_add.error == "Not enough money")md.alert("Недостаточно средств!");
-                    else md.alert("Ошибка подключения услуги к аккаунту!");
+                    if (error_add.error == "Not enough money")
+                        md.alert("Недостаточно средств!");
+                    else
+                        md.alert("Ошибка подключения услуги к аккаунту!");
                 });
-            else
+            } else
                 md.alert("Не выбран ни один счет!");
+        };
+
+        form.mgBills.onMouseClicked = function (e) {
+            if (e.clickCount == 2) {
+                form.btnChoose.onActionPerformed();
+            }
         };
     }
     return module_constructor;

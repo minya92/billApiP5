@@ -9,7 +9,7 @@
   <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgBills" parent="view" prefHeight="280px" prefWidth="334px">
     <AnchorsPaneConstraints bottom="50px" left="0px" right="0px" top="50px"/>
     <ModelGridColumn name="colID" title="ID Счёта" width="332px">
-      <ModelFormattedField/>
+      <ModelFormattedField format=""/>
     </ModelGridColumn>
   </ModelGrid>
   <Button cursor="0" icon="icons/Ok.Cancel/apply3.png" name="btnChoose" parent="view" prefHeight="30px" prefWidth="130px" text="Выбрать">

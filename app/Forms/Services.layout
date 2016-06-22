@@ -14,7 +14,7 @@
   <Label cursor="0" name="label2" parent="toolBar" prefHeight="30px" prefWidth="50px" text="Поиск:"/>
   <ModelFormattedField cursor="0" format="" name="mffSearch" parent="toolBar" prefHeight="30px" prefWidth="185px" toolTipText="Поиск"/>
   <Label cursor="0" icon="https://raw.githubusercontent.com/AlexeyKashintsev/Clinic/p5/app/icons/loading5.gif" name="lbWating" parent="view" prefHeight="200px" prefWidth="200px" visible="false">
-    <AnchorsPaneConstraints height="200px" left="166px" top="115px" width="200px"/>
+    <AnchorsPaneConstraints bottom="84px" left="166px" right="167px" top="115px"/>
   </Label>
   <ModelGrid cursor="0" deletable="false" insertable="false" name="mgServises" parent="view" prefHeight="369px" prefWidth="533px" toolTipText="Список услуг" visible="false">
     <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="30px"/>

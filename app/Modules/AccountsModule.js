@@ -118,6 +118,7 @@ define('AccountsModule', ['orm', 'Messages', 'Events'],
                  */
                 self.GetAllAccounts = function (aCallBack, aErrCallback) {
                     var error = null;
+                    model.qBillAccounts.params.account_id = null;
                     model.qBillAccounts.requery(function () {
                         if (model.qBillAccounts.length)
                             aCallBack({

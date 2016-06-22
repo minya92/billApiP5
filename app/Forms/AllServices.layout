@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><layout title="Список услуг" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="450px" prefWidth="650px"/>
+  <ModelFormattedField cursor="0" format="" name="mffSearch" parent="view" prefHeight="30px" prefWidth="200px" toolTipText="Поиск по ID">
+    <AnchorsPaneConstraints height="30px" left="440px" right="10px" top="10px"/>
+  </ModelFormattedField>
+  <Label cursor="0" horizontalTextPosition="2" name="lbSearch" parent="view" prefHeight="30px" prefWidth="106px" text="Поиск по имени: ">
+    <AnchorsPaneConstraints height="30px" left="334px" top="10px" width="106px"/>
+  </Label>
+  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgServises" parent="view" prefHeight="350px" prefWidth="650px">
+    <AnchorsPaneConstraints bottom="50px" left="0px" right="0px" top="50px"/>
+    <RadioGridColumn name="colSelect"/>
+    <ModelGridColumn name="colName" preferredWidth="90px" title="Имя услуги" width="131px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colCost" preferredWidth="35px" title="Стоимость" width="76px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colType" preferredWidth="70px" title="Тип" width="111px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colPeriod" preferredWidth="45px" title="Период" width="86px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colCount" preferredWidth="30px" title="Счётчик" width="71px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colPrepaymemt" preferredWidth="35px" title="Предоплата" width="76px">
+      <ModelCheckBox/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colOnce" preferredWidth="35px" title="Единоразовая" width="75px">
+      <ModelCheckBox/>
+    </ModelGridColumn>
+  </ModelGrid>
+  <Button cursor="0" icon="icons/Ok.Cancel/apply3.png" name="btnAdd" parent="view" prefHeight="30px" prefWidth="130px" text="Добавить">
+    <AnchorsPaneConstraints bottom="10px" height="30px" right="10px" width="130px"/>
+  </Button>
+  <Label cursor="0" name="lblFilterType" parent="view" prefHeight="30px" prefWidth="100px" text="Фильтр по типу:">
+    <AnchorsPaneConstraints height="30px" left="10px" top="10px" width="100px"/>
+  </Label>
+  <ModelCombo cursor="0" name="mсFilterType" parent="view" prefHeight="30px" prefWidth="200px">
+    <AnchorsPaneConstraints height="30px" left="110px" top="10px" width="200px"/>
+  </ModelCombo>
+</layout>

@@ -3,12 +3,8 @@
     <parameter description="" name="service_id" nullable="true" parameterMode="1" selectionForm="null" type="Number"/>
   </parameters>
   <parametersEntity entityHeight="200" entityIconified="false" entityLocationX="8" entityLocationY="7" entityWidth="150"/>
-  <entity Title="" entityHeight="200" entityIconified="false" entityId="146539328740500" entityLocationX="358" entityLocationY="6" entityWidth="160" tableAlias="t" tableName="bill_services_accounts" tableSchemaName=""/>
-  <entity Title="" entityHeight="200" entityIconified="false" entityId="146539328740501" entityLocationX="704" entityLocationY="45" entityWidth="150" tableAlias="t3" tableName="bill_operations" tableSchemaName=""/>
-  <entity Title="" entityHeight="200" entityIconified="false" entityId="146539321026200" entityLocationX="531" entityLocationY="44" entityWidth="150" tableAlias="t4" tableName="bill_services_accounts" tableSchemaName=""/>
-  <entity Title="" entityHeight="75" entityIconified="false" entityId="146530035284900" entityLocationX="189" entityLocationY="12" entityWidth="150" tableAlias="t1" tableName="bill_accounts" tableSchemaName=""/>
-  <relation leftEntityFieldName="bill_services_accounts" leftEntityId="146539328740501" rightEntityFieldName="bill_services_accounts_id" rightEntityId="146539321026200"/>
-  <relation leftEntityFieldName="account_id" leftEntityId="146539328740500" rightEntityFieldName="bill_accounts_id" rightEntityId="146530035284900"/>
-  <relation leftEntityId="-1" leftEntityParameterName="service_id" rightEntityFieldName="service_id" rightEntityId="146539328740500"/>
-  <relation leftEntityId="-1" leftEntityParameterName="service_id" rightEntityFieldName="service_id" rightEntityId="146539321026200"/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="146555123698300" entityLocationX="444" entityLocationY="19" entityWidth="277" tableAlias="t" tableName="bill_operations" tableSchemaName=""/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="146555121398500" entityLocationX="207" entityLocationY="12" entityWidth="212" tableAlias="t1" tableName="bill_services_accounts" tableSchemaName=""/>
+  <relation leftEntityFieldName="bill_services_accounts" leftEntityId="146555123698300" rightEntityFieldName="bill_services_accounts_id" rightEntityId="146555121398500"/>
+  <relation leftEntityId="-1" leftEntityParameterName="service_id" rightEntityFieldName="service_id" rightEntityId="146555121398500"/>
 </datamodel>

@@ -556,6 +556,15 @@ QUnit.test("Получить список типов оперций", function (
     });
 });
 
+QUnit.test("Получить список всех счетов", function (assert) {
+    var done = assert.async();
+    request("POST", "accounts/get_accounts", {}, function (res) {
+        console.log(res);
+        assert.ok(!res.error, "accounts : " + JSON.stringify(res.accounts) + errorMsg(res));
+        done();
+    });
+});
+
 QUnit.test("Получить список статусов и типов оперций одновременно", function (assert) {
     var done = assert.async();
     request("POST", "operations/get_types_statuses", {}, function (res) {
