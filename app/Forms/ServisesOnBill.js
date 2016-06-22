@@ -70,6 +70,26 @@ define('ServisesOnBill', ['orm', 'forms', 'ui', 'rpc', 'ServiceInfo', 'AllServic
             });
         };
 
+        //Удалить услугу
+        form.btnDel.onActionPerformed = function () {
+            var item = form.mgServisesOnBill.selected[0];
+            if (!item)
+                md.alert("Выберите услугу!");
+            else
+                md.confirm("Вы уверены что хотите отключить услугу " + item.service_name + " со счёта?", function (res) {
+                    if (res) {
+                        BillFunc.request("services/disable", {service_account_id: item.bill_services_accounts_id}, function (res_disable) {
+                            console.log(res_disable);
+                            md.alert("Удаление успешно!");
+                            Request();
+                        }, function (disable_error) {
+                            console.log(disable_error);
+                            md.alert("Ошибка отключения услуги " + item.account_id + " со счёта!");
+                        });
+                    }
+                });
+        };
+
         //Окно информации об услуге
         form.btnInfo.onActionPerformed = function () {
             if (form.mgServisesOnBill.selected.length == 0)
