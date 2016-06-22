@@ -55,10 +55,10 @@ define('AllBills', ['orm', 'forms', 'ui', 'rpc'], function (Orm, Forms, Ui, Rpc,
 
         //Кнопка выбрать
         form.btnChoose.onActionPerformed = function () {
-            form.close(true);
-            if (form.mgBills.selected.length != 0)
+            if (form.mgBills.selected.length != 0) {
+                form.close(true);
                 BillFunc.request("services/add", {service_id: ServiceId, account_id: form.mgBills.selected[0].bill_accounts_id}, function (success_add) {
-                    console.log(success_add);   
+                    console.log(success_add);
                     ParentSelf.request();
                 }, function (error_add) {
                     console.log(error_add);
@@ -67,7 +67,7 @@ define('AllBills', ['orm', 'forms', 'ui', 'rpc'], function (Orm, Forms, Ui, Rpc,
                     else
                         md.alert("Ошибка подключения услуги к аккаунту!");
                 });
-            else
+            } else
                 md.alert("Не выбран ни один счет!");
         };
 

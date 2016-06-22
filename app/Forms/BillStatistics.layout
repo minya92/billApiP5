@@ -19,6 +19,6 @@
     <font family="Arial" size="11" style="0"/>
     <AnchorsPaneConstraints height="30px" left="10px" right="10px" top="10px"/>
   </SplitPane>
-  <ModelCombo cursor="0" name="mcType" parent="splitPane" prefHeight="28px" prefWidth="139px"/>
-  <ModelCombo cursor="0" name="mсStatus" parent="splitPane" prefHeight="28px" prefWidth="209px"/>
+  <ModelCombo cursor="0" name="mcType" parent="splitPane" prefHeight="28px" prefWidth="139px" toolTipText="Фильтр по типу"/>
+  <ModelCombo cursor="0" name="mсStatus" parent="splitPane" prefHeight="28px" prefWidth="209px" toolTipText="Фильтр по статусу"/>
 </layout>

@@ -31,8 +31,13 @@ define('ServisesOnBill', ['orm', 'forms', 'ui', 'rpc', 'ServiceInfo', 'AllServic
             Request();
         };
 
+        self.request = Request;
         //Запрос данных грида
         function Request() {
+            if (form.lbWating.visible) {
+                form.mgServisesOnBill.visible = true;
+                form.lbWating.visible = false;
+            }
             BillFunc.request("services/on_account", {account_id: AccountId}, function (successOnAccount) {
                 console.log(successOnAccount);
                 FillGrid(successOnAccount.result);
@@ -55,9 +60,14 @@ define('ServisesOnBill', ['orm', 'forms', 'ui', 'rpc', 'ServiceInfo', 'AllServic
 
         //Добавить услугу
         form.btnAddService.onActionPerformed = function () {
-            var formAddService = new AllServices();
-                formAddService.setParams();
-                formAddService.showModal();
+            var formAddService = new AllServices(self.request);
+            formAddService.setParams(AccountId);
+            formAddService.showModal(function (res) {
+                if (res) {
+                    form.mgServisesOnBill.visible = false;
+                    form.lbWating.visible = true;
+                }
+            });
         };
 
         //Окно информации об услуге

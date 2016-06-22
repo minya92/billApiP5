@@ -7,6 +7,9 @@
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/info/Information3.png" name="btnInfo" parent="toolBar" prefHeight="30px" prefWidth="34px" toolTipText="Информация об услуге" verticalTextPosition="3"/>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/refresh/refresh.png" name="btnRefresh" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Обновить список услуг" verticalTextPosition="3"/>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/delete.png" name="btnDel" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Удалить услугу со счёта" verticalTextPosition="3"/>
+  <Label cursor="0" icon="https://raw.githubusercontent.com/AlexeyKashintsev/Clinic/p5/app/icons/loading5.gif" name="lbWating" parent="view" prefHeight="200px" prefWidth="200px" visible="false">
+    <AnchorsPaneConstraints bottom="8px" left="90px" right="85px" top="67px"/>
+  </Label>
   <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgServisesOnBill" parent="view" prefHeight="245px" prefWidth="375px">
     <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="30px"/>
     <RadioGridColumn name="colSelected" resizable="true"/>

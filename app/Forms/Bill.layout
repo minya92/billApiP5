@@ -38,9 +38,9 @@
     <AnchorsPaneConstraints height="30px" left="219px" top="170px" width="110px"/>
   </ModelFormattedField>
   <AnchorsPane background="#ffffff" cursor="0" name="pnlStatistics" parent="tabbedPane" prefHeight="275px" prefWidth="375px" visible="false">
-    <TabbedPaneConstraints tabIcon="icons/22x22/old-openofficeorg-calc.png" tabTitle="Статистика операций" tabToolTip=""/>
+    <TabbedPaneConstraints tabIcon="icons/22x22/old-openofficeorg-calc.png" tabTitle="История операций" tabToolTip=""/>
   </AnchorsPane>
   <AnchorsPane background="#ffffff" cursor="0" name="pnlServicesOnBill" parent="tabbedPane" prefHeight="275px" prefWidth="375px" visible="false">
-    <TabbedPaneConstraints tabIcon="icons/list/todo-list.png" tabTitle="Услуги" tabToolTip="Операции с услугами"/>
+    <TabbedPaneConstraints tabIcon="icons/list/todo-list.png" tabTitle="Услуги" tabToolTip=""/>
   </AnchorsPane>
 </layout>
