@@ -62,6 +62,7 @@ define('AllServices', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, Fo
         //заполнение данных грида
         function FillGrid(Data) {
             ServicesList = Data;
+            Period();
             form.mgServises.data = Data;
             form.mgServises.colName.field = 'service_name';
             form.mgServises.colCost.field = 'service_cost';
@@ -72,13 +73,21 @@ define('AllServices', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, Fo
             form.mgServises.colOnce.field = 'once';
         }
 
+        //Заполнение столбца Период
+        function Period() {
+            for (var i = 0; i < ServicesList.length; i++) {
+                ServicesList[i].period = ServicesList[i].service_month ? "Месяц" : (ServicesList[i].service_days != 0 ? (ServicesList[i].service_days + " дн.") : "");
+            }
+            form.mgServises.colPeriod.field = 'period';
+        }
+
         //Кнопка добавления
         form.btnAdd.onActionPerformed = function () {
             if (form.mgServises.selected.length != 0) {
                 form.close(true);
                 BillFunc.request("services/add", {service_id: form.mgServises.selected[0].service_id, account_id: AccountId}, function (success_add) {
                     console.log(success_add);
-                     ParentRequest();
+                    ParentRequest();
                 }, function (error_add) {
                     console.log(error_add);
                     md.alert("Ошибка добавления услуги!");
