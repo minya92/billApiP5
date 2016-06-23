@@ -41,7 +41,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                  * @param {type} aDays
                  * @returns {Boolean} 
                  */
-                self.CreateService = function (aName, aCost, aDays, aLock, anAfterMonth, aPrepayment, anOnce, aCounter, aType, aCallBack, aErrCallback) {
+                self.CreateService = function (aName, aCost, aDays, aLock, anAfterMonth, aPrepayment, anOnce, aCounter, aType, aDescription, aCallBack, aErrCallback) {
 //                    var service_type = aCounter ? 'CounterServiceModule' : 'PeriodServiceModule'
                     var service_type = !aType? 'PeriodServiceModule' : aType;
                     aPrepayment = !aPrepayment? null : true;
@@ -54,6 +54,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                     }
                     model.qServiceList.push({
                         service_name: aName,
+                        service_desc: aDescription,
                         locked: aLock
                     });
                     model.qServiceSetting.push({
@@ -85,7 +86,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                  * @param {type} aCallBack
                  * @returns {undefined} 
                  */
-                self.ChangeService = function (aServiceId, aCost, aDays, anAfterMonth, aPrepayment, anOnce, aCounter, aType, aCallBack, aErrCallback) {
+                self.ChangeService = function (aServiceId, aCost, aDays, anAfterMonth, aPrepayment, anOnce, aCounter, aType, aName, aDescription, aCallBack, aErrCallback) {
                     function closeCostCallback(result) {
                         aPrepayment = (typeof aPrepayment != 'undefined') ?  aPrepayment : model.qServiceList[0].prepayment;
                         anOnce = (typeof anOnce != 'undefined') ? anOnce : model.qServiceList[0].once;
@@ -126,6 +127,10 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                     model.qServiceList.params.service_id = +aServiceId;
                     model.qServiceList.requery(function () {
                         if (model.qServiceList.length) {
+                            if(aName || aDescription){
+                                model.qServiceList[0].service_name = aName;
+                                model.qServiceList[0].service_desc = aDescription;
+                            }
                             model.qCloseCostService.params.service_id = +aServiceId;
                             model.qCloseCostService.executeUpdate(closeCostCallback, closeCostCallback);
                         } else {

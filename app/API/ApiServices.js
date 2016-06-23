@@ -15,7 +15,7 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                  */
                 self.serviceCreate = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ["name", "cost"], function(p, aHttpContext){
-                        billServicesModule.CreateService(p.name, p.cost, p.days, p.lock, p.afterMonth, p.prepayment, p.once, p.counts, p.type, function (res) {
+                        billServicesModule.CreateService(p.name, p.cost, p.days, p.lock, p.afterMonth, p.prepayment, p.once, p.counts, p.type, p.description, function (res) {
                             onSucces({service_id: res});
                         }, function(err){
                             onSucces(err);
@@ -29,11 +29,11 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                  */
                 self.serviceChange = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ["service_id"], function(p, aHttpContext){
-                        billServicesModule.ChangeService(p.service_id, p.cost, p.days, p.afterMonth, p.prepayment, p.once, p.counts, p.type, function (res) {
+                        billServicesModule.ChangeService(p.service_id, p.cost, p.days, p.afterMonth, p.prepayment, p.once, p.counts, p.type, p.name, p.description, function (res) {
                             onSucces(res);
                         }, function(err){
                             onSucces(err);
-                        });
+                        }); 
                     }, onSucces);
                 };
 

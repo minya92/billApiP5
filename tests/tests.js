@@ -161,7 +161,7 @@ QUnit.test("Создание услуги с предоплатой (стоим�
 
 QUnit.test("Создание услуги (стоимость 500, разовое списание)", function (assert) {
     var done = assert.async();
-    request("POST", "services/create", {name: "test service", cost: 500, once: true}, function (res) {
+    request("POST", "services/create", {name: "test service", description: "Description", cost: 500, once: true}, function (res) {
         serviceId = res.service_id;
         assert.ok(res.service_id, "RESULT: " + JSON.stringify(res.service_id) + errorMsg(res));
         done();
@@ -178,12 +178,14 @@ QUnit.test("Получить предыдущую услугу ", function (asse
     });
 });
 
-QUnit.test("Изменить услугу + проверка на одноразовость", function (assert) {
+QUnit.test("Изменить услугу + проверка на одноразовость ", function (assert) {
     var done = assert.async();
-    request("POST", "services/change", {service_id: serviceId, once: false}, function (res) {
+    request("POST", "services/change", {name: 'New serviceName', description: 'New Description', service_id: serviceId, once: false}, function (res) {
         console.log(res);
         assert.equal(res.service_id, serviceId, "Тот ли ID: " + JSON.stringify(res.service_id) + errorMsg(res));
-        assert.equal(res.once, false, "Одноразовость: " + JSON.stringify(res.once) + errorMsg(res));
+        assert.equal(res.once, false, "Одноразовость: " + JSON.stringify(res.once) + errorMsg(res)); 
+        assert.equal(res.service_name, 'New serviceName', "Изменилось ли имя: " + JSON.stringify(res.service_name) + errorMsg(res));
+        assert.equal(res.service_desc, 'New Description', "Изменилось ли описание: " + JSON.stringify(res.service_desc) + errorMsg(res));
         assert.ok(res.service_type_id, "Есть ли тип: " + JSON.stringify(res.service_type_id) + errorMsg(res));
         done();
     });
