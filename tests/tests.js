@@ -417,7 +417,11 @@ QUnit.test("Удалить услугу с предоплатой (отключ�
     var done = assert.async();
     request("POST", "services/delete", {service_id: servicePrepayment, unsubscribe: true}, function (res) {
         assert.ok(res.result, "Message: " + res.result + errorMsg(res));
-        done();
+        request("POST", "services/on_account", {account_id: accountId}, function (res) {
+            console.log('!!!!!!!!', res);
+            assert.equal(res.result.length, 1, "Проверка отписалась ли она со счета: " + JSON.stringify(res.result) + errorMsg(res));
+            done();
+        });
     });
 });
 
