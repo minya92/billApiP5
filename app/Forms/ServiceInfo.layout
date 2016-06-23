@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><layout title="Информация об услуге" view="view">
-  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="354px" prefWidth="318px"/>
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="434px" prefWidth="318px"/>
   <Label cursor="0" horizontalAlignment="0" horizontalTextPosition="0" name="lblName" opaque="true" parent="view" prefHeight="50px" prefWidth="298px" text="Имя услуги">
     <font family="Arial" size="11" style="1"/>
     <AnchorsPaneConstraints height="50px" left="10px" right="10px" top="10px"/>
@@ -16,8 +16,8 @@
   <Label cursor="0" name="lblTypeName" parent="view" prefHeight="25px" prefWidth="70px" text="Тип услуги:">
     <AnchorsPaneConstraints height="25px" left="10px" top="120px" width="70px"/>
   </Label>
-  <Label cursor="0" name="lblType" opaque="true" parent="view" prefHeight="25px" prefWidth="220px" text="По времени">
-    <AnchorsPaneConstraints height="25px" left="90px" top="120px" width="220px"/>
+  <Label cursor="0" name="lblType" opaque="true" parent="view" prefHeight="25px" prefWidth="213px" text="По времени">
+    <AnchorsPaneConstraints height="25px" left="90px" top="120px" width="213px"/>
   </Label>
   <Label cursor="0" name="lblPeriodName" parent="view" prefHeight="25px" prefWidth="180px" text="Период действия/списания:" toolTipText="Период, через который будет производиться списание средств со счёта">
     <AnchorsPaneConstraints height="25px" left="10px" top="160px" width="180px"/>
@@ -41,6 +41,13 @@
     <AnchorsPaneConstraints height="25px" left="10px" top="280px" width="100px"/>
   </ModelCheckBox>
   <Button cursor="0" name="btnOk" parent="view" prefHeight="30px" prefWidth="100px" text="Ok">
-    <AnchorsPaneConstraints height="30px" right="10px" top="314px" width="100px"/>
+    <AnchorsPaneConstraints height="30px" right="10px" top="394px" width="100px"/>
   </Button>
+  <Label cursor="0" name="lbDescriptionName" parent="view" prefHeight="25px" prefWidth="60px" text="Описание:" verticalAlignment="1" verticalTextPosition="1">
+    <AnchorsPaneConstraints height="25px" left="10px" top="323px" width="60px"/>
+  </Label>
+  <ScrollPane cursor="0" name="scrollPane" parent="view" prefHeight="50px" prefWidth="228px">
+    <AnchorsPaneConstraints height="50px" left="80px" right="10px" top="323px"/>
+  </ScrollPane>
+  <Label cursor="0" name="lbDescription" opaque="true" parent="scrollPane" prefHeight="0px" prefWidth="226px" verticalAlignment="1" verticalTextPosition="1"/>
 </layout>

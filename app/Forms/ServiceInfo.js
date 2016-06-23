@@ -50,6 +50,7 @@ define('ServiceInfo', ['orm', 'forms', 'rpc', 'ui'], function (Orm, Forms, Rpc, 
         function DataFilling(aData) {
             form.lblName.text = aData.service_name;
             form.lblCost.text = aData.service_cost;
+            form.lbDescription.text = aData.service_desc;
             form.lblType.text = RusType(aData.service_type_id).type_name;
             form.lblPeriod.text = aData.service_month ? "Месяц" : aData.service_days != 0 ? aData.service_days + " дн." : "нет";
             form.lblCount.text = aData.cost_counts ? aData.cost_counts : "0";
