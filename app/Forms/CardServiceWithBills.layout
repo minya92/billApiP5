@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?><layout title="Управление услугой:" view="view">
-  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="445px" prefWidth="405px"/>
-  <TabbedPane cursor="0" name="tabbedPane" parent="view" prefHeight="445px" prefWidth="405px" selectedComponent="pnlServiseCard">
-    <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="0px"/>
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="515px" prefWidth="430px"/>
+  <TabbedPane cursor="0" name="tabbedPane" parent="view" prefHeight="525px" prefWidth="430px" selectedComponent="pnlServiseCard">
+    <AnchorsPaneConstraints bottom="-10px" left="0px" right="0px" top="0px"/>
   </TabbedPane>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseCard" parent="tabbedPane" prefHeight="415px" prefWidth="400px">
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseCard" parent="tabbedPane" prefHeight="495px" prefWidth="425px">
     <TabbedPaneConstraints tabIcon="icons/Settings/edit2.png" tabTitle="Карточка услуги" tabToolTip=""/>
   </AnchorsPane>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseWithBill" parent="tabbedPane" prefHeight="415px" prefWidth="400px" visible="false">
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseWithBill" parent="tabbedPane" prefHeight="495px" prefWidth="425px" visible="false">
     <TabbedPaneConstraints tabIcon="icons/16x16/bill.png" tabTitle="Подключенные счета" tabToolTip=""/>
   </AnchorsPane>
-  <ToolBar cursor="0" name="toolBar" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="160px">
+  <ToolBar cursor="0" name="toolBar" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="185px">
     <AnchorsPaneConstraints height="30px" left="0px" right="240px" top="0px"/>
   </ToolBar>
   <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/new_bill/new_bill.png" name="btnAddBill" parent="toolBar" prefHeight="30px" prefWidth="32px" toolTipText="Добавить услугу на счёт" verticalTextPosition="3"/>
@@ -20,25 +20,25 @@
   <Label cursor="0" horizontalAlignment="4" name="lbSearch" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="47px" text="Поиск: ">
     <AnchorsPaneConstraints height="30px" left="160px" top="0px" width="47px"/>
   </Label>
-  <ModelFormattedField cursor="0" format="" name="mffSearch" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="185px" toolTipText="Поиск по ID">
+  <ModelFormattedField cursor="0" format="" name="mffSearch" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="210px" toolTipText="Поиск по ID">
     <AnchorsPaneConstraints height="30px" left="215px" right="0px" top="0px"/>
   </ModelFormattedField>
-  <Label cursor="0" icon="https://raw.githubusercontent.com/AlexeyKashintsev/Clinic/p5/app/icons/loading5.gif" name="lbWating" parent="pnlServiseWithBill" prefHeight="200px" prefWidth="200px" visible="false">
+  <Label cursor="0" icon="https://raw.githubusercontent.com/AlexeyKashintsev/Clinic/p5/app/icons/loading5.gif" name="lbWating" parent="pnlServiseWithBill" prefHeight="280px" prefWidth="225px" visible="false">
     <AnchorsPaneConstraints bottom="95px" left="100px" right="100px" top="120px"/>
   </Label>
-  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgBillsOnService" parent="pnlServiseWithBill" prefHeight="385px" prefWidth="400px">
+  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgBillsOnService" parent="pnlServiseWithBill" prefHeight="465px" prefWidth="425px">
     <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="30px"/>
-    <RadioGridColumn name="colSelected"/>
-    <ModelGridColumn name="colBillId" preferredWidth="85px" title="ID счета" width="124px">
+    <RadioGridColumn name="colSelected" resizable="true"/>
+    <ModelGridColumn name="colBillId" preferredWidth="85px" title="ID счета" width="132px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="colCount" preferredWidth="50px" title="Остаток счетчика" width="88px">
+    <ModelGridColumn name="colCount" preferredWidth="50px" title="Остаток счетчика" width="97px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="colDate" title="Дата списания" width="114px">
+    <ModelGridColumn name="colDate" title="Дата списания" width="122px">
       <ModelDate/>
     </ModelGridColumn>
-    <ModelGridColumn maxWidth="110px" minWidth="22px" name="colPause" preferredWidth="50px" title="Приостановлен" width="50px">
+    <ModelGridColumn maxWidth="110px" minWidth="22px" name="colPause" preferredWidth="50px" title="Приостановлен">
       <ModelCheckBox/>
     </ModelGridColumn>
   </ModelGrid>

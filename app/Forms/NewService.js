@@ -43,7 +43,6 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'],
                     form.btnDel.visible = true;
                     form.cbUnsubscribe.visible = true;
                     form.btnSave.visible = true;
-                    form.mffName.enabled = false;
 
                     ServiceId = serviceId;
 
@@ -85,6 +84,7 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'],
                         parentForm.title = "Управление услугой: " + success_get.services[0].service_name;
                     form.mffName.value = success_get.services[0].service_name;
                     form.mffCost.value = +success_get.services[0].service_cost;
+                    form.mtaDescription.value = success_get.services[0].service_desc;
 
                     if (success_get.services[0].cost_counts)
                         form.mcbCounter.value = true;
@@ -261,7 +261,8 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'],
                                     once: form.mcbOnce.value,
                                     counts: form.mcbCounter.value ? +form.mffCounter.text : null,
                                     type: form.mcType.value.bill_services_types_id,
-                                    service_month: (form.rbMonth.selected && form.mcbPeriod.value) ? true : null
+                                    service_month: (form.rbMonth.selected && form.mcbPeriod.value) ? true : null,
+                                    description: form.mtaDescription.text
                                 };
                                 callback(params);
                             }
