@@ -2,7 +2,7 @@
  * 
  * @author User
  */
-define('AllServices', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, Forms, Ui, Rpc, Invoke, ModuleName) {
+define('AllServices', ['orm', 'forms', 'ui', 'rpc', 'invoke', 'ServiceInfo'], function (Orm, Forms, Ui, Rpc, Invoke, ServiceInfo, ModuleName) {
     function module_constructor(ParentRequest) {
         var self = this
                 , model = Orm.loadModel(ModuleName)
@@ -155,6 +155,14 @@ define('AllServices', ['orm', 'forms', 'ui', 'rpc', 'invoke'], function (Orm, Fo
         //Поиск по имени
         form.mffSearch.onValueChange = form.mffSearch.onKeyReleased = function () {
             form.mсFilterType.onValueChange();
+        };
+
+        form.mgServises.onMouseClicked = function (e) {
+            if (e.clickCount == 2) {
+                var formInfoService = new ServiceInfo();
+                formInfoService.setParams(form.mgServises.selected[0].service_id);
+                formInfoService.showModal();
+            }
         };
     }
     return module_constructor;
