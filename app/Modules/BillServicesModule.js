@@ -268,6 +268,8 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                                         } else {
                                             aErrCallback({error: status.error, accounts: model.qAddService});
                                         }
+                                    }, function(){
+                                        aErrCallback();
                                     });
                                 })(i, mas, length);
                             }
@@ -314,7 +316,7 @@ define('BillServicesModule', ['orm', 'AccountsModule', 'Messages', 'Events', 'Op
                                         delService();
                                     else
                                         aErrCallback({error: res.error});
-                                });
+                                }, aErrCallback);
                             } else {
                                 //aErrCallback({error: msg.get('errDeleteService'), accounts: model.qAddService});
                                 delService();

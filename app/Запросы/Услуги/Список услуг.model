@@ -6,6 +6,6 @@
   <parametersEntity entityHeight="200" entityIconified="false" entityLocationX="8" entityLocationY="7" entityWidth="150"/>
   <entity Title="" entityHeight="200" entityIconified="false" entityId="145027368962793" entityLocationX="217" entityLocationY="7" entityWidth="150" tableAlias="t1" tableName="bill_services" tableSchemaName=""/>
   <entity Title="" entityHeight="200" entityIconified="false" entityId="145027368962749" entityLocationX="418" entityLocationY="11" entityWidth="150" tableAlias="t" tableName="bill_cost" tableSchemaName=""/>
+  <relation leftEntityId="-1" leftEntityParameterName="service_id" rightEntityFieldName="bill_services_id" rightEntityId="145027368962793"/>
   <relation leftEntityFieldName="bill_services_id" leftEntityId="145027368962793" rightEntityFieldName="service_id" rightEntityId="145027368962749"/>
-  <relation leftEntityFieldName="service_id" leftEntityId="-1" rightEntityFieldName="bill_services_id" rightEntityId="145027368962793"/>
 </datamodel>
