@@ -275,7 +275,10 @@ QUnit.test("Подключить услугу c предоплатой на сч
 QUnit.test("Все услуги на счету", function (assert) {
     var done = assert.async();
     request("POST", "services/on_account", {account_id: accountId}, function (res) {
-        assert.equal(res.result.length, 3, "RESULT: " + JSON.stringify(res.result) + errorMsg(res));
+        assert.equal(res.result.length, 3, "Спсиок всех услуг: " + JSON.stringify(res.result) + errorMsg(res));
+        res.result.forEach(function(row){
+            assert.ok(row.operation_date, "Есть ли дата списания у услуги " + row.service_name + ": " + JSON.stringify(row.operation_date) + errorMsg(res));
+        });
         done();
     });
 });

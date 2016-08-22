@@ -5,10 +5,12 @@
     <parameter description="" name="service_account_id" nullable="true" parameterMode="1" selectionForm="null" type="Number"/>
   </parameters>
   <parametersEntity entityHeight="200" entityIconified="false" entityLocationX="11" entityLocationY="7" entityWidth="150"/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="146677953921600" entityLocationX="617" entityLocationY="31" entityWidth="171" tableAlias="t2" tableName="bill_operations" tableSchemaName=""/>
   <entity Title="" entityHeight="200" entityIconified="false" entityId="145329951562628" entityLocationX="412" entityLocationY="38" entityWidth="150" tableAlias="t" tableName="bill_services" tableSchemaName=""/>
   <entity Title="" entityHeight="170" entityIconified="false" entityId="145252382186261" entityLocationX="217" entityLocationY="37" entityWidth="150" tableAlias="t1" tableName="bill_services_accounts" tableSchemaName=""/>
   <relation leftEntityFieldName="bill_services_accounts_id" leftEntityId="145252382186261" rightEntityFieldName="service_account_id" rightEntityId="-1"/>
   <relation leftEntityFieldName="account_id" leftEntityId="145252382186261" rightEntityFieldName="account_id" rightEntityId="-1"/>
+  <relation leftEntityFieldName="bill_services_accounts_id" leftEntityId="145252382186261" rightEntityFieldName="bill_services_accounts" rightEntityId="146677953921600"/>
   <relation leftEntityFieldName="bill_services_id" leftEntityId="145329951562628" rightEntityFieldName="service_id" rightEntityId="145252382186261"/>
   <relation leftEntityFieldName="service_id" leftEntityId="145252382186261" rightEntityFieldName="service_id" rightEntityId="-1"/>
 </datamodel>
