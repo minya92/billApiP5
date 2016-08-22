@@ -5,6 +5,7 @@
  **Создание услуги**
  
     @POST /services/create
+    @GET /services/create
     name - название *
     cost - абонентская плата *
     days - кол-во дней списания средств (по умолчанию 0)
@@ -27,6 +28,7 @@
  **Изменение существующей услуги**
  
     @POST /services/change
+    @GET /services/change
     service_id - service_id *
     cost - абонентская плата
     days - кол-во дней списания средств 
@@ -39,6 +41,7 @@
  **Добавление услуги на счет**
  
     @POST /services/add
+    @GET /services/add
     service_id  *
     account_id  *
     return {result: servicesOnAccountId, error: xxxx}
@@ -46,6 +49,7 @@
  **Отключение услуги на счету**
  
     @POST /services/disable
+    @GET /services/disable
     service_id  *
     account_id  *
     service_account_id - serviceOnAcoountId (получается при добавлении)
@@ -54,6 +58,7 @@
  **Удаление услуги**
  
     @POST /services/delete
+    @GET /services/delete
     service_id  *
     unsubscribe - true/false Отключить услугу у всех клинтов (По умолчанию false)
     return {result: xxxx, error: xxxx, accounts: [{account1}, {account2}]}
@@ -61,6 +66,7 @@
  **Приотсановить услугу на счету (заморозить)**
  
     @POST /services/pause
+    @GET /services/pause
     service_id  *
     account_id  *
     service_account_id - serviceOnAcoountId (получается при добавлении)
@@ -69,12 +75,14 @@
  **Получить услугу (услуги)**
  
     @POST /services/get
+    @GET /services/get
     service_id  
     return [{service1}, {service2}]
     
 **Получить услугу на счету**
  
     @POST /services/on_account
+    @GET /services/on_account
     service_id  
     account_id 
     service_account_id - serviceOnAcoountId (получается при добавлении)
@@ -83,6 +91,7 @@
  **Изменить счетчик у услги на счету**
  
     @POST /services/set_count
+    @GET /services/set_count
     service_id  
     account_id  
     service_account_id - serviceOnAcoountId (получается при добавлении)
