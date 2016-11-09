@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><datamodel>
-  <entity Name="qListPlannedOperations" Title="" entityHeight="176" entityIconified="false" entityId="145321532407594" entityLocationX="14" entityLocationY="11" entityWidth="236" queryId="qListPlannedOperations" tableName="" tableSchemaName=""/>
+  <entity Name="qListPlannedOperations" Title="" entityHeight="190" entityIconified="false" entityId="145321532407594" entityLocationX="14" entityLocationY="11" entityWidth="236" queryId="qListPlannedOperations" tableName="" tableSchemaName=""/>
+  <entity Name="qAddService" Title="" entityHeight="200" entityIconified="false" entityId="147818001531500" entityLocationX="38" entityLocationY="213" entityWidth="150" queryId="qGetServiceOnAccount" tableName="" tableSchemaName=""/>
+  <entity Name="qServiceListRevaluation" Title="" entityHeight="332" entityIconified="false" entityId="147394455682300" entityLocationX="304" entityLocationY="14" entityWidth="220" queryId="qServiceListRevaluation" tableName="" tableSchemaName=""/>
+  <referenceRelation leftEntityFieldName="bill_services_accounts" leftEntityId="145321532407594" rightEntityFieldName="bill_services_accounts_id" rightEntityId="147394455682300"/>
+  <referenceRelation leftEntityFieldName="bill_services_accounts" leftEntityId="145321532407594" rightEntityFieldName="bill_services_accounts_id" rightEntityId="147818001531500"/>
+  <referenceRelation leftEntityFieldName="service_id" leftEntityId="147818001531500" rightEntityFieldName="bill_services_id" rightEntityId="147818001531500"/>
+  <referenceRelation leftEntityFieldName="service_id" leftEntityId="147394455682300" rightEntityFieldName="bill_services_id" rightEntityId="147818001531500"/>
 </datamodel>

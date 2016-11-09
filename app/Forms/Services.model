@@ -1,3 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<datamodel>
+<?xml version="1.0" encoding="UTF-8"?><datamodel>
+  <entity Name="qServiceList" Title="" entityHeight="200" entityIconified="false" entityId="147677229166900" entityLocationX="42" entityLocationY="9" entityWidth="150" queryId="qServiceList" tableName="" tableSchemaName=""/>
+  <referenceRelation leftEntityFieldName="service_id" leftEntityId="147677229166900" rightEntityFieldName="bill_services_id" rightEntityId="147677229166900"/>
 </datamodel>

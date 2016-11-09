@@ -1,18 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?><layout title="Счета" view="view">
-  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="380px" prefWidth="334px"/>
-  <ModelFormattedField cursor="0" format="" name="mffSearch" parent="view" prefHeight="30px" prefWidth="268px" toolTipText="Поиск по ID">
-    <AnchorsPaneConstraints height="30px" left="56px" right="10px" top="10px"/>
+<?xml version="1.0" encoding="UTF-8"?><layout maximizable="false" minimizable="false" resizable="false" title="Счета" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="380px" prefWidth="345px"/>
+  <ModelFormattedField cursor="0" format="" name="mffSearch" parent="view" prefHeight="40px" prefWidth="250px" toolTipText="Поиск по ID">
+    <AnchorsPaneConstraints height="40px" left="82px" top="10px" width="250px"/>
   </ModelFormattedField>
-  <Label cursor="0" horizontalTextPosition="2" name="lbSearch" parent="view" prefHeight="30px" prefWidth="50px" text="Поиск: ">
-    <AnchorsPaneConstraints height="30px" left="10px" top="10px" width="50px"/>
+  <Label cursor="0" horizontalTextPosition="2" name="lbSearch" parent="view" prefHeight="40px" prefWidth="60px" text="Поиск: ">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="40px" left="10px" top="10px" width="60px"/>
   </Label>
-  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgBills" parent="view" prefHeight="280px" prefWidth="334px">
-    <AnchorsPaneConstraints bottom="50px" left="0px" right="0px" top="50px"/>
-    <ModelGridColumn name="colID" title="ID Счёта" width="332px">
+  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgBills" parent="view" prefHeight="266px" prefWidth="322px">
+    <AnchorsPaneConstraints bottom="54px" left="10px" right="13px" top="60px"/>
+    <ServiceGridColumn name="column" resizable="true"/>
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@45590a48,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" name="colID" title="ID Счёта" view="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@57813c1c,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="298px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
   </ModelGrid>
-  <Button cursor="0" icon="icons/Ok.Cancel/apply3.png" name="btnChoose" parent="view" prefHeight="30px" prefWidth="130px" text="Выбрать">
-    <AnchorsPaneConstraints bottom="10px" height="30px" right="10px" width="130px"/>
+  <Button cursor="0" icon="icons/Ok.Cancel/apply3.png" name="btnChoose" parent="view" prefHeight="30px" prefWidth="135px" text="Выбрать">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="14px" height="30px" right="160px" width="135px"/>
+  </Button>
+  <Button cursor="0" icon="icons/22x22/actions/window-close.png" name="btnCancel" parent="view" prefHeight="30px" prefWidth="135px" text="Отмена">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="14px" height="30px" right="13px" width="135px"/>
   </Button>
 </layout>

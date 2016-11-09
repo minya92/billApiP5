@@ -1,5 +1,6 @@
 /**
  * @author Work
+ * @stateless
  */
 define('ApiLibs', ['Messages'], function (Messages, ModuleName) {
     return function () {

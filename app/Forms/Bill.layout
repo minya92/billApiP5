@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?><layout title="Ваш счёт" view="view">
   <ButtonGroup name="buttonGroup"/>
-  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="311px" prefWidth="377px"/>
-  <TabbedPane cursor="0" name="tabbedPane" parent="view" prefHeight="311px" prefWidth="380px" selectedComponent="pnlOperations">
-    <AnchorsPaneConstraints bottom="0px" left="0px" right="-3px" top="0px"/>
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="311px" prefWidth="364px"/>
+  <TabbedPane cursor="0" name="tabbedPane" parent="view" prefHeight="303px" prefWidth="367px" selectedComponent="pnlOperations">
+    <AnchorsPaneConstraints bottom="8px" left="0px" right="-3px" top="0px"/>
   </TabbedPane>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlOperations" parent="tabbedPane" prefHeight="275px" prefWidth="375px">
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlOperations" parent="tabbedPane" prefHeight="267px" prefWidth="362px">
     <TabbedPaneConstraints tabIcon="icons/22x22/currency_dollar_blue.png" tabTitle="Операции со счётом" tabToolTip=""/>
   </AnchorsPane>
-  <ModelCombo cursor="0" name="mcChoose" nullable="false" parent="pnlOperations" prefHeight="30px" prefWidth="180px">
-    <AnchorsPaneConstraints height="30px" left="20px" top="20px" width="180px"/>
+  <ModelCombo cursor="0" name="mcChoose" nullable="false" parent="pnlOperations" prefHeight="40px" prefWidth="180px">
+    <AnchorsPaneConstraints height="40px" left="20px" top="20px" width="180px"/>
   </ModelCombo>
-  <TextField cursor="0" name="tfSum" parent="pnlOperations" prefHeight="30px" prefWidth="100px">
-    <AnchorsPaneConstraints height="30px" left="217px" top="20px" width="100px"/>
+  <TextField cursor="0" name="tfSum" parent="pnlOperations" prefHeight="40px" prefWidth="100px">
+    <AnchorsPaneConstraints height="40px" left="217px" top="20px" width="100px"/>
   </TextField>
   <Label cursor="0" name="lbRub" parent="pnlOperations" prefHeight="30px" prefWidth="50px" text="руб.">
-    <AnchorsPaneConstraints height="30px" left="324px" top="20px" width="50px"/>
+    <AnchorsPaneConstraints height="30px" left="329px" top="24px" width="50px"/>
   </Label>
-  <ModelDate cursor="0" enabled="false" focusable="false" name="modelDate" nullable="false" parent="pnlOperations" prefHeight="30px" prefWidth="130px" timePicker="false">
-    <AnchorsPaneConstraints height="30px" left="176px" top="110px" width="130px"/>
+  <ModelDate cursor="0" enabled="false" focusable="false" name="modelDate" nullable="false" parent="pnlOperations" prefHeight="40px" prefWidth="154px" timePicker="false">
+    <AnchorsPaneConstraints height="40px" left="160px" top="110px" width="154px"/>
   </ModelDate>
   <RadioButton buttonGroup="buttonGroup" cursor="0" name="rbToday" parent="pnlOperations" prefHeight="30px" prefWidth="80px" selected="true" text="Сейчас">
     <AnchorsPaneConstraints height="30px" left="22px" top="70px" width="80px"/>
@@ -25,22 +25,22 @@
   <RadioButton buttonGroup="buttonGroup" cursor="0" name="rbDate" parent="pnlOperations" prefHeight="30px" prefWidth="230px" text="Запланировать операцию на срок:">
     <AnchorsPaneConstraints height="30px" left="127px" top="70px" width="230px"/>
   </RadioButton>
-  <Button cursor="0" enabled="false" icon="icons/Ok.Cancel/apply4.png" name="btnExecute" parent="pnlOperations" prefHeight="32px" prefWidth="335px" text="Провести операцию">
-    <AnchorsPaneConstraints height="32px" left="20px" top="227px" width="335px"/>
+  <Button cursor="0" enabled="false" icon="icons/Ok.Cancel/apply4.png" name="btnExecute" parent="pnlOperations" prefHeight="30px" prefWidth="335px" text="Провести операцию">
+    <AnchorsPaneConstraints height="30px" left="20px" top="227px" width="335px"/>
   </Button>
   <Label cursor="0" name="lbBalance" parent="pnlOperations" prefHeight="30px" prefWidth="170px" text="Остаток средств на счёте:">
     <AnchorsPaneConstraints height="30px" left="22px" top="170px" width="170px"/>
   </Label>
-  <Button cursor="0" name="btnBalance" parent="pnlOperations" prefHeight="30px" prefWidth="110px" text="Показать">
-    <AnchorsPaneConstraints height="30px" left="219px" top="170px" width="110px"/>
+  <Button cursor="0" name="btnBalance" parent="pnlOperations" prefHeight="40px" prefWidth="110px" text="Показать">
+    <AnchorsPaneConstraints height="40px" left="219px" top="170px" width="110px"/>
   </Button>
   <ModelFormattedField cursor="0" editable="false" focusable="false" format="" name="mffBalance" nullable="false" parent="pnlOperations" prefHeight="30px" prefWidth="110px" toolTipText="Скрыть нажатием на любую кнопку мыши" visible="false">
     <AnchorsPaneConstraints height="30px" left="219px" top="170px" width="110px"/>
   </ModelFormattedField>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlStatistics" parent="tabbedPane" prefHeight="275px" prefWidth="375px" visible="false">
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlStatistics" parent="tabbedPane" prefHeight="267px" prefWidth="362px" visible="false">
     <TabbedPaneConstraints tabIcon="icons/22x22/old-openofficeorg-calc.png" tabTitle="История операций" tabToolTip=""/>
   </AnchorsPane>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlServicesOnBill" parent="tabbedPane" prefHeight="275px" prefWidth="375px" visible="false">
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlServicesOnBill" parent="tabbedPane" prefHeight="267px" prefWidth="362px" visible="false">
     <TabbedPaneConstraints tabIcon="icons/list/todo-list.png" tabTitle="Услуги" tabToolTip=""/>
   </AnchorsPane>
 </layout>

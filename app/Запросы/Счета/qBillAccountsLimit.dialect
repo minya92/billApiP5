@@ -1,0 +1,5 @@
+Select * 
+From bill_accounts t1
+ Order by t1.bill_accounts_id
+limit (Case When :lim is null Then 5000 else cast(:lim as numeric) End)
+offset (Case When :off is null Then 5000 else cast(:off as numeric) End)

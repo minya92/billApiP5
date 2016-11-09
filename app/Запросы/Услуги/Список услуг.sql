@@ -2,6 +2,7 @@
  * @author Work
  * @name qServiceList
  * @writable bill_services
+ * @public
  */ 
 Select * 
 From bill_services t1

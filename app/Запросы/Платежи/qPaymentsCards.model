@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel>
+  <parameters>
+    <parameter description="" name="id" nullable="true" parameterMode="1" selectionForm="null" type="Number"/>
+  </parameters>
+  <parametersEntity entityHeight="200" entityIconified="false" entityLocationX="8" entityLocationY="7" entityWidth="150"/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="147584452290400" entityLocationX="181" entityLocationY="8" entityWidth="150" tableAlias="t1" tableName="tk_card" tableSchemaName=""/>
+  <relation leftEntityId="-1" leftEntityParameterName="id" rightEntityFieldName="card_key" rightEntityId="147584452290400"/>
+</datamodel>

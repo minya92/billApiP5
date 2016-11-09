@@ -107,7 +107,7 @@ define('q', ['invoke'], function (invoke) {
                     // In browsers, uncaught exceptions are not fatal.
                     // Re-throw them asynchronously to avoid slow-downs.
                     invoke.later(function () {
-                        throw e;
+                        throw 'error Q'; //TODO
                     });
                 }
             }

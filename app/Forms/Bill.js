@@ -2,18 +2,13 @@
  * 
  * @author User
  */
-define('Bill', ['orm', 'forms', 'ui', 'rpc', 'BillStatistics', 'ServisesOnBill'], function (Orm, Forms, Ui, Rpc, BillStatistics, ServisesOnBill, ModuleName) {
+define('Bill', ['orm', 'FormLoader', 'rpc', 'BillStatistics', 'ServisesOnBill'], function (Orm, FormLoader, Rpc, BillStatistics, ServisesOnBill, ModuleName) {
     function module_constructor() {
         var self = this
                 , model = Orm.loadModel(ModuleName)
-                , form = Forms.loadForm(ModuleName, model);
+                , form = FormLoader(ModuleName, model, self);
 
         var BillFunc = new Rpc.Proxy('BillApiFunctions');
-
-        self.show = function () {
-            form.show();
-        };
-
         var billId;
         var billStatistics = new BillStatistics();
         billStatistics.show(form.pnlStatistics);

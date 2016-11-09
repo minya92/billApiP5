@@ -2,11 +2,11 @@
  * 
  * @author User
  */
-define('ServiceInfo', ['orm', 'forms', 'rpc', 'ui'], function (Orm, Forms, Rpc, Ui, ModuleName) {
+define('ServiceInfo', ['orm', 'FormLoader', 'rpc'], function (Orm, FormLoader, Rpc, ModuleName) {
     function module_constructor() {
         var self = this
                 , model = Orm.loadModel(ModuleName)
-                , form = Forms.loadForm(ModuleName, model);
+                , form = FormLoader(ModuleName, model, self);
 
         var BillFunc = new Rpc.Proxy('BillApiFunctions');
         var Once = false;

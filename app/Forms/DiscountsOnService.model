@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel>
+  <entity Name="qDiscounts" Title="" entityHeight="200" entityIconified="false" entityId="147549749732000" entityLocationX="243" entityLocationY="77" entityWidth="150" queryId="qDiscounts" tableName="" tableSchemaName=""/>
+  <entity Name="qServiceDiscount" Title="" entityHeight="200" entityIconified="false" entityId="147549708255100" entityLocationX="35" entityLocationY="77" entityWidth="150" queryId="qServiceDiscount" tableName="" tableSchemaName=""/>
+  <referenceRelation leftEntityFieldName="discount_id" leftEntityId="147549708255100" rightEntityFieldName="disc_discounts_id" rightEntityId="147549749732000" scalarPropertyName="refDiscounts"/>
+</datamodel>

@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?><layout title="" view="view">
-  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="275px" prefWidth="375px"/>
-  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgOperations" parent="view" prefHeight="215px" prefWidth="375px">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="315px" prefWidth="375px"/>
+  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgOperations" parent="view" prefHeight="255px" prefWidth="375px">
     <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="60px"/>
-    <ModelGridColumn name="operation_sum" preferredWidth="40px" title="Сумма" width="72px">
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@602be1b9,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" name="operation_sum" preferredWidth="40px" title="Сумма" view="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@311b86ab,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="72px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="operation_type" preferredWidth="55px" title="Тип" width="87px">
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@3bfad465,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" name="operation_type" preferredWidth="55px" title="Тип" view="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@a121306,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="87px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="operation_status" preferredWidth="90px" title="Статус" width="122px">
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@350b0dd4,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" name="operation_status" preferredWidth="90px" title="Статус" view="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@5848eb00,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="122px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="operation_date" preferredWidth="60px" title="Дата" width="92px">
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@35fc5590,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" name="operation_date" preferredWidth="60px" title="Дата" view="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@2f6cfa0a,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="92px">
       <ModelFormattedField format="" valueType="1"/>
     </ModelGridColumn>
   </ModelGrid>
-  <SplitPane cursor="0" dividerLocation="140" foreground="#000000" leftComponent="mcType" name="splitPane" parent="view" prefHeight="30px" prefWidth="355px" rightComponent="mсStatus">
+  <SplitPane cursor="0" dividerLocation="140" foreground="#000000" leftComponent="mcType" name="splitPane" parent="view" prefHeight="40px" prefWidth="355px" rightComponent="mсStatus">
     <font family="Arial" size="11" style="0"/>
-    <AnchorsPaneConstraints height="30px" left="10px" right="10px" top="10px"/>
+    <AnchorsPaneConstraints height="40px" left="10px" right="10px" top="10px"/>
   </SplitPane>
-  <ModelCombo cursor="0" name="mcType" parent="splitPane" prefHeight="28px" prefWidth="139px" toolTipText="Фильтр по типу"/>
-  <ModelCombo cursor="0" name="mсStatus" parent="splitPane" prefHeight="28px" prefWidth="209px" toolTipText="Фильтр по статусу"/>
+  <ModelCombo cursor="0" name="mcType" parent="splitPane" prefHeight="38px" prefWidth="139px" toolTipText="Фильтр по типу"/>
+  <ModelCombo cursor="0" name="mсStatus" parent="splitPane" prefHeight="38px" prefWidth="209px" toolTipText="Фильтр по статусу"/>
 </layout>

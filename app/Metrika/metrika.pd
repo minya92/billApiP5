@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel datasource="null">
+  <fieldsEntity entityHeight="200" entityIconified="false" entityId="147567026078100" entityLocationX="322" entityLocationY="97" entityWidth="150" tableName="mtk_shots"/>
+  <fieldsEntity entityHeight="200" entityIconified="false" entityId="147567020954800" entityLocationX="71" entityLocationY="114" entityWidth="150" tableName="mtk_labels"/>
+</datamodel>

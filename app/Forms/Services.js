@@ -2,22 +2,19 @@
  * 
  * @author User
  */
-define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 'rpc'],
-        function (Orm, Forms, Ui, NewService, CardServiceWithBills, Rpc, ModuleName) {
+define('Services', ['orm', 'FormLoader', 'NewService', 'CardServiceWithBills', 'rpc', 'DiscountsOnService'],
+        function (Orm, FormLoader, NewService, CardServiceWithBills, Rpc, DiscountsOnService, ModuleName) {
             function module_constructor() {
                 var self = this
                         , model = Orm.loadModel(ModuleName)
-                        , form = Forms.loadForm(ModuleName, model);
+                        , form = FormLoader(ModuleName, model, self);
 
                 var BillFunc = new Rpc.Proxy('BillApiFunctions');
                 var Delete = null;
                 var ListOfTypes;
-                var ServisesList;
-
-                self.show = function () {
-                    form.show();
-                };
-
+                var ServicesList;
+                var discountsOnService = new DiscountsOnService();
+                
                 self.setParams = function () {
                     form.lbWating.visible = true;
                     form.mgServises.visible = false;
@@ -34,35 +31,36 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                         md.alert("Ошибка получения типов!");
                     });
                 };
-
+                self.setParams();
                 //Запрос данных грида
                 function Request() {
-                    BillFunc.request("services/get", {deleted: Delete ? Delete : null}, function (success_get) {
-                        console.log(success_get);
-                        ServisesList = success_get.services;
-
+                    model.qServiceList.query({deleted: Delete ? true : false, service_id: null}, function (services) {
+                        console.log(services);
                         if (form.lbWating.visible) {
                             form.mgServises.visible = true;
                             form.lbWating.visible = false;
                         }
 
-                        form.mgServises.data = success_get.services;
+                        form.mgServises.data = services;
+                        ServicesList = services;
                         form.mgServises.colName.field = 'service_name';
                         form.mgServises.colChekPrepay.field = 'prepayment';
                         form.mgServises.colCost.field = 'service_cost';
 
-                        for (var i = 0; i < success_get.services.length; i++) {
-                            success_get.services[i].active = !success_get.services[i].deleted;
+                        for (var i = 0; i < services.length; i++) {
+                            services[i].active = !services[i].deleted;
 
                             for (var k = 0; k < ListOfTypes.length; k++) {
-                                if (ListOfTypes[k].bill_services_types_id == success_get.services[i].service_type_id) {
-                                    success_get.services[i].service_type = ListOfTypes[k].type_name;
+                                if (ListOfTypes[k].bill_services_types_id == services[i].service_type_id) {
+                                    services[i].service_type = ListOfTypes[k].type_name;
                                     break;
                                 }
                             }
                         }
                         form.mgServises.colType.field = 'service_type';
                         form.mgServises.colActive.field = 'active';
+                        
+                        form.mffSearch.onValueChange();
 
                     }, function (get_error) {
                         console.log(get_error);
@@ -84,8 +82,9 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                 //Поиск
                 form.mffSearch.onValueChange = form.mffSearch.onKeyReleased = function () {
                     var filterKey = form.mffSearch.text;
-                    var filtered = ServisesList.filter(function (aItems) {
-                        return aItems.service_name.toLowerCase().indexOf(filterKey.toLowerCase()) !== -1;
+                    var filtered = ServicesList.filter(function (aItems) {
+                        return aItems.service_name.toLowerCase().indexOf(filterKey.toLowerCase()) !== -1
+                        || aItems.service_type.toLowerCase().indexOf(filterKey.toLowerCase()) !== -1;
                     });
                     form.mgServises.data = filtered;
                 };
@@ -226,6 +225,15 @@ define('Services', ['orm', 'forms', 'ui', 'NewService', 'CardServiceWithBills', 
                 form.mgServises.onMouseClicked = function (e) {
                     if (e.clickCount == 2) {
                         form.btnSettings.onActionPerformed();
+                    }
+                };
+                
+                form.btnDiscounts.onActionPerformed = function(){
+                    if (form.mgServises.selected.length == 0)
+                        md.alert("Выберите услугу!");
+                    else {
+                        discountsOnService.setService(form.mgServises.selected[0].service_id);
+                        discountsOnService.show();
                     }
                 };
             }

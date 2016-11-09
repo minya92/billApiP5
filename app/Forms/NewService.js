@@ -2,12 +2,12 @@
  * 
  * @author User
  */
-define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'],
-        function (Orm, Forms, Ui, Rpc, invoke, ModuleName) {
+define('NewService', ['orm', 'FormLoader', 'rpc', 'invoke'],
+        function (Orm, FormLoader, Rpc, invoke, ModuleName) {
             function module_constructor(parentSelf, parentForm, parentServiceSelf) {
                 var self = this
                         , model = Orm.loadModel(ModuleName)
-                        , form = Forms.loadForm(ModuleName, model);
+                        , form = FormLoader(ModuleName, model, self);
 
                 var BillFunc = new Rpc.Proxy('BillApiFunctions');
                 var ServiceId;
@@ -36,14 +36,18 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'],
                 form.mcbCounter.value = false;
                 form.mcbPrepayment.value = false;
                 form.mcbOnce.value = false;
+                form.mcbEmission.value = false;
 
                 //Открытие для редактирования
                 self.setParamsOpen = function (aListOfTypes, serviceId) {
                     form.btnCreate.visible = false;
-                    form.btnDel.visible = true;
-                    form.cbUnsubscribe.visible = true;
+                    //form.btnDel.visible = true;
+                    //form.cbUnsubscribe.visible = true;
                     form.btnSave.visible = true;
-
+                    //form.label3.visible = true;
+                    form.panelEditable.visible = false;
+                    form.mffName.editable = false;
+                    form.mtaDescription.editable = false;
                     ServiceId = serviceId;
 
                     checkListOfTypes(aListOfTypes, function (types) {
@@ -52,16 +56,18 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'],
 
                     GetServiseRequest();
                 };
-                
+
                 //Открытия для создания
                 self.setParamsNew = function (aListOfTypes) {
-//            form.mcbPrepayment.value = false;
-//            form.mffName.text = "";
-//            form.mffCost.text = "";
-//            form.mffDays.text = "";
-//            form.mffCounter.text = "";
-//            form.rbMonth.selected = true;
+//                    form.mcbPrepayment.value = false;
+//                    form.mffName.text = "";
+//                    form.mffCost.text = "";
+//                    form.mffDays.text = "";
+//                    form.mffCounter.text = "";
+//                    form.rbMonth.selected = true;
+                    
 
+                    form.mcbUnlimited.value = false;
                     checkListOfTypes(aListOfTypes, function (types) {
                         SetData_mcType(types);
                     });
@@ -184,6 +190,18 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'],
                     else if (!form.mcbPeriod.value)
                         ChangeType('CounterServiceModule');
                 };
+                
+                //Нажатие на галочку Безлимитно
+                form.mcbUnlimited.onActionPerformed = function () {
+                    form.mcbCounter.value = false;
+                    ChangeType('Unlimited');
+                };
+                
+                //Нажатие на галочку Эмиссия
+                form.mcbEmission.onActionPerformed = function () {
+                    form.mcbCounter.value = false;
+                    ChangeType('Emission');
+                };
 
                 //Смена значения списка типов
                 form.mcType.onValueChange = function (evt) {
@@ -205,6 +223,19 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'],
                                 form.mcbPeriod.value = true;
                                 form.mcbCounter.value = true;
                                 form.mcbOnce.value = false;
+                                break;
+                            case 'Unlimited':
+                                form.mcbPeriod.value = true;
+                                form.mcbCounter.value = false;
+                                form.mcbOnce.value = false;
+                                form.mcbUnlimited.value = true;
+                                break;
+                            case 'Emission':
+                                form.mcbPeriod.value = false;
+                                form.mcbCounter.value = false;
+                                form.mcbOnce.value = false;
+                                form.mcbPrepayment.value = true;
+                                form.mcbUnlimited.value = false;
                                 break;
                             case 'OneTime':
                                 form.mcbOnce.value = true;
@@ -262,7 +293,7 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'],
                                     counts: form.mcbCounter.value ? +form.mffCounter.text : null,
                                     type: form.mcType.value.bill_services_types_id,
                                     service_month: (form.rbMonth.selected && form.mcbPeriod.value) ? true : null,
-                                    description: form.mtaDescription.text
+                                    description: form.mtaDescription.text,
                                 };
                                 callback(params);
                             }
@@ -296,21 +327,21 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'],
                     });
                 }
 
-                //Кнопка удаления
-                form.btnDel.onActionPerformed = function () {
-                    if (!form.cbUnsubscribe.selected)
-                        md.confirm("Вы хотите сделать услугу неактивной?", function (answer) {
-                            if (answer) {
-                                DeleteRequest();
-                            }
-                        });
-                    else
-                        md.confirm("Вы хотите сделать услугу неактивной и отписать её ото всех счетов? Действие необратимо!", function (answer) {
-                            if (answer) {
-                                DeleteRequest(true);
-                            }
-                        });
-                };
+//                //Кнопка удаления
+//                form.btnDel.onActionPerformed = function () {
+//                    if (!form.cbUnsubscribe.selected)
+//                        md.confirm("Вы хотите сделать услугу неактивной?", function (answer) {
+//                            if (answer) {
+//                                DeleteRequest();
+//                            }
+//                        });
+//                    else
+//                        md.confirm("Вы хотите сделать услугу неактивной и отписать её ото всех счетов? Действие необратимо!", function (answer) {
+//                            if (answer) {
+//                                DeleteRequest(true);
+//                            }
+//                        });
+//                };
 
                 //Запрос на удаление (Деактивацию)
                 function DeleteRequest(aUnsubscribe) {
@@ -351,6 +382,11 @@ define('NewService', ['orm', 'forms', 'ui', 'rpc', 'invoke'],
                 //Клик на текст со счётчиком
                 form.lbCount.onMouseClicked = function () {
                     form.mcbCounter.onActionPerformed();
+                };
+                 
+                //Отмена
+                form.btnCancel.onActionPerformed = function () {
+                    form.close();
                 };
             }
             return module_constructor;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><layout title="Состав услуги" view="view">
+  <AnchorsPane cursor="0" name="view" prefHeight="414px" prefWidth="321px"/>
+  <ToolBar cursor="0" name="toolBar" parent="view" prefHeight="40px" prefWidth="190px">
+    <AnchorsPaneConstraints height="40px" left="10px" top="10px" width="190px"/>
+  </ToolBar>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/list-add.png" name="btnAdd" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Добавить" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/list-remove.png" name="btnDel" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Удалить" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/gtk-floppy.png" name="btnSave" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Сохранить" verticalTextPosition="3"/>
+  <ModelGrid cursor="0" data="qServicesConnect" deletable="false" insertable="false" name="modelGrid" parent="view" prefHeight="340px" prefWidth="298px">
+    <AnchorsPaneConstraints bottom="14px" left="10px" right="13px" top="60px"/>
+    <ServiceGridColumn name="colService" resizable="true"/>
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelCombo[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@68fe75c9,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" field="refUsed" name="colType_name" title="Услуга" view="com.eas.client.forms.components.model.ModelCombo[,-256,-29,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="257px">
+      <ModelCombo displayField="service_name" displayList="qServiceList"/>
+    </ModelGridColumn>
+  </ModelGrid>
+</layout>

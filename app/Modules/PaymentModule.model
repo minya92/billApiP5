@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel>
+  <entity Name="qPaymentsCards" Title="" entityHeight="200" entityIconified="false" entityId="147584455745500" entityLocationX="46" entityLocationY="21" entityWidth="150" queryId="qPaymentsCards" tableName="" tableSchemaName=""/>
+  <entity Name="qGetStartPeriodFromService" Title="" entityHeight="200" entityIconified="false" entityId="147610969532700" entityLocationX="451" entityLocationY="35" entityWidth="150" queryId="qGetStartPeriodFromService" tableName="" tableSchemaName=""/>
+  <entity Name="qFillOperations" Title="" entityHeight="200" entityIconified="false" entityId="147584598690400" entityLocationX="252" entityLocationY="35" entityWidth="150" queryId="qFillOperations" tableName="" tableSchemaName=""/>
+  <referenceRelation leftEntityFieldName="card_id" leftEntityId="147584598690400" rightEntityFieldName="tk_card_id" rightEntityId="147584455745500"/>
+  <referenceRelation leftEntityFieldName="bill_services_accounts" leftEntityId="147610969532700" rightEntityFieldName="bill_services_accounts_id" rightEntityId="147610969532700"/>
+  <referenceRelation leftEntityFieldName="bill_operation" leftEntityId="147584598690400" rightEntityFieldName="bill_operations_id" rightEntityId="147610969532700"/>
+</datamodel>

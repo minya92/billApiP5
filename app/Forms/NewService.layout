@@ -1,80 +1,136 @@
-<?xml version="1.0" encoding="UTF-8"?><layout title="Создание услуги" view="view">
+<?xml version="1.0" encoding="UTF-8"?><layout maximizable="false" minimizable="false" resizable="false" title="Создание услуги" view="view">
   <ButtonGroup name="buttonGroup"/>
-  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="482px" prefWidth="420px"/>
-  <Button cursor="0" icon="icons/Save/save2.png" name="btnSave" parent="view" prefHeight="33px" prefWidth="112px" text="Сохранить" visible="false">
-    <AnchorsPaneConstraints height="33px" right="12px" top="433px" width="112px"/>
+  <AnchorsPane cursor="0" name="view" prefHeight="530px" prefWidth="507px"/>
+  <Button cursor="0" icon="icons/22x22/actions/document-save.png" name="btnSave" parent="view" prefHeight="30px" prefWidth="140px" text="Сохранить" visible="false">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="20px" height="30px" right="165px" width="140px"/>
   </Button>
-  <Label cursor="0" name="lbName" parent="view" prefHeight="25px" prefWidth="80px" text="Имя услуги">
-    <AnchorsPaneConstraints height="25px" left="10px" top="10px" width="80px"/>
+  <Label cursor="0" name="lbName" parent="view" prefHeight="25px" prefWidth="110px" text="Имя услуги">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="10px" top="10px" width="110px"/>
   </Label>
-  <Label cursor="0" name="lbCost" parent="view" prefHeight="25px" prefWidth="80px" text="Стоимость">
-    <AnchorsPaneConstraints height="25px" left="10px" top="60px" width="80px"/>
+  <Label cursor="0" name="lbCost" parent="view" prefHeight="25px" prefWidth="110px" text="Стоимость">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="10px" top="60px" width="110px"/>
   </Label>
-  <ModelFormattedField cursor="0" format="" name="mffCost" nullable="false" parent="view" prefHeight="25px" prefWidth="280px">
-    <AnchorsPaneConstraints height="25px" left="90px" right="50px" top="60px"/>
+  <ModelFormattedField cursor="0" format="" name="mffCost" nullable="false" parent="view" prefHeight="30px" prefWidth="330px">
+    <AnchorsPaneConstraints height="30px" left="120px" right="57px" top="60px"/>
   </ModelFormattedField>
   <Label cursor="0" name="lbRub" parent="view" prefHeight="25px" prefWidth="30px" text="руб.">
-    <AnchorsPaneConstraints height="25px" right="15px" top="60px" width="30px"/>
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" right="23px" top="63px" width="30px"/>
   </Label>
-  <ModelFormattedField cursor="0" format="" name="mffName" nullable="false" parent="view" prefHeight="25px" prefWidth="310px">
-    <AnchorsPaneConstraints height="25px" left="90px" right="20px" top="10px"/>
+  <ModelFormattedField cursor="0" format="" name="mffName" nullable="false" parent="view" prefHeight="30px" prefWidth="363px">
+    <AnchorsPaneConstraints height="30px" left="120px" right="24px" top="10px"/>
   </ModelFormattedField>
-  <ModelCheckBox cursor="0" name="mcbPeriod" nullable="false" parent="view" prefHeight="15px" prefWidth="13px" toolTipText="Период, через который будет производиться списание средств со счёта">
-    <AnchorsPaneConstraints height="15px" left="10px" top="234px" width="13px"/>
-  </ModelCheckBox>
-  <Label cursor="0" name="lbPeriod" parent="view" prefHeight="25px" prefWidth="174px" text="Период действия/списания:" toolTipText="Период, через который будет производиться списание средств со счёта">
-    <AnchorsPaneConstraints height="25px" left="30px" top="230px" width="174px"/>
-  </Label>
-  <RadioButton buttonGroup="buttonGroup" cursor="0" name="rbMonth" parent="view" prefHeight="25px" prefWidth="75px" selected="true" text="Месяц">
-    <AnchorsPaneConstraints height="25px" left="215px" right="130px" top="230px"/>
-  </RadioButton>
-  <RadioButton buttonGroup="buttonGroup" cursor="0" foreground="#ffffff" name="rbDays" parent="view" prefHeight="25px" prefWidth="90px" text="             дней">
-    <AnchorsPaneConstraints height="25px" left="305px" top="230px" width="90px"/>
-  </RadioButton>
-  <ModelFormattedField cursor="0" format="" name="mffDays" nullable="false" parent="view" prefHeight="25px" prefWidth="40px">
-    <AnchorsPaneConstraints height="25px" left="325px" top="230px" width="40px"/>
-  </ModelFormattedField>
-  <Label cursor="0" name="lbDays" parent="view" prefHeight="25px" prefWidth="40px" text="дней">
-    <AnchorsPaneConstraints height="25px" left="371px" top="230px" width="40px"/>
-  </Label>
   <ModelCheckBox cursor="0" name="mcbCounter" nullable="false" parent="view" prefHeight="15px" prefWidth="13px" toolTipText="Пакет услуг">
-    <AnchorsPaneConstraints height="15px" left="10px" top="284px" width="13px"/>
+    <AnchorsPaneConstraints height="15px" left="10px" top="230px" width="13px"/>
   </ModelCheckBox>
   <ModelFormattedField cursor="0" enabled="false" focusable="false" format="" name="mffCounter" nullable="false" parent="view" prefHeight="25px" prefWidth="60px">
-    <AnchorsPaneConstraints height="25px" left="90px" top="280px" width="60px"/>
+    <AnchorsPaneConstraints height="25px" left="120px" top="230px" width="60px"/>
   </ModelFormattedField>
-  <ModelCheckBox cursor="0" name="mcbPrepayment" nullable="false" parent="view" prefHeight="25px" prefWidth="100px" text="Предоплата" toolTipText="Означает списание со счёта средств единовременно с подключением">
-    <AnchorsPaneConstraints height="25px" left="10px" top="380px" width="100px"/>
-  </ModelCheckBox>
-  <ModelCombo cursor="0" editable="true" name="mcType" nullable="false" parent="view" prefHeight="25px" prefWidth="310px">
-    <AnchorsPaneConstraints height="25px" left="90px" right="20px" top="110px"/>
+  <ModelCombo cursor="0" editable="true" name="mcType" nullable="false" parent="view" prefHeight="30px" prefWidth="363px">
+    <AnchorsPaneConstraints height="30px" left="120px" right="24px" top="110px"/>
   </ModelCombo>
-  <Label cursor="0" name="lbType" parent="view" prefHeight="25px" prefWidth="80px" text="Тип услуги">
-    <AnchorsPaneConstraints height="25px" left="10px" top="110px" width="80px"/>
+  <Label cursor="0" name="lbType" parent="view" prefHeight="25px" prefWidth="120px" text="Тип услуги">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="10px" top="110px" width="120px"/>
   </Label>
-  <Button cursor="0" icon="icons/Ok.Cancel/cancel3.png" name="btnDel" parent="view" prefHeight="33px" prefWidth="112px" text="Удалить" visible="false">
-    <AnchorsPaneConstraints height="33px" left="10px" top="433px" width="112px"/>
+  <Button cursor="0" icon="icons/22x22/actions/list-remove.png" name="btnDel" parent="view" prefHeight="30px" prefWidth="130px" text="Удалить" visible="false">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="20px" height="30px" left="10px" width="130px"/>
   </Button>
-  <CheckBox cursor="0" name="cbUnsubscribe" parent="view" prefHeight="30px" prefWidth="120px" text="Со всех счетов" visible="false">
-    <AnchorsPaneConstraints height="30px" left="125px" top="434px" width="120px"/>
+  <CheckBox cursor="0" name="cbUnsubscribe" parent="view" prefHeight="15px" prefWidth="20px" visible="false">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="38px" height="15px" left="140px" width="20px"/>
   </CheckBox>
-  <Button cursor="0" icon="icons/Ok.Cancel/apply3.png" name="btnCreate" parent="view" prefHeight="35px" prefWidth="150px" text="Создать">
-    <AnchorsPaneConstraints height="35px" right="20px" top="428px" width="150px"/>
+  <Button cursor="0" icon="icons/Ok.Cancel/apply3.png" name="btnCreate" parent="view" prefHeight="30px" prefWidth="140px" text="Принять">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="20px" height="30px" right="165px" width="140px"/>
   </Button>
   <Label cursor="0" enabled="false" name="lbCounter" parent="view" prefHeight="25px" prefWidth="50px" text="единиц">
-    <AnchorsPaneConstraints height="25px" left="160px" top="280px" width="50px"/>
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="190px" top="230px" width="50px"/>
   </Label>
-  <Label cursor="0" name="lbCount" parent="view" prefHeight="25px" prefWidth="63px" text="Счётчик:" toolTipText="Пакет услуг">
-    <AnchorsPaneConstraints height="25px" left="30px" top="280px" width="63px"/>
+  <Label cursor="0" name="lbCount" parent="view" prefHeight="25px" prefWidth="80px" text="Счётчик:" toolTipText="Пакет услуг">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="40px" top="230px" width="80px"/>
   </Label>
-  <ModelCheckBox cursor="0" name="mcbOnce" nullable="false" parent="view" prefHeight="25px" prefWidth="180px" text="Единоразовое списание" toolTipText="Списание будет произведено только один раз">
-    <AnchorsPaneConstraints height="25px" left="10px" top="330px" width="180px"/>
-  </ModelCheckBox>
-  <Label cursor="0" name="lbDescription" parent="view" prefHeight="25px" prefWidth="80px" text="Описание">
-    <AnchorsPaneConstraints height="25px" left="10px" top="170px" width="80px"/>
+  <Label cursor="0" name="lbDescription" parent="view" prefHeight="25px" prefWidth="110px" text="Описание">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="10px" top="170px" width="110px"/>
   </Label>
-  <ScrollPane cursor="0" name="scrollPane" parent="view" prefHeight="50px" prefWidth="310px">
-    <AnchorsPaneConstraints height="50px" left="90px" right="20px" top="160px"/>
+  <ScrollPane cursor="0" name="scrollPane" parent="view" prefHeight="50px" prefWidth="363px">
+    <AnchorsPaneConstraints height="50px" left="120px" right="24px" top="160px"/>
   </ScrollPane>
-  <ModelTextArea cursor="0" name="mtaDescription" nullable="false" parent="scrollPane" prefHeight="48px" prefWidth="308px"/>
+  <ModelTextArea cursor="0" name="mtaDescription" nullable="false" parent="scrollPane" prefHeight="48px" prefWidth="361px"/>
+  <Label cursor="0" name="label3" parent="view" prefHeight="30px" prefWidth="120px" text="Со всех счетов" visible="false">
+    <font family="Arial" size="12" style="0"/>
+    <AnchorsPaneConstraints bottom="25px" height="30px" left="158px" width="120px"/>
+  </Label>
+  <AnchorsPane background="#ffffff" cursor="0" name="panelEditable" parent="view" prefHeight="170px" prefWidth="500px">
+    <AnchorsPaneConstraints height="170px" left="0px" right="7px" top="270px"/>
+  </AnchorsPane>
+  <Label cursor="0" name="lbPeriod" parent="panelEditable" prefHeight="25px" prefWidth="230px" text="Период действия/списания:" toolTipText="Период, через который будет производиться списание средств со счёта">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="30px" top="10px" width="230px"/>
+  </Label>
+  <ModelFormattedField cursor="0" format="" name="mffDays" nullable="false" parent="panelEditable" prefHeight="25px" prefWidth="40px">
+    <AnchorsPaneConstraints height="25px" left="370px" top="10px" width="40px"/>
+  </ModelFormattedField>
+  <Label cursor="0" name="lbDays" parent="panelEditable" prefHeight="25px" prefWidth="40px" text="дней">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="420px" top="10px" width="40px"/>
+  </Label>
+  <Label cursor="0" name="label2" parent="panelEditable" prefHeight="30px" prefWidth="100px" text="Месяц">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="30px" left="280px" top="10px" width="100px"/>
+  </Label>
+  <Label cursor="0" name="label4" parent="panelEditable" prefHeight="30px" prefWidth="100px" text="Безлимит" toolTipText="Означает списание со счёта средств единовременно с подключением">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="30px" left="40px" top="100px" width="100px"/>
+  </Label>
+  <RadioButton buttonGroup="buttonGroup" cursor="0" name="rbMonth" parent="panelEditable" prefHeight="20px" prefWidth="20px" selected="true">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="20px" left="260px" top="10px" width="20px"/>
+  </RadioButton>
+  <Label cursor="0" name="label1" parent="panelEditable" prefHeight="30px" prefWidth="290px" text="Единоразовое списание" toolTipText="Списание будет произведено только один раз">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="30px" left="40px" top="40px" width="290px"/>
+  </Label>
+  <RadioButton buttonGroup="buttonGroup" cursor="0" foreground="#ffffff" name="rbDays" parent="panelEditable" prefHeight="30px" prefWidth="40px" text="             дней">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="30px" left="350px" top="10px" width="40px"/>
+  </RadioButton>
+  <Label cursor="0" name="label" parent="panelEditable" prefHeight="30px" prefWidth="100px" text="Предоплата" toolTipText="Означает списание со счёта средств единовременно с подключением">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="30px" left="40px" top="70px" width="100px"/>
+  </Label>
+  <ModelCheckBox cursor="0" name="mcbPeriod" nullable="false" parent="panelEditable" prefHeight="15px" prefWidth="13px" toolTipText="Период, через который будет производиться списание средств со счёта">
+    <AnchorsPaneConstraints height="15px" left="10px" top="10px" width="13px"/>
+  </ModelCheckBox>
+  <ModelCheckBox cursor="0" name="mcbOnce" nullable="false" parent="panelEditable" prefHeight="15px" prefWidth="13px" toolTipText="Списание будет произведено только один раз">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="15px" left="10px" top="40px" width="13px"/>
+  </ModelCheckBox>
+  <ModelCheckBox cursor="0" name="mcbPrepayment" nullable="false" parent="panelEditable" prefHeight="15px" prefWidth="13px" toolTipText="Означает списание со счёта средств единовременно с подключением">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="15px" left="10px" top="70px" width="13px"/>
+  </ModelCheckBox>
+  <ModelCheckBox cursor="0" name="mcbUnlimited" nullable="false" parent="panelEditable" prefHeight="15px" prefWidth="13px" toolTipText="Безлимитная услуга">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="15px" left="10px" top="100px" width="13px"/>
+  </ModelCheckBox>
+  <Label cursor="0" name="label41" parent="panelEditable" prefHeight="30px" prefWidth="100px" text="Эмиссия" toolTipText="Означает списание со счёта средств единовременно с подключением">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="10px" height="30px" left="40px" width="100px"/>
+  </Label>
+  <ModelCheckBox cursor="0" name="mcbEmission" nullable="false" parent="panelEditable" prefHeight="15px" prefWidth="13px" toolTipText="Безлимитная услуга">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="25px" height="15px" left="10px" width="13px"/>
+  </ModelCheckBox>
+  <Button cursor="0" icon="icons/22x22/actions/window-close.png" name="btnCancel" parent="view" prefHeight="30px" prefWidth="140px" text="Отмена">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="20px" height="30px" right="13px" width="140px"/>
+  </Button>
 </layout>

@@ -69,6 +69,18 @@ define('Messages', [], function (ModuleName) {
             errHardDeleteService : {
                 en  : "Failed to delete service. Please first make inactive. /services/delete?service_id=xxxxxx",
                 ru  : "Ошибка удаление услуги. Сначала сделайте услгу неактивной. /services/delete?service_id=xxxxxx"
+            },
+            errEmptyCount : {
+                en  : "Counter ended",
+                ru  : "Счетчик закончился"
+            },
+            discAddSuccess : {
+                en  : "Discount Success Added to Account",
+                ru  : "Скидка успешно подключена на к услуге"
+            },
+            discAddError : {
+                en  : "Discount error add to Account",
+                ru  : "Ошибка подключения скидки к услуге"
             }
         };
         

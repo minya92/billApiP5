@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><layout title="Правила по скидке" view="view">
+  <AnchorsPane cursor="0" name="view" prefHeight="363px" prefWidth="552px"/>
+  <ToolBar cursor="0" name="toolBar" parent="view" prefHeight="40px" prefWidth="150px">
+    <AnchorsPaneConstraints height="40px" left="10px" top="10px" width="150px"/>
+  </ToolBar>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/list-add.png" name="btnAdd" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Добавить" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/list-remove.png" name="btnDel" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Удалить" verticalTextPosition="3"/>
+  <ModelGrid cursor="0" data="qDiscRules" deletable="false" insertable="false" name="modelGrid" parent="view" prefHeight="249px" prefWidth="529px">
+    <AnchorsPaneConstraints bottom="54px" left="10px" right="13px" top="60px"/>
+    <ServiceGridColumn name="colService" resizable="true"/>
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelSpin[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@14ddbb95,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" field="rule_amount" name="colRule_amount" title="Значение правила" view="com.eas.client.forms.components.model.ModelSpin[,-162,-29,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="163px">
+      <ModelSpin max="1.7976931348623157E308" min="-1.7976931348623157E308"/>
+    </ModelGridColumn>
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelSpin[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@12e22d38,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" field="discount_natural" name="colDiscount_natural" title="Скидка в рублях" view="com.eas.client.forms.components.model.ModelSpin[,-162,-29,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="163px">
+      <ModelSpin max="1.7976931348623157E308" min="-1.7976931348623157E308"/>
+    </ModelGridColumn>
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelSpin[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@61e1f9b4,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" field="discount_percent" name="colDiscount_percent" title="Скидка в процентах" view="com.eas.client.forms.components.model.ModelSpin[,-161,-29,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="162px">
+      <ModelSpin max="1.7976931348623157E308" min="-1.7976931348623157E308"/>
+    </ModelGridColumn>
+  </ModelGrid>
+  <Button cursor="0" icon="icons/22x22/actions/dialog-apply.png" name="btnAccept" parent="view" prefHeight="30px" prefWidth="130px" text="Принять">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="14px" height="30px" right="165px" width="130px"/>
+  </Button>
+  <Button cursor="0" icon="icons/22x22/actions/window-close.png" name="btnCancel" parent="view" prefHeight="30px" prefWidth="130px" text="Отмена">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="14px" height="30px" right="13px" width="130px"/>
+  </Button>
+</layout>

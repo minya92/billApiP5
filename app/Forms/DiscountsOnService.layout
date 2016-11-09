@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><layout title="Скидки по услуге" view="view">
+  <AnchorsPane cursor="0" name="view" prefHeight="363px" prefWidth="552px"/>
+  <ToolBar cursor="0" name="toolBar" parent="view" prefHeight="40px" prefWidth="130px">
+    <AnchorsPaneConstraints height="40px" left="10px" top="10px" width="130px"/>
+  </ToolBar>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/list-add.png" name="btnAdd" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Добавить" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/list-remove.png" name="btnDel" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Удалить" verticalTextPosition="3"/>
+  <ModelGrid cursor="0" data="qServiceDiscount" deletable="false" editable="false" insertable="false" name="modelGrid" parent="view" prefHeight="249px" prefWidth="529px">
+    <AnchorsPaneConstraints bottom="54px" left="10px" right="13px" top="60px"/>
+    <ServiceGridColumn name="colService" resizable="true"/>
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelCombo[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@2bde7a61,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" field="refDiscounts" name="colDiscount_id" title="Название скидки" view="com.eas.client.forms.components.model.ModelCombo[,-487,-29,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="488px">
+      <ModelCombo displayField="disc_description" displayList="qDiscounts" list="false"/>
+    </ModelGridColumn>
+  </ModelGrid>
+  <Button cursor="0" icon="icons/22x22/actions/window-close.png" name="btnCancel" parent="view" prefHeight="30px" prefWidth="130px" text="Отмена">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="14px" height="30px" right="13px" width="130px"/>
+  </Button>
+  <Button cursor="0" icon="icons/22x22/actions/dialog-apply.png" name="btnAccept" parent="view" prefHeight="30px" prefWidth="130px" text="Принять">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="14px" height="30px" right="165px" width="130px"/>
+  </Button>
+</layout>

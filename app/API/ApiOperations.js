@@ -1,6 +1,7 @@
 /**
  * @public
  * @author Work
+ * @stateless
  */
 define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', 'Messages'],
         function (Orm, HttpContext, ApiLibs, OperationsModule, Messages, ModuleName) {
@@ -15,8 +16,8 @@ define('ApiOperations', ['orm', 'http-context', 'ApiLibs', 'OperationsModule', '
                  * @GET /operations/create
                  */
                 self.operationCreate = function (aPath, onSucces) {
-                    libs.checkRequiredParams((new HttpContext()), ["id", "sum"], function(p, aHttpContext){
-                        operationsModule.createOperation(p.id, p.sum, p.withdraw, null, function (res) {
+                    libs.checkRequiredParams((new HttpContext()), ["id"], function(p, aHttpContext){
+                        operationsModule.createOperation(p.id, p.sum, p.withdraw, null, p.service_id, function (res) {
                             onSucces(res);
                         }, function(err){
                             onSucces(err);

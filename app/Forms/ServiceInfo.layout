@@ -1,53 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?><layout title="Информация об услуге" view="view">
-  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="434px" prefWidth="318px"/>
+  <AnchorsPane cursor="0" name="view" prefHeight="434px" prefWidth="318px"/>
   <Label cursor="0" horizontalAlignment="0" horizontalTextPosition="0" name="lblName" opaque="true" parent="view" prefHeight="50px" prefWidth="298px" text="Имя услуги">
-    <font family="Arial" size="11" style="1"/>
+    <font family="Arial" size="12" style="1"/>
     <AnchorsPaneConstraints height="50px" left="10px" right="10px" top="10px"/>
   </Label>
   <Label cursor="0" name="lblCostName" parent="view" prefHeight="25px" prefWidth="70px" text="Стоимость:">
-    <AnchorsPaneConstraints height="25px" left="10px" top="80px" width="70px"/>
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="10px" top="70px" width="70px"/>
   </Label>
   <Label cursor="0" horizontalAlignment="0" horizontalTextPosition="0" name="lblCost" opaque="true" parent="view" prefHeight="25px" prefWidth="50px" text="0">
-    <AnchorsPaneConstraints height="25px" left="80px" top="80px" width="50px"/>
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="90px" top="68px" width="50px"/>
   </Label>
   <Label cursor="0" horizontalAlignment="0" horizontalTextPosition="0" name="lbRub" parent="view" prefHeight="25px" prefWidth="30px" text="руб.">
-    <AnchorsPaneConstraints height="25px" left="130px" top="80px" width="30px"/>
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="130px" top="70px" width="30px"/>
   </Label>
-  <Label cursor="0" name="lblTypeName" parent="view" prefHeight="25px" prefWidth="70px" text="Тип услуги:">
-    <AnchorsPaneConstraints height="25px" left="10px" top="120px" width="70px"/>
+  <Label cursor="0" name="lblTypeName" parent="view" prefHeight="25px" prefWidth="120px" text="Тип услуги:">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="10px" top="110px" width="120px"/>
   </Label>
-  <Label cursor="0" name="lblType" opaque="true" parent="view" prefHeight="25px" prefWidth="213px" text="По времени">
-    <AnchorsPaneConstraints height="25px" left="90px" top="120px" width="213px"/>
+  <Label cursor="0" name="lblType" opaque="true" parent="view" prefHeight="25px" prefWidth="170px" text="По времени">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="120px" top="110px" width="170px"/>
   </Label>
-  <Label cursor="0" name="lblPeriodName" parent="view" prefHeight="25px" prefWidth="180px" text="Период действия/списания:" toolTipText="Период, через который будет производиться списание средств со счёта">
-    <AnchorsPaneConstraints height="25px" left="10px" top="160px" width="180px"/>
+  <Label cursor="0" name="lblPeriodName" parent="view" prefHeight="25px" prefWidth="240px" text="Период действия/списания:" toolTipText="Период, через который будет производиться списание средств со счёта">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="10px" top="150px" width="240px"/>
   </Label>
   <Label cursor="0" horizontalTextPosition="0" name="lblPeriod" opaque="true" parent="view" prefHeight="25px" prefWidth="90px" text="Месяц">
-    <AnchorsPaneConstraints height="25px" left="190px" top="160px" width="90px"/>
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" right="-12px" top="150px" width="90px"/>
   </Label>
   <Label cursor="0" name="lblCountName" parent="view" prefHeight="25px" prefWidth="60px" text="Счётчик:" toolTipText="Пакет услуг">
-    <AnchorsPaneConstraints height="25px" left="10px" top="200px" width="60px"/>
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="10px" top="190px" width="60px"/>
   </Label>
   <Label cursor="0" horizontalAlignment="0" horizontalTextPosition="0" name="lblCount" opaque="true" parent="view" prefHeight="25px" prefWidth="50px" text="0">
-    <AnchorsPaneConstraints height="25px" left="70px" top="200px" width="50px"/>
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="70px" top="188px" width="50px"/>
   </Label>
   <Label cursor="0" name="lbCounter" parent="view" prefHeight="25px" prefWidth="50px" text="единиц">
-    <AnchorsPaneConstraints height="25px" left="130px" top="200px" width="50px"/>
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="130px" top="190px" width="50px"/>
   </Label>
-  <ModelCheckBox cursor="0" name="mcbOnce" nullable="false" parent="view" prefHeight="25px" prefWidth="180px" text="Единоразовое списание" toolTipText="Списание будет произведено только один раз">
-    <AnchorsPaneConstraints height="25px" left="10px" top="240px" width="180px"/>
+  <ModelCheckBox cursor="0" name="mcbOnce" nullable="false" parent="view" prefHeight="25px" prefWidth="270px" text="Единоразовое списание" toolTipText="Списание будет произведено только один раз">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="10px" top="230px" width="270px"/>
   </ModelCheckBox>
-  <ModelCheckBox cursor="0" name="mcbPrepayment" nullable="false" parent="view" prefHeight="25px" prefWidth="100px" text="Предоплата" toolTipText="Означает списание со счёта средств единовременно с подключением">
-    <AnchorsPaneConstraints height="25px" left="10px" top="280px" width="100px"/>
+  <ModelCheckBox cursor="0" name="mcbPrepayment" nullable="false" parent="view" prefHeight="25px" prefWidth="170px" text="Предоплата" toolTipText="Означает списание со счёта средств единовременно с подключением">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="25px" left="10px" top="270px" width="170px"/>
   </ModelCheckBox>
   <Button cursor="0" name="btnOk" parent="view" prefHeight="30px" prefWidth="100px" text="Ok">
+    <font family="Arial" size="12" style="1"/>
     <AnchorsPaneConstraints height="30px" right="10px" top="394px" width="100px"/>
   </Button>
   <Label cursor="0" name="lbDescriptionName" parent="view" prefHeight="25px" prefWidth="60px" text="Описание:" verticalAlignment="1" verticalTextPosition="1">
-    <AnchorsPaneConstraints height="25px" left="10px" top="323px" width="60px"/>
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="96px" height="25px" left="10px" width="60px"/>
   </Label>
   <ScrollPane cursor="0" name="scrollPane" parent="view" prefHeight="50px" prefWidth="228px">
-    <AnchorsPaneConstraints height="50px" left="80px" right="10px" top="323px"/>
+    <AnchorsPaneConstraints bottom="71px" height="50px" left="80px" width="228px"/>
   </ScrollPane>
-  <Label cursor="0" name="lbDescription" opaque="true" parent="scrollPane" prefHeight="0px" prefWidth="226px" verticalAlignment="1" verticalTextPosition="1"/>
+  <Label cursor="0" name="lbDescription" opaque="true" parent="scrollPane" prefHeight="48px" prefWidth="226px" verticalAlignment="1" verticalTextPosition="1">
+    <font family="Arial" size="12" style="1"/>
+  </Label>
 </layout>

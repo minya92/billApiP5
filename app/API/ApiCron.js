@@ -1,6 +1,7 @@
 /**
  * @public
  * @author Work
+ * @stateless
  */
 define('ApiCron', ['orm', 'http-context', 'ApiLibs', 'CronModule', 'Messages'],
         function (Orm, HttpContext, ApiLibs, CronModule, Messages, ModuleName) {
@@ -11,9 +12,20 @@ define('ApiCron', ['orm', 'http-context', 'ApiLibs', 'CronModule', 'Messages'],
 
                 /*
                  * @GET /cron/planned
+                 * @POST /cron/planned
                  */
                 self.plannedOperation = function (aPath, onSucces) {
-                    cronModule.CheckPlannedPayments(function (res) {
+                    cronModule.CheckPlannedPayments(aPath, function (res) {
+                        onSucces(res);
+                    });
+                };
+                
+                /*
+                 * @GET /cron/rev
+                 * @POST /cron/rev
+                 */
+                self.checkRevaluation = function (aPath, onSucces) {
+                    cronModule.CheckRevaluation(function (res) {
                         onSucces(res);
                     });
                 };

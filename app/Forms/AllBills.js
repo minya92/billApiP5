@@ -2,19 +2,15 @@
  * 
  * @author User
  */
-define('AllBills', ['orm', 'forms', 'ui', 'rpc'], function (Orm, Forms, Ui, Rpc, ModuleName) {
+define('AllBills', ['orm',  'FormLoader', 'rpc'], function (Orm, FormLoader, Rpc, ModuleName) {
     function module_constructor(ParentSelf) {
         var self = this
                 , model = Orm.loadModel(ModuleName)
-                , form = Forms.loadForm(ModuleName, model);
+                , form = FormLoader(ModuleName, model, self);
 
         var BillFunc = new Rpc.Proxy('BillApiFunctions');
         var AccountsList;
         var ServiceId;
-
-        self.show = function () {
-            form.show();
-        };
 
         self.showModal = function (callback) {
             form.showModal(callback);
@@ -70,6 +66,10 @@ define('AllBills', ['orm', 'forms', 'ui', 'rpc'], function (Orm, Forms, Ui, Rpc,
                 });
             } else
                 md.alert("Не выбран ни один счет!");
+        };
+        
+        form.btnCancel.onActionPerformed = function () {
+            form.close();
         };
 
         form.mgBills.onMouseClicked = function (e) {

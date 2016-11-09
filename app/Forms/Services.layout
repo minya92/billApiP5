@@ -1,38 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?><layout title="Управление услугами" view="view">
-  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="399px" prefWidth="533px"/>
-  <ToolBar cursor="0" name="toolBar" parent="view" prefHeight="30px" prefWidth="533px">
-    <AnchorsPaneConstraints height="30px" left="0px" right="0px" top="0px"/>
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="399px" prefWidth="741px"/>
+  <ToolBar cursor="0" name="toolBar" parent="view" prefHeight="40px" prefWidth="370px">
+    <AnchorsPaneConstraints height="40px" left="10px" right="361px" top="10px"/>
   </ToolBar>
-  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/add.png" name="btnNewService" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Создать услугу" verticalTextPosition="3"/>
-  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/Settings/settings.png" name="btnSettings" parent="toolBar" prefHeight="30px" prefWidth="34px" toolTipText="Изменить/Подключить на счёт" verticalTextPosition="3"/>
-  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/Ok.Cancel/active.png" name="btnActive" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Активировать/деактивировать услугу" verticalTextPosition="3"/>
-  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/delete.png" name="btnDel" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Деактивировать и отписать от всех счетов" verticalTextPosition="3"/>
-  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/refresh/refresh.png" name="btnRefresh" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Обновить список услуг" verticalTextPosition="3"/>
-  <Label cursor="0" name="label" parent="toolBar" prefHeight="30px" prefWidth="20px"/>
-  <CheckBox cursor="0" focusable="false" name="cbActive" parent="toolBar" prefHeight="30px" prefWidth="100px" selected="true" text="Активные" toolTipText="Фильтр"/>
-  <Label cursor="0" name="label1" parent="toolBar" prefHeight="30px" prefWidth="15px"/>
-  <Label cursor="0" name="label2" parent="toolBar" prefHeight="30px" prefWidth="50px" text="Поиск:"/>
-  <ModelFormattedField cursor="0" format="" name="mffSearch" parent="toolBar" prefHeight="30px" prefWidth="185px" toolTipText="Поиск"/>
-  <Label cursor="0" icon="https://raw.githubusercontent.com/AlexeyKashintsev/Clinic/p5/app/icons/loading5.gif" name="lbWating" parent="view" prefHeight="200px" prefWidth="200px" visible="false">
-    <AnchorsPaneConstraints bottom="84px" left="166px" right="167px" top="115px"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/list-add.png" name="btnNewService" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Создать услугу" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/list-remove.png" name="btnDel" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Деактивировать и отписать от всех счетов" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/document-edit.png" name="btnSettings" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Изменить/Подключить на счёт" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/format-justify-center.png" name="btnDiscounts" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Доступные скидки" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/Ok.Cancel/active.png" name="btnActive" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Активировать/деактивировать услугу" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/new-view-refresh.png" name="btnRefresh" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Обновить список услуг" verticalTextPosition="3"/>
+  <Label cursor="0" name="label1" parent="toolBar" prefHeight="40px" prefWidth="15px"/>
+  <CheckBox cursor="0" focusable="false" name="cbActive" parent="toolBar" prefHeight="40px" prefWidth="120px" selected="true" text="Активные" toolTipText="Фильтр">
+    <font family="Arial" size="12" style="1"/>
+  </CheckBox>
+  <Label cursor="0" icon="https://raw.githubusercontent.com/AlexeyKashintsev/Clinic/p5/app/icons/loading5.gif" name="lbWating" parent="view" prefHeight="200px" prefWidth="408px" visible="false">
+    <AnchorsPaneConstraints height="200px" left="166px" top="135px" width="408px"/>
   </Label>
-  <ModelGrid cursor="0" deletable="false" insertable="false" name="mgServises" parent="view" prefHeight="369px" prefWidth="533px" toolTipText="Список услуг" visible="false">
-    <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="30px"/>
-    <RadioGridColumn minWidth="12px" name="colSelected" preferredWidth="13px" resizable="true" width="13px"/>
-    <ModelGridColumn minWidth="105px" name="colName" preferredWidth="110px" readonly="true" title="Имя услуги" width="169px">
+  <ModelGrid cursor="0" deletable="false" insertable="false" name="mgServises" parent="view" prefHeight="285px" prefWidth="718px" toolTipText="Список услуг" visible="false">
+    <AnchorsPaneConstraints bottom="54px" left="10px" right="13px" top="60px"/>
+    <ServiceGridColumn name="column" resizable="true"/>
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@4d06e9fc,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" minWidth="105px" name="colName" preferredWidth="110px" readonly="true" title="Имя услуги" view="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@37229c4b,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="227px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn minWidth="70px" name="colType" preferredWidth="85px" readonly="true" title="Тип" width="143px">
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@679325b1,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" minWidth="70px" name="colType" preferredWidth="85px" readonly="true" title="Тип" view="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@5ea03b77,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="202px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn maxWidth="100px" minWidth="50px" name="colChekPrepay" preferredWidth="55px" readonly="true" title="Предоплата" width="55px">
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelCheckBox[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777217,maximumSize=,minimumSize=,preferredSize=]" maxWidth="100px" minWidth="50px" name="colChekPrepay" preferredWidth="55px" readonly="true" title="Предоплата" view="com.eas.client.forms.components.model.ModelCheckBox[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777217,maximumSize=,minimumSize=,preferredSize=]" width="55px">
       <ModelCheckBox nullable="false"/>
     </ModelGridColumn>
-    <ModelGridColumn minWidth="50px" name="colCost" preferredWidth="52px" readonly="true" title="Стоимость" width="111px">
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@2614846b,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" minWidth="50px" name="colCost" preferredWidth="52px" readonly="true" title="Стоимость" view="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@19bac12f,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="170px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn maxWidth="75px" minWidth="35px" name="colActive" preferredWidth="40px" readonly="true" title="Активна" width="40px">
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelCheckBox[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777217,maximumSize=,minimumSize=,preferredSize=]" maxWidth="75px" minWidth="35px" name="colActive" preferredWidth="40px" readonly="true" title="Активна" view="com.eas.client.forms.components.model.ModelCheckBox[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777217,maximumSize=,minimumSize=,preferredSize=]" width="40px">
       <ModelCheckBox nullable="false"/>
     </ModelGridColumn>
   </ModelGrid>
+  <ModelFormattedField cursor="0" format="" name="mffSearch" parent="view" prefHeight="40px" prefWidth="250px" toolTipText="Поиск">
+    <AnchorsPaneConstraints height="40px" right="13px" top="10px" width="250px"/>
+  </ModelFormattedField>
+  <Label cursor="0" name="label2" parent="view" prefHeight="40px" prefWidth="60px" text="Поиск:">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="40px" right="275px" top="10px" width="60px"/>
+  </Label>
 </layout>

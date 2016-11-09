@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><layout maximizable="false" title="Редактор скидок" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="152px" prefWidth="482px"/>
+  <Label cursor="0" name="label1" parent="view" prefHeight="30px" prefWidth="158px" text="Тип скидки">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="30px" left="10px" top="60px" width="158px"/>
+  </Label>
+  <ModelFormattedField cursor="0" data="qDiscounts" field="cursor.disc_description" format="" name="modelFormattedField" parent="view" prefHeight="30px" prefWidth="299px">
+    <font family="Arial" size="12" style="0"/>
+    <AnchorsPaneConstraints height="30px" left="170px" right="13px" top="20px"/>
+  </ModelFormattedField>
+  <Button cursor="0" icon="icons/22x22/actions/dialog-apply.png" name="btnAccept" parent="view" prefHeight="30px" prefWidth="130px" text="Принять">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="17px" height="30px" right="154px" width="130px"/>
+  </Button>
+  <Button cursor="0" icon="icons/22x22/actions/window-close.png" name="btnCancel" parent="view" prefHeight="30px" prefWidth="130px" text="Отмена">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="17px" height="30px" right="14px" width="130px"/>
+  </Button>
+  <Label cursor="0" name="label11" parent="view" prefHeight="30px" prefWidth="158px" text="Наименование">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="30px" left="10px" top="20px" width="158px"/>
+  </Label>
+  <ModelCombo cursor="0" data="qDiscounts" displayField="type_name" displayList="qDiscountTypes" field="cursor.Type_name" name="modelCombo" parent="view" prefHeight="30px" prefWidth="299px">
+    <AnchorsPaneConstraints height="30px" left="170px" right="13px" top="60px"/>
+  </ModelCombo>
+</layout>

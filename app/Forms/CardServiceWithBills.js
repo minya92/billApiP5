@@ -2,21 +2,19 @@
  * 
  * @author User
  */
-define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService', 'AllBills', 'rpc'],
-        function (Orm, Forms, Ui, NewService, AllBills, Rpc, ModuleName) {
+define('CardServiceWithBills', ['orm', 'FormLoader', 'NewService', 'AllBills', 'rpc', 'DiscountsOnService', 'ServiceContent'],
+        function (Orm, FormLoader, NewService, AllBills, Rpc, DiscountsOnService, ServiceContent, ModuleName) {
             function module_constructor(ServicesSelf) {
                 var self = this
                         , model = Orm.loadModel(ModuleName)
-                        , form = Forms.loadForm(ModuleName, model);
+                        , form = FormLoader(ModuleName, model, self);
 
                 var BillFunc = new Rpc.Proxy('BillApiFunctions');
                 var ServiceId;
                 var AccountsList;
-
-                self.show = function () {
-                    form.show();
-                };
-
+                var discountsOnService = new DiscountsOnService();
+                //var serviceContent = new ServiceContent();
+                
                 self.showModal = function (callback) {
                     form.showModal(callback);
                 };
@@ -32,6 +30,10 @@ define('CardServiceWithBills', ['orm', 'forms', 'ui', 'NewService', 'AllBills', 
                     var newService = new NewService(self, form, ServicesSelf);
                     newService.setParamsOpen(aListOfTypes, serviceId);
                     newService.show(form.pnlServiseCard);
+                    discountsOnService.setService(serviceId);
+                    discountsOnService.show(form.pnlDiscounts);
+                    //serviceContent.setService(serviceId);
+                    //serviceContent.show(form.pnlContentServices);
                     ServiceId = serviceId;
                     Request();
                 };

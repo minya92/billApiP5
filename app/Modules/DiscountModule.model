@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel>
+  <entity Name="qServiceDiscount" Title="" entityHeight="200" entityIconified="false" entityId="147515691910000" entityLocationX="78" entityLocationY="32" entityWidth="150" queryId="qServiceDiscount" tableName="" tableSchemaName=""/>
+  <entity Name="prDiscCloseActive" Title="" entityHeight="70" entityIconified="false" entityId="147515934254100" entityLocationX="289" entityLocationY="32" entityWidth="150" queryId="prDiscCloseActive" tableName="" tableSchemaName=""/>
+  <entity Name="qDiscActive" Title="" entityHeight="200" entityIconified="false" entityId="147521747300200" entityLocationX="457" entityLocationY="33" entityWidth="150" queryId="qDiscActive" tableName="" tableSchemaName=""/>
+  <entity Name="qDiscountsOnAccount" Title="" entityHeight="78" entityIconified="false" entityId="147574020927300" entityLocationX="39" entityLocationY="262" entityWidth="150" queryId="qDiscountsOnAccount" tableName="" tableSchemaName=""/>
+  <entity Name="qDiscRulesMin" Title="" entityHeight="200" entityIconified="false" entityId="147574417826700" entityLocationX="263" entityLocationY="208" entityWidth="150" queryId="qDiscRulesMin" tableName="" tableSchemaName=""/>
+  <entity Name="qDiscRules" Title="" entityHeight="200" entityIconified="false" entityId="147574577750400" entityLocationX="450" entityLocationY="246" entityWidth="150" queryId="qDiscRules" tableName="" tableSchemaName=""/>
+  <referenceRelation leftEntityFieldName="active_rule" leftEntityId="147521747300200" rightEntityFieldName="disc_rules_id" rightEntityId="147574577750400"/>
+  <referenceRelation leftEntityFieldName="active_rule" leftEntityId="147521747300200" rightEntityFieldName="disc_rules_id" rightEntityId="147574417826700"/>
+</datamodel>

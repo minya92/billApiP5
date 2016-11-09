@@ -1,45 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?><layout title="Управление услугой:" view="view">
-  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="515px" prefWidth="430px"/>
-  <TabbedPane cursor="0" name="tabbedPane" parent="view" prefHeight="525px" prefWidth="430px" selectedComponent="pnlServiseCard">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="515px" prefWidth="531px"/>
+  <TabbedPane cursor="0" name="tabbedPane" parent="view" prefHeight="525px" prefWidth="531px" selectedComponent="pnlServiseCard">
     <AnchorsPaneConstraints bottom="-10px" left="0px" right="0px" top="0px"/>
   </TabbedPane>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseCard" parent="tabbedPane" prefHeight="495px" prefWidth="425px">
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseCard" parent="tabbedPane" prefHeight="495px" prefWidth="526px">
     <TabbedPaneConstraints tabIcon="icons/Settings/edit2.png" tabTitle="Карточка услуги" tabToolTip=""/>
   </AnchorsPane>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseWithBill" parent="tabbedPane" prefHeight="495px" prefWidth="425px" visible="false">
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlServiseWithBill" parent="tabbedPane" prefHeight="495px" prefWidth="526px" visible="false">
     <TabbedPaneConstraints tabIcon="icons/16x16/bill.png" tabTitle="Подключенные счета" tabToolTip=""/>
   </AnchorsPane>
-  <ToolBar cursor="0" name="toolBar" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="185px">
-    <AnchorsPaneConstraints height="30px" left="0px" right="240px" top="0px"/>
+  <ToolBar cursor="0" name="toolBar" parent="pnlServiseWithBill" prefHeight="40px" prefWidth="210px">
+    <AnchorsPaneConstraints height="40px" left="10px" top="10px" width="210px"/>
   </ToolBar>
-  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/new_bill/new_bill.png" name="btnAddBill" parent="toolBar" prefHeight="30px" prefWidth="32px" toolTipText="Добавить услугу на счёт" verticalTextPosition="3"/>
-  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/Play.Pause/pause.png" name="btnPause" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Приостановить/Возобновить услугу на счету" verticalTextPosition="3"/>
-  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/delete.png" name="btnDel" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Безвозвратно удалить услугу со счёта" verticalTextPosition="3"/>
-  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/refresh/reload_refresh.png" name="btnRefresh" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Обновить данные" verticalTextPosition="3"/>
-  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/money1.png" name="btnMoney" parent="toolBar" prefHeight="30px" prefWidth="29px" toolTipText="Просмотреть остаток денежных средств на счету в рублях" verticalTextPosition="3"/>
-  <Label cursor="0" horizontalAlignment="4" name="lbSearch" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="47px" text="Поиск: ">
-    <AnchorsPaneConstraints height="30px" left="160px" top="0px" width="47px"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/list-add.png" name="btnAddBill" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Добавить услугу на счёт" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/list-remove.png" name="btnDel" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Безвозвратно удалить услугу со счёта" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/Play.Pause/pause.png" name="btnPause" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Приостановить/Возобновить услугу на счету" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/new-view-refresh.png" name="btnRefresh" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Обновить данные" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/money1.png" name="btnMoney" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Просмотреть остаток денежных средств на счету в рублях" verticalTextPosition="3"/>
+  <Label cursor="0" horizontalAlignment="4" name="lbSearch" parent="pnlServiseWithBill" prefHeight="40px" prefWidth="60px" text="Поиск: ">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="40px" right="245px" top="10px" width="60px"/>
   </Label>
-  <ModelFormattedField cursor="0" format="" name="mffSearch" parent="pnlServiseWithBill" prefHeight="30px" prefWidth="210px" toolTipText="Поиск по ID">
-    <AnchorsPaneConstraints height="30px" left="215px" right="0px" top="0px"/>
+  <ModelFormattedField cursor="0" format="" name="mffSearch" parent="pnlServiseWithBill" prefHeight="40px" prefWidth="220px" toolTipText="Поиск по ID">
+    <AnchorsPaneConstraints height="40px" right="13px" top="10px" width="220px"/>
   </ModelFormattedField>
-  <Label cursor="0" icon="https://raw.githubusercontent.com/AlexeyKashintsev/Clinic/p5/app/icons/loading5.gif" name="lbWating" parent="pnlServiseWithBill" prefHeight="280px" prefWidth="225px" visible="false">
+  <Label cursor="0" icon="https://raw.githubusercontent.com/AlexeyKashintsev/Clinic/p5/app/icons/loading5.gif" name="lbWating" parent="pnlServiseWithBill" prefHeight="280px" prefWidth="326px" visible="false">
     <AnchorsPaneConstraints bottom="95px" left="100px" right="100px" top="120px"/>
   </Label>
-  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgBillsOnService" parent="pnlServiseWithBill" prefHeight="465px" prefWidth="425px">
-    <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="30px"/>
+  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgBillsOnService" parent="pnlServiseWithBill" prefHeight="425px" prefWidth="503px">
+    <AnchorsPaneConstraints bottom="10px" left="10px" right="13px" top="60px"/>
     <RadioGridColumn name="colSelected" resizable="true"/>
-    <ModelGridColumn name="colBillId" preferredWidth="85px" title="ID счета" width="132px">
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@6bfdfbcb,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" name="colBillId" preferredWidth="85px" title="ID счета" view="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@24fbc726,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="158px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="colCount" preferredWidth="50px" title="Остаток счетчика" width="97px">
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@dc02f7a,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" name="colCount" preferredWidth="50px" title="Остаток счетчика" view="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@2970b7a1,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="123px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="colDate" title="Дата списания" width="122px">
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelDate[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@2d5722e7,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" name="colDate" title="Дата списания" view="com.eas.client.forms.components.model.ModelDate[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@576f029c,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="148px">
       <ModelDate/>
     </ModelGridColumn>
-    <ModelGridColumn maxWidth="110px" minWidth="22px" name="colPause" preferredWidth="50px" title="Приостановлен">
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelCheckBox[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777217,maximumSize=,minimumSize=,preferredSize=]" maxWidth="110px" minWidth="22px" name="colPause" preferredWidth="50px" title="Приостановлен" view="com.eas.client.forms.components.model.ModelCheckBox[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777217,maximumSize=,minimumSize=,preferredSize=]">
       <ModelCheckBox/>
     </ModelGridColumn>
   </ModelGrid>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlDiscounts" parent="tabbedPane" prefHeight="495px" prefWidth="526px" visible="false">
+    <TabbedPaneConstraints tabTitle="Доступные скидки" tabToolTip=""/>
+  </AnchorsPane>
 </layout>

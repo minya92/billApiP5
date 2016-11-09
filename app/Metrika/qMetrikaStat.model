@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel>
+  <parameters>
+    <parameter description="" name="p_start" nullable="true" parameterMode="1" selectionForm="null" type="Date"/>
+    <parameter description="" name="p_end" nullable="true" parameterMode="1" selectionForm="null" type="Date"/>
+    <parameter description="" name="p_label" nullable="true" parameterMode="1" selectionForm="null" type="Number"/>
+  </parameters>
+  <parametersEntity entityHeight="200" entityIconified="false" entityLocationX="8" entityLocationY="7" entityWidth="150"/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="147567055109600" entityLocationX="254" entityLocationY="26" entityWidth="150" tableAlias="t1" tableName="mtk_shots" tableSchemaName=""/>
+  <relation leftEntityId="-1" leftEntityParameterName="p_start" rightEntityFieldName="shot_time" rightEntityId="147567055109600"/>
+  <relation leftEntityId="-1" leftEntityParameterName="p_label" rightEntityFieldName="mtk_label" rightEntityId="147567055109600"/>
+  <relation leftEntityId="-1" leftEntityParameterName="p_end" rightEntityFieldName="shot_time" rightEntityId="147567055109600"/>
+</datamodel>

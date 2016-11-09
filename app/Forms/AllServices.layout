@@ -1,43 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?><layout title="Список услуг" view="view">
-  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="450px" prefWidth="650px"/>
-  <ModelFormattedField cursor="0" format="" name="mffSearch" parent="view" prefHeight="30px" prefWidth="200px" toolTipText="Поиск по ID">
-    <AnchorsPaneConstraints height="30px" left="440px" right="10px" top="10px"/>
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="450px" prefWidth="840px"/>
+  <ModelFormattedField cursor="0" format="" name="mffSearch" parent="view" prefHeight="30px" prefWidth="320px" toolTipText="Поиск по ID">
+    <AnchorsPaneConstraints height="30px" left="510px" right="10px" top="10px"/>
   </ModelFormattedField>
-  <Label cursor="0" horizontalTextPosition="2" name="lbSearch" parent="view" prefHeight="30px" prefWidth="106px" text="Поиск по имени: ">
-    <AnchorsPaneConstraints height="30px" left="334px" top="10px" width="106px"/>
+  <Label cursor="0" horizontalTextPosition="2" name="lbSearch" parent="view" prefHeight="30px" prefWidth="176px" text="Поиск по имени: ">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="30px" left="364px" top="10px" width="176px"/>
   </Label>
-  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgServises" parent="view" prefHeight="350px" prefWidth="650px">
+  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="mgServises" parent="view" prefHeight="350px" prefWidth="840px">
     <AnchorsPaneConstraints bottom="50px" left="0px" right="0px" top="50px"/>
-    <RadioGridColumn name="colSelect"/>
-    <ModelGridColumn name="colName" preferredWidth="90px" title="Имя услуги" width="131px">
+    <RadioGridColumn name="colSelect" resizable="true"/>
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@5dd94ed9,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" name="colName" preferredWidth="90px" title="Имя услуги" view="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@13f5d4c1,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="173px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="colCost" preferredWidth="35px" title="Стоимость" width="76px">
-      <ModelFormattedField/>
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@7f8999a4,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" name="colCost" preferredWidth="35px" title="Стоимость" view="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@691876a1,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="118px">
+      <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="colType" preferredWidth="70px" title="Тип" width="111px">
-      <ModelFormattedField/>
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@7ea052dd,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" maxWidth="100px" minWidth="20px" name="colType" preferredWidth="50px" title="Тип" view="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@43ced214,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="50px">
+      <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="colPeriod" preferredWidth="45px" title="Период" width="86px">
-      <ModelFormattedField/>
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@70b92770,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" name="colPeriod" preferredWidth="45px" title="Период" view="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@5abefab8,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="127px">
+      <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="colCount" preferredWidth="30px" title="Счётчик" width="71px">
-      <ModelFormattedField/>
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@26f46d88,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" name="colCount" preferredWidth="30px" title="Счётчик" view="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@139f5530,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="113px">
+      <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="colPrepaymemt" preferredWidth="35px" title="Предоплата" width="76px">
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelCheckBox[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777217,maximumSize=,minimumSize=,preferredSize=]" name="colPrepaymemt" preferredWidth="35px" title="Предоплата" view="com.eas.client.forms.components.model.ModelCheckBox[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777217,maximumSize=,minimumSize=,preferredSize=]" width="118px">
       <ModelCheckBox/>
     </ModelGridColumn>
-    <ModelGridColumn name="colOnce" preferredWidth="35px" title="Единоразовая" width="75px">
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelCheckBox[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777217,maximumSize=,minimumSize=,preferredSize=]" name="colOnce" preferredWidth="35px" title="Единоразовая" view="com.eas.client.forms.components.model.ModelCheckBox[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777217,maximumSize=,minimumSize=,preferredSize=]" width="117px">
       <ModelCheckBox/>
     </ModelGridColumn>
   </ModelGrid>
   <Button cursor="0" icon="icons/Ok.Cancel/apply3.png" name="btnAdd" parent="view" prefHeight="30px" prefWidth="130px" text="Добавить">
-    <AnchorsPaneConstraints bottom="10px" height="30px" right="10px" width="130px"/>
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="10px" height="30px" right="170px" width="130px"/>
   </Button>
-  <Label cursor="0" name="lblFilterType" parent="view" prefHeight="30px" prefWidth="100px" text="Фильтр по типу:">
-    <AnchorsPaneConstraints height="30px" left="10px" top="10px" width="100px"/>
+  <Label cursor="0" name="lblFilterType" parent="view" prefHeight="30px" prefWidth="150px" text="Фильтр по типу:">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints height="30px" left="10px" top="10px" width="150px"/>
   </Label>
-  <ModelCombo cursor="0" name="mсFilterType" parent="view" prefHeight="30px" prefWidth="200px">
-    <AnchorsPaneConstraints height="30px" left="110px" top="10px" width="200px"/>
+  <ModelCombo cursor="0" name="mсFilterType" parent="view" prefHeight="30px" prefWidth="190px">
+    <AnchorsPaneConstraints height="30px" left="160px" top="10px" width="190px"/>
   </ModelCombo>
+  <Button cursor="0" icon="icons/22x22/actions/window-close.png" name="btnCancel" parent="view" prefHeight="30px" prefWidth="140px" text="Отмена">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="10px" height="30px" right="10px" width="140px"/>
+  </Button>
 </layout>

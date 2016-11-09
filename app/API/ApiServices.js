@@ -1,6 +1,7 @@
 /**
  * @public
  * @author Work
+ * @stateless
  */
 define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', 'Messages'],
         function (Orm, HttpContext, ApiLibs, BillServicesModule, Messages, ModuleName) {
@@ -15,7 +16,8 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                  */
                 self.serviceCreate = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ["name", "cost"], function(p, aHttpContext){
-                        billServicesModule.CreateService(p.name, p.cost, p.days, p.lock, p.afterMonth, p.prepayment, p.once, p.counts, p.type, p.description, function (res) {
+                        billServicesModule.CreateService(p, function (res) {
+                            //p.name, p.cost, p.days, p.lock, p.afterMonth, p.prepayment, p.once, p.counts, p.type, p.description, p.rev, p.revDays, p.revCounts, p.revTransfer
                             onSucces({service_id: res});
                         }, function(err){
                             onSucces(err);
@@ -29,7 +31,7 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                  */
                 self.serviceChange = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ["service_id"], function(p, aHttpContext){
-                        billServicesModule.ChangeService(p.service_id, p.cost, p.days, p.afterMonth, p.prepayment, p.once, p.counts, p.type, p.name, p.description, function (res) {
+                        billServicesModule.ChangeService(p.service_id, p.cost, p.days, p.afterMonth, p.prepayment, p.once, p.counts, p.type, p.name, p.description, p.deleted, function (res) {
                             onSucces(res);
                         }, function(err){
                             onSucces(err);
@@ -43,7 +45,7 @@ define('ApiServices', ['orm', 'http-context', 'ApiLibs', 'BillServicesModule', '
                  */
                 self.serviceAddOnAccount = function (aPath, onSucces) {
                     libs.checkRequiredParams((new HttpContext()), ["service_id", "account_id"], function(p, aHttpContext){
-                        billServicesModule.AddServiceOnAccount(p.account_id, p.service_id, function (res) {
+                        billServicesModule.AddServiceOnAccount(p.account_id, p.service_id, p.deleted, function (res) {
                             onSucces(res);
                         }, function(err){
                             onSucces(err);

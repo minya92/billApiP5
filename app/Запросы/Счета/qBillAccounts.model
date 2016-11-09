@@ -3,6 +3,6 @@
     <parameter description="" name="account_id" nullable="true" parameterMode="1" selectionForm="null" type="Number"/>
   </parameters>
   <parametersEntity entityHeight="200" entityIconified="false" entityLocationX="8" entityLocationY="7" entityWidth="150"/>
-  <entity Title="" entityHeight="200" entityIconified="false" entityId="145044508139839" entityLocationX="188" entityLocationY="7" entityWidth="150" tableAlias="t1" tableName="bill_accounts" tableSchemaName=""/>
-  <relation leftEntityFieldName="account_id" leftEntityId="-1" rightEntityFieldName="bill_accounts_id" rightEntityId="145044508139839"/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="147205069941900" entityLocationX="170" entityLocationY="34" entityWidth="150" tableAlias="t1" tableName="bill_accounts" tableSchemaName=""/>
+  <relation leftEntityId="-1" leftEntityParameterName="account_id" rightEntityFieldName="bill_accounts_id" rightEntityId="147205069941900"/>
 </datamodel>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel>
+  <parameters>
+    <parameter description="" name="discount_id" nullable="true" parameterMode="1" selectionForm="null" type="Number"/>
+  </parameters>
+  <parametersEntity entityHeight="200" entityIconified="false" entityLocationX="8" entityLocationY="7" entityWidth="150"/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="147574404692100" entityLocationX="176" entityLocationY="7" entityWidth="150" tableAlias="t" tableName="disc_rules" tableSchemaName=""/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="147574405622300" entityLocationX="369" entityLocationY="13" entityWidth="150" tableAlias="t1" tableName="disc_rules" tableSchemaName=""/>
+  <relation leftEntityFieldName="rule_amount" leftEntityId="147574404692100" rightEntityId="-1" rightEntityParameterName="discount_id"/>
+  <relation leftEntityId="-1" leftEntityParameterName="discount_id" rightEntityFieldName="discount_id" rightEntityId="147574404692100"/>
+  <relation leftEntityId="-1" leftEntityParameterName="discount_id" rightEntityFieldName="discount_id" rightEntityId="147574405622300"/>
+</datamodel>

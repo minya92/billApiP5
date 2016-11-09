@@ -2,11 +2,11 @@
  * 
  * @author User
  */
-define('AllServices', ['orm', 'forms', 'ui', 'rpc', 'invoke', 'ServiceInfo'], function (Orm, Forms, Ui, Rpc, Invoke, ServiceInfo, ModuleName) {
+define('AllServices', ['orm', 'FormLoader', 'rpc', 'invoke', 'ServiceInfo'], function (Orm, FormLoader, Rpc, Invoke, ServiceInfo, ModuleName) {
     function module_constructor(ParentRequest) {
         var self = this
                 , model = Orm.loadModel(ModuleName)
-                , form = Forms.loadForm(ModuleName, model);
+                , form = FormLoader(ModuleName, model, self);
 
         var BillFunc = new Rpc.Proxy('BillApiFunctions');
         var ServicesList;
@@ -163,6 +163,10 @@ define('AllServices', ['orm', 'forms', 'ui', 'rpc', 'invoke', 'ServiceInfo'], fu
                 formInfoService.setParams(form.mgServises.selected[0].service_id);
                 formInfoService.showModal();
             }
+        };
+        
+         form.btnCancel.onActionPerformed = function () {
+            form.close();
         };
     }
     return module_constructor;

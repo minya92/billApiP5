@@ -1,6 +1,7 @@
 /**
  * @public
  * @author Work
+ * @stateless
  */
 define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Messages'],
         function (Orm, ApiLibs, AccountsModule, HttpContext, Messages, ModuleName) {
@@ -83,8 +84,8 @@ define('ApiAccounts', ['orm', 'ApiLibs', 'AccountsModule', 'http-context', 'Mess
                 * @GET /accounts/get_accounts
                 */
                 self.getAllAccounts = function (aPath, onSucces) {
-                    libs.checkRequiredParams((new HttpContext()), [], function(params, aHttpContext){
-                        accountsModule.GetAllAccounts(function (res) {
+                    libs.checkRequiredParams((new HttpContext()), [], function(p, aHttpContext){
+                        accountsModule.GetAllAccounts(p.limit, p.offset, function (res) {
                             onSucces(res);
                         }, function(err){
                             onSucces(err);

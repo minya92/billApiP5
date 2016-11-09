@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><layout title="Управление скидками" view="view">
+  <AnchorsPane cursor="0" name="view" prefHeight="363px" prefWidth="552px"/>
+  <ToolBar cursor="0" name="toolBar" parent="view" prefHeight="40px" prefWidth="190px">
+    <AnchorsPaneConstraints height="40px" left="10px" top="10px" width="190px"/>
+  </ToolBar>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/list-add.png" name="btnAdd" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Добавить" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/list-remove.png" name="btnDel" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Удалить" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/document-edit.png" name="btnEdit" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Редактировать" verticalTextPosition="3"/>
+  <Button cursor="0" focusable="false" horizontalTextPosition="0" icon="icons/22x22/actions/help-about.png" name="btnRools" parent="toolBar" prefHeight="40px" prefWidth="40px" toolTipText="Правила по скидке" verticalTextPosition="3"/>
+  <ModelGrid cursor="0" data="qDiscounts" deletable="false" editable="false" insertable="false" name="modelGrid" parent="view" prefHeight="249px" prefWidth="529px">
+    <AnchorsPaneConstraints bottom="54px" left="10px" right="13px" top="60px"/>
+    <ServiceGridColumn name="colService" resizable="true"/>
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelFormattedField[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@68cc2618,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" field="disc_description" name="colDisc_description" title="Наименование" view="com.eas.client.forms.components.model.ModelFormattedField[,-243,-29,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="244px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn editor="com.eas.client.forms.components.model.ModelCombo[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=javax.swing.border.LineBorder@4d9a8e5a,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" field="refTypes" name="colType_name" title="Тип скидки" view="com.eas.client.forms.components.model.ModelCombo[,-243,-29,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777225,maximumSize=,minimumSize=,preferredSize=]" width="244px">
+      <ModelCombo displayField="type_name" displayList="qDiscountTypes"/>
+    </ModelGridColumn>
+  </ModelGrid>
+  <Button cursor="0" icon="icons/22x22/actions/dialog-apply.png" name="btnSelect" parent="view" prefHeight="30px" prefWidth="130px" text="Выбрать">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="14px" height="30px" right="165px" width="130px"/>
+  </Button>
+  <Button cursor="0" icon="icons/22x22/actions/window-close.png" name="btnCancel" parent="view" prefHeight="30px" prefWidth="130px" text="Отмена">
+    <font family="Arial" size="12" style="1"/>
+    <AnchorsPaneConstraints bottom="14px" height="30px" right="13px" width="130px"/>
+  </Button>
+</layout>

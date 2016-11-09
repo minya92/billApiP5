@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel>
+  <parameters>
+    <parameter description="" name="account_id" nullable="true" parameterMode="1" selectionForm="null" type="Number"/>
+  </parameters>
+  <parametersEntity entityHeight="200" entityIconified="false" entityLocationX="8" entityLocationY="7" entityWidth="150"/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="147576022613800" entityLocationX="170" entityLocationY="120" entityWidth="150" tableAlias="t2" tableName="disc_services" tableSchemaName=""/>
+  <entity Title="" entityHeight="94" entityIconified="false" entityId="147573824481500" entityLocationX="170" entityLocationY="14" entityWidth="150" tableAlias="t1" tableName="disc_tktypes" tableSchemaName=""/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="147576028511600" entityLocationX="170" entityLocationY="120" entityWidth="150" tableAlias="t3" tableName="disc_discounts" tableSchemaName=""/>
+  <entity Title="" entityHeight="176" entityIconified="false" entityId="147573836123800" entityLocationX="360" entityLocationY="8" entityWidth="150" tableAlias="t" tableName="tk_card" tableSchemaName=""/>
+  <relation leftEntityId="-1" leftEntityParameterName="account_id" rightEntityFieldName="account_id" rightEntityId="147573836123800"/>
+  <relation leftEntityFieldName="discount_id" leftEntityId="147573824481500" rightEntityFieldName="discount_id" rightEntityId="147576022613800"/>
+  <relation leftEntityFieldName="discount_id" leftEntityId="147576022613800" rightEntityFieldName="disc_discounts_id" rightEntityId="147576028511600"/>
+  <relation leftEntityFieldName="tk_type" leftEntityId="147573824481500" rightEntityFieldName="card_type" rightEntityId="147573836123800"/>
+</datamodel>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel>
+  <entity Name="qServiceList" Title="" entityHeight="200" entityIconified="false" entityId="147644469886400" entityLocationX="257" entityLocationY="31" entityWidth="150" queryId="qServiceList" tableName="" tableSchemaName=""/>
+  <entity Name="qServicesConnect" Title="" entityHeight="200" entityIconified="false" entityId="147644469475700" entityLocationX="43" entityLocationY="37" entityWidth="150" queryId="qServicesConnect" tableName="" tableSchemaName=""/>
+  <referenceRelation leftEntityFieldName="host_service" leftEntityId="147644469475700" rightEntityFieldName="bill_services_id" rightEntityId="147644469886400" scalarPropertyName="refHost"/>
+  <referenceRelation leftEntityFieldName="service_id" leftEntityId="147644469886400" rightEntityFieldName="bill_services_id" rightEntityId="147644469886400"/>
+  <referenceRelation leftEntityFieldName="used_service" leftEntityId="147644469475700" rightEntityFieldName="bill_services_id" rightEntityId="147644469886400" scalarPropertyName="refUsed"/>
+</datamodel>

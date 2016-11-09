@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel>
+  <parameters>
+    <parameter description="" name="id" nullable="true" parameterMode="1" selectionForm="null" type="Number"/>
+  </parameters>
+  <parametersEntity entityHeight="200" entityIconified="false" entityLocationX="8" entityLocationY="7" entityWidth="150"/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="147584583124800" entityLocationX="200" entityLocationY="14" entityWidth="274" tableAlias="t1" tableName="tk_fill_operations" tableSchemaName=""/>
+  <relation leftEntityId="-1" leftEntityParameterName="id" rightEntityFieldName="bill_operation" rightEntityId="147584583124800"/>
+</datamodel>

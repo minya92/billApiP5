@@ -1,19 +1,25 @@
 /**
  * @author Work
+ * @stateless
  */
-define('AccountsModule', ['orm', 'Messages', 'Events'],
-        function (Orm, Messages, Events, ModuleName) {
+define('AccountsModule', ['orm', 'Messages', 'Events', 'rpc'],
+        function (Orm, Messages, Events, Rpc, ModuleName) {
             return function () {
                 var self = this, model = Orm.loadModel(ModuleName);
                 var msg = new Messages();
                 var events = new Events();
-
+                var metrika = new Rpc.Proxy('MetrikaTestModule');
+                
+                var M_BILL_CREATE_ACC = 13;
+                var M_BILL_GET_SUM = 14;
+                
                 /*
                  * Создает новый биллинговый аккаунт и возвращает его ID
                  */
                 self.createBillAccount = function (aCallBack, aErrCallback) {
+                    metrika.shot(M_BILL_CREATE_ACC, function(){});
                     model.qBillAccounts.push({
-                        currnt_sum: 0, //TODO А нужно ли?
+                       // currnt_sum: 0, //TODO А нужно ли?
                         active: true
                     });
                     model.save(function () {
@@ -28,13 +34,13 @@ define('AccountsModule', ['orm', 'Messages', 'Events'],
                  * Получить остаток суммы на счету
                  */
                 self.getSumFromAccount = function (anAccountId, aCallBack, aErrCallback) {
-                    model.qGetAccountBalance.params.account_id = +anAccountId;
+                    metrika.shot(M_BILL_GET_SUM, function(){});
                     var sum = 0, error = null;
-                    model.qGetAccountBalance.requery(function () {
-                        if (model.qGetAccountBalance.length)
+                    model.qGetAccountBalance.query({account_id: +anAccountId}, function (balance) {
+                        if (balance.length)
                             aCallBack({
                                 account_id: anAccountId,
-                                sum: model.qGetAccountBalance[0].account_balance
+                                sum: balance[0].account_balance
                             });
                         else {
                             aErrCallback({error: msg.get('errFindAccount')});
@@ -116,13 +122,11 @@ define('AccountsModule', ['orm', 'Messages', 'Events'],
                 /*
                  * Получить список всех аккаунтов
                  */
-                self.GetAllAccounts = function (aCallBack, aErrCallback) {
-                    var error = null;
-                    model.qBillAccounts.params.account_id = null;
-                    model.qBillAccounts.requery(function () {
-                        if (model.qBillAccounts.length)
+                self.GetAllAccounts = function (aLimit, aOffset, aCallBack, aErrCallback) {
+                    model.qBillAccounts.query({lim: aLimit, off: aOffset}, function (res) {
+                        if (res.length)
                             aCallBack({
-                                accounts: model.qBillAccounts
+                                accounts: res
                             });
                         else {
                             aErrCallback({error: msg.get('errFindAccount')});
